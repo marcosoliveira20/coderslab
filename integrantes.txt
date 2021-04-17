@@ -1,0 +1,34 @@
+{
+ integrantes :[
+   {
+     "nome": Alexia Gabrielly da Silva Trovão,
+     "ra": 819114120,
+     "email": alexiatrovao.4120@aluno.saojudas.br
+   },
+   {
+     "nome": Alexsandro Ferreira Guimarães Valêncio,
+     "ra": 820267772,
+     "email": alexsandrovalencio.7772@aluno.saojudas.br
+   },
+   {
+     "nome": Davi Brandão Fonseca,
+     "ra": 81910998,
+     "email": davibrandao.0998@aluno.saojudas.br
+   },
+   {
+     "nome": Kesselyn Juliana Fortunato Domingues,
+     "ra":	819166352,
+     "email": kesselyndomingues.6352@aluno.saojudas.br
+   },
+  {
+     "nome": Maicon de Souza Pinheiro Araujo,
+     "ra": 819160889,
+     "email":	maiconaraujo.0889@aluno.saojudas.br
+   },
+   {
+     "nome": Marcos de Oliveira Santos,
+     "ra":	819168546,
+     "email":	marcossantos.8546@aluno.saojudas.br
+   }
+ ]
+}
