@@ -4,7 +4,7 @@
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/codando-community/coderslab?color=">
   <img alt="Last commit on GitHub" src="https://img.shields.io/github/last-commit/codando-community/coderslab?color=">
   <img alt="Project programing languages count" src="https://img.shields.io/github/languages/count/codando-community/coderslab?color=">
-</p> 
+</p>
 
 <p align="center">
   <a href="#gear-tecnologias-utilizadas">:gear: Construção</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -65,6 +65,14 @@ npm install
 
 > Acesse o diretório web para instalar as dependencias.
 ```sh
-cd /web
+cd /frontend
 npm install
+```
+> Inicie o servidor
+```sh
+ng serve
+```
+> Com o servidor iniciado,  acesse o endereço:
+```sh
+http://localhost:4200/
 ```
