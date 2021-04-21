@@ -1,3 +1,4 @@
+import { AppError } from "errors/AppErrors";
 import { v4 as uuidv4 } from "uuid";
 
 interface ICreateUser {
@@ -15,8 +16,8 @@ interface ICreateUser {
   group_list: string;
 }
 
-class User {
-  users: Array<string> = [];
+export default class User {
+  users: Array<ICreateUser> = [];
 
   createUser({
     id,
@@ -29,9 +30,26 @@ class User {
     password,
     interst_list,
     group_list,
-  }: ICreateUser) {
-    const find = this.users.find((u) => u.username === username);
-    if (!find) {
+  }: ICreateUser): Array<ICreateUser> {
+    const find: number = this.users.findIndex((u) => u.username === username);
+    if (find > 0) {
+      throw new AppError("Username already exist!", 401);
     }
+    this.users = [
+      {
+        id,
+        username,
+        name,
+        last_name,
+        email,
+        discord_id,
+        github_id,
+        password,
+        interst_list,
+        group_list,
+      },
+      ...this.users,
+    ];
+    return this.users;
   }
 }
