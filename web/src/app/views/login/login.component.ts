@@ -1,46 +1,44 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
-  private mode:string = 'login';
+  private mode: string = "login";
 
   loginForm = this.fb.group({
-    username: [''],
-    password: ['']
-  })
+    username: [""],
+    password: [""],
+  });
 
   registerForm = this.fb.group({
-    name: [''],
-    lastname: [''],
-    username: [''],
-    email: [''],
-    password: [''],
-    confirm_password: [''],
-    discord_id: [''],
-    github_id: [''],
-    objective: ['']
-  })
+    name: [""],
+    lastname: [""],
+    username: [""],
+    email: [""],
+    password: [""],
+    confirm_password: [""],
+    discord_id: [""],
+    github_id: [""],
+    objective: [""],
+  });
 
-  constructor(private router: Router, private fb: FormBuilder) {
-  }
+  constructor(private router: Router, private fb: FormBuilder) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  handleLoginMode = mode => this.mode = mode;
+  handleLoginMode = (mode) => (this.mode = mode);
 
   onSubmitLogin() {
-    console.log('loginForm', this.loginForm.value)
+    console.log("loginForm", this.loginForm.value);
   }
 
   onSubmitRegister() {
-    console.log('registerForm', this.registerForm.value)
+    console.log("registerForm", this.registerForm.value);
   }
 }
