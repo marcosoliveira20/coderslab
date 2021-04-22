@@ -17,6 +17,7 @@ class User implements IUsersRepository {
     group_list,
   }: IUserDTO): { message: string; status: number } {
     const UserAlreadyExists = users.findIndex((u) => u.username === username);
+    
     if (UserAlreadyExists >= 0) {
       return { message: "user already exists", status: 403 };
     }
