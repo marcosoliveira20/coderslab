@@ -4,6 +4,7 @@ interface IUsersRepository {
   create(data: IUserDTO): void;
   read(data: IUserDTO) : void;
   update(data: IUserDTO) : void;
+  delete(data: IUserDTO) : void;
   
 }
 

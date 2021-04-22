@@ -88,7 +88,29 @@ class User implements IUsersRepository {
       userAlreadyExists.interst_list = interst_list;
       userAlreadyExists.group_list = group_list;
       
-      return { data: userAlreadyExists, message: "User exists", status: 201 };
+      return { data: userAlreadyExists, message: "User updated", status: 201 };
+  }
+
+  delete({
+    id,
+    username,
+    name,
+    last_name,
+    email,
+    discord_id,
+    github_id,
+    password,
+    interst_list,
+    group_list} : IUserDTO) : { message: string; status: number } {
+      const userAlreadyExists = users.findIndex((u) => u.username === username);
+
+      if (userAlreadyExists === -1) {
+        return { message: "User does not exist", status: 404 };
+      }
+
+      users.splice(userAlreadyExists, 1);
+
+      return { message: "User deleted", status: 200 };
   }
 }
 
