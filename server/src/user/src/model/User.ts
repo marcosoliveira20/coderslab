@@ -14,12 +14,13 @@ class User implements IUsersRepository {
     github_id,
     password,
     interst_list,
-    group_list,
+    group_list
   }: IUserDTO): { message: string; status: number } {
-    const UserAlreadyExists = users.findIndex((u) => u.username === username);
-    
-    if (UserAlreadyExists >= 0) {
-      return { message: "user already exists", status: 403 };
+
+    const userAlreadyExists = users.findIndex((u) => u.username === username);
+
+    if (userAlreadyExists >= 0) {
+      return { message: "User already exists", status: 403 };
     }
 
     users.push({
@@ -35,7 +36,29 @@ class User implements IUsersRepository {
       group_list,
     });
 
-    return { message: "user created", status: 200 };
+    return { message: "User created", status: 200 };
+  }
+
+  read({
+    id,
+    username,
+    name,
+    last_name,
+    email,
+    discord_id,
+    github_id,
+    password,
+    interst_list,
+    group_list
+  } : IUserDTO) : { data: object , message: string; status: number } {
+
+    const userAlreadyExists = users.find((u) => u.username === username);
+
+    if (userAlreadyExists === undefined) {
+      return { data: {}, message: "User doesn't exist", status: 404 };
+    }
+    
+    return { data: userAlreadyExists, message: "User exists", status: 201 };
   }
 }
 
