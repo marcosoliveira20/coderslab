@@ -1,4 +1,4 @@
-interface ICreateUserDTO {
+interface IUserDTO {
   id: string;
   username: string;
   name: string;
@@ -13,8 +13,4 @@ interface ICreateUserDTO {
   group_list: string;
 }
 
-interface ICreateUsersRepository {
-  create(data: ICreateUserDTO): void;
-}
-
-export {ICreateUsersRepository, ICreateUserDTO}
+export { IUserDTO };

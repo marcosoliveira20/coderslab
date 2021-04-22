@@ -1,8 +1,9 @@
-import { AppError } from "../errors/AppErrors";
-import {Request, Response} from "express";
-import { User } from "../model/User/CreateUsers";
+import { Request, Response } from "express";
+
+import { User } from "../model/User";
+
 class CreateUserController {
-  async handle(request: Request, response: Response){
+  async handle(request: Request, response: Response) {
     const {
       id,
       username,
@@ -16,9 +17,9 @@ class CreateUserController {
       group_list,
     } = request.body;
 
-    const createUser = new User()
+    const createUser = new User();
 
-    try{
+    try {
       const user = createUser.create({
         id,
         username,
@@ -30,12 +31,13 @@ class CreateUserController {
         password,
         interst_list,
         group_list,
-      })
+      });
 
-      return response.status(user.status).send(user.message)
+      return response.status(user.status).send(user.message);
     } catch (err) {
-      return response.status(404)
+      return response.status(404);
     }
-}}
+  }
+}
 
-export {CreateUserController}
+export { CreateUserController };
