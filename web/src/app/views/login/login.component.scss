@@ -1,0 +1,30 @@
+body {
+  background: #141648;
+}
+
+main {
+  width: 40%;
+  padding: 25px;
+  background: #24276D;
+  border-radius: 25px;
+
+  input {
+    width: 100%;
+    height: 35px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #FFFFFF;
+  }
+}
+
+.blob-left {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.blob-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+}

@@ -1,0 +1,24 @@
+.ng-autocomplete {
+    width:100%;
+    max-width: 600px;
+    display: table;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+button, p{
+    display: inline;
+    color: white;
+    background-color: #D13C74;
+}
+p {
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    margin: 10px;  
+    
+}
+
+button{
+    border-radius: 1rem;
+    border-style: none;
+}
