@@ -1,12 +1,63 @@
-<div>
-  <img src="assets/background/left_1.svg" class="blob-left">
-  <img src="assets/background/right_1.svg" class="blob-right">
+<!-- BACKGROUND -->
+<div class="bg">
+  <img src="assets/icons/text_logo.svg" alt="" id="coderslab_icon" />
+  <img src="assets/icons/poweredby.svg" alt="" id="poweredby_icon" />
+
+  <div class="div_bg_login" *ngIf="mode === 'login'">
+    <img src="assets/background/left_blob_stage1.svg" alt="" />
+    <img src="assets/background/right_blob_stage1.svg" alt="" />
+  </div>
+
+  <div class="div_bg_register" *ngIf="mode === 'register'">
+    <img src="assets/background/right_blob_stage3.svg" alt="" />
+  </div>
 </div>
 
-<main>
-  <input placeholder="Nome de usuário">
-  <input placeholder="Senha">
+<main class="container h-100">
+  <!-- LOGIN -->
+  <section class="section_loginMode" *ngIf="mode === 'login'">
+    <article>
+      <input type="text" placeholder="Nome de Usuário" [formControl]="login.username" />
+      <input type="text" placeholder="Senha" [formControl]="login.password" />
 
-  <button class="btn btn-success">Login</button>
-  <button>Fazer cadastro</button>
+      <button class="btn_lm_filled" (click)="handleLoginMode('login')">Login</button>
+      <button class="btn_lm_void" (click)="handleLoginMode('register')">Fazer cadastro</button>
+    </article>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="section_registerMode" *ngIf="mode === 'register'">
+    <div>
+      <article>
+        <div class="row">
+          <div class="col">
+            <input type="text" placeholder="Nome" [formControl]="login.name" />
+          </div>
+          <div class="col">
+            <input type="text" placeholder="Sobrenome" [formControl]="login.lastname" />
+          </div>
+        </div>
+        <input type="text" placeholder="Nome de usuário" [formControl]="login.username" />
+        <input type="text" placeholder="E-mail" [formControl]="login.email" />
+      </article>
+
+      <article>
+        <input type="text" placeholder="Senha" [formControl]="login.password" />
+        <input type="email" placeholder="Confirmar senha" [formControl]="login.confirm_password" />
+      </article>
+
+      <article>
+        <input type="text" placeholder="Discord ID" [formControl]="login.discord_id" />
+        <input type="email" placeholder="GitHub ID" [formControl]="login.github_id" />
+      </article>
+
+      <article>
+        <input type="text" placeholder="Objetivo" [formControl]="login.objective" />
+        <!-- TODO substituir pelo input dinâmico -->
+      </article>
+    </div>
+
+    <button class="btn_rm_filled">Cadastrar</button>
+    <button class="btn_rm_void" (click)="handleLoginMode('login')">Fazer login</button>
+  </section>
 </main>

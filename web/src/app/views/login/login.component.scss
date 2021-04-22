@@ -1,30 +1,146 @@
+::placeholder {
+  color: #FFF;
+}
+
+// SCROLLBAR
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #24276D;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFC42E;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B88B18;
+}
+
+// ELEMENTS
 body {
   background: #141648;
 }
 
 main {
-  width: 40%;
-  padding: 25px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+article {
+  padding: 0 40px 10px;
   background: #24276D;
   border-radius: 25px;
+  margin-bottom: 25px;
 
   input {
     width: 100%;
     height: 35px;
     border: none;
     background: none;
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFF;
+    color: #FFF;
+    font-size: 25px;
+    margin-bottom: 35px;
+    font-weight: 100;
+  }
+
+  input:nth-child(1) {
+    margin-top: 25px;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 5px;
+    background: none;
+    color: #FFF;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    text-align: center;
   }
 }
 
-.blob-left {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+// LOGIN MODE
+.section_loginMode {
+  width: 100%;
+  padding: 25%;
 }
 
-.blob-right {
+.btn_lm_filled {
+  border: 1px solid #FFF;
+  margin-bottom: 10px;
+}
+
+.btn_lm_void {
+  border: 0px;
+}
+
+// REGISTER MODE
+.section_registerMode {
+  width: 50%;
+  display: block;
+
+  button {
+    width: 100%;
+    margin-top: 28px;
+    border: 0px;
+  }
+}
+
+.btn_rm_filled {
+  background: #48DBDB;
+  color: #141648;
+  height: 56px;
+}
+
+.btn_rm_void {
+  background: none;
+  color: #FFF;
+}
+
+.section_registerMode > div {
+  height: 60vh;
+  overflow-y: scroll;
+  padding-right: 28px;
+}
+
+// BACKGROUND
+.bg img {
   position: fixed;
+  z-index: -99;
+}
+
+.bg > .div_bg_login {
+  img:nth-child(1) {
+    bottom: 0;
+    left: 0;
+  }
+
+  img:nth-child(2) {
+    top: 0;
+    right: 0;
+  }
+}
+
+.div_bg_register img {
   top: 0;
   right: 0;
 }
+
+#coderslab_icon {
+  top: 50px;
+  left: 50px;
+}
+
+#poweredby_icon {
+  bottom: 50px;
+  right: 50px;
+}
+
