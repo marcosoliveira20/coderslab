@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,30 +11,36 @@ import { FormControl } from '@angular/forms';
 export class LoginComponent implements OnInit {
   private mode:string = 'login';
 
-  login = {
-    username: new FormControl(''),
-    password: new FormControl('')
-  }
+  loginForm = this.fb.group({
+    username: [''],
+    password: ['']
+  })
 
-  register = {
-    name: new FormControl(''),
-    lastname: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirm_password: new FormControl(''),
-    discord_id: new FormControl(''),
-    github_id: new FormControl(''),
-    objective: new FormControl('')
-  }
+  registerForm = this.fb.group({
+    name: [''],
+    lastname: [''],
+    username: [''],
+    email: [''],
+    password: [''],
+    confirm_password: [''],
+    discord_id: [''],
+    github_id: [''],
+    objective: ['']
+  })
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private fb: FormBuilder) {
   }
 
   ngOnInit() {
   }
 
-  handleLoginMode(mode:string) {
-    this.mode = mode
+  handleLoginMode = mode => this.mode = mode;
+
+  onSubmitLogin() {
+    console.log('loginForm', this.loginForm.value)
+  }
+
+  onSubmitRegister() {
+    console.log('registerForm', this.registerForm.value)
   }
 }
