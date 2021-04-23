@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
 
-html, body { height: 100%; font-family: 'Roboto'; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  font-family: 'Roboto';
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+}

@@ -5,11 +5,10 @@ import { FormBuilder } from "@angular/forms";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  private mode: string = "login";
+  private mode: string = "register";
 
   loginForm = this.fb.group({
     username: [""],

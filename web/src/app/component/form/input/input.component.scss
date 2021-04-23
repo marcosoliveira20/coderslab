@@ -6,6 +6,10 @@
     padding: 1rem 0;
 }
 
+.ng-autocomplete input  {
+  background: red!important;
+}
+
 button, p{
     display: inline;
     color: white;
@@ -14,8 +18,8 @@ button, p{
 p {
     border-radius: 0.5rem;
     padding: 0.3rem;
-    margin: 10px;  
-    
+    margin: 10px;
+
 }
 
 button{
