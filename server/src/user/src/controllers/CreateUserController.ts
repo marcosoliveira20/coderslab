@@ -34,7 +34,7 @@ class CreateUserController {
       });
 
       return response.status(user.status).send(user.message);
-    } catch (err) {
+    } catch(err) {
       return response.status(404);
     }
   }

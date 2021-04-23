@@ -17,7 +17,7 @@ class User implements IUsersRepository {
     group_list
   }: IAllUserDTO): { message: string; status: number } {
 
-    const userAlreadyExists = users.findIndex((u) => u.username === username);
+    const userAlreadyExists = users.findIndex(u => u.username === username);
 
     if (userAlreadyExists >= 0) {
       return { message: "User already exists", status: 403 };
@@ -45,7 +45,7 @@ class User implements IUsersRepository {
     username
   } : IIdUserDTO) : { data: object , message: string; status: number } {
 
-    const userAlreadyExists = users.find((u) => u.id === id && u.username === username);
+    const userAlreadyExists = users.find(u => u.id === id && u.username === username);
 
     if (!userAlreadyExists) {
       return { data: {}, message: "User does not exist", status: 404 };
@@ -67,7 +67,7 @@ class User implements IUsersRepository {
     group_list
   } : IAllUserDTO) : { data: object , message: string; status: number } {
 
-    const userAlreadyExists = users.find((u) => u.username === username);
+    const userAlreadyExists = users.find(u => u.username === username);
     
     if (!userAlreadyExists) {
       return { data: {}, message: "User does not exist", status: 404 };
@@ -90,7 +90,7 @@ class User implements IUsersRepository {
     username
   } : IIdUserDTO) : { message: string; status: number } {
     
-    const userAlreadyExists = users.findIndex((u) => u.id === id && u.username === username);
+    const userAlreadyExists = users.findIndex(u => u.id === id && u.username === username);
 
 
     if (userAlreadyExists === -1) {
