@@ -1,4 +1,4 @@
-interface IUserDTO {
+interface IAllUserDTO {
   id: string;
   username: string;
   name: string;
@@ -13,4 +13,9 @@ interface IUserDTO {
   group_list: string;
 }
 
-export { IUserDTO };
+interface IIdUserDTO {
+  id: string;
+  username: string;
+}
+
+export { IAllUserDTO, IIdUserDTO };
