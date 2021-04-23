@@ -36,7 +36,14 @@ class Group implements IGroupRepository {
   read({
     id
   }) : { data: object; message: string; status: number } {
-    return { data: {}, message: "", status: 0 };
+
+    const groupAlreadyExists = groups.find(g => g.id === id);
+
+    if(!groupAlreadyExists) {
+      return { data: {}, message: "Group does not exist", status: 404 };
+    }
+
+    return { data: groupAlreadyExists, message: "Group exists", status: 201 };
   }
 
   update({
