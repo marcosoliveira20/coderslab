@@ -29,7 +29,7 @@ class CreateGroupController {
 
 			return response.status(group.status).send(group.message);
 		} catch(err) {
-			return response.status(404);
+			return response.status(403);
 		}
 	}
 }
