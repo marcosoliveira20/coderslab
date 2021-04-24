@@ -1,11 +1,10 @@
-
-* {
-  margin: 0;
-  padding: 0;
-  outline: none;
+div {
+  height: 100vh;
+  width: 100vw;
 }
 
-body {
-  width: 100vw;
-  height: 100vh;
+main {
+  display: grid;
+  grid-template-columns: 103px 0 calc(100% - 103px);
+  grid-template-rows: 100vh;
 }

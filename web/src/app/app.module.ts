@@ -10,13 +10,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BasicAutoCompleterComponent } from './component/form/input/input.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ProfileComponent } from './views/profile/profile.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { CommonModule } from '@angular/common';
+import { HomeComponent } from './views/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NotFoundComponent,
-    BasicAutoCompleterComponent
+    BasicAutoCompleterComponent,
+    ProfileComponent,
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +31,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

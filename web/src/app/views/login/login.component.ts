@@ -8,7 +8,7 @@ import { FormBuilder } from "@angular/forms";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  private mode: string = "register";
+  private mode: string = "login";
 
   loginForm = this.fb.group({
     username: [""],
