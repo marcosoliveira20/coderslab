@@ -6,15 +6,7 @@ class DeleteUserController {
   async handle(request: Request, response: Response) {
     const {
       id,
-      username,
-      name,
-      last_name,
-      email,
-      discord_id,
-      github_id,
-      password,
-      interst_list,
-      group_list,
+      username
     } = request.body;
 
     const deleteUser = new User();
@@ -22,15 +14,7 @@ class DeleteUserController {
     try {
       const user = deleteUser.delete({
         id,
-        username,
-        name,
-        last_name,
-        email,
-        discord_id,
-        github_id,
-        password,
-        interst_list,
-        group_list,
+        username
       });
 
       return response.status(user.status).send(user.message);

@@ -75,7 +75,16 @@ class Group implements IGroupRepository {
   delete({
     id
   }) : { message: string; status: number } {
-    return { message: "", status: 0 };
+
+    const groupAlreadyExists = groups.findIndex(g => g.id === id);
+
+    if(groupAlreadyExists === -1) {
+      return { message: "Group does not exist", status: 404 };
+    }
+
+    groups.splice(groupAlreadyExists, 1);
+
+    return { message: "Group deleted", status: 200 };
   }
 }
 
