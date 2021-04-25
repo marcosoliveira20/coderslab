@@ -1,4 +1,4 @@
-import { IAllUserDTO, IIdUserDTO, IUsernameUserDTO } from "../interfaces/IUserDTO";
+import { IUserDTO } from "../interfaces/IUserDTO";
 import { IUsersRepository } from "../interfaces/IUserRepository";
 
 const users = [];
@@ -13,13 +13,12 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-    interst_list,
+    interest_list,
     group_list
-  }: IAllUserDTO): { message: string; status: number } {
+  }: IUserDTO): { message: string; status: number } {
+    const findIndex: number = users.findIndex(u => u.username === username || u.id === id);
 
-    const userAlreadyExists = users.findIndex(u => u.username === username || u.id === id);
-
-    if (userAlreadyExists >= 0) {
+    if (findIndex >= 0) {
       return { message: "User already exists", status: 403 };
     }
 
@@ -33,45 +32,41 @@ class User implements IUsersRepository {
       discord_id,
       github_id,
       password,
-      interst_list,
+      interest_list,
       group_list,
     });
 
-    return { message: "User created", status: 200 };
+    return { message: "User created", status: 201 };
   }
 
-  readById({
-    id
-  } : IIdUserDTO) : { data: object , message: string; status: number } {
+  readById(id : string) : { user?: IUserDTO; message?: string; status: number } {
 
-    const userAlreadyExists = users.find(u => u.id === id);
+    const user: IUserDTO = users.find(u => u.id === id);
 
-    if (!userAlreadyExists) {
-      return { data: {}, message: "User does not exist", status: 404 };
+    if (!user) {
+      return { message: "User does not exist", status: 404 };
     }
     
-    return { data: userAlreadyExists, message: "User exists", status: 201 };
+    return { user, status: 201 };
   }
 
-  readByUsername({
-    username
-  } : IUsernameUserDTO) : { data: object , message: string; status: number } {
+  readByUsername(username : string) : { user?: IUserDTO; message?: string; status: number } {
 
-    const userAlreadyExists = users.find(u => u.username === username);
+    const user: IUserDTO = users.find(u => u.username === username);
 
-    if (!userAlreadyExists) {
-      return { data: {}, message: "User does not exist", status: 404 };
+    if (!user) {
+      return { message: "User does not exist", status: 404 };
     }
     
-    return { data: userAlreadyExists, message: "User exists", status: 201 };
+    return { user, status: 200 };
   }
 
-  readAll() : { data: Array<object> , message: string; status: number } {
+  readAll() : { users: Array<IUserDTO>; status: number } {
     if(users.length === 0) {
-      return { data: users, message: "Users are empty", status: 201 };
+      return { users, status: 200 };
     }
 
-    return { data: users, message: "Users list", status: 201 };
+    return { users, status: 200 };
   }
 
   update({
@@ -83,42 +78,39 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-    interst_list,
+    interest_list,
     group_list
-  } : IAllUserDTO) : { data: object , message: string; status: number } {
+  } : IUserDTO) : { user?: IUserDTO; message?: string; status: number } {
 
-    const userAlreadyExists = users.find(u => u.username === username && u.id === id);
+    const user: IUserDTO = users.find(u => u.username === username && u.id === id);
     
-    if (!userAlreadyExists) {
-      return { data: {}, message: "User does not exist", status: 404 };
-    }
-
-    userAlreadyExists.name = name;
-    userAlreadyExists.last_name = last_name;
-    userAlreadyExists.email = email;
-    userAlreadyExists.discord_id = discord_id;
-    userAlreadyExists.github_id = github_id;
-    userAlreadyExists.password = password;
-    userAlreadyExists.interst_list = interst_list;
-    userAlreadyExists.group_list = group_list;
-    
-    return { data: userAlreadyExists, message: "User updated", status: 201 };
-  }
-
-  delete({
-    id
-  } : IIdUserDTO) : { message: string; status: number } {
-    
-    const userAlreadyExists = users.findIndex(u => u.id === id);
-
-
-    if (userAlreadyExists === -1) {
+    if (!user) {
       return { message: "User does not exist", status: 404 };
     }
 
-    users.splice(userAlreadyExists, 1);
+    user.name = name;
+    user.last_name = last_name;
+    user.email = email;
+    user.discord_id = discord_id;
+    user.github_id = github_id;
+    user.password = password;
+    user.interest_list = interest_list;
+    user.group_list = group_list;
+    
+    return { user, status: 200 };
+  }
 
-    return { message: "User deleted", status: 200 };
+  delete(id : string) : { message: string; status: number } {
+    
+    const userIndex = users.findIndex(u => u.id === id);
+
+    if (userIndex === -1) {
+      return { message: "User does not exist", status: 404 };
+    }
+
+    users.splice(userIndex, 1);
+
+    return { message: "User deleted", status: 204 };
   }
 }
 

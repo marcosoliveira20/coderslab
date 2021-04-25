@@ -13,14 +13,14 @@ class CreateUserController {
       discord_id,
       github_id,
       password,
-      interst_list,
+      interest_list,
       group_list,
     } = request.body;
 
-    const createUser = new User();
+    const user = new User();
 
     try {
-      const user = createUser.create({
+      const data = user.create({
         id,
         username,
         name,
@@ -29,13 +29,14 @@ class CreateUserController {
         discord_id,
         github_id,
         password,
-        interst_list,
+        interest_list,
         group_list,
       });
 
-      return response.status(user.status).send(user.message);
+      return response.status(data.status).send(data.message);
     } catch(err) {
-      return response.status(403);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

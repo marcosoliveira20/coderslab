@@ -13,14 +13,14 @@ class UpdateUserController {
       discord_id,
       github_id,
       password,
-      interst_list,
+      interest_list,
       group_list,
     } = request.body;
 
-    const updateUser = new User();
+    const user = new User();
 
     try {
-      const user = updateUser.update({
+      const data = user.update({
         id,
         username,
         name,
@@ -29,13 +29,18 @@ class UpdateUserController {
         discord_id,
         github_id,
         password,
-        interst_list,
+        interest_list,
         group_list,
       });
 
-      return response.status(user.status).json({message: user.message, user: user.data});
+      if(!data.user) {
+        return response.status(data.status).send(data.message);
+      }
+
+      return response.status(data.status).send(data.user);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

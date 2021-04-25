@@ -1,4 +1,4 @@
-interface IAllUserDTO {
+interface IUserDTO {
   id: string;
   username: string;
   name: string;
@@ -7,18 +7,8 @@ interface IAllUserDTO {
   discord_id: string;
   github_id: string;
   password: string;
-  // TODO - Criar Interst
-  interst_list: string;
-  // TODO - Criar Group
+  interest_list: string;
   group_list: string;
 }
 
-interface IIdUserDTO {
-  id: string;
-}
-
-interface IUsernameUserDTO {
-  username: string;
-}
-
-export { IAllUserDTO, IIdUserDTO, IUsernameUserDTO };
+export { IUserDTO };

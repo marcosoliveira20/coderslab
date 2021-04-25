@@ -8,16 +8,19 @@ class ReadUserByIdController {
       id
     } = request.params;
 
-    const readUser = new User();
+    const user = new User();
 
     try {
-      const user = readUser.readById({
-        id
-      });
+      const data = user.readById(id);
 
-      return response.status(user.status).json({message: user.message, user: user.data});
+      if(!data.user) {
+        return response.status(data.status).send(data.message);
+      }
+
+      return response.status(data.status).send(data.user);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

@@ -8,16 +8,15 @@ class DeleteUserController {
       id
     } = request.params;
 
-    const deleteUser = new User();
+    const user = new User();
 
     try {
-      const user = deleteUser.delete({
-        id
-      });
+      const data = user.delete(id);
 
-      return response.status(user.status).send(user.message);
+      return response.status(data.status).send(data.message);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

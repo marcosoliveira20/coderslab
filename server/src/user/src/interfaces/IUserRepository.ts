@@ -1,12 +1,12 @@
-import { IAllUserDTO, IIdUserDTO, IUsernameUserDTO } from "./IUserDTO";
+import { IUserDTO } from "./IUserDTO";
 
 interface IUsersRepository {
-  create(data: IAllUserDTO): object;
-  readById(data: IIdUserDTO) : object;
-  readByUsername(data: IUsernameUserDTO) : object;
+  create(data: IUserDTO): object;
+  readById(id: string) : object;
+  readByUsername(username: string) : object;
   readAll() : object;
-  update(data: IAllUserDTO) : object;
-  delete(data: IIdUserDTO) : object;
+  update(data: IUserDTO) : object;
+  delete(id: string) : object;
   
 }
 
