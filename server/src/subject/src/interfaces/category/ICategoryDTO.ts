@@ -5,8 +5,5 @@ interface ICategoryAllDTO {
 interface ICategoryIdDTO {
   id: string;
 }
-interface ICategoryLabelDTO {
-  label: string;
-}
 
-export { ICategoryAllDTO, ICategoryIdDTO, ICategoryLabelDTO };
+export { ICategoryAllDTO, ICategoryIdDTO };

@@ -1,6 +1,5 @@
 import {
-  ICategoryCreateDTO,
-  ICategoryDTO,
+  ICategoryAllDTO,
   ICategoryIdDTO,
 } from "../interfaces/category/ICategoryDTO";
 import { ICategoryRepository } from "../interfaces/category/ICategoryRepository";
@@ -9,28 +8,71 @@ import { ICategoryRepository } from "../interfaces/category/ICategoryRepository"
 const categories = [];
 
 class Category implements ICategoryRepository {
-  read({
+  create({ id, label }: ICategoryAllDTO): { message: string; status: number } {
+    if (categories.findIndex((c) => c.label === label) >= 0) {
+      return { message: "Category already exists", status: 403 };
+    }
+    if (categories.findIndex((c) => c.id === id) >= 0) {
+      return { message: "Category already exists", status: 403 };
+    }
+
+    categories.push({
+      id,
+      label,
+    });
+    return { message: "Category created", status: 201 };
+  }
+
+  readById({
     id,
   }: ICategoryIdDTO): {
     category: string;
     message: string;
     status: number;
   } {
-    let category = categories.find((s) => s.id === id);
+    const category = categories.find((c) => c.id === id);
     if (!category) {
-      category = "";
-      return { category, message: "Category don't exists", status: 404 };
+      return { category: "", message: "Category don't exists", status: 404 };
     }
-    return { category, message: "Category created", status: 201 };
+    return { category, message: "", status: 200 };
   }
-  create(data: ICategoryCreateDTO): void {
-    throw new Error("Method not implemented.");
+
+  readAll(): {
+    categories: Array<string>;
+    message: string;
+    status: number;
+  } {
+    if (categories.length === 0) {
+      return { categories: [], message: "Categories is empty", status: 200 };
+    }
+    return { categories, message: "", status: 200 };
   }
-  update(data: ICategoryDTO): void {
-    throw new Error("Method not implemented.");
+
+  update({ id, label }: ICategoryAllDTO): { message: string; status: number } {
+    const findCategory: ICategoryAllDTO = categories.find((c) => c.id === id);
+    if (!findCategory) {
+      return { message: "Category don't exists", status: 404 };
+    }
+    if (findCategory.label === label) {
+      return { message: "Category label already exists", status: 403 };
+    }
+    findCategory.label = label;
+
+    return { message: "Category updated", status: 204 };
   }
-  delete(data: ICategoryIdDTO): void {
-    throw new Error("Method not implemented.");
+
+  delete({
+    id,
+  }: ICategoryIdDTO): {
+    message: string;
+    status: number;
+  } {
+    const categoryIndex = categories.findIndex((c) => c.id === id);
+    if (categoryIndex < 0) {
+      return { message: "Category don't exists", status: 404 };
+    }
+    categories.splice(categoryIndex, 1);
+    return { message: "Category deleted", status: 204 };
   }
 }
 
