@@ -2,19 +2,17 @@ import { Request, Response } from "express";
 
 import { User } from "../model/User";
 
-class ReadUserController {
+class ReadUserByIdController {
   async handle(request: Request, response: Response) {
     const {
-      id,
-      username
-    } = request.body;
+      id
+    } = request.params;
 
     const readUser = new User();
 
     try {
-      const user = readUser.read({
-        id,
-        username
+      const user = readUser.readById({
+        id
       });
 
       return response.status(user.status).json({message: user.message, user: user.data});
@@ -24,4 +22,4 @@ class ReadUserController {
   }
 }
 
-export { ReadUserController };
+export { ReadUserByIdController };

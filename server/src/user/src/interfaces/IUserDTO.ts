@@ -15,7 +15,10 @@ interface IAllUserDTO {
 
 interface IIdUserDTO {
   id: string;
+}
+
+interface IUsernameUserDTO {
   username: string;
 }
 
-export { IAllUserDTO, IIdUserDTO };
+export { IAllUserDTO, IIdUserDTO, IUsernameUserDTO };

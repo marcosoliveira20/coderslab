@@ -1,4 +1,4 @@
-import { IAllUserDTO, IIdUserDTO } from "../interfaces/IUserDTO";
+import { IAllUserDTO, IIdUserDTO, IUsernameUserDTO } from "../interfaces/IUserDTO";
 import { IUsersRepository } from "../interfaces/IUserRepository";
 
 const users = [];
@@ -40,18 +40,39 @@ class User implements IUsersRepository {
     return { message: "User created", status: 200 };
   }
 
-  read({
-    id,
-    username
+  readById({
+    id
   } : IIdUserDTO) : { data: object , message: string; status: number } {
 
-    const userAlreadyExists = users.find(u => u.id === id && u.username === username);
+    const userAlreadyExists = users.find(u => u.id === id);
 
     if (!userAlreadyExists) {
       return { data: {}, message: "User does not exist", status: 404 };
     }
     
     return { data: userAlreadyExists, message: "User exists", status: 201 };
+  }
+
+  readByUsername({
+    username
+  } : IUsernameUserDTO) : { data: object , message: string; status: number } {
+
+    const userAlreadyExists = users.find(u => u.username === username);
+
+    if (!userAlreadyExists) {
+      return { data: {}, message: "User does not exist", status: 404 };
+    }
+    
+    return { data: userAlreadyExists, message: "User exists", status: 201 };
+  }
+
+  readAll() : { data: Array<object> , message: string; status: number } {
+    if(users.length === 0) {
+      // const users_list = [];
+      return { data: users, message: "Users are empty", status: 201 };
+    }
+
+    return { data: users, message: "Users list", status: 201 };
   }
 
   update({
@@ -86,11 +107,10 @@ class User implements IUsersRepository {
   }
 
   delete({
-    id,
-    username
+    id
   } : IIdUserDTO) : { message: string; status: number } {
     
-    const userAlreadyExists = users.findIndex(u => u.id === id && u.username === username);
+    const userAlreadyExists = users.findIndex(u => u.id === id);
 
 
     if (userAlreadyExists === -1) {
