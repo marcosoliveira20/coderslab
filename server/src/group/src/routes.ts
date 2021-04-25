@@ -19,7 +19,7 @@ const deleteGroupController = new DeleteGroupController();
 router.post("/group/create", createGroupController.handle);
 router.get("/group/read/byId/:id", readGroupByIdController.handle);
 router.get("/group/read/byName/:name", readGroupByNameController.handle);
-router.get("/group/read/getAll", readAllGroupsController.handle);
+router.get("/group/read/all", readAllGroupsController.handle);
 router.put("/group/update", updateGroupController.handle);
 router.delete("/group/delete/:id", deleteGroupController.handle);
 
