@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
 
-class ReadGroupController {
+class ReadGroupByIdController {
 	async handle(request: Request, response: Response) {
 		const {
 			id
-		} = request.body;
+		} = request.params;
 
 		const readGroup = new Group();
 
 		try {
-			const group = readGroup.read({
+			const group = readGroup.readById({
 				id
 			});
 
@@ -22,4 +22,4 @@ class ReadGroupController {
 	}
 }
 
-export { ReadGroupController };
+export { ReadGroupByIdController };

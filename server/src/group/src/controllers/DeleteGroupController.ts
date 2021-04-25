@@ -6,7 +6,7 @@ class DeleteGroupController {
 	async handle(request: Request, response: Response) {
 		const {
 			id
-		} = request.body;
+		} = request.params;
 
 		const deleteGroup = new Group();
 

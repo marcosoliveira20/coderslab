@@ -68,7 +68,6 @@ class User implements IUsersRepository {
 
   readAll() : { data: Array<object> , message: string; status: number } {
     if(users.length === 0) {
-      // const users_list = [];
       return { data: users, message: "Users are empty", status: 201 };
     }
 

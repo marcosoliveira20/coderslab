@@ -1,4 +1,4 @@
-import { IAllGroupDTO, IIdGroupDTO } from "../interfaces/IGroupDTO";
+import { IAllGroupDTO, IIdGroupDTO, INameGroupDTO } from "../interfaces/IGroupDTO";
 import { IGroupRepository } from "../interfaces/IGroupRepository";
 
 const groups = [];
@@ -12,7 +12,7 @@ class Group implements IGroupRepository {
     is_public,
     user_list,
     schedule_list
-  }) : { message: string; status: number } {
+  } : IAllGroupDTO) : { message: string; status: number } {
 
     const groupAlreadyExists = groups.findIndex(g => g.id === id);
 
@@ -33,9 +33,9 @@ class Group implements IGroupRepository {
     return { message: "Group created", status: 200 };
   }
 
-  read({
+  readById({
     id
-  }) : { data: object; message: string; status: number } {
+  } : IIdGroupDTO) : { data: object; message: string; status: number } {
 
     const groupAlreadyExists = groups.find(g => g.id === id);
 
@@ -46,6 +46,27 @@ class Group implements IGroupRepository {
     return { data: groupAlreadyExists, message: "Group exists", status: 201 };
   }
 
+  readByName({
+    name
+  } : INameGroupDTO) : { data: object; message: string; status: number } {
+
+    const groupAlreadyExists = groups.find(g => g.name === name);
+
+    if(!groupAlreadyExists) {
+      return { data: {}, message: "Group does not exist", status: 404 };
+    }
+
+    return { data: groupAlreadyExists, message: "Group exists", status: 201 };
+  }
+
+  readAll() : { data: Array<object> , message: string; status: number } {
+    if(groups.length === 0) {
+      return { data: groups, message: "Groups are empty", status: 201 };
+    }
+
+    return { data: groups, message: "Groups list", status: 201 };
+  }
+
   update({
     id,
     name,
@@ -54,7 +75,7 @@ class Group implements IGroupRepository {
     is_public,
     user_list,
     schedule_list
-  }) : { data: object; message: string; status: number } {
+  } : IAllGroupDTO) : { data: object; message: string; status: number } {
     
     const groupAlreadyExists = groups.find(g => g.id === id);
 
@@ -74,7 +95,7 @@ class Group implements IGroupRepository {
 
   delete({
     id
-  }) : { message: string; status: number } {
+  } : IIdGroupDTO) : { message: string; status: number } {
 
     const groupAlreadyExists = groups.findIndex(g => g.id === id);
 

@@ -12,4 +12,8 @@ interface IIdGroupDTO {
   id: string;
 }
 
-export { IAllGroupDTO, IIdGroupDTO };
+interface INameGroupDTO {
+  name: string;
+}
+
+export { IAllGroupDTO, IIdGroupDTO, INameGroupDTO };
