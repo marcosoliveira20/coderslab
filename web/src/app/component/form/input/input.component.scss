@@ -1,24 +1,61 @@
-.ng-autocomplete {
-    width:100%;
-    max-width: 600px;
-    display: table;
-    margin: 0 auto;
-    padding: 1rem 0;
+.default {
+    width: 100%;
+    height: 35px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #FFF;
+    color: #FFF;
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    font-weight: 100;
 }
 
-button, p{
-    display: inline;
-    color: white;
-    background-color: #D13C74;
+.custom {
+    width: 100%;
+    height: 35px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #141648 !important;
+    color: #2B2B2B;
+    font-size: 25px ;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    font-weight: 100
 }
-p {
-    border-radius: 0.5rem;
-    padding: 0.3rem;
-    margin: 10px;  
-    
+
+.custom::placeholder{
+    color: #2B2B2B;
+}
+
+li{
+    list-style: none;
 }
 
 button{
-    border-radius: 1rem;
-    border-style: none;
+    background-color: white;
+    margin: 0;
+    color: black;
+    border-radius: 0;
+}
+
+.interest {
+    background-color: #D13C74;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    margin: 10px; 
+    display: inline;
+    color: white;
+    
+    button{
+        border-radius: 1rem;
+        border-style: none;
+        display:inline;
+        background-color: #D13C74;
+        height: auto;
+        width: auto;
+        color: white;
+    
+    }
+
 }

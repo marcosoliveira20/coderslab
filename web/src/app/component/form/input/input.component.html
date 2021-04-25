@@ -1,22 +1,28 @@
-<div class="ng-autocomplete">
-  <ng-autocomplete
-    [data]="interesses"
-    [searchKeyword]="keyword"
-    placeHolder=""
-    (selected)='selectEvent($event)'
-    (inputChanged)='onChangeSearch($event)'
-    [itemTemplate]="itemTemplate"
-    [notFoundTemplate]="notFoundTemplate">
-  </ng-autocomplete>
-
-  <ng-template #itemTemplate let-item>
-    <a [innerHTML]="item.name"></a>
-  </ng-template>
-
-  <ng-template #notFoundTemplate let-notFound>
-    <div [innerHTML]="notFound"></div>
-  </ng-template>
-  <div id="interest-list">
-      <p class='interest' *ngFor="let item of interestList">{{item.name}} <button class='{{item.name}}' (click)="removeInterest($event)"> x</button></p>
+<div class="wrapper">
+  <div class="search-input">
+    <input
+      type="text"
+      placeholder="Objetivo"
+      class="{{ theme }}"
+      (input)="filterList($event)"
+    />
+    <div class="autocom-box">
+      <ul>
+        <li *ngFor="let item of interestListFilter">
+          <button class="{{ item.name }}" (click)="addInterest($event)">
+            {{ item.name }}
+          </button>
+        </li>
+      </ul>
+      <div id="interest-list">
+        <p class="interest" *ngFor="let item of interestList">
+          {{ item.name }}
+          <button class="{{ item.name }}" (click)="removeInterest($event)">
+            x
+          </button>
+        </p>
+      </div>
+    </div>
+    <div class="icon"><i class="fas fa-search"></i></div>
   </div>
 </div>
