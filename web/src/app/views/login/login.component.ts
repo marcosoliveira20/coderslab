@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-login",
@@ -16,15 +16,15 @@ export class LoginComponent implements OnInit {
   });
 
   registerForm = this.fb.group({
-    name: [""],
-    lastname: [""],
-    username: [""],
-    email: [""],
-    password: [""],
-    confirm_password: [""],
+    name: ["", Validators.required],
+    lastname: ["", Validators.required],
+    username: ["", Validators.required],
+    email: ["", Validators.required],
+    password: ["", Validators.required],
+    confirm_password: ["", Validators.required],
     discord_id: [""],
     github_id: [""],
-    objective: [""],
+    objective: [[], Validators.required],
   });
 
   constructor(private router: Router, private fb: FormBuilder) {}

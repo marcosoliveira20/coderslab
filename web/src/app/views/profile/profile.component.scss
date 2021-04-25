@@ -1,4 +1,8 @@
-h1, h4 { color: #141648 }
+$darkBlue: #141648;
+$pink: #D13C74;
+$darkGrey: #2D2D2D;
+
+h1, h4 { color: $darkBlue }
 h1 {
   font-weight: 100;
   font-size: 45px;
@@ -7,11 +11,16 @@ h1 {
 }
 
 h4 { font-weight: 500; margin-bottom: 25px; }
-label { font-weight: 400; color: #D13C74; }
+label { font-weight: 400; color: $pink; }
 input { width: 100%; font-weight: 300; }
-input:disabled { color: #888888; }
+input:disabled { color: #888; }
 
-main { padding: 48px 32px; }
+.mainPage {
+  padding: 48px 32px;
+  display: grid;
+  height: 100%;
+  align-content: space-between;
+}
 
 .header {
   margin-bottom: 55px;
@@ -25,8 +34,8 @@ main { padding: 48px 32px; }
       padding: 10px 0;
       width: 280px;
       background: none;
-      border: 1px solid #D13C74;
-      color: #D13C74;
+      border: 1px solid $pink;
+      color: $pink;
       border-radius: 5px;
       font-weight: 300;
       font-size: 20px;
@@ -59,7 +68,7 @@ section {
 
   input {
     border: none;
-    border-bottom: 1px solid #141648;
+    border-bottom: 1px solid $darkBlue;
     display: block;
     font-weight: 300;
     font-size: 25px;
@@ -79,6 +88,7 @@ section {
 footer {
   display: flex;
   justify-content: space-between;
+  height: 53px;
 
   button {
     padding: 10px 0;
@@ -90,13 +100,13 @@ footer {
     border: none;
   }
 
-  button:first-child {
-    color: #141648;
+  button:nth-child(1) {
+    color: $darkBlue;
   }
 
-  button:last-child {
+  button:nth-child(2) {
     width: 280px;
-    border: 1px solid #D13C74;
-    color: #D13C74;
+    border: 1px solid $pink;
+    color: $pink;
   }
 }
