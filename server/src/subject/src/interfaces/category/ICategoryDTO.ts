@@ -1,13 +1,12 @@
-interface ICategoryCreateDTO {
-  label: string;
-}
-
-interface ICategoryDTO {
+interface ICategoryAllDTO {
   id: string;
   label: string;
 }
-
 interface ICategoryIdDTO {
   id: string;
 }
-export { ICategoryCreateDTO, ICategoryDTO, ICategoryIdDTO };
+interface ICategoryLabelDTO {
+  label: string;
+}
+
+export { ICategoryAllDTO, ICategoryIdDTO, ICategoryLabelDTO };
