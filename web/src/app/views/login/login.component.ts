@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
+import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 
 @Component({
   selector: "app-login",
@@ -10,6 +11,9 @@ import { FormBuilder } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
   private mode: string = "login";
+
+  @ViewChild(BasicAutoCompleterComponent, { static: false })
+  autoCompleteComponent: BasicAutoCompleterComponent;
 
   loginForm = this.fb.group({
     username: [""],
@@ -25,7 +29,7 @@ export class LoginComponent implements OnInit {
     confirm_password: [""],
     discord_id: [""],
     github_id: [""],
-    objective: [""],
+    objective: [],
   });
 
   constructor(private router: Router, private fb: FormBuilder) {}
@@ -39,6 +43,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitRegister() {
+    this.registerForm.patchValue({
+      objective: this.autoCompleteComponent.getInterestList(),
+    });
     console.log("registerForm", this.registerForm.value);
+  }
+
+  listenInput(event) {
+    console.log(event);
   }
 }

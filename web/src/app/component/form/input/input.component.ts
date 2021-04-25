@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output } from "@angular/core";
+import { EventEmitter } from "events";
 
 @Component({
   selector: "app-input-auto-complete",
@@ -9,11 +10,10 @@ import { Component, Input } from "@angular/core";
 export class BasicAutoCompleterComponent {
   @Input() theme:string;
 
-
   keyword = "name";
   private interestList = [];
   private interestListFilter =[]
-  public interesses = [
+  public interestListMock = [
     {
       id: 1,
       name: "Java",
@@ -46,10 +46,10 @@ export class BasicAutoCompleterComponent {
 
   selectEvent(item) {
     this.interestList.push(item);
-    const interestIndex = this.interesses.findIndex(
+    const interestIndex = this.interestListMock.findIndex(
       (interest) => interest.name == item.name
     );
-    this.interesses.splice(interestIndex, 1);
+    this.interestListMock.splice(interestIndex, 1);
   }
 
   removeInterest(interest) {
@@ -57,19 +57,19 @@ export class BasicAutoCompleterComponent {
     const interestIndex = this.interestList.findIndex(
       (interest) => interest.name == interestRemove
     ); 
-    this.interesses.push(this.interestList[interestIndex]);
-    this.interesses = [...this.interesses.splice(interestIndex)]
+    this.interestListMock.push(this.interestList[interestIndex]);
+    this.interestListMock = [...this.interestListMock.splice(interestIndex)]
     
     this.interestList.splice(interestIndex, 1);
   }
 
    addInterest(interest) {
     var interestAdd = interest.path[0].className;
-    const interestIndex = this.interesses.findIndex(
+    const interestIndex = this.interestListMock.findIndex(
       (i) => i.name == interestAdd
     );
-    this.interestList.push(this.interesses[interestIndex]);
-    this.interesses.splice(interestIndex, 1);
+    this.interestList.push(this.interestListMock[interestIndex]);
+    this.interestListMock.splice(interestIndex, 1);
     
     this.interestListFilter.splice( this.interestListFilter.findIndex(
       (i) => i.name == interestAdd
@@ -80,13 +80,12 @@ export class BasicAutoCompleterComponent {
 
   filterList(event){
     if(event.target.value.length >0){
-      this.interestListFilter = this.interesses.filter(interest => interest.name.toLowerCase().includes(event.target.value));
+      this.interestListFilter = this.interestListMock.filter(interest => interest.name.toLowerCase().includes(event.target.value));
     }else{
       this.interestListFilter.splice(0);
     }
   }
-
-  reloadData() {
-    this.interestListFilter = [...this.interestListFilter];
+  public getInterestList(){
+    return this.interestList;
   }
 }

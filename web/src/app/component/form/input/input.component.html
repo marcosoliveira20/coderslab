@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div>
   <div class="search-input">
     <input
       type="text"
@@ -6,7 +6,7 @@
       class="{{ theme }}"
       (input)="filterList($event)"
     />
-    <div class="autocom-box">
+    <div>
       <ul>
         <li *ngFor="let item of interestListFilter">
           <button class="{{ item.name }}" (click)="addInterest($event)">
@@ -23,6 +23,5 @@
         </p>
       </div>
     </div>
-    <div class="icon"><i class="fas fa-search"></i></div>
   </div>
 </div>
