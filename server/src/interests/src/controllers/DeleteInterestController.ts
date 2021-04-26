@@ -8,16 +8,19 @@ class DeleteInterestController {
       id
     } = request.params;
 
-    const deleteInterests = new Interests();
+    const interests = new Interests();
 
     try {
-      const interest = deleteInterests.delete({
-        id
-      });
+      const data = interests.delete(id);
 
-      return response.status(interest.status).send(interest.message);
+      if(!data.message) {
+        return response.status(data.status).send();
+      }
+
+      return response.status(data.status).send(data.message);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

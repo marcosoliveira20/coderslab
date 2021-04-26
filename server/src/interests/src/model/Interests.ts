@@ -1,4 +1,4 @@
-import { IAllInterestsDTO, IIdInterestDTO, IIdLevelInterestDTO } from "../interfaces/IInterestsDTO";
+import { IInterestsDTO } from "../interfaces/IInterestsDTO";
 import { IInterestsRepository } from "../interfaces/IInterestsRepository";
 
 const interests = [];
@@ -8,11 +8,11 @@ class Interests implements IInterestsRepository {
         id,
         subject_label,
         level
-    }: IAllInterestsDTO): { message: string; status: number } {
+    }: IInterestsDTO): { message: string; status: number } {
 
-        const interestAlreadyExists = interests.findIndex(i => i.id === id);
+        const findIndex: number = interests.findIndex(i => i.id === id);
 
-        if (interestAlreadyExists >= 0) {
+        if (findIndex >= 0) {
             return { message: "Interest already exists", status: 403 };
         }
 
@@ -23,60 +23,56 @@ class Interests implements IInterestsRepository {
             level
         });
 
-        return { message: "Interest created", status: 200 };
+        return { message: "Interest created", status: 201 };
     }
 
-    readById({
-        id
-    }: IIdInterestDTO): { data: object, message: string; status: number } {
+    readById(id: string): { interest?: IInterestsDTO; message?: string; status: number } {
 
-        const interestAlreadyExists = interests.find(i => i.id === id);
+        const interest = interests.find(i => i.id === id);
 
-        if (!interestAlreadyExists) {
-            return { data: {}, message: "Interest does not exist", status: 404 };
-        }
-
-        return { data: interestAlreadyExists, message: "Interest exists", status: 201 };
-    }
-
-    readAll(): { data: Array<object>, message: string; status: number } {
-        if (interests.length === 0) {
-            return { data: interests, message: "Interests are empty", status: 201 };
-        }
-
-        return { data: interests, message: "Interests list", status: 201 };
-    }
-
-    update({
-        id,
-        level
-    }: IIdLevelInterestDTO): { data: object, message: string; status: number } {
-
-        const interestAlreadyExists = interests.find(i => i.id === id);
-
-        if (!interestAlreadyExists) {
-            return { data: {}, message: "Interest does not exist", status: 404 };
-        }
-
-        interestAlreadyExists.level = level;
-
-        return { data: interestAlreadyExists, message: "Interest updated", status: 201 };
-    }
-
-    delete({
-        id
-    }: IIdInterestDTO): { message: string; status: number } {
-
-        const interestAlreadyExists = interests.findIndex(i => i.id === id);
-
-
-        if (interestAlreadyExists === -1) {
+        if (!interest) {
             return { message: "Interest does not exist", status: 404 };
         }
 
-        interests.splice(interestAlreadyExists, 1);
+        return { interest, status: 200 };
+    }
 
-        return { message: "Interest deleted", status: 200 };
+    readAll(): { interests: Array<IInterestsDTO>; status: number } {
+        if (interests.length === 0) {
+            return { interests, status: 200 };
+        }
+
+        return { interests, status: 201 };
+    }
+
+    update(subject_label: string, level: string): { interest?: IInterestsDTO; message?: string; status: number } {
+
+        const interest: IInterestsDTO = interests.find(i => i.subject_label === subject_label);
+
+        if (!interest) {
+            return { message: "Interest does not exist", status: 404 };
+        }
+
+        if (interest.level === level) {
+            return { message: "Please, check your current level", status: 403 };
+        }
+
+        interest.level = level;
+
+        return { interest, status: 200 };
+    }
+
+    delete(id: string): { message?: string; status: number } {
+
+        const interestIndex = interests.findIndex(i => i.id === id);
+
+        if (interestIndex === -1) {
+            return { message: "Interest does not exist", status: 404 };
+        }
+
+        interests.splice(interestIndex, 1);
+
+        return { status: 204 };
     }
 }
 

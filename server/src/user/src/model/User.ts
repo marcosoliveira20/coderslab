@@ -47,7 +47,7 @@ class User implements IUsersRepository {
       return { message: "User does not exist", status: 404 };
     }
     
-    return { user, status: 201 };
+    return { user, status: 200 };
   }
 
   readByUsername(username : string) : { user?: IUserDTO; message?: string; status: number } {
@@ -100,7 +100,7 @@ class User implements IUsersRepository {
     return { user, status: 200 };
   }
 
-  delete(id : string) : { message: string; status: number } {
+  delete(id : string) : { message?: string; status: number } {
     
     const userIndex = users.findIndex(u => u.id === id);
 
@@ -110,7 +110,7 @@ class User implements IUsersRepository {
 
     users.splice(userIndex, 1);
 
-    return { message: "User deleted", status: 204 };
+    return { status: 204 };
   }
 }
 

@@ -10,18 +10,19 @@ class CreateInterestController {
       level
     } = request.body;
 
-    const createInterest = new Interests();
+    const interests = new Interests();
 
     try {
-      const interest = createInterest.create({
+      const data = interests.create({
         id,
         subject_label,
         level
       });
 
-      return response.status(interest.status).send(interest.message);
+      return response.status(data.status).send(data.message);
     } catch(err) {
-      return response.status(403);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

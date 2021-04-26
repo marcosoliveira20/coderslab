@@ -5,21 +5,23 @@ import { Interests } from "../model/Interests";
 class UpdateInterestController {
   async handle(request: Request, response: Response) {
     const {
-        id,
+        subject_label,
         level
     } = request.body;
 
-    const updateInterest = new Interests();
+    const interests = new Interests();
 
     try {
-      const interest = updateInterest.update({
-        id,
-        level
-      });
+      const data = interests.update(subject_label, level);
 
-      return response.status(interest.status).json({message: interest.message, interest: interest.data});
+      if(!data.interest) {
+        return response.status(data.status).send(data.message);
+      }
+
+      return response.status(data.status).send(data.interest);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

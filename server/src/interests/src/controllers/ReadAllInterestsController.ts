@@ -4,14 +4,15 @@ import { Interests } from "../model/Interests";
 
 class ReadAllInterestsController {
   async handle(request: Request, response: Response) {
-    const readInterests = new Interests();
+    const interests = new Interests();
 
     try {
-      const interests = readInterests.readAll();
+      const data = interests.readAll();
 
-      return response.status(interests.status).json({message: interests.message, interests: interests.data});
+      return response.status(data.status).send(data.interests);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

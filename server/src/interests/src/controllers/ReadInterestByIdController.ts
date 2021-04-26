@@ -8,16 +8,21 @@ class ReadInterestByIdController {
       id
     } = request.params;
 
-    const readInterest = new Interests();
+    const interests = new Interests();
 
     try {
-      const interest = readInterest.readById({
-        id
-      });
+      const data = interests.readById(id);
 
-      return response.status(interest.status).json({message: interest.message, interest: interest.data});
+      if(!data.interest) {
+        return response.status(data.status).send(data.message);
+      }
+
+      return response.status(data.status).send(data.interest);
+
+
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send("Bad Request");
     }
   }
 }

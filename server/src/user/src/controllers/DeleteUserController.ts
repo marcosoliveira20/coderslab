@@ -13,6 +13,10 @@ class DeleteUserController {
     try {
       const data = user.delete(id);
 
+      if(!data.message) {
+        return response.status(data.status).send();
+      }
+
       return response.status(data.status).send(data.message);
     } catch (err) {
       console.log(err.message);
