@@ -18,6 +18,8 @@ main {
   div { width: 100%; }
 }
 
+.custom_roadmap_icon svg { fill: green; }
+
 .personal-status {
   grid-area: personal-status;
   display: block;
@@ -64,7 +66,18 @@ main {
 
 .study-groups {
   grid-area: study-groups;
-  background: $pink;
+
+  h1 { font-size: 28px; font-weight: 500; color: $darkBlue;}
+
+  ul {
+    list-style: none;
+    display: flex;
+
+    li {
+      background: #FFF;
+      border-radius: 15px;
+    }
+  }
 }
 
 .roadmap-status {

@@ -29,9 +29,8 @@ export class HomeComponent implements OnInit {
       },
       {
         name: "Lógica de programação",
-        user_list: [{}],
-        schedule_list: [{datetime: new Date("2021-04-20")}, {datetime: new Date("2021-04-28")}],
-        category: 35
+        user_list: 35,
+        schedule_list: [{datetime: new Date("2021-04-20")}, {datetime: new Date("2021-04-28")}]
       }
     ],
     interest_list: [
