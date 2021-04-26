@@ -1,0 +1,22 @@
+<div class="ng-autocomplete">
+  <ng-autocomplete
+    [data]="interesses"
+    [searchKeyword]="keyword"
+    placeHolder=""
+    (selected)='selectEvent($event)'
+    (inputChanged)='onChangeSearch($event)'
+    [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate">
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+  <div id="interest-list">
+      <p class='interest' *ngFor="let item of interestList">{{item.name}} <button class='{{item.name}}' (click)="removeInterest($event)"> x</button></p>
+  </div>
+</div>

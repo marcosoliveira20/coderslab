@@ -1,0 +1,32 @@
+nav {
+  width: calc(100% - 13px);
+  height: calc(100% - 26px);
+  margin: 13px 0 0 13px;
+  background: #141648;
+  border-radius: 15px;
+  display: grid;
+  justify-content: center;
+  align-content: space-between;
+  padding: 25px;
+
+  div {
+    display: block;
+
+    a {
+      display: block;
+      cursor: pointer;
+    }
+  }
+
+  div:first-child {
+    a { margin-bottom: 30px; }
+  }
+
+  div:last-child {
+    a { margin-top: 30px; }
+  }
+}
+
+#hand_logo {
+  width: 54px;
+}
