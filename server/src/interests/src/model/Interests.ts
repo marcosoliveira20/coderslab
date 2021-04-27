@@ -10,7 +10,7 @@ class Interests implements IInterestsRepository {
         level
     }: IInterestsDTO): { message: string; status: number } {
 
-        const findIndex: number = interests.findIndex(i => i.id === id);
+        const findIndex: number = interests.findIndex(i => i.id === id || i.subject_label === subject_label);
 
         if (findIndex >= 0) {
             return { message: "Interest already exists", status: 403 };
