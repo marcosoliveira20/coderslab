@@ -20,7 +20,7 @@ router.post("/user/create", createUserController.handle);
 router.get("/user/read/byId/:id", readUserByIdController.handle);
 router.get("/user/read/byUsername/:username", readUserByUsernameController.handle);
 router.get("/user/read/all", readAllUsersController.handle);
-router.put("/user/update/:id", updateUserController.handle);
+router.put("/user/update", updateUserController.handle);
 router.delete("/user/delete/:id", deleteUserController.handle);
 
 export { router };

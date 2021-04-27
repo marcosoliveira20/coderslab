@@ -4,9 +4,9 @@ import { User } from "../model/User";
 
 class UpdateUserController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
     
     const {
+      id,
       username,
       name,
       last_name,
