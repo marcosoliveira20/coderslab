@@ -8,16 +8,19 @@ class DeleteGroupController {
 			id
 		} = request.params;
 
-		const deleteGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = deleteGroup.delete({
-				id
-			});
+			const data = group.delete(id);
 
-			return response.status(group.status).send(group.message);
+			if(!data.message) {
+				return response.status(data.status).send();
+			  }
+
+			return response.status(data.status).send(data.message);
 		} catch(err) {
-			return response.status(404);
+			console.log(err.message);
+			return response.status(400).send("Bad Request");
 		}
 	}
 }

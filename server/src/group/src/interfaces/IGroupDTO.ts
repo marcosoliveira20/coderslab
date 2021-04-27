@@ -1,4 +1,4 @@
-interface IAllGroupDTO {
+interface IGroupDTO {
   id: string;
   name: string;
   category: object;
@@ -8,12 +8,4 @@ interface IAllGroupDTO {
   schedule_list: object;
 }
 
-interface IIdGroupDTO {
-  id: string;
-}
-
-interface INameGroupDTO {
-  name: string;
-}
-
-export { IAllGroupDTO, IIdGroupDTO, INameGroupDTO };
+export { IGroupDTO };

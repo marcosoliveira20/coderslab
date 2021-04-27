@@ -64,13 +64,13 @@ class Interests implements IInterestsRepository {
 
     delete(id: string): { message?: string; status: number } {
 
-        const interestIndex = interests.findIndex(i => i.id === id);
+        const findIndex = interests.findIndex(i => i.id === id);
 
-        if (interestIndex === -1) {
+        if (findIndex === -1) {
             return { message: "Interest does not exist", status: 404 };
         }
 
-        interests.splice(interestIndex, 1);
+        interests.splice(findIndex, 1);
 
         return { status: 204 };
     }

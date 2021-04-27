@@ -1,12 +1,12 @@
-import { IIdGroupDTO, IAllGroupDTO, INameGroupDTO } from "./IGroupDTO";
+import { IGroupDTO } from "./IGroupDTO";
 
 interface IGroupRepository {
-    create(data: IAllGroupDTO) : object;
-    readById(data: IIdGroupDTO) : object;
-    readByName(data: INameGroupDTO) : object;
+    create(data: IGroupDTO) : object;
+    readById(id: string) : object;
+    readByName(name: string) : object;
     readAll() : object;
-    update(data: IAllGroupDTO) : object;
-    delete(data: IIdGroupDTO) : object;
+    update(data: IGroupDTO) : object;
+    delete(id: string) : object;
 }
 
 export { IGroupRepository };

@@ -14,10 +14,10 @@ class CreateGroupController {
 			schedule_list
 		} = request.body;
 
-		const createGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = createGroup.create({
+			const data = group.create({
 				id,
 				name,
 				category,
@@ -27,9 +27,10 @@ class CreateGroupController {
 				schedule_list
 			});
 
-			return response.status(group.status).send(group.message);
+			return response.status(data.status).send(data.message);
 		} catch(err) {
-			return response.status(403);
+			console.log(err.message);
+			return response.status(400).send("Bad Request");
 		}
 	}
 }

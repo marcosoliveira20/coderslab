@@ -8,16 +8,19 @@ class ReadGroupByNameController {
 			name
 		} = request.params;
 
-		const readGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = readGroup.readByName({
-				name
-			});
+			const data = group.readByName(name);
 
-			response.status(group.status).json({message: group.message, group: group.data});
+			if(!data.group) {
+				return response.status(data.status).send(data.message);
+			}
+
+			response.status(data.status).send(data.group);
 		} catch(err) {
-			response.status(404);
+			console.log(err.message);
+			return response.status(400).send("Bad Request");
 		}
 	}
 }

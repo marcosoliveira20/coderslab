@@ -14,10 +14,10 @@ class UpdateGroupController {
 			schedule_list
 		} = request.body;
 
-		const updateGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = updateGroup.update({
+			const data = group.update({
 				id,
 				name,
 				category,
@@ -27,10 +27,14 @@ class UpdateGroupController {
 				schedule_list
 			});
 
+			if(!data.group) {
+				return response.status(data.status).send(data.message);
+			}
 
-			response.status(group.status).json({message: group.message, group: group.data});
+			response.status(data.status).send(data.group);
 		} catch(err) {
-			response.status(404);
+			console.log(err.message);
+			return response.status(400).send("Bad Request");
 		}
 	}
 }

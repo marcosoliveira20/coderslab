@@ -4,14 +4,15 @@ import { Group } from "../model/Group";
 
 class ReadAllGroupsController {
 	async handle(request: Request, response: Response) {
-		const readGroups = new Group();
+		const group = new Group();
 
 		try {
-			const groups = readGroups.readAll();
+			const data = group.readAll();
 
-			response.status(groups.status).json({message: groups.message, groups: groups.data});
+			response.status(data.status).send(data.groups);
 		} catch(err) {
-			response.status(404);
+			console.log(err.message);
+			return response.status(400).send("Bad Request");
 		}
 	}
 }

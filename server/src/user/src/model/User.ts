@@ -102,13 +102,13 @@ class User implements IUsersRepository {
 
   delete(id : string) : { message?: string; status: number } {
     
-    const userIndex = users.findIndex(u => u.id === id);
+    const findIndex = users.findIndex(u => u.id === id);
 
-    if (userIndex === -1) {
+    if (findIndex === -1) {
       return { message: "User does not exist", status: 404 };
     }
 
-    users.splice(userIndex, 1);
+    users.splice(findIndex, 1);
 
     return { status: 204 };
   }
