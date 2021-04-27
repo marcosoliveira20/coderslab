@@ -1,12 +1,12 @@
-import { ISubjecAlltDTO, ISubjectIdDTO, ISubjectLabelDTO } from "./ISubjectDTO";
+import { ISubjecDTO, ISubjectIdDTO, ISubjectLabelDTO } from "./ISubjectDTO";
 
 interface ISubjectRepository {
-  create(data: ISubjecAlltDTO): void; // TODO transformar em ISubjecAlltDTO que não passa id
-  readById(data: ISubjectIdDTO): void;
-  readByLabel(data: ISubjectLabelDTO): void;
+  create(data: ISubjecDTO): void; // TODO transformar em ISubjecDTO que não passa id
+  readById(id: string): void;
+  readByLabel(label: string): void;
   readAll(): void;
-  update(data: ISubjecAlltDTO): void;
-  delete(data: ISubjectIdDTO): void;
+  update(data: ISubjecDTO): void;
+  delete(id: string): void;
 }
 
 export { ISubjectRepository };

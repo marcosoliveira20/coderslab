@@ -6,12 +6,16 @@ export default class ReadByIdSubjectController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const readSubjectById = new Subject();
+    const subject = new Subject();
 
     try {
-      const envio = readSubjectById.readById({ id });
-      return response.status(envio.status).send(envio.subject);
+      const data = subject.readById(id);
+      if (!data.subject) {
+        return response.status(data.status).send(data.message);
+      }
+      return response.status(data.status).send(data.subject);
     } catch (err) {
+      console.log(err.message);
       return response.status(400).send("Bad Request");
     }
   }

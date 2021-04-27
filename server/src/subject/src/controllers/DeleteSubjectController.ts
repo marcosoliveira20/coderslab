@@ -6,12 +6,16 @@ export default class DeleteSubjectController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const deleteSubject = new Subject();
+    const subject = new Subject();
 
     try {
-      const envio = deleteSubject.delete({ id });
-      return response.status(envio.status).send(envio.message);
+      const data = subject.delete(id);
+      if (!data.message) {
+        return response.status(data.status).send(data.message);
+      }
+      return response.status(data.status).send();
     } catch (err) {
+      console.log(err.message);
       return response.status(400).send("Bad Request");
     }
   }

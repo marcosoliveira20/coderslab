@@ -6,12 +6,16 @@ export default class UpdateSubjectController {
   async handle(request: Request, response: Response) {
     const { id, label, categories } = request.body;
 
-    const updateSubject = new Subject();
+    const subject = new Subject();
 
     try {
-      const envio = updateSubject.update({ id, label, categories });
-      return response.status(envio.status).send(envio.message);
+      const data = subject.update({ id, label, categories });
+      if (!data.subject) {
+        return response.status(data.status).send(data.message);
+      }
+      return response.status(data.status).send(data.subject);
     } catch (err) {
+      console.log(err.message);
       return response.status(400).send("Bad Request");
     }
   }

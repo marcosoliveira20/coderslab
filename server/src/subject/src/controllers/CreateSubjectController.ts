@@ -6,12 +6,13 @@ export default class CreateSubjectController {
   async handle(request: Request, response: Response) {
     const { id, label, categories } = request.body;
 
-    const createSubject = new Subject();
+    const subject = new Subject();
 
     try {
-      const envio = createSubject.create({ id, label, categories });
-      return response.status(envio.status).send(envio.message);
+      const data = subject.create({ id, label, categories });
+      return response.status(data.status).send(data.message);
     } catch (err) {
+      console.log(err.message);
       return response.status(400).send("Bad Request");
     }
   }

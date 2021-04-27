@@ -1,4 +1,4 @@
-interface ISubjecAlltDTO {
+interface ISubjecDTO {
   id: string;
   label: string;
   // TO DO Transformar em lista de categorias
@@ -11,4 +11,4 @@ interface ISubjectIdDTO {
 interface ISubjectLabelDTO {
   label: string;
 }
-export { ISubjecAlltDTO, ISubjectIdDTO, ISubjectLabelDTO };
+export { ISubjecDTO, ISubjectIdDTO, ISubjectLabelDTO };
