@@ -4,8 +4,9 @@ import { Group } from "../model/Group";
 
 class UpdateGroupController {
 	async handle(request: Request, response: Response) {
+		const { id } = request.params;
+
 		const {
-			id,
 			name,
 			category,
 			subject,
