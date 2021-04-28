@@ -2,9 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
-
+dotenv.config();
 
 import { router } from './routes';
+
 
 class App {
   public express: express.Application;
@@ -23,11 +24,6 @@ class App {
   }
 
   private database(): void {
-    // prod
-    // const url = "mongodb+srv://admin:coderslab2021@cluster0.fxn5y.mongodb.net/coderslab";
-
-    // dev
-    const url = "mongodb+srv://admin:coderslab2021@cluster0.lzv8b.mongodb.net/coderslab";
 
     let options = {
       poolSize: 5,
@@ -36,7 +32,7 @@ class App {
       useUnifiedTopology: true
     }
 
-    mongoose.connect(url, options);
+    mongoose.connect(process.env.URL_MONGO_DEV, options);
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
 
