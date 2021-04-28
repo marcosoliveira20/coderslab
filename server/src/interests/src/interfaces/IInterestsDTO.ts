@@ -1,7 +1,6 @@
 interface IInterestsDTO {
-    id: string;
     subject_label: string;
-    level: string; 
+    level: number; 
 }
 
 export { IInterestsDTO };

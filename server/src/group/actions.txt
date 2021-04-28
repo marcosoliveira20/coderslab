@@ -1,0 +1,6 @@
+- Colocar validação de owner para deletar e atualizar grupo
+- Definir critérios para usuário não poder criar grupos duplicados
+- ReadByName seria usado para procurar grupos? Precisa de regex e retornar uma lista
+- Como Schedule vai ser guardado em Group?
+- Entrar no grupo, precisa do id do grupo e do cara, remover o grupo de user e o user de grupo, quem vai ter essa rota?
+- Sair do grupo, precisa do id do grupo e do cara, adicionar o grupo de user e o user de grupo, quem vai ter essa rota?

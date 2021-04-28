@@ -17,7 +17,7 @@ const deleteInterestController = new DeleteInterestController();
 router.post("/interest/create", createInterestController.handle);
 router.get("/interest/read/byId/:id", readInterestByIdController.handle);
 router.get("/interest/read/all", readAllInterestsController.handle);
-router.put("/interest/update", updateInterestController.handle);
+router.put("/interest/update/:id", updateInterestController.handle);
 router.delete("/interest/delete/:id", deleteInterestController.handle);
 
 export { router };

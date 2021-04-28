@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose"
 
-const UserSchema = new Schema({
+const GroupSchema = new Schema({
   name: { type: String, required: true },
   category: { type: [String], required: true },
   subject: { type: Object, required: true },
@@ -12,4 +12,4 @@ const UserSchema = new Schema({
   timestamps: true,
 })
 
-export default model("Groups", UserSchema);
+export default model("Groups", GroupSchema);
