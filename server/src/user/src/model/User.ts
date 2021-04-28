@@ -1,11 +1,9 @@
 import { IUserDTO } from "../interfaces/IUserDTO";
 import { IUsersRepository } from "../interfaces/IUserRepository";
-
-const users = [];
+import UserSchema from "../database/Schemas/UserSchema";
 
 class User implements IUsersRepository {
-  create({
-    id,
+  async create({
     username,
     name,
     last_name,
@@ -15,16 +13,8 @@ class User implements IUsersRepository {
     password,
     interest_list,
     group_list
-  }: IUserDTO): { message: string; status: number } {
-    const findIndex: number = users.findIndex(u => u.username === username || u.id === id);
-
-    if (findIndex >= 0) {
-      return { message: "User already exists", status: 403 };
-    }
-
-    //o id vai ser gerado pelo banco futuramente
-    users.push({
-      id,
+  }: IUserDTO): Promise<object | null> {
+    const user = await UserSchema.create({
       username,
       name,
       last_name,
@@ -33,44 +23,29 @@ class User implements IUsersRepository {
       github_id,
       password,
       interest_list,
-      group_list,
-    });
+      group_list
+  });
 
-    return { message: "User created", status: 201 };
+    return user;
   }
 
-  readById(id : string) : { user?: IUserDTO; message?: string; status: number } {
-
-    const user: IUserDTO = users.find(u => u.id === id);
-
-    if (!user) {
-      return { message: "User does not exist", status: 404 };
-    }
-    
-    return { user, status: 200 };
+  async readById(_id : string) : Promise<object> {
+    return await UserSchema.findOne({ _id });
   }
 
-  readByUsername(username : string) : { user?: IUserDTO; message?: string; status: number } {
-
-    const user: IUserDTO = users.find(u => u.username === username);
-
-    if (!user) {
-      return { message: "User does not exist", status: 404 };
-    }
-    
-    return { user, status: 200 };
+  async readByUsername(username : string) : Promise<object> {
+    return await UserSchema.findOne({ username });
   }
 
-  readAll() : { users: Array<IUserDTO>; status: number } {
-    if(users.length === 0) {
-      return { users, status: 200 };
-    }
-
-    return { users, status: 200 };
+  async readByEmail(email : string) : Promise<object> {
+    return await UserSchema.findOne({ email });
   }
 
-  update({
-    id,
+  async readAll() : Promise<object> {
+    return await UserSchema.find().sort({ username: 1 });
+  }
+
+  async update(_id: string, {
     username,
     name,
     last_name,
@@ -80,37 +55,22 @@ class User implements IUsersRepository {
     password,
     interest_list,
     group_list
-  } : IUserDTO) : { user?: IUserDTO; message?: string; status: number } {
-
-    const user: IUserDTO = users.find(u => u.username === username && u.id === id);
-    
-    if (!user) {
-      return { message: "User does not exist", status: 404 };
-    }
-
-    user.name = name;
-    user.last_name = last_name;
-    user.email = email;
-    user.discord_id = discord_id;
-    user.github_id = github_id;
-    user.password = password;
-    user.interest_list = interest_list;
-    user.group_list = group_list;
-    
-    return { user, status: 200 };
+  } : IUserDTO) : Promise<object> {
+    return await UserSchema.findByIdAndUpdate(_id, {
+      username,
+      name,
+      last_name,
+      email,
+      discord_id,
+      github_id,
+      password,
+      interest_list,
+      group_list
+    }, {new: true});
   }
 
-  delete(id : string) : { message?: string; status: number } {
-    
-    const findIndex = users.findIndex(u => u.id === id);
-
-    if (findIndex === -1) {
-      return { message: "User does not exist", status: 404 };
-    }
-
-    users.splice(findIndex, 1);
-
-    return { status: 204 };
+  async delete(_id : string) : Promise<object>{
+    return await UserSchema.deleteOne({ _id });
   }
 }
 

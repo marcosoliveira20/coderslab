@@ -21,8 +21,13 @@ class UpdateUserController {
     const user = new User();
 
     try {
-      const data = user.update({
-        id,
+      const findIndex = await user.readById(id);
+
+      if(!findIndex) {
+        return response.status(404).send("User does not exist");
+      }
+
+      const data = await user.update(id, {
         username,
         name,
         last_name,
@@ -34,11 +39,7 @@ class UpdateUserController {
         group_list,
       });
 
-      if(!data.user) {
-        return response.status(data.status).send(data.message);
-      }
-
-      return response.status(data.status).send(data.user);
+      return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

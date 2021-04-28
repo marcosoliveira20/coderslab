@@ -2,11 +2,12 @@ import { IUserDTO } from "./IUserDTO";
 
 interface IUsersRepository {
   create(data: IUserDTO): object;
-  readById(id: string) : object;
+  readById(_id: string) : object;
   readByUsername(username: string) : object;
+  readByEmail(email: string) : object;
   readAll() : object;
-  update(data: IUserDTO) : object;
-  delete(id: string) : object;
+  update(_id: string, data: IUserDTO) : object;
+  delete(_id: string) : object;
   
 }
 

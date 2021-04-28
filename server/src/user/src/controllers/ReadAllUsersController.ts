@@ -7,9 +7,9 @@ class ReadAllUsersController {
     const user = new User();
 
     try {
-      const data = user.readAll();
+      const data = await user.readAll();
 
-      return response.status(data.status).send(data.users);
+      return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

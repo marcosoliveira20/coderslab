@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import { Request, Response } from "express";
 
 import { User } from "../model/User";
@@ -18,22 +19,30 @@ class CreateUserController {
     } = request.body;
 
     const user = new User();
-
+    
     try {
-      const data = user.create({
-        id,
+      const findUsername = await user.readByUsername(username);
+      const findEmail = await user.readByEmail(email);
+  
+      if (findUsername || findEmail) {
+        return response.status(403).send("User already exists");
+      }
+  
+      const passwordHash = await hash(password, 8);
+
+      await user.create({
         username,
         name,
         last_name,
         email,
         discord_id,
         github_id,
-        password,
+        password: passwordHash,
         interest_list,
         group_list,
       });
 
-      return response.status(data.status).send(data.message);
+      return response.status(201).send("User created");
     } catch(err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

@@ -1,5 +1,4 @@
 interface IUserDTO {
-  id: string;
   username: string;
   name: string;
   last_name: string;

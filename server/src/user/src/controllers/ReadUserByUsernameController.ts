@@ -4,20 +4,18 @@ import { User } from "../model/User";
 
 class ReadUserByUsernameController {
   async handle(request: Request, response: Response) {
-    const {
-      username
-    } = request.params;
+    const { username } = request.params;
 
     const user = new User();
 
     try {
-      const data = user.readByUsername(username);
+      const data = await user.readByUsername(username);
 
-      if(!data.user) {
-        return response.status(data.status).send(data.message);
+      if(!data) {
+        return response.status(404).send("User does not exist");
       }
 
-      return response.status(data.status).send(data.user);
+      return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

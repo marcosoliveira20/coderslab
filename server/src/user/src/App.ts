@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from "dotenv";
+
 
 import { router } from './routes';
 
@@ -36,6 +38,7 @@ class App {
 
     mongoose.connect(url, options);
     mongoose.set('useCreateIndex', true);
+    mongoose.set('useFindAndModify', false);
 
     mongoose.connection.on('error', () => {
       console.log("Erro na conexão com o banco de dados");
