@@ -13,8 +13,8 @@ class User implements IUsersRepository {
     password,
     _interest_list,
     _group_list
-  }: IUserDTO): Promise<object | null> {
-    const user = await UserSchema.create({
+  }: IUserDTO): Promise<object> {
+    return await UserSchema.create({
       username,
       name,
       last_name,
@@ -24,9 +24,7 @@ class User implements IUsersRepository {
       password,
       _interest_list,
       _group_list
-  });
-
-    return user;
+    });
   }
 
   async readById(_id : string) : Promise<object> {
