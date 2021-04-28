@@ -1,11 +1,11 @@
 interface IGroupDTO {
-  id: string;
   name: string;
-  category: object;
+  category: Array<String>;
   subject: object;
   is_public: boolean;
-  user_list: object;
-  schedule_list: object;
+  _owner: string;
+  _user_list: Array<string>;
+  schedule_list: Array<string>;
 }
 
 export { IGroupDTO };

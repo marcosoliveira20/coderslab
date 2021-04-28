@@ -10,6 +10,7 @@ class CreateGroupController {
 			category,
 			subject,
 			is_public,
+			owner,
 			user_list,
 			schedule_list
 		} = request.body;
@@ -23,6 +24,7 @@ class CreateGroupController {
 				category,
 				subject,
 				is_public,
+				owner,
 				user_list,
 				schedule_list
 			});

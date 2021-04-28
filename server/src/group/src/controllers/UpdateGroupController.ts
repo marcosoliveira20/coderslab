@@ -4,13 +4,14 @@ import { Group } from "../model/Group";
 
 class UpdateGroupController {
 	async handle(request: Request, response: Response) {
+		const { id } = request.params;
 
 		const {
-			id,
 			name,
 			category,
 			subject,
 			is_public,
+			owner,
 			user_list,
 			schedule_list
 		} = request.body;
@@ -18,12 +19,12 @@ class UpdateGroupController {
 		const group = new Group();
 
 		try {
-			const data = group.update({
-				id,
+			const data = group.update(id, {
 				name,
 				category,
 				subject,
 				is_public,
+				owner,
 				user_list,
 				schedule_list
 			});

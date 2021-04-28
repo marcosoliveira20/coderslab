@@ -5,11 +5,11 @@ const groups = [];
 
 class Group implements IGroupRepository {
   create({
-    id,
     name,
     category,
     subject,
     is_public,
+    owner,
     user_list,
     schedule_list
   } : IGroupDTO) : { message: string; status: number } {
@@ -21,11 +21,11 @@ class Group implements IGroupRepository {
     }
 
     groups.push({
-      id,
       name,
       category,
       subject,
       is_public,
+      owner,
       user_list,
       schedule_list
     });
@@ -63,12 +63,12 @@ class Group implements IGroupRepository {
     return { groups, status: 200 };
   }
 
-  update({
-    id,
+  update(id: string, {
     name,
     category,
     subject,
     is_public,
+    owner,
     user_list,
     schedule_list
   } : IGroupDTO) : { group?: IGroupDTO; message?: string; status: number } {
@@ -83,6 +83,7 @@ class Group implements IGroupRepository {
     group.category = category;
     group.subject = subject;
     group.is_public = is_public;
+    group.owner = owner;
     group.user_list = user_list;
     group.schedule_list = schedule_list;
 
