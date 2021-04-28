@@ -7,9 +7,9 @@ class ReadAllGroupsController {
 		const group = new Group();
 
 		try {
-			const data = group.readAll();
+			const data = await group.readAll();
 
-			response.status(data.status).send(data.groups);
+			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send("Bad Request");

@@ -4,20 +4,23 @@ import { Group } from "../model/Group";
 
 class DeleteGroupController {
 	async handle(request: Request, response: Response) {
-		const {
-			id
-		} = request.params;
+		const { id, idUser } = request.params;
 
 		const group = new Group();
 
 		try {
-			const data = group.delete(id);
+			const findIndex = await group.readById(id);
 
-			if(!data.message) {
-				return response.status(data.status).send();
-			  }
+			if(!findIndex) {
+				return response.status(404).send("Group does not exist");
+			} 
+			// else if(findIndex._owner !== idUser) {
+			// 	return response.status(401).send();
+			// }
+			
+			await group.delete(id);
 
-			return response.status(data.status).send(data.message);
+			return response.status(204).send();
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send("Bad Request");

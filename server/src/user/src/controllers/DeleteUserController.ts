@@ -15,7 +15,7 @@ class DeleteUserController {
         return response.status(404).send("User does not exist");
       }
 
-      user.delete(id);
+      await user.delete(id);
 
       return response.status(204).send();
     } catch (err) {

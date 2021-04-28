@@ -1,106 +1,62 @@
 import { IGroupDTO } from "../interfaces/IGroupDTO";
 import { IGroupRepository } from "../interfaces/IGroupRepository";
-
-const groups = [];
+import GroupSchema from "../database/Schemas/GroupSchema";
 
 class Group implements IGroupRepository {
-  create({
+  async create({
     name,
     category,
     subject,
     is_public,
-    owner,
-    user_list,
-    schedule_list
-  } : IGroupDTO) : { message: string; status: number } {
-
-    const findIndex = groups.findIndex(g => g.id === id);
-
-    if(findIndex >= 0) {
-      return { message: "Group already exists", status: 403 };
-    }
-
-    groups.push({
+    _owner,
+    _user_list,
+    _schedule_list
+  } : IGroupDTO) : Promise<object> {
+    return await GroupSchema.create({
       name,
       category,
       subject,
       is_public,
-      owner,
-      user_list,
-      schedule_list
+      _owner,
+      _user_list,
+      _schedule_list
     });
-
-    return { message: "Group created", status: 201 };
   }
 
-  readById(id: string) : { group?: IGroupDTO; message?: string; status: number } {
-
-    const group = groups.find(g => g.id === id);
-
-    if(!group) {
-      return { message: "Group does not exist", status: 404 };
-    }
-
-    return { group, status: 200 };
+  async readById(_id: string) : Promise<object> {
+    return await GroupSchema.findOne({ _id });
   }
 
-  readByName(name: string) : { group?: IGroupDTO; message?: string; status: number } {
-
-    const group = groups.find(g => g.name === name);
-
-    if(!group) {
-      return { message: "Group does not exist", status: 404 };
-    }
-
-    return { group, status: 200 };
+  async readByName(name: string) : Promise<object> {
+    return await GroupSchema.findOne({ name });
   }
 
-  readAll() : { groups: Array<IGroupDTO>; status: number } {
-    if(groups.length === 0) {
-      return { groups, status: 200 };
-    }
-
-    return { groups, status: 200 };
+  async readAll() : Promise<object> {
+    return await GroupSchema.find().sort({ name: 1 });
   }
 
-  update(id: string, {
+  async update(_id: string, {
     name,
     category,
     subject,
     is_public,
-    owner,
-    user_list,
-    schedule_list
-  } : IGroupDTO) : { group?: IGroupDTO; message?: string; status: number } {
-    
-    const group = groups.find(g => g.id === id);
-
-    if(!group) {
-      return { message: "Group does not exist", status: 404 };
-    }
-
-    group.name = name;
-    group.category = category;
-    group.subject = subject;
-    group.is_public = is_public;
-    group.owner = owner;
-    group.user_list = user_list;
-    group.schedule_list = schedule_list;
-
-    return { group, status: 200 };
+    _owner,
+    _user_list,
+    _schedule_list
+  } : IGroupDTO) : Promise<object> {
+    return await GroupSchema.findByIdAndUpdate(_id, {
+      name,
+      category,
+      subject,
+      is_public,
+      _owner,
+      _user_list,
+      _schedule_list
+    }, {new: true});
   }
 
-  delete(id: string) : { message?: string; status: number } {
-
-    const findIndex = groups.findIndex(g => g.id === id);
-
-    if(findIndex === -1) {
-      return { message: "Group does not exist", status: 404 };
-    }
-
-    groups.splice(findIndex, 1);
-
-    return { status: 204 };
+  async delete(_id: string) : Promise<object> {
+    return await GroupSchema.deleteOne({ _id });
   }
 }
 

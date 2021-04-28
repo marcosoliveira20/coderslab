@@ -11,29 +11,31 @@ class UpdateGroupController {
 			category,
 			subject,
 			is_public,
-			owner,
-			user_list,
-			schedule_list
+			_owner,
+			_user_list,
+			_schedule_list
 		} = request.body;
 
 		const group = new Group();
 
 		try {
-			const data = group.update(id, {
+			const findIndex = await group.readById(id);
+
+			if(!findIndex) {
+				return response.status(404).send("Group does not exist");
+			  }
+
+			const data = await group.update(id, {
 				name,
 				category,
 				subject,
 				is_public,
-				owner,
-				user_list,
-				schedule_list
+				_owner,
+				_user_list,
+				_schedule_list
 			});
 
-			if(!data.group) {
-				return response.status(data.status).send(data.message);
-			}
-
-			response.status(data.status).send(data.group);
+			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send("Bad Request");

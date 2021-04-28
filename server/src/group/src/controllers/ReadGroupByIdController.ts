@@ -4,20 +4,21 @@ import { Group } from "../model/Group";
 
 class ReadGroupByIdController {
 	async handle(request: Request, response: Response) {
-		const {
-			id
-		} = request.params;
+		const {id, idUser} = request.params;
 
 		const group = new Group();
 
 		try {
-			const data = group.readById(id);
+			const data = await group.readById(id);
 
-			if(!data.group) {
-				return response.status(data.status).send(data.message);
-			  }
+			if(!data) {
+				return response.status(404).send("Group does not exist");
+			}
+			// else if(findIndex._owner !== idUser) {
+			// 	return response.status(401).send();
+			// }
 
-			response.status(data.status).send(data.group);
+			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send("Bad Request");

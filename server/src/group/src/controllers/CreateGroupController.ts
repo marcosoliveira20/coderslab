@@ -10,26 +10,25 @@ class CreateGroupController {
 			category,
 			subject,
 			is_public,
-			owner,
-			user_list,
-			schedule_list
+			_owner,
+			_user_list,
+			_schedule_list
 		} = request.body;
 
 		const group = new Group();
 
 		try {
-			const data = group.create({
-				id,
+			await group.create({
 				name,
 				category,
 				subject,
 				is_public,
-				owner,
-				user_list,
-				schedule_list
+				_owner,
+				_user_list,
+				_schedule_list
 			});
 
-			return response.status(data.status).send(data.message);
+			return response.status(201).send("Group created");
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send("Bad Request");

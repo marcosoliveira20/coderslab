@@ -5,7 +5,7 @@ interface IGroupDTO {
   is_public: boolean;
   _owner: string;
   _user_list: Array<string>;
-  schedule_list: Array<string>;
+  _schedule_list: Array<string>;
 }
 
 export { IGroupDTO };

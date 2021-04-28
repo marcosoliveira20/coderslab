@@ -4,20 +4,18 @@ import { Group } from "../model/Group";
 
 class ReadGroupByNameController {
 	async handle(request: Request, response: Response) {
-		const {
-			name
-		} = request.params;
+		const { name } = request.params;
 
 		const group = new Group();
 
 		try {
-			const data = group.readByName(name);
+			const data = await group.readByName(name);
 
-			if(!data.group) {
-				return response.status(data.status).send(data.message);
+			if(!data) {
+				return response.status(404).send("User does not exist");
 			}
 
-			response.status(data.status).send(data.group);
+			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send("Bad Request");
