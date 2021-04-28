@@ -7,9 +7,9 @@ class ReadAllInterestsController {
     const interests = new Interests();
 
     try {
-      const data = interests.readAll();
+      const data = await interests.readAll();
 
-      return response.status(data.status).send(data.interests);
+      return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

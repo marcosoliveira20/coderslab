@@ -4,20 +4,20 @@ import { Interests } from "../model/Interests";
 
 class DeleteInterestController {
   async handle(request: Request, response: Response) {
-    const {
-      id
-    } = request.params;
+    const { id } = request.params;
 
     const interests = new Interests();
 
     try {
-      const data = interests.delete(id);
+      const findIndex = await interests.readById(id);
 
-      if(!data.message) {
-        return response.status(data.status).send();
+      if(!findIndex) {
+        return response.status(404).send("Interest does not exist");
       }
 
-      return response.status(data.status).send(data.message);
+      await interests.delete(id);
+
+      return response.status(204).send();
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

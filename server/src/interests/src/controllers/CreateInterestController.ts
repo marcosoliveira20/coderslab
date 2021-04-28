@@ -5,7 +5,6 @@ import { Interests } from "../model/Interests";
 class CreateInterestController {
   async handle(request: Request, response: Response) {
     const {
-      id,
       subject_label,
       level
     } = request.body;
@@ -13,13 +12,22 @@ class CreateInterestController {
     const interests = new Interests();
 
     try {
-      const data = interests.create({
-        id,
+      if(level < 0 || level > 2) {
+        return response.status(406).send();
+      }
+
+      const findSubject = await interests.readBySubject(subject_label);
+
+      if (findSubject) {
+        return response.status(403).send("Interest already exists");
+      }
+
+      await interests.create({
         subject_label,
         level
       });
 
-      return response.status(data.status).send(data.message);
+      return response.status(201).send("Interest created");
     } catch(err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");
