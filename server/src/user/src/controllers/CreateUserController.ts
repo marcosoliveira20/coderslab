@@ -6,7 +6,6 @@ import { User } from "../model/User";
 class CreateUserController {
   async handle(request: Request, response: Response) {
     const {
-      id,
       username,
       name,
       last_name,
@@ -14,8 +13,8 @@ class CreateUserController {
       discord_id,
       github_id,
       password,
-      interest_list,
-      group_list,
+      _interest_list,
+      _group_list,
     } = request.body;
 
     const user = new User();
@@ -38,8 +37,8 @@ class CreateUserController {
         discord_id,
         github_id,
         password: passwordHash,
-        interest_list,
-        group_list,
+        _interest_list,
+        _group_list,
       });
 
       return response.status(201).send("User created");

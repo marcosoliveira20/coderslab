@@ -11,8 +11,8 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-    interest_list,
-    group_list
+    _interest_list,
+    _group_list
   }: IUserDTO): Promise<object | null> {
     const user = await UserSchema.create({
       username,
@@ -22,8 +22,8 @@ class User implements IUsersRepository {
       discord_id,
       github_id,
       password,
-      interest_list,
-      group_list
+      _interest_list,
+      _group_list
   });
 
     return user;
@@ -53,8 +53,8 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-    interest_list,
-    group_list
+    _interest_list,
+    _group_list
   } : IUserDTO) : Promise<object> {
     return await UserSchema.findByIdAndUpdate(_id, {
       username,
@@ -64,8 +64,8 @@ class User implements IUsersRepository {
       discord_id,
       github_id,
       password,
-      interest_list,
-      group_list
+      _interest_list,
+      _group_list
     }, {new: true});
   }
 

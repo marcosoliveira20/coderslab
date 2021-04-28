@@ -6,7 +6,6 @@ dotenv.config();
 
 import { router } from './routes';
 
-
 class App {
   public express: express.Application;
 
