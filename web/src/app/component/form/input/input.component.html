@@ -17,7 +17,7 @@
       <div id="interest-list">
         <p class="interest" *ngFor="let item of interestList">
           {{ item.name }}
-          <button class="{{ item.name }}" (click)="removeInterest($event)">
+          <button  type="button" class="{{ item.name }}" (click)="removeInterest($event)">
             x
           </button>
         </p>
