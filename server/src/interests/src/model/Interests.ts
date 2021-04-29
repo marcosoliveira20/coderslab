@@ -21,6 +21,11 @@ class Interests implements IInterestsRepository {
         return await InterestsSchema.findOne({ subject_label });
     }
 
+    async readSubject(_id: string) : Promise<string> {
+        let data = await InterestsSchema.findOne({ _id });
+        return data.subject_label;
+    }
+
     async readAll(): Promise<object> {
         return await InterestsSchema.find().sort({ subject_label: 1 });
     }

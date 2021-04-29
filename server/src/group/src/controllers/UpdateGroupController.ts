@@ -20,7 +20,7 @@ class UpdateGroupController {
 
 		try {
 			const findIndex = await group.readById(id);
-			const findOwner = await group.readByOwner(id);
+			const findOwner = await group.readOwner(id);
 
 			if(!findIndex) {
 				return response.status(404).send("Group does not exist");
