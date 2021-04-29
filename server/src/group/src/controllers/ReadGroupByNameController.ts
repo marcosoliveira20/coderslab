@@ -11,10 +11,6 @@ class ReadGroupByNameController {
 		try {
 			const data = await group.readByName(name);
 
-			if(!data) {
-				return response.status(404).send("User does not exist");
-			}
-
 			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);

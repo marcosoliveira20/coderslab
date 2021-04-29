@@ -2,18 +2,14 @@ import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
 
-class ReadGroupByIdController {
+class ReadGroupByCategoryController {
 	async handle(request: Request, response: Response) {
-		const { id } = request.params;
+		const { category } = request.params;
 
 		const group = new Group();
 
 		try {
-			const data = await group.readById(id);
-
-			if(!data) {
-				return response.status(404).send("Group does not exist");
-			}
+			const data = await group.readByCategory(category);
 
 			response.status(200).send(data);
 		} catch(err) {
@@ -23,4 +19,4 @@ class ReadGroupByIdController {
 	}
 }
 
-export { ReadGroupByIdController };
+export { ReadGroupByCategoryController };

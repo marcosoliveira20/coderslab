@@ -35,6 +35,10 @@ class Group implements IGroupRepository {
     return await GroupSchema.find({ name: { "$regex": name }, is_public: true}).sort({ name: 1 });
   }
 
+  async readByCategory(category: string) : Promise<object> {
+    return await GroupSchema.find({ category, is_public: true}).sort({ name: 1 });
+  }
+
   async readBySubject(subject_label: string) : Promise<object> {
     return await GroupSchema.find({ subject_label, is_public: true }).sort({ name: 1 });
   }
