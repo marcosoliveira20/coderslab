@@ -31,6 +31,11 @@ class Group implements IGroupRepository {
     return await GroupSchema.findOne({ name });
   }
 
+  async readByOwner(_id: string) : Promise<string> {
+    let data = await GroupSchema.findOne({ _id });
+    return data._owner;
+  }
+
   async readAll() : Promise<object> {
     return await GroupSchema.find().sort({ name: 1 });
   }

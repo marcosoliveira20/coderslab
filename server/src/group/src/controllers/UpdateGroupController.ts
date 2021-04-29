@@ -4,7 +4,7 @@ import { Group } from "../model/Group";
 
 class UpdateGroupController {
 	async handle(request: Request, response: Response) {
-		const { id } = request.params;
+		const { id, idUser } = request.params;
 
 		const {
 			name,
@@ -20,10 +20,13 @@ class UpdateGroupController {
 
 		try {
 			const findIndex = await group.readById(id);
+			const findOwner = await group.readByOwner(id);
 
 			if(!findIndex) {
 				return response.status(404).send("Group does not exist");
-			  }
+			} else if(findOwner != idUser) {
+				return response.status(401).send();
+			}
 
 			const data = await group.update(id, {
 				name,
