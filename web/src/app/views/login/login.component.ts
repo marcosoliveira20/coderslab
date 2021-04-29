@@ -6,8 +6,7 @@ import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
   private mode: string = "login";
@@ -21,15 +20,15 @@ export class LoginComponent implements OnInit {
   });
 
   registerForm = this.fb.group({
-    name: [""],
-    lastname: [""],
-    username: [""],
-    email: [""],
-    password: [""],
-    confirm_password: [""],
+    name: ["", Validators.required],
+    lastname: ["", Validators.required],
+    username: ["", Validators.required],
+    email: ["", Validators.required],
+    password: ["", Validators.required],
+    confirm_password: ["", Validators.required],
     discord_id: [""],
     github_id: [""],
-    objective: [],
+    objective: [[], Validators.required],
   });
 
   constructor(private router: Router, private fb: FormBuilder) {}

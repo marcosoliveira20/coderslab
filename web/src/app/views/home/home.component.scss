@@ -1,0 +1,78 @@
+$darkBlue: #141648;
+$indigoBlue: #24276D;
+$pink: #D13C74;
+$darkGrey: #2D2D2D;
+
+main {
+  height: 100%;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-areas:  "personal-status roadmap-details"
+                        "study-groups roadmap-details"
+                        "roadmap-status roadmap-details";
+  column-gap: 48px;
+  row-gap: 28px;
+
+  div { width: 100%; }
+}
+
+.personal-status {
+  grid-area: personal-status;
+  display: block;
+
+  div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    h1 { color: $darkBlue; font-weight: 300;}
+    h3 { color: $pink; font-weight: 500; }
+  }
+
+  ul {
+    padding: 25px;
+    border-radius: 15px;
+    background-color: #FFF;
+    text-align: center;
+    align-items: center;
+    list-style: none;
+    color: $darkBlue;
+    font-weight: 300;
+    display: flex;
+    width: 100%;
+
+    li {
+      width: 100%;
+    }
+
+    li p:first-child { font-size: 20px; }
+    li p:last-child { font-size: 50px; }
+
+    li:first-child {
+      border: none;
+      border-right: 1px solid $darkBlue;
+    }
+
+    li:last-child {
+      border: none;
+      border-left: 1px solid $darkBlue;
+    }
+  }
+}
+
+.study-groups {
+  grid-area: study-groups;
+  background: $pink;
+}
+
+.roadmap-status {
+  grid-area: roadmap-status;
+  background: $darkGrey;
+}
+
+.roadmap-details {
+  grid-area: roadmap-details;
+  background: green;
+}

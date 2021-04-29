@@ -4,36 +4,77 @@
   <img src="assets/icons/poweredby.svg" alt="" id="poweredby_icon" />
 
   <div class="div_bg_login" *ngIf="mode === 'login'">
-    <img src="assets/background/left_blob_stage1.svg" alt="" />
-    <img src="assets/background/right_blob_stage1.svg" alt="" />
+    <img
+      class="img_blob_left"
+      src="assets/background/left_blob_stage1.svg"
+      alt=""
+    />
+    <img
+      class="img_blob_right"
+      src="assets/background/right_blob_stage1.svg"
+      alt=""
+    />
   </div>
 
   <div class="div_bg_register" *ngIf="mode === 'register'">
-    <img src="assets/background/right_blob_stage3.svg" alt="" />
+    <img
+      class="img_blob_right"
+      src="assets/background/right_blob_stage3.svg"
+      alt=""
+    />
   </div>
 </div>
 
 <main class="container h-100">
   <!-- LOGIN -->
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="section_loginMode" *ngIf="mode === 'login'">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmitLogin()"
+    class="section_loginMode"
+    *ngIf="mode === 'login'"
+  >
     <article>
-      <input type="text" placeholder="Nome de Usuário" formControlName="username" required/>
-      <input type="text" placeholder="Senha" formControlName="password" required/>
+      <input
+        type="text"
+        placeholder="Nome de Usuário"
+        formControlName="username"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Senha"
+        formControlName="password"
+        required
+      />
 
-      <button type="submit" class="btn_lm_filled" (click)="handleLoginMode('login')">Login</button>
+      <button
+        type="submit"
+        class="btn_lm_filled"
+        (click)="handleLoginMode('login')"
+        routerLink="/"
+      >
+        Login
+      </button>
       <div class="row">
         <div class="col">
           <button class="btn_lm_void">Redefinir senha</button>
         </div>
         <div class="col">
-          <button class="btn_lm_void" (click)="handleLoginMode('register')">Fazer cadastro</button>
+          <button class="btn_lm_void" (click)="handleLoginMode('register')">
+            Fazer cadastro
+          </button>
         </div>
       </div>
     </article>
   </form>
 
   <!-- REGISTER -->
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" class="section_registerMode" *ngIf="mode === 'register'">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmitRegister()"
+    class="section_registerMode"
+    *ngIf="mode === 'register'"
+  >
     <div>
       <article>
         <div class="row">
@@ -41,21 +82,41 @@
             <input type="text" placeholder="Nome" formControlName="name" />
           </div>
           <div class="col">
-            <input type="text" placeholder="Sobrenome" formControlName="lastname" />
+            <input
+              type="text"
+              placeholder="Sobrenome"
+              formControlName="lastname"
+            />
           </div>
         </div>
-        <input type="text" placeholder="Nome de usuário" formControlName="username" />
+        <input
+          type="text"
+          placeholder="Nome de usuário"
+          formControlName="username"
+        />
         <input type="text" placeholder="E-mail" formControlName="email" />
       </article>
 
       <article>
         <input type="text" placeholder="Senha" formControlName="password" />
-        <input type="email" placeholder="Confirmar senha" formControlName="confirm_password" />
+        <input
+          type="email"
+          placeholder="Confirmar senha"
+          formControlName="confirm_password"
+        />
       </article>
 
       <article>
-        <input type="text" placeholder="Discord ID" formControlName="discord_id" />
-        <input type="email" placeholder="GitHub ID" formControlName="github_id" />
+        <input
+          type="text"
+          placeholder="Discord ID"
+          formControlName="discord_id"
+        />
+        <input
+          type="email"
+          placeholder="GitHub ID"
+          formControlName="github_id"
+        />
       </article>
 
       <article>
@@ -64,6 +125,8 @@
     </div>
 
     <button type="submit" class="btn_rm_filled">Cadastrar</button>
-    <button class="btn_rm_void" (click)="handleLoginMode('login')">Fazer login</button>
+    <button class="btn_rm_void" (click)="handleLoginMode('login')">
+      Fazer login
+    </button>
   </form>
 </main>
