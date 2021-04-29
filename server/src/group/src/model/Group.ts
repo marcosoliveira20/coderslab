@@ -41,7 +41,7 @@ class Group implements IGroupRepository {
   }
 
   async readAll() : Promise<object> {
-    return await GroupSchema.find().sort({ name: 1 });
+    return await GroupSchema.find({ is_public: true }).sort({ name: 1 });
   }
 
   async update(_id: string, {
