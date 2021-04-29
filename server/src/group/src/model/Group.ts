@@ -32,11 +32,15 @@ class Group implements IGroupRepository {
   }
 
   async readByName(name: string) : Promise<object> {
-    return await GroupSchema.find({ name: { "$regex": name }}).sort({ name: 1 });
+    return await GroupSchema.find({ name: { "$regex": name }, is_public: true}).sort({ name: 1 });
   }
 
   async readBySubject(subject_label: string) : Promise<object> {
-    return await GroupSchema.find({ subject_label }).sort({ name: 1 });
+    return await GroupSchema.find({ subject_label, is_public: true }).sort({ name: 1 });
+  }
+
+  async readAll() : Promise<object> {
+    return await GroupSchema.find({ is_public: true }).sort({ name: 1 });
   }
 
   async readByToken(token: string) : Promise<object> {
@@ -46,10 +50,6 @@ class Group implements IGroupRepository {
   async readOwner(_id: string) : Promise<string> {
     let data = await GroupSchema.findOne({ _id });
     return data._owner;
-  }
-
-  async readAll() : Promise<object> {
-    return await GroupSchema.find({ is_public: true }).sort({ name: 1 });
   }
 
   async update(_id: string, {
