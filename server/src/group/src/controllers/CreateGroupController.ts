@@ -7,7 +7,7 @@ class CreateGroupController {
 		const {
 			name,
 			category,
-			subject,
+			subject_label,
 			level,
   			token,
 			is_public,
@@ -26,7 +26,7 @@ class CreateGroupController {
 			await group.create({
 				name,
 				category,
-				subject,
+				subject_label,
 				level,
   				token,
 				is_public,

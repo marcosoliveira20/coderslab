@@ -10,11 +10,14 @@ class DeleteGroupController {
 		
 		try {
 			const findIndex = await group.readById(id);
-			const findOwner = await group.readByOwner(id);
-
+			
 			if(!findIndex) {
 				return response.status(404).send("Group does not exist");
-			} else if(findOwner != idUser) {
+			} 
+			
+			const findOwner = await group.readOwner(id);
+			
+			if(findOwner != idUser) {
 				return response.status(401).send();
 			}
 			

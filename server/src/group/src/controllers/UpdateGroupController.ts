@@ -9,7 +9,7 @@ class UpdateGroupController {
 		const {
 			name,
 			category,
-			subject,
+			subject_label,
 			level,
   			token,
 			is_public,
@@ -26,18 +26,21 @@ class UpdateGroupController {
 			}
 			
 			const findIndex = await group.readById(id);
-			const findOwner = await group.readOwner(id);
-
+			
 			if(!findIndex) {
 				return response.status(404).send("Group does not exist");
-			} else if(findOwner != idUser) {
+			} 
+			
+			const findOwner = await group.readOwner(id);
+			
+			if(findOwner != idUser) {
 				return response.status(401).send();
 			}
 
 			const data = await group.update(id, {
 				name,
 				category,
-				subject,
+				subject_label,
 				level,
   				token,
 				is_public,

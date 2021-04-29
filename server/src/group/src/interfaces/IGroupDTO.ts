@@ -1,7 +1,7 @@
 interface IGroupDTO {
   name: string;
   category: Array<String>;
-  subject: object;
+  subject_label: string;
   level: number;
   token: string;
   is_public: boolean;

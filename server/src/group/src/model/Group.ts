@@ -6,7 +6,7 @@ class Group implements IGroupRepository {
   async create({
     name,
     category,
-    subject,
+    subject_label,
     level,
     token,
     is_public,
@@ -17,7 +17,7 @@ class Group implements IGroupRepository {
     return await GroupSchema.create({
       name,
       category,
-      subject,
+      subject_label,
       level,
       token,
       is_public,
@@ -32,7 +32,15 @@ class Group implements IGroupRepository {
   }
 
   async readByName(name: string) : Promise<object> {
-    return await GroupSchema.findOne({ name });
+    return await GroupSchema.find({ name: { "$regex": name }}).sort({ name: 1 });
+  }
+
+  async readBySubject(subject_label: string) : Promise<object> {
+    return await GroupSchema.find({ subject_label }).sort({ name: 1 });
+  }
+
+  async readByToken(token: string) : Promise<object> {
+    return await GroupSchema.findOne({ token });
   }
 
   async readOwner(_id: string) : Promise<string> {
@@ -47,7 +55,7 @@ class Group implements IGroupRepository {
   async update(_id: string, {
     name,
     category,
-    subject,
+    subject_label,
     level,
     token,
     is_public,
@@ -58,7 +66,7 @@ class Group implements IGroupRepository {
     return await GroupSchema.findByIdAndUpdate(_id, {
       name,
       category,
-      subject,
+      subject_label,
       level,
       token,
       is_public,
