@@ -4,6 +4,8 @@ const GroupSchema = new Schema({
   name: { type: String, required: true },
   category: { type: [String], required: true },
   subject: { type: Object, required: true },
+  level: { type: Number, required: true },
+  token: { type: String, required: true },
   is_public: { type: Boolean, required: true },
   _owner: { type: Schema.Types.ObjectId, required: true },
   _user_list: { type: [Schema.Types.ObjectId], required: true },

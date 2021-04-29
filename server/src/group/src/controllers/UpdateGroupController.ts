@@ -10,6 +10,8 @@ class UpdateGroupController {
 			name,
 			category,
 			subject,
+			level,
+  			token,
 			is_public,
 			_owner,
 			_user_list,
@@ -19,6 +21,10 @@ class UpdateGroupController {
 		const group = new Group();
 
 		try {
+			if(level < 0 || level > 2) {
+				return response.status(406).send();
+			}
+			
 			const findIndex = await group.readById(id);
 			const findOwner = await group.readOwner(id);
 
@@ -32,6 +38,8 @@ class UpdateGroupController {
 				name,
 				category,
 				subject,
+				level,
+  				token,
 				is_public,
 				_owner,
 				_user_list,

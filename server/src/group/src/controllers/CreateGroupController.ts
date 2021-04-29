@@ -5,10 +5,11 @@ import { Group } from "../model/Group";
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
 		const {
-			id,
 			name,
 			category,
 			subject,
+			level,
+  			token,
 			is_public,
 			_owner,
 			_user_list,
@@ -18,10 +19,16 @@ class CreateGroupController {
 		const group = new Group();
 
 		try {
+			if(level < 0 || level > 2) {
+				return response.status(406).send();
+			}
+
 			await group.create({
 				name,
 				category,
 				subject,
+				level,
+  				token,
 				is_public,
 				_owner,
 				_user_list,
