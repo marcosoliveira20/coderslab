@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 
 @Component({
