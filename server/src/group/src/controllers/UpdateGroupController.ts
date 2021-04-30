@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 
+import { IGroupDTO } from "../interfaces/IGroupDTO";
 import { Group } from "../model/Group";
 
 class UpdateGroupController {
@@ -31,9 +32,9 @@ class UpdateGroupController {
 				return response.status(404).send("Group does not exist");
 			} 
 			
-			const findOwner = await group.readOwner(id);
+			let newfindIndex = <IGroupDTO> findIndex;
 			
-			if(findOwner != idUser) {
+			if(newfindIndex._owner != idUser) {
 				return response.status(401).send();
 			}
 

@@ -51,11 +51,6 @@ class Group implements IGroupRepository {
     return await GroupSchema.findOne({ token });
   }
 
-  async readOwner(_id: string) : Promise<string> {
-    let data = await GroupSchema.findOne({ _id });
-    return data._owner;
-  }
-
   async update(_id: string, {
     name,
     category,
