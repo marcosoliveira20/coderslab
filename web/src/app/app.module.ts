@@ -14,6 +14,7 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './views/home/home.component';
+import { CardComponent } from './component/card/card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeComponent } from './views/home/home.component';
     BasicAutoCompleterComponent,
     ProfileComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

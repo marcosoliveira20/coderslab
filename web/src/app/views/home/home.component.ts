@@ -19,18 +19,22 @@ export class HomeComponent implements OnInit {
         name: "Node para iniciantes",
         user_list: 15,
         schedule_list: [{datetime: new Date("2021-04-20")}, {datetime: new Date("2021-04-28")}],
-        category: [{label: "back end"}, {label: "dev web"}]
+        category: [{label: "back end"}, {label: "dev web"}],
+        isDefault: false
       },
       {
         name: "MySQL básico",
         user_list: 10,
         schedule_list: [{datetime: new Date("2021-04-20")}, {datetime: new Date("2021-04-28")}],
-        category: [{label: "back end"}, {label: "dev web"}, {label: "dba"}]
+        category: [{label: "back end"}, {label: "dev web"}, {label: "dba"}],
+        isDefault: false
       },
       {
         name: "Lógica de programação",
         user_list: 35,
-        schedule_list: [{datetime: new Date("2021-04-20")}, {datetime: new Date("2021-04-28")}]
+        schedule_list: [{datetime: new Date("2021-04-20")}, {datetime: new Date("2021-04-28")}],
+        category: [{label: "back end"}, {label: "dev web"}],
+        isDefault: true
       }
     ],
     interest_list: [
