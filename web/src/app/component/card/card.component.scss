@@ -3,6 +3,7 @@ $indigoBlue: #24276D;
 $pink: #D13C74;
 $darkGrey: #2D2D2D;
 $cdl_yellow: #FFC42E;
+$cdl_grey: #E7E9F0;
 
 .isDefault {
   >main {
@@ -15,6 +16,7 @@ $cdl_yellow: #FFC42E;
     footer { background: $indigoBlue; }
     footer svg { fill: $cdl_yellow; }
     footer p { color: white; }
+    footer >label { background: $indigoBlue; border: 1px solid $cdl_yellow; color: #FFF; }
   }
 
   >button {
@@ -106,13 +108,23 @@ header {
 }
 
 footer {
-  display: flex;
+  display: block;
   height: 100%;
   background: white;
 
+  >label {
+    width: 100%;
+    background: $cdl_grey;
+    text-align: center;
+    border-radius: 5px;
+    color: $darkBlue;
+    border: 1px solid $cdl_grey;
+    margin: 10px 0 0;
+  }
+
   div {
     display: flex;
-    height: 100%;
+    height: fit-content;
     width: 100%;
 
     svg {
