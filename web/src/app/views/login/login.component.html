@@ -120,8 +120,7 @@
       </article>
 
       <article>
-        <input type="text" placeholder="Objetivo" formControlName="objective" />
-        <app-input-auto-complete></app-input-auto-complete>
+        <app-input-auto-complete theme="default" (onOutput)="listenInput($event)"> </app-input-auto-complete>
       </article>
     </div>
 
