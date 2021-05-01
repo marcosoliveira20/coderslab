@@ -111,10 +111,10 @@ main {
   display: flex;
   justify-content: end;
 
-  > button {
+  > a > button {
     background-color: $pink;
 
-    position: absolute;
+    position: fixed;
     bottom: 28px;
     right: 56px;
 
