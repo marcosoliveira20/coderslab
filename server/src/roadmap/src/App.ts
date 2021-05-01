@@ -4,6 +4,8 @@ import mongoose from 'mongoose'
 
 import { RoadmapRoutes } from './routes'
 
+import dotenv from "dotenv";
+dotenv.config();
 class App {
   public express: express.Application
 
@@ -21,8 +23,6 @@ class App {
   }
 
   private database(): void {
-    const url="mongodb+srv://coderslab:coderslab123@cluster0.c3uoq.mongodb.net/coderslab?retryWrites=true&w=majority"
-
     let options = {
       poolSize: 5,
       ssl: true,
@@ -32,7 +32,7 @@ class App {
       useCreateIndex: true
     }
 
-    mongoose.connect(url, options),
+    mongoose.connect(process.env.SECRET_URL_MONGO_DEV, options),
 
     mongoose.connection.on('error', () => {
       console.log("Erro na conexão com o banco de dados")
