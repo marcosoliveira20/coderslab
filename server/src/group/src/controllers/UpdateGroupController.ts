@@ -15,7 +15,6 @@ class UpdateGroupController {
   			token,
 			is_public,
 			_owner,
-			_user_list,
 			_schedule_list
 		} = request.body;
 
@@ -32,9 +31,7 @@ class UpdateGroupController {
 				return response.status(404).send("Group does not exist");
 			} 
 			
-			let newfindIndex = <IGroupDTO> findIndex;
-			
-			if(newfindIndex._owner != idUser) {
+			if(findIndex._owner != idUser) {
 				return response.status(401).send();
 			}
 
@@ -46,7 +43,6 @@ class UpdateGroupController {
   				token,
 				is_public,
 				_owner,
-				_user_list,
 				_schedule_list
 			});
 

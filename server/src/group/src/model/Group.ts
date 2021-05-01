@@ -3,7 +3,7 @@ import { IGroupRepository } from "../interfaces/IGroupRepository";
 import GroupSchema from "../database/Schemas/GroupSchema";
 
 class Group implements IGroupRepository {
-  async create({
+  create({
     name,
     category,
     subject_label,
@@ -11,10 +11,9 @@ class Group implements IGroupRepository {
     token,
     is_public,
     _owner,
-    _user_list,
     _schedule_list
-  } : IGroupDTO) : Promise<object> {
-    return await GroupSchema.create({
+  } : IGroupDTO) : void {
+    GroupSchema.create({
       name,
       category,
       subject_label,
@@ -22,36 +21,35 @@ class Group implements IGroupRepository {
       token,
       is_public,
       _owner,
-      _user_list,
       _schedule_list
     });
   }
 
-  async readById(_id: string) : Promise<object> {
-    return await GroupSchema.findOne({ _id });
+  readById(_id: string) : Promise<IGroupDTO> {
+    return GroupSchema.findOne({ _id });
+  }
+  
+  readByToken(token: string) : Promise<IGroupDTO> {
+    return GroupSchema.findOne({ token });
   }
 
-  async readByName(name: string) : Promise<object> {
-    return await GroupSchema.find({ name: { "$regex": name }, is_public: true}).sort({ name: 1 });
+  readByName(name: string) : Promise<Array<IGroupDTO>> {
+    return GroupSchema.find({ name: { "$regex": name }, is_public: true}).sort({ name: 1 });
   }
 
-  async readByCategory(category: string) : Promise<object> {
-    return await GroupSchema.find({ category, is_public: true}).sort({ name: 1 });
+  readByCategory(category: string) : Promise<Array<IGroupDTO>> {
+    return GroupSchema.find({ category, is_public: true}).sort({ name: 1 });
   }
 
-  async readBySubject(subject_label: string) : Promise<object> {
-    return await GroupSchema.find({ subject_label, is_public: true }).sort({ name: 1 });
+  readBySubject(subject_label: string) : Promise<Array<IGroupDTO>> {
+    return GroupSchema.find({ subject_label, is_public: true }).sort({ name: 1 });
   }
 
-  async readAll() : Promise<object> {
-    return await GroupSchema.find({ is_public: true }).sort({ name: 1 });
+  readAll() : Promise<Array<IGroupDTO>> {
+    return GroupSchema.find({ is_public: true }).sort({ name: 1 });
   }
 
-  async readByToken(token: string) : Promise<object> {
-    return await GroupSchema.findOne({ token });
-  }
-
-  async update(_id: string, {
+  update(_id: string, {
     name,
     category,
     subject_label,
@@ -59,10 +57,9 @@ class Group implements IGroupRepository {
     token,
     is_public,
     _owner,
-    _user_list,
     _schedule_list
-  } : IGroupDTO) : Promise<object> {
-    return await GroupSchema.findByIdAndUpdate(_id, {
+  } : IGroupDTO) : Promise<IGroupDTO> {
+    return GroupSchema.findByIdAndUpdate(_id, {
       name,
       category,
       subject_label,
@@ -70,13 +67,12 @@ class Group implements IGroupRepository {
       token,
       is_public,
       _owner,
-      _user_list,
       _schedule_list
     }, {new: true});
   }
 
-  async delete(_id: string) : Promise<object> {
-    return await GroupSchema.deleteOne({ _id });
+  delete(_id: string) : void {
+    return GroupSchema.deleteOne({ _id });
   }
 }
 

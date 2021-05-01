@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 
-import { IGroupDTO } from "../interfaces/IGroupDTO";
 import { Group } from "../model/Group";
 
 class DeleteGroupController {
@@ -16,9 +15,7 @@ class DeleteGroupController {
 				return response.status(404).send("Group does not exist");
 			} 
 			
-			let newfindIndex = <IGroupDTO> findIndex;
-			
-			if(newfindIndex._owner != idUser) {
+			if(findIndex._owner != idUser) {
 				return response.status(401).send();
 			}
 			

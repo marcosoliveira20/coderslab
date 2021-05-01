@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
+import { IGroupDTO } from "../interfaces/IGroupDTO";
 
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
@@ -12,7 +13,6 @@ class CreateGroupController {
   			token,
 			is_public,
 			_owner,
-			_user_list,
 			_schedule_list
 		} = request.body;
 
@@ -20,6 +20,12 @@ class CreateGroupController {
 
 		try {
 			if(level < 0 || level > 2) {
+				return response.status(406).send();
+			}
+
+			const data = await group.readByToken(token);
+
+			if(data) {
 				return response.status(406).send();
 			}
 
@@ -31,7 +37,6 @@ class CreateGroupController {
   				token,
 				is_public,
 				_owner,
-				_user_list,
 				_schedule_list
 			});
 
