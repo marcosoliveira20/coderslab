@@ -15,6 +15,10 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './views/home/home.component';
 import { CardComponent } from './component/card/card.component';
+import { HomeGroupComponent } from './views/group/home-group/home-group.component';
+import { DetailGroupComponent } from './views/group/detail-group/detail-group.component';
+import { NewGroupComponent } from './views/group/new-group/new-group.component';
+import { ExploreGroupComponent } from './views/group/explore-group/explore-group.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { CardComponent } from './component/card/card.component';
     ProfileComponent,
     NavbarComponent,
     HomeComponent,
-    CardComponent
+    CardComponent,
+    HomeGroupComponent,
+    DetailGroupComponent,
+    NewGroupComponent,
+    ExploreGroupComponent
   ],
   imports: [
     BrowserModule,

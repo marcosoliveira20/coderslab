@@ -7,7 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'web';
+  hideNavbar:boolean;
+  title:string = 'web';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.hideNavbar = router.url === '/login' || router.url === '/groups/explore'
+  }
 }

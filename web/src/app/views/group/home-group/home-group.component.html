@@ -1,0 +1,6 @@
+<app-detail-group *ngIf="queryParams.id else showHome"></app-detail-group>
+
+<ng-template #showHome>
+  <p >home-group works!</p>
+</ng-template>
+
