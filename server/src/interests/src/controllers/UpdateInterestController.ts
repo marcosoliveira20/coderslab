@@ -19,12 +19,11 @@ class UpdateInterestController {
       }
       
       const findIndex = await interests.readById(id);
-      const findSubject = await interests.readSubject(id);
 
       if(!findIndex) {
-        return response.status(404).send("User does not exist");
-      } else if(findSubject != subject_label) {
-        return response.status(406).send();
+        return response.status(404).send("Interest does not exist");
+      } else if(findIndex.subject_label != subject_label) {
+          return response.status(406).send();
       }
 
       const data = await interests.update(id, {subject_label, level});

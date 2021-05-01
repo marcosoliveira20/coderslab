@@ -14,7 +14,6 @@ class CreateUserController {
       github_id,
       password,
       _interest_list,
-      _group_list,
     } = request.body;
 
     const user = new User();
@@ -38,7 +37,6 @@ class CreateUserController {
         github_id,
         password: passwordHash,
         _interest_list,
-        _group_list,
       });
 
       return response.status(201).send("User created");

@@ -7,7 +7,6 @@ interface IUserDTO {
   github_id: string;
   password: string;
   _interest_list: Array<string>;
-  _group_list: Array<string>;
 }
 
 export { IUserDTO };

@@ -3,7 +3,7 @@ import { IUsersRepository } from "../interfaces/IUserRepository";
 import UserSchema from "../database/Schemas/UserSchema";
 
 class User implements IUsersRepository {
-  async create({
+  create({
     username,
     name,
     last_name,
@@ -12,9 +12,8 @@ class User implements IUsersRepository {
     github_id,
     password,
     _interest_list,
-    _group_list
-  }: IUserDTO): Promise<object> {
-    return await UserSchema.create({
+  }: IUserDTO): void {
+    UserSchema.create({
       username,
       name,
       last_name,
@@ -23,27 +22,26 @@ class User implements IUsersRepository {
       github_id,
       password,
       _interest_list,
-      _group_list
     });
   }
 
-  async readById(_id : string) : Promise<object> {
-    return await UserSchema.findOne({ _id });
+  readById(_id : string) : Promise<IUserDTO> {
+    return UserSchema.findOne({ _id });
   }
 
-  async readByUsername(username : string) : Promise<object> {
-    return await UserSchema.findOne({ username });
+  readByUsername(username : string) : Promise<IUserDTO> {
+    return UserSchema.findOne({ username });
   }
 
-  async readByEmail(email : string) : Promise<object> {
-    return await UserSchema.findOne({ email });
+  readByEmail(email : string) : Promise<IUserDTO> {
+    return UserSchema.findOne({ email });
   }
 
-  async readAll() : Promise<object> {
-    return await UserSchema.find().sort({ username: 1 });
+  readAll() : Promise<Array<IUserDTO>> {
+    return UserSchema.find().sort({ username: 1 });
   }
 
-  async update(_id: string, {
+  update(_id: string, {
     username,
     name,
     last_name,
@@ -52,9 +50,8 @@ class User implements IUsersRepository {
     github_id,
     password,
     _interest_list,
-    _group_list
-  } : IUserDTO) : Promise<object> {
-    return await UserSchema.findByIdAndUpdate(_id, {
+  } : IUserDTO) : Promise<IUserDTO> {
+    return UserSchema.findByIdAndUpdate(_id, {
       username,
       name,
       last_name,
@@ -63,12 +60,11 @@ class User implements IUsersRepository {
       github_id,
       password,
       _interest_list,
-      _group_list
     }, {new: true});
   }
 
-  async delete(_id : string) : Promise<object>{
-    return await UserSchema.deleteOne({ _id });
+  delete(_id : string) : void {
+    UserSchema.deleteOne({ _id });
   }
 }
 

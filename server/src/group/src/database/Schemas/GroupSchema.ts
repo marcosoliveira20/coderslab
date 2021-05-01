@@ -8,7 +8,6 @@ const GroupSchema = new Schema({
   token: { type: String, required: true, unique: true },
   is_public: { type: Boolean, required: true },
   _owner: { type: Schema.Types.ObjectId, required: true },
-  _user_list: { type: [Schema.Types.ObjectId], required: true },
   _schedule_list: { type: [Schema.Types.ObjectId], required: true },
 }, {
   timestamps: true,

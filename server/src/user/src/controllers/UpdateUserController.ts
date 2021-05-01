@@ -15,7 +15,6 @@ class UpdateUserController {
       github_id,
       password,
       _interest_list,
-      _group_list,
     } = request.body;
 
     const user = new User();
@@ -36,7 +35,6 @@ class UpdateUserController {
         github_id,
         password,
         _interest_list,
-        _group_list,
       });
 
       return response.status(200).send(data);
