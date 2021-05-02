@@ -1,6 +1,6 @@
 <main >
   <div class="body">
-    <a href="./"
+    <a routerLink="./../.."
     ><button id="logo">
       <img
         src="../../../../assets/icons/vulcano_logo.svg"
@@ -31,10 +31,10 @@
         />
       </div>
       <div class="col-1">
-        <button><img src="../../../../assets/icons/filter.svg" /></button>
+        <button (click)="setShowInput()"><img src="../../../../assets/icons/filter.svg" /></button>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="showInput">
       <div class="col-3">
         <select id="objective" name="objective">
           <option value="" disabled>Objetivo</option>
@@ -79,7 +79,7 @@
   </div>
   <ul class="button-list">
     <li>
-      <a href="./groups/explore"
+      <a routerLink="./"
         ><button>
           <img
             src="../../../../assets/icons/key.svg"
@@ -89,7 +89,7 @@
       ></a>
     </li>
     <li>
-      <a href="./groups"
+      <a routerLink="./.."
         ><button>
           <img
             src="../../../../assets/icons/earth.svg"

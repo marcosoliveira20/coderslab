@@ -1,3 +1,4 @@
+<div class="container content display">
   <header>
     <div>
       <h1>José Bezerra</h1>
@@ -9,12 +10,20 @@
     </ul>
   </header>
   <main>
-    <section>
+    <section class="">
       <ul>
         <li *ngFor="let group of user.group_list">
           <app-card [data]="group"></app-card>
         </li>
       </ul>
     </section>
-    <a href="./groups/explore"><button><img src="../../../../assets/icons/planet.svg" alt="" srcset=""></button></a>
+    <a routerLink="./explore"
+      ><button>
+        <img
+          src="../../../../assets/icons/planet.svg"
+          alt=""
+          srcset=""
+        /></button
+    ></a>
   </main>
+</div>
