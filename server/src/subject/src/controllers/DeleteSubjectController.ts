@@ -9,11 +9,13 @@ export default class DeleteSubjectController {
     const subject = new Subject();
 
     try {
-      const data = subject.delete(id);
-      if (!data.message) {
-        return response.status(data.status).send(data.message);
+      const data = await subject.readById(id);
+      if (!data) {
+        return response.status(404).send("Subject does not exist");
       }
-      return response.status(data.status).send();
+      await subject.delete(id).then(() => {
+        return response.status(204).send();
+      });
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");
