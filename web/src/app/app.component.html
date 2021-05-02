@@ -1,8 +1,8 @@
-<div *ngIf="!hideNavbar">
+<div *ngIf="hideNavbar">
   <router-outlet></router-outlet>
 </div>
 
-<main *ngIf="hideNavbar">
+<main *ngIf="!hideNavbar">
   <app-navbar></app-navbar>
   <router-outlet></router-outlet>
 </main>
