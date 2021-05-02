@@ -17,8 +17,25 @@ export class ExploreGroupComponent implements OnInit {
     level: "Iniciante",
     group_list: [
       {
+        token: 1,
         name: "Node para iniciantes",
-        user_list: 15,
+        user_list: [{
+          name: "Luiz Carlos",
+          discord_id: "luiz #4526"
+        },
+        {
+          name: "Maria Clara",
+          discord_id: "marica #3950"
+        },
+        {
+          name: "João Carvalho",
+          discord_id: "jCarvalho #3056"
+        },
+        {
+          name: "Larissa Soares",
+          discord_id: "lari #0356"
+        },
+      ],
         level: "iniciante",
         schedule_list: [
           { datetime: new Date("2021-04-20") },
@@ -28,6 +45,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: false,
       },
       {
+        token: 2,
         name: "MySQL básico",
         user_list: 10,
         level: "iniciante",
@@ -43,6 +61,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: false,
       },
       {
+        token: 3,
         name: "Lógica de programação",
         user_list: 35,
         level: "iniciante",
@@ -54,6 +73,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: true,
       },
       {
+        token: 4,
         name: "Node para iniciantes",
         user_list: 15,
         level: "iniciante",
@@ -65,6 +85,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: false,
       },
       {
+        token: 5,
         name: "MySQL básico",
         user_list: 10,
         level: "iniciante",
@@ -80,6 +101,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: false,
       },
       {
+        token: 6,
         name: "Lógica de programação",
         user_list: 35,
         level: "iniciante",
@@ -91,6 +113,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: true,
       },
       {
+        token: 7,
         name: "Node para iniciantes",
         user_list: 15,
         level: "iniciante",
@@ -102,6 +125,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: false,
       },
       {
+        token: 8,
         name: "MySQL básico",
         user_list: 10,
         level: "iniciante",
@@ -117,6 +141,7 @@ export class ExploreGroupComponent implements OnInit {
         isDefault: false,
       },
       {
+        token: 9,
         name: "Lógica de programação",
         user_list: 35,
         level: "iniciante",
@@ -135,15 +160,15 @@ export class ExploreGroupComponent implements OnInit {
   };
 
   public objective_list = [
-    { token: 1, name: "Java" },
-    { token: 2, name: "CSS" },
-    { token: 3, name: "HTML" },
+    { id: 1, name: "Java" },
+    { id: 2, name: "CSS" },
+    { id: 3, name: "HTML" },
   ];
 
   public category_list = [
-    { token: 1, name: "Backend" },
-    { token: 2, name: "Frontend" },
-    { token: 3, name: "Desing" },
+    { id: 1, name: "Backend" },
+    { id: 2, name: "Frontend" },
+    { id: 3, name: "Desing" },
   ];
 
   setShowInput(){
