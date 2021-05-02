@@ -1,0 +1,126 @@
+$darkBlue: #141648;
+$indigoBlue: #24276d;
+$pink: #d13c74;
+$darkGrey: #2d2d2d;
+
+header > div > button {
+  border: 1px solid $pink;
+  color: $pink;
+  width: 277px;
+
+  background-color: rgb(231 233 240);
+  border-radius: 5px;
+
+  font-family: roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+
+}
+
+section{
+  display: flex;
+  height: 100%;
+  flex-wrap:wrap;
+
+}
+
+
+section > ul {
+  list-style: none;
+  display: flex;
+  border-radius: 15px;
+  text-align: center;
+  align-items: center;
+  list-style: none;
+  color: $darkBlue;
+  font-weight: 300;
+  height: auto;
+  width: 100%;
+  column-gap: 40px;
+
+  margin-top: 0;
+  margin-bottom: 1rem;
+
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+
+  flex-wrap: wrap;
+
+  li {
+    margin-bottom: 28px;
+    width: 246px;
+    height: 322px;
+  }
+
+  li p:first-child {
+    font-size: 20px;
+  }
+  li p:last-child {
+    font-size: 50px;
+  }
+
+  li:first-child {
+    border: none;
+  }
+
+  li:last-child {
+    border: none;
+    //border-left: 1px solid $darkBlue;
+  }
+}
+
+header ul > li > button {
+  margin: 0px 23px;
+  background-color: rgb(231 233 240);
+  border: none;
+
+  font-family: roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+header ul > li > button:hover {
+  color: $pink;
+  margin: -1px 23px;
+  border-bottom: 3px solid $pink;
+}
+
+header {
+  margin: 50px 35px 0 35px;
+  border-bottom: 1px solid;
+}
+
+header > ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+
+header > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+main {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+
+  > a > button {
+    background-color: $pink;
+
+    position: fixed;
+    bottom: 28px;
+    right: 56px;
+
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 10em;
+  }
+}

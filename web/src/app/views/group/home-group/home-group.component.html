@@ -1,6 +1,24 @@
-<app-detail-group *ngIf="queryParams.id else showHome"></app-detail-group>
+<app-detail-group *ngIf="queryParams.id; else showHome"></app-detail-group>
 
 <ng-template #showHome>
-  <p >home-group works!</p>
+  <header>
+    <div>
+      <h1>José Bezerra</h1>
+      <button>Novo Grupo</button>
+    </div>
+    <ul>
+      <li><button>Todos</button></li>
+      <li><button>Meus Grupos</button></li>
+    </ul>
+  </header>
+  <main>
+    <section>
+      <ul>
+        <li *ngFor="let group of user.group_list">
+          <app-card [data]="group"></app-card>
+        </li>
+      </ul>
+    </section>
+    <a href="./groups/explore"><button><img src="../../../../assets/icons/planet.svg" alt="" srcset=""></button></a>
+  </main>
 </ng-template>
-
