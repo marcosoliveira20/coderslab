@@ -6,6 +6,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./explore-group.component.scss"],
 })
 export class ExploreGroupComponent implements OnInit {
+
+  showInput:boolean;
+
   public user = {
     name: "José",
     lastname: "Bezerra",
@@ -142,6 +145,10 @@ export class ExploreGroupComponent implements OnInit {
     { token: 2, name: "Frontend" },
     { token: 3, name: "Desing" },
   ];
+
+  setShowInput(){
+    this.showInput = !this.showInput;
+  }
 
   constructor() {}
 
