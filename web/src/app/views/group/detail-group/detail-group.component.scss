@@ -1,0 +1,134 @@
+$darkBlue: #141648;
+$pink: #D13C74;
+$darkGrey: #2D2D2D;
+
+h1 { font-weight: 100; font-size: 45px; margin: 0; align-self: baseline; color: $darkBlue;}
+h4 { font-weight: 500; margin-bottom: 25px; }
+
+.mainPage {
+  padding: 48px 32px;
+  height: 100%;
+  row-gap: 40px;
+}
+
+.header {
+  align-items: center;
+  display: block;
+
+  div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      padding: 10px 0;
+      width: 280px;
+      background: none;
+      border: 1px solid $pink;
+      color: $pink;
+      border-radius: 5px;
+      font-weight: 300;
+      font-size: 20px;
+      letter-spacing: 4px;
+      margin-right: 30px;
+    }
+  }
+
+  h2 { font-weight: 500; color: $pink; font-size: 25px; }
+}
+
+.cdl_card_group {
+
+}
+
+.cdl_card {
+  background: white;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  width: fit-content;
+  border-radius: 15px;
+  border: none;
+  border-top: 10px solid $darkBlue;
+
+  >div {
+    height: 100%;
+    z-index: 15;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all .3s;
+    padding: 18px;
+    border-radius: 15px;
+
+    h3 {
+      font-weight: 300;
+      color: $darkBlue;
+      margin-bottom: 30px;
+    }
+
+    >div {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+
+      p { margin: 0; }
+      p:first-child { color: $darkBlue; font-weight: 500; }
+      p:last-child { color: $pink; font-weight: 300; }
+    }
+  }
+
+  >button {
+    z-index: 1;
+    display: none;
+    margin-top: -20px;
+    height: 60px;
+    width: 100%;
+    position: relative;
+    background: $pink;
+    border: 1px solid $pink;
+    color: white;
+    border-radius: 0 0 15px 15px;
+    font-weight: 500;
+    font-size: 28px;
+    align-items: flex-end;
+    justify-content: center;
+    transition: all .3s;
+
+    p { margin: 0; }
+
+  }
+}
+
+.cdl_card:hover {
+  >div {
+    height: calc(100% - 40px);
+    position: relative;
+    z-index: 2;
+  }
+  >button {
+    display: flex;
+  }
+}
+
+section {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tag_list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  div {
+    min-width: fit-content;
+    width: fit-content;
+    border-radius: 50px;
+    padding: 2px 10px;
+    border: 1px solid $pink;
+    color: $pink;
+    background: none;
+  }
+}

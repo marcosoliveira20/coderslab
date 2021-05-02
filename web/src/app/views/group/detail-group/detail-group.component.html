@@ -1,1 +1,66 @@
-<p>detail-group works!</p>
+<div class="container mainPage">
+    <div class="header">
+      <div>
+        <h1>{{ group.name }}</h1>
+        <div>
+          <button>Sair do grupo</button>
+        </div>
+      </div>
+      <h2>Lógica de Programação</h2>
+      <div class="tag_list" *ngIf="group.category">
+        <div>
+          back end
+        </div>
+        <div>
+          dev web
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <h4>Informações Pessoais</h4>
+      <div class="cdl_card_group">
+        <div class="cdl_card">
+          <div>
+            <h3>20 abr 2021</h3>
+            <div>
+              <p>horário:</p>
+              <p>18:30</p>
+            </div>
+          </div>
+          <button>ver mais</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h4>Integrantes</h4>
+      <div class="member_list">
+        <div class="member_card">
+          <h3>Luiz Carlos</h3>
+          <div>
+            <h4>Discord ID:</h4>
+            <p>luiz #4526</p>
+          </div>
+        </div>
+      </div>
+      <div class="member_list">
+        <div class="member_card">
+          <h3>Luiz Carlos</h3>
+          <div>
+            <h4>Discord ID:</h4>
+            <p>luiz #4526</p>
+          </div>
+        </div>
+      </div>
+      <div class="member_list">
+        <div class="member_card">
+          <h3>Luiz Carlos</h3>
+          <div>
+            <h4>Discord ID:</h4>
+            <p>luiz #4526</p>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>

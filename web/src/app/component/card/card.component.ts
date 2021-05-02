@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CardComponent implements OnInit {
   @Input() data:object;
+  @Input() mode:string;
   public color:string = "red";
   public theme:object;
 
