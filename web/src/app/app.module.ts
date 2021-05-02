@@ -19,6 +19,7 @@ import { HomeGroupComponent } from './views/group/home-group/home-group.componen
 import { DetailGroupComponent } from './views/group/detail-group/detail-group.component';
 import { NewGroupComponent } from './views/group/new-group/new-group.component';
 import { ExploreGroupComponent } from './views/group/explore-group/explore-group.component';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ExploreGroupComponent } from './views/group/explore-group/explore-group
     HomeGroupComponent,
     DetailGroupComponent,
     NewGroupComponent,
-    ExploreGroupComponent
+    ExploreGroupComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
