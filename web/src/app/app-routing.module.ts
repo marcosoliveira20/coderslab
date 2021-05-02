@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'groups', component: HomeGroupComponent, },
-  { path: 'groups/:token', component: DetailGroupComponent },
   { path: 'groups/explore', component: ExploreGroupComponent },
   { path: 'groups/new', component: NewGroupComponent },
+  { path: 'groups/:token', component: DetailGroupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: '**', component: NotFoundComponent }
 ];
