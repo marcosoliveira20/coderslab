@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -10,10 +11,14 @@ export class CardComponent implements OnInit {
   public color:string = "red";
   public theme:object;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
+  }
+
+  handleRedirect(token) {
+    this.router.navigate([`/groups`, token])
   }
 
 }

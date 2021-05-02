@@ -132,15 +132,15 @@ export class ExploreGroupComponent implements OnInit {
   };
 
   public objective_list = [
-    { id: 1, name: "Java" },
-    { id: 2, name: "CSS" },
-    { id: 3, name: "HTML" },
+    { token: 1, name: "Java" },
+    { token: 2, name: "CSS" },
+    { token: 3, name: "HTML" },
   ];
 
   public category_list = [
-    { id: 1, name: "Backend" },
-    { id: 2, name: "Frontend" },
-    { id: 3, name: "Desing" },
+    { token: 1, name: "Backend" },
+    { token: 2, name: "Frontend" },
+    { token: 3, name: "Desing" },
   ];
 
   constructor() {}

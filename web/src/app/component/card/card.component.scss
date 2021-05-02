@@ -42,7 +42,7 @@ $cdl_grey: #E7E9F0;
   }
 
   >button {
-    z-index: -1;
+    z-index: 1;
     display: none;
     margin-top: -20px;
     height: 60px;
@@ -67,6 +67,8 @@ $cdl_grey: #E7E9F0;
 .pre-main:hover {
   >main {
     height: calc(100% - 40px);
+    position: relative;
+    z-index: 2;
   }
   >button {
     display: flex;

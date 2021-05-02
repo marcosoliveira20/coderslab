@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     level: "Iniciante",
     group_list: [
       {
+        token: 1,
         name: "Node para iniciantes",
         user_list: 15,
         level: "iniciante",
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
         isDefault: false
       },
       {
+        token: 2,
         name: "MySQL básico",
         user_list: 10,
         level: "iniciante",
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
         isDefault: false
       },
       {
+        token: 3,
         name: "Lógica de programação",
         user_list: 35,
         level: "iniciante",

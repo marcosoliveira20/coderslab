@@ -14,31 +14,31 @@ export class BasicAutoCompleterComponent {
   private interestListFilter = [];
   public interestListMock = [
     {
-      id: 1,
+      token: 1,
       name: "Java",
     },
     {
-      id: 2,
+      token: 2,
       name: "Angular",
     },
     {
-      id: 3,
+      token: 3,
       name: "Python",
     },
     {
-      id: 4,
+      token: 4,
       name: "CSS",
     },
     {
-      id: 5,
+      token: 5,
       name: "HTML",
     },
     {
-      id: 6,
+      token: 6,
       name: "JS",
     },
     {
-      id: 7,
+      token: 7,
       name: "C#",
     },
   ];

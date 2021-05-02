@@ -1,4 +1,4 @@
-<div class="pre-main" [ngClass]="{'isDefault': data.isDefault}">
+<div class="pre-main" [ngClass]="{'isDefault': data.isDefault}" (click)="handleRedirect(data.token)">
   <main>
     <header>
       <p>{{data.name}}</p>
