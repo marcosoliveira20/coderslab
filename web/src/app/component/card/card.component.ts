@@ -7,10 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  @Input() data:object;
-  @Input() mode:string;
-  public color:string = "red";
-  public theme:object;
+  @Input() data;
+  @Input() isMinimal:boolean;
 
   constructor(private router: Router) {
   }
@@ -21,5 +19,4 @@ export class CardComponent implements OnInit {
   handleRedirect(token) {
     this.router.navigate([`/groups`, token])
   }
-
 }
