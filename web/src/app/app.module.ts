@@ -14,6 +14,12 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './views/home/home.component';
+import { CardComponent } from './component/card/card.component';
+import { HomeGroupComponent } from './views/group/home-group/home-group.component';
+import { DetailGroupComponent } from './views/group/detail-group/detail-group.component';
+import { NewGroupComponent } from './views/group/new-group/new-group.component';
+import { ExploreGroupComponent } from './views/group/explore-group/explore-group.component';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { HomeComponent } from './views/home/home.component';
     BasicAutoCompleterComponent,
     ProfileComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    CardComponent,
+    HomeGroupComponent,
+    DetailGroupComponent,
+    NewGroupComponent,
+    ExploreGroupComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

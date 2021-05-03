@@ -1,7 +1,8 @@
 <main>
+  <!-- PERSONAL STATUS -->
   <div class="personal-status">
     <div>
-      <h1>{{user.name}}</h1>
+      <h1>{{user.name}} {{user.lastname}}</h1>
       <h3>{{user.level}}</h3>
     </div>
     <ul>
@@ -19,7 +20,38 @@
       </li>
     </ul>
   </div>
-  <div class="study-groups"></div>
+
+  <!-- STUDY GROUPS -->
+  <div class="study-groups">
+    <h1>Grupos de estudo</h1>
+    <ul>
+      <li *ngFor="let group of user.group_list">
+        <app-card [data]="group"></app-card>
+      </li>
+      <!-- <li *ngFor="let group of user.group_list">
+        <div class="group-card-header">
+          <p>{{group.name}}</p>
+          <ul>
+            <li *ngFor="let category of group.category">
+              {{category.label}}
+            </li>
+          </ul>
+        </div>
+
+        <div class="group-card-footer">
+          <div>
+            <img src="assets/icons/user_icon.svg" alt="" class="custom_roadmap_icon" />
+            <p>{{group.user_list}}</p>
+          </div>
+          <div>
+            <img src="assets/icons/calendar_icon.svg" alt="" class="default_roadmap_icon" />
+            <p>{{group.schedule_list[0].datetime.getDay()}}/{{group.schedule_list[0].datetime.getMonth()}}</p>
+          </div>
+        </div>
+      </li> -->
+    </ul>
+  </div>
+
   <div class="roadmap-status"></div>
   <div class="roadmap-details"></div>
 </main>

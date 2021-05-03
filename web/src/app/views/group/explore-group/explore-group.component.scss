@@ -1,0 +1,145 @@
+$darkBlue: #141648;
+$indigoBlue: #24276d;
+$pink: #d13c74;
+$darkGrey: #2d2d2d;
+$yellow: #ffc42e;
+
+main{
+  height: 100vh;
+  width: 100vw;
+  background-color: $darkBlue;
+}
+
+input,
+select,
+div > button {
+  width: 100%;
+  height: 42px;
+  background-color: $darkBlue;
+  color: $yellow;
+  margin-top: 24px;
+
+  border: solid 2px $yellow;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+input,select{
+  border-radius: 50px;
+}
+
+div > button{
+  border-radius: 10px;
+}
+
+
+a,
+button {
+  border: none;
+}
+
+input,
+select {
+  padding-left: 20px;
+}
+
+input::placeholder {
+  color: $yellow;
+}
+
+.body {
+  background-color: $darkBlue;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+
+  h1 {
+
+    color: white;
+
+    span {
+      display: block;
+    }
+  }
+}
+
+.button-list {
+  list-style: none;
+  position: fixed;
+  right: 28px;
+  bottom: 37px;
+
+  li {
+    margin: 13px;
+  }
+
+  button {
+    background-color: $pink;
+    height: 80px;
+    width: 80px;
+    border-radius: 10em;
+  }
+}
+
+.card-list {
+  list-style: none;
+  display: flex;
+  border-radius: 15px;
+  align-items: center;
+  list-style: none;
+  color: $darkBlue;
+  font-weight: 300;
+  height: auto;
+  width: 100%;
+  justify-content: space-between;
+
+  padding-left: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 1rem;
+
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+
+  flex-wrap: wrap;
+
+  li {
+    margin-bottom: 28px;
+    width: 245px;
+    height: 322px;
+  }
+
+  li p:first-child {
+    font-size: 20px;
+  }
+  li p:last-child {
+    font-size: 50px;
+  }
+}
+
+.center{
+  text-align: center;
+  margin-top: 19px;
+  margin-bottom: 25px;
+}
+
+#logo {
+  top: 35px;
+  left: 34px;
+  position: absolute;
+  background-color: $darkBlue;
+}
+
+#order-alphabetic {
+  text-align: left;
+  padding-left: 20px;
+  width: 103px;
+  height: 43px;
+  border-radius: 50px;
+}

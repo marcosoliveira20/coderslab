@@ -1,0 +1,78 @@
+<!-- <app-modal></app-modal> -->
+<div class="container mainPage">
+  <div class="bodyForm">
+    <div class="header">
+      <div>
+        <h1>{{ user.name }} {{ user.lastname }}</h1>
+      </div>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <section>
+        <div class="row">
+          <div class="col-11">
+            <h4>Informações gerais</h4>
+          </div>
+
+          <div class="col-1">
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label>nome</label>
+          <input
+            type="text"
+            id=""
+            placeholder="Nome do grupo"
+            formControlName="name"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>objetivo</label>
+            <app-input-auto-complete
+              placeholder="Busque por um assunto"
+              theme="custom"
+              (onOutput)="listenInput($event)"
+            ></app-input-auto-complete>
+          </div>
+          <div class="col">
+            <label>nível</label>
+            <select id="level" name="level" formControlName="level">
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Informações gerais</h4>
+        <label>tags</label>
+        <div class="row">
+          <div class="col-11">
+            <app-input-auto-complete
+              placeholder="Assuntos relacionados"
+              theme="custom"
+              (onOutput)="listenInput($event)"
+            ></app-input-auto-complete>
+          </div>
+          <div class="col-1">
+            <button id="call-modal">
+              <img src="../../../../assets/icons/plus.svg" />
+            </button>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+
+  <footer>
+    <button>Criar</button>
+  </footer>
+</div>
