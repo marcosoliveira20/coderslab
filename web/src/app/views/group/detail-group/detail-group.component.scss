@@ -2,12 +2,47 @@ $darkBlue: #141648;
 $pink: #D13C74;
 $darkGrey: #2D2D2D;
 
-h1 { font-weight: 100; font-size: 45px; margin: 0; align-self: baseline; color: $darkBlue;}
-h4 { font-weight: 500; margin-bottom: 25px; }
+::placeholder {
+  color: #FFF;
+}
+
+// SCROLLBAR
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #24276D;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFC42E;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B88B18;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 45px;
+  margin: 10px 0;
+  align-self: baseline;
+  color: $darkBlue;
+}
+
+h4 {
+  font-weight: 500;
+  margin-bottom: 25px;
+}
 
 .mainPage {
   padding: 48px 32px;
   height: 100%;
+  overflow-y: auto;
 }
 
 .header {
@@ -40,22 +75,41 @@ h4 { font-weight: 500; margin-bottom: 25px; }
   list-style: none;
   display: flex;
   gap: 24px;
-  height: 160px;
+  height: 170px;
+  overflow-x: auto;
 }
 
 section {
   margin-top: 40px;
   display: block;
-  width: 100%;
   height: auto;
+  width: 100%;
 }
 
 .member_list {
   list-style: none;
+
+  li { margin-bottom: 25px; }
 }
 
 .member_card {
+  display: flex;
+  width: 100%;
+  padding: 24px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-columns: 60% 40%;
 
+  >h3 { color: $darkBlue; font-weight: 400; margin: 0; }
+  >div {
+    display: flex;
+    align-items: center;
+
+    >h4 { font-weight: 300; color: $pink; font-size: 28px; margin: 0 28px 0 0; }
+    >p { color: $darkBlue; font-weight: 300; font-size: 28px; margin: 0; }
+  }
 }
 
 .tag_list {

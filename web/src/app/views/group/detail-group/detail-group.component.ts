@@ -24,6 +24,10 @@ export class DetailGroupComponent implements OnInit {
         schedule_list: [
           { datetime: new Date("2021-04-20") },
           { datetime: new Date("2021-04-28") },
+          { datetime: new Date("2021-04-20") },
+          { datetime: new Date("2021-04-28") },
+          { datetime: new Date("2021-04-20") },
+          { datetime: new Date("2021-04-28") },
         ],
         category: [{ label: "back end" }, { label: "dev web" }],
         isDefault: false,

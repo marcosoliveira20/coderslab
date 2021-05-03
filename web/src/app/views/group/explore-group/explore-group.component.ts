@@ -16,23 +16,7 @@ export class ExploreGroupComponent implements OnInit {
       {
         token: 1,
         name: "Node para iniciantes",
-        user_list: [{
-          name: "Luiz Carlos",
-          discord_id: "luiz #4526"
-        },
-        {
-          name: "Maria Clara",
-          discord_id: "marica #3950"
-        },
-        {
-          name: "João Carvalho",
-          discord_id: "jCarvalho #3056"
-        },
-        {
-          name: "Larissa Soares",
-          discord_id: "lari #0356"
-        },
-      ],
+        user_list: 17,
         level: "iniciante",
         schedule_list: [
           { datetime: new Date("2021-04-20") },
