@@ -8,6 +8,7 @@ import { EventEmitter } from "events";
 })
 export class BasicAutoCompleterComponent {
   @Input() theme: string;
+  @Input() placeholder: string;
 
   keyword = "name";
   private interestList = [];

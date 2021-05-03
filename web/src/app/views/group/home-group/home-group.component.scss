@@ -3,6 +3,13 @@ $indigoBlue: #24276d;
 $pink: #d13c74;
 $darkGrey: #2d2d2d;
 
+h1 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 45px;
+}
+
 header > div > button {
   border: 1px solid $pink;
   color: $pink;
@@ -11,20 +18,17 @@ header > div > button {
   background-color: rgb(231 233 240);
   border-radius: 5px;
 
-  font-family: roboto;
+  font-family: Roboto;
   font-style: normal;
   font-weight: 300;
   font-size: 25px;
-
 }
 
-section{
+section {
   display: flex;
   height: 100%;
-  flex-wrap:wrap;
-
+  flex-wrap: wrap;
 }
-
 
 section > ul {
   list-style: none;
@@ -37,16 +41,7 @@ section > ul {
   font-weight: 300;
   height: auto;
   width: 100%;
-  column-gap: 40px;
-
-  margin-top: 0;
-  margin-bottom: 1rem;
-
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
+  justify-content: space-between;
 
   flex-wrap: wrap;
 
@@ -69,7 +64,6 @@ section > ul {
 
   li:last-child {
     border: none;
-    //border-left: 1px solid $darkBlue;
   }
 }
 
@@ -78,10 +72,11 @@ header ul > li > button {
   background-color: rgb(231 233 240);
   border: none;
 
-  font-family: roboto;
+  font-family: Roboto;
   font-style: normal;
   font-weight: 300;
   font-size: 20px;
+  border-bottom: 3px solid transparent;
 }
 
 header ul > li > button:hover {
@@ -91,7 +86,6 @@ header ul > li > button:hover {
 }
 
 header {
-  margin: 50px 35px 0 35px;
   border-bottom: 1px solid;
 }
 
@@ -107,9 +101,9 @@ header > div {
 }
 
 main {
+  height: 100%;
   margin-top: 10px;
   display: flex;
-  justify-content: end;
 
   > a > button {
     background-color: $pink;
@@ -123,4 +117,38 @@ main {
     border: none;
     border-radius: 10em;
   }
+}
+
+app-card{
+  text-align: left;
+}
+
+.content {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #24276d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffc42e;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b88b18;
+}
+
+.display {
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 100vh;
+  width: 100%;
+  padding: 48px 32px;
 }

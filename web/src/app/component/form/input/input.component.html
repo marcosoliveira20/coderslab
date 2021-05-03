@@ -1,8 +1,8 @@
 <div>
-  <div class="search-input">
+  <div class="">
     <input
       type="text"
-      placeholder="Objetivo"
+      placeholder="{{placeholder}}"
       class="{{ theme }}"
       (input)="filterList($event)"
     />
@@ -15,7 +15,7 @@
         </li>
       </ul>
       <div id="interest-list">
-        <p class="interest" *ngFor="let item of interestList">
+        <p class="interest-{{theme}}" *ngFor="let item of interestList">
           {{ item.name }}
           <button  type="button" class="{{ item.name }}" (click)="removeInterest($event)">
             x

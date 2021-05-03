@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BasicAutoCompleterComponent } from 'src/app/component/form/input/input.component';
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-new-group',
@@ -8,6 +10,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NewGroupComponent implements OnInit {
   public group;
+
+  @ViewChild(BasicAutoCompleterComponent, { static: false })
+  autoCompleteComponent: BasicAutoCompleterComponent;
+
+  formGroup = this.fb.group({
+    name: ["", Validators.required],
+    level: ["", Validators.required],
+    objctive_list: ["", Validators.required],
+    assunto_list: [, Validators.required],
+  });
+
+  onSubmit(){
+    this.formGroup.patchValue({
+      objective: this.autoCompleteComponent.getInterestList(),
+    });
+    console.log("registerForm", this.formGroup.value);
+  }
+
+  listenInput(event) {
+    console.log(event);
+  }
 
   public user = {
     name: "José",
@@ -143,7 +166,7 @@ export class NewGroupComponent implements OnInit {
     ],
   };
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder) {
   }
 
   ngOnInit() {
