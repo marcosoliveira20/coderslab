@@ -48,7 +48,7 @@
             <p>{{data.schedule_list[0].datetime | date:'dd/MM'}}</p>
           </div>
         </div>
-        <label>{{data.level}}</label>
+        <label>{{data.level === 0 ? "Iniciante" : data.level === 1 ? "intermediário" : "Avançado"}}</label>
       </footer>
     </main>
     <button>
