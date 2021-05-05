@@ -18,12 +18,15 @@ label {
 
 .bg-blur {
     backdrop-filter: blur(3px);
-    width: 90vw;
+    width: 100vw;
     height: 100vh;
     position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .close {
