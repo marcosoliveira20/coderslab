@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 
-import { IGroupDTO } from "../interfaces/IGroupDTO";
 import { Group } from "../model/Group";
 
 class UpdateGroupController {

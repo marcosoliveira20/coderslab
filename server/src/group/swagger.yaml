@@ -1,0 +1,1150 @@
+openapi: 3.0.0
+info:
+  description: |
+    Documentation
+  version: '1.0'
+  title: 'Coderslab'
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    name: Codando Community
+    email: codando.community@gmail.com
+    url: https://github.com/codando-community/
+#  license:
+#    name: Apache 2.0
+#    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: User
+    description: everything about user integration for Coderslab
+  - name: Group
+    description: everything about group integration for Coderslab
+  - name: UnionUserGroup
+    description: everything about union between user and group integration for Coderslab
+  - name: Interest
+    description: everything about interest integration for Coderslab
+  - name: Subject
+    description: everything about subject integration for Coderslab
+paths:
+  # User
+  /user/create:
+    post:
+      tags: 
+        - User
+      summary: Faz a criação de um novo user
+      description: API de criação de user
+      operationId: user_create
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: Bad Request
+        '403':
+          description: User already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user.Request'
+        required: true
+  /user/read/byId/{id}:
+    get:
+      summary: Retorna o user com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      tags:
+        - User
+      description: API para retorno de um user
+      operationId: user_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /user/read/byUsername/{username}:
+    get:
+      summary: Retorna o user com base em um username
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: Username informado pelo usuário durante cadastro
+          schema:
+            type: string
+            minimum: 1
+      tags:
+        - User
+      description: API para retorno de um user
+      operationId: user_byUsername
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /user/read/byEmail/{email}:
+    get:
+      summary: Retorna o user com base em um e-mail
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: E-mail informado pelo usuário durante cadastro
+          schema:
+            type: string
+            minimum: 1
+      tags:
+        - User
+      description: API para retorno de um user
+      operationId: user_byEmail
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /user/read/all:
+    get:
+      tags:
+        - User
+      summary: Retorna uma lista de users
+      description: API para retorno do array de usuários ordenados por ordem alfabética
+      operationId: user_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read_all.Response'
+        '400':
+          description: Bad Request
+  /user/update/{id}:
+    put:
+      tags:
+        - User
+      summary: Atualiza os dados do user com base em seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para update de um user
+      operationId: user_update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: User does not exist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user.Request'
+        required: true
+  /user/delete/{id}:
+    delete:
+      tags:
+        - User
+      summary: Deleta um user com base em seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para deletar de um user
+      operationId: user_delete
+      responses:
+        '204':
+          description: User deleted
+        '400':
+          description: Bad request
+        '404':
+            description: User does not exist
+
+  # Group
+  /group/create:
+    post:
+      tags: 
+        - Group
+      summary: Faz a criação de um novo group
+      description: API de criação de group
+      operationId: group_create
+      responses:
+        '201':
+          description: Group created
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/group.Request'
+        required: true
+  /group/read/byId/{id}:
+    get:
+      summary: Retorna o group com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do group gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      tags:
+        - Group
+      description: API para retorno de um group
+      operationId: group_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Group does not exist
+  /group/read/byToken/{token}:
+    get:
+      summary: Retorna o group com base em um token
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: Token do group gerado
+          schema:
+            type: string
+            minimum: 1
+      tags:
+        - Group
+      description: API para retorno de um group
+      operationId: group_byToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Group does not exist
+  /group/read/byName/{name}:
+    get:
+      tags:
+        - Group
+      summary: Retorna uma lista de groups com base em uma parte do nome
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Nome do group
+          schema:
+            type: string
+            minimum: 1
+      description: API para retorno do array de groups ordenados por ordem alfabética
+      operationId: group_byName
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
+  /group/read/byCategory/{category}:
+    get:
+      tags:
+        - Group
+      summary: Retorna uma lista de groups com base em uma categoria
+      parameters:
+        - name: category
+          in: path
+          required: true
+          description: Category do groups
+          schema:
+            type: string
+            minimum: 1
+      description: API para retorno do array de groups ordenados por ordem alfabética
+      operationId: group_byCategory
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
+  /group/read/bySubject/{subject}:
+    get:
+      tags:
+        - Group
+      summary: Retorna uma lista de groups com base em uma categoria
+      parameters:
+        - name: subject
+          in: path
+          required: true
+          description: Subject dos groups
+          schema:
+            type: string
+            minimum: 1
+      description: API para retorno do array de groups ordenados por ordem alfabética
+      operationId: group_bySubject
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
+  /group/read/all:
+    get:
+      tags:
+        - Group
+      summary: Retorna uma lista com todos os groups categoria
+      description: API para retorno do array de groups ordenados por ordem alfabética
+      operationId: group_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
+  /group/update/{id}/{idUser}:
+    put:
+      tags:
+        - Group
+      summary: Atualiza os dados do group com base em seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do group gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+        - name: idUser
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB que está tentando atualizar o grupo
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para update de um group
+      operationId: group_update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read.Response'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+        '404':
+          description: Group does not exist
+        '406':
+          description: Not Acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/group.Request'
+        required: true
+  /group/delete/{id}/{idUser}:
+    delete:
+      tags:
+        - Group
+      summary: Deleta um group com base em seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do group gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+        - name: idUser
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB que está tentando deletar o grupo
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para deletar de um group
+      operationId: group_delete
+      responses:
+        '204':
+          description: Group deleted
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+        '404':
+          description: Group does not exist
+  
+  # Union User Group
+  /unionUserGroup/create:
+    post:
+      tags: 
+        - UnionUserGroup
+      summary: Faz a inserção de um usuário em um grupo
+      description: API de adição de user em group
+      operationId: unionUserGroup_create
+      responses:
+        '201':
+          description: User entered in the group
+        '403':
+          description: User is already in the group
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/unionUserGroup.Request'
+        required: true
+  /unionUserGroup/read/users/{idGroup}:
+    get:
+      tags:
+        - UnionUserGroup
+      summary: Retorna uma lista de users com base em um determinado grupo
+      parameters:
+        - name: idGroup
+          in: path
+          required: true
+          description: ID do group gerado pelo MongoDB
+          schema:
+            type: string
+            minimum: 1
+      description: API para retorno do array de groups
+      operationId: unionUserGroup_byGroup
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unionUserGroup_read_all.Response'
+        '400':
+          description: Bad Request
+  /unionUserGroup/read/groups/{idUser}:
+    get:
+      tags:
+        - UnionUserGroup
+      summary: Retorna uma lista de groups com base em um determinado user
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB
+          schema:
+            type: string
+            minimum: 1
+      description: API para retorno do array de users
+      operationId: unionUserGroup_byUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unionUserGroup_read_all.Response'
+        '400':
+          description: Bad Request
+  /unionUserGroup/delete/{idUser}/{idGroup}:
+    delete:
+      tags:
+        - UnionUserGroup
+      summary: Remove um usuário em um grupo com base em seu ID e o ID do grupo 
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: ID do user gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+        - name: idGroup
+          in: path
+          required: true
+          description: ID do group gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para remover um user de um grupo
+      operationId: unionUserGroup_delete
+      responses:
+        '204':
+          description: User removed from group
+        '400':
+          description: Bad request
+        '404':
+            description: User is not already in the group
+
+  # Interest
+  /interest/create:
+    post:
+      tags: 
+        - Interest
+      summary: Faz a criação de um novo interest
+      description: API de criação de interest
+      operationId: interest_create
+      responses:
+        '201':
+          description: Interest created
+        '400':
+          description: Bad Request
+        '403':
+          description: Interest already exists
+        '406':
+          description: Not Acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/interest.Request'
+        required: true
+  /interest/read/byId/{id}:
+    get:
+      summary: Retorna o interest com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do interest gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      tags:
+        - Interest
+      description: API para retorno de um interest
+      operationId: interest_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/interest_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Interest does not exist
+  /interest/read/all:
+    get:
+      tags:
+        - Interest
+      summary: Retorna uma lista de interests
+      description: API para retorno do array de interesses ordenados por ordem alfabética
+      operationId: interest_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/interest_read_all.Response'
+        '400':
+          description: Bad Request
+  /interest/update/{id}:
+    put:
+      tags:
+        - Interest
+      summary: Atualiza os dados do interest com base em seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do interest gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para update de um interest
+      operationId: interest_update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/interest_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Interest does not exist
+        '406':
+          description: Not Acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/interest.Request'
+        required: true
+  /interest/delete/{id}:
+    delete:
+      tags:
+        - Interest
+      summary: Deleta um interest com base em seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do interest gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: API para deletar de um user
+      operationId: interest_delete
+      responses:
+        '204':
+          description: Interest deleted
+        '400':
+          description: Bad request
+        '404':
+            description: Interest does not exist
+  
+  # Subject
+  /subject/create:
+    post:
+      tags:
+        - Subject
+      summary: API
+      description: API de criação de subject
+      operationId: subject_create
+      responses:
+        '201':
+          description: Subject created
+        '400':
+          description: Bad Request
+        '403':
+          description: Subject already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject_create.Request'
+        required: true
+  /subject/read/byId/{id}:
+    get:
+      summary: Retorna o subject com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id do subject gerado pelo MongoDB.
+          schema:
+            type : string
+            format: uuid
+            minimum: 1
+      tags:
+        - Subject
+      description: API para retorno de um subject
+      operationId: subjects_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /subject/read/byLabel/{label}:
+    get:
+      summary: Retorna o subject com base em uma Label.
+      parameters:
+        - name: label
+          in: path
+          required: true
+          description: Rótulo atribuido ao subject.
+          schema:
+            type : string
+            minimum: 1
+      tags:
+        - Subject
+      description: API para retorno do array de subjects
+      operationId: subjects_byLabel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /subject/read/all:
+    get:
+      tags:
+        - Subject
+      summary: API
+      description: API para retorno do array de subjects
+      operationId: subjects_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_all.Response'
+        '400':
+          description: Bad Request
+  /subject/update/{id}:
+    put:
+      summary: Atualiza as categories de um subject com base no ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Subject
+      description: API para update de um subject
+      operationId: subject_update
+      responses:
+        '200':
+          description: Subject updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_read.Response'
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject_update.Request'
+        required: true
+  /subject/delete/{id}:
+    delete:
+      summary: Deleta um subject com base em seu ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Subject
+      description: API para deletar um subject com base em seu id
+      operationId: subject_delete
+      responses:
+        '204':
+          description: Subject deleted
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+servers:
+# Added by API Auto Mocking Plugin
+  - url: 'https://cluster.prod.com.br/coderslab'
+    description: Link do cluster produtivo - External URL PRD
+components:
+  schemas:
+    # User
+    user.Request:
+      title: user.Request
+      description: 'Object for user'
+      type: object
+      properties:
+        username:
+          type: string
+          description: 'Username do usuário Ex: Joãozinho10'
+        name:
+          type: string
+          description: 'Nome do usuário Ex: João'
+        last_name:
+          type: string
+          description: 'Sobrenome do usuário Ex: Silva'
+        email:
+          type: string
+          description: 'E-mail do usuário Ex: joao@email.com'
+        discord_id:
+          type: string
+          description: 'ID do usuário no Discord Ex: joao#0134'
+        github_id:
+          type: string
+          description: 'ID do usuário no GitHub Ex: joaosilva10'
+        password:
+          type: string
+          description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+        _interest_list:
+          type: array
+          items:
+            type: string
+            description: 'Array de interesses Ex: [Node, Java]'
+    user_read.Response:
+      title: user_read.Response
+      description: 'Object for user'
+      type: object
+      properties:
+        _id:
+          type: string
+          description: 'ID gerado pelo MongoDB'
+        username:
+          type: string
+          description: 'Username do usuário Ex: Joãozinho10'
+        name:
+          type: string
+          description: 'Nome do usuário Ex: João'
+        last_name:
+          type: string
+          description: 'Sobrenome do usuário Ex: Silva'
+        email:
+          type: string
+          description: 'E-mail do usuário Ex: joao@email.com'
+        discord_id:
+          type: string
+          description: 'ID do usuário no Discord Ex: joao#0134'
+        github_id:
+          type: string
+          description: 'ID do usuário no GitHub Ex: joaosilva10'
+        password:
+          type: string
+          description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+        _interest_list:
+          type: array
+          items:
+            type: string
+            description: 'Array de interesses Ex: [Node, Java]'
+    user_read_all.Response:
+      title: user_read_all.Response
+      description: 'Array for users'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          username:
+            type: string
+            description: 'Username do usuário Ex: Joãozinho10'
+          name:
+            type: string
+            description: 'Nome do usuário Ex: João'
+          last_name:
+            type: string
+            description: 'Sobrenome do usuário Ex: Silva'
+          email:
+            type: string
+            description: 'E-mail do usuário Ex: joao@email.com'
+          discord_id:
+            type: string
+            description: 'ID do usuário no Discord Ex: joao#0134'
+          github_id:
+            type: string
+            description: 'ID do usuário no GitHub Ex: joaosilva10'
+          password:
+            type: string
+            description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+          _interest_list:
+            type: array
+            items:
+              type: string
+              description: 'Array de interesses Ex: [Node, Java]'
+    
+    # Group
+    group.Request:
+      title: group.Request
+      description: 'Object for group'
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        category:
+          type: array
+          items:
+            type: string
+            description: 'Array de subjects Ex: [Node, Java]'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+        token:
+          type: string
+          description: 'Token de acesso para grupos'
+        is_public:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é público ou particular'
+        _owner:
+          type: string
+          description: 'ID do dono do grupo gerado pelo MongoDB'
+        _schedule_list:
+          type: array
+          items:
+            type: string
+            description: 'Array de IDs gerado pelo MongoDB referente as reuniões do grupo'
+    group_read.Response:
+      title: group_read.Response
+      description: 'Object for group'
+      type: object
+      properties:
+        _id:
+          type: string
+          description: 'ID gerado pelo MongoDB'
+        name:
+          type: string
+          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        category:
+          type: array
+          items:
+            type: string
+            description: 'Array de subjects Ex: [Node, Java]'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+        token:
+          type: string
+          description: 'Token de acesso para grupos'
+        is_public:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é público ou particular'
+        _owner:
+          type: string
+          description: 'ID do dono do grupo gerado pelo MongoDB'
+        _schedule_list:
+          type: array
+          items:
+            type: string
+            description: 'Array de IDs gerado pelo MongoDB referente as reuniões do grupo'
+    group_read_all.Response:
+      title: group_read_all.Response
+      description: 'Array for users'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          username:
+            type: string
+            description: 'Username do usuário Ex: Joãozinho10'
+          name:
+            type: string
+            description: 'Nome do usuário Ex: João'
+          last_name:
+            type: string
+            description: 'Sobrenome do usuário Ex: Silva'
+          email:
+            type: string
+            description: 'E-mail do usuário Ex: joao@email.com'
+          discord_id:
+            type: string
+            description: 'ID do usuário no Discord Ex: joao#0134'
+          github_id:
+            type: string
+            description: 'ID do usuário no GitHub Ex: joaosilva10'
+          password:
+            type: string
+            description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+          _interest_list:
+            type: array
+            items:
+              type: string
+              description: 'Array de interesses Ex: [Node, Java]'
+
+    # Union User Group
+    unionUserGroup.Request:
+      title: unionUserGroup.Request
+      description: 'Object for unionUserGroup'
+      type: object
+      properties:
+        _id_user:
+          type: string
+          description: 'ID do user gerado pelo MongoDB que está entrando no grupo'
+        _id_group:
+          type: string
+          description: 'ID do group gerado pelo MongoDB no qual o user está entrando'
+    unionUserGroup_read_all.Response:
+      title: unionUserGroup_read_users.Response
+      description: 'Array for unionUserGroup'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          _id_user:
+            type: string
+            description: 'ID do user gerado pelo MongoDB que está entrando no grupo'
+          _id_group:
+            type: string
+            description: 'ID do group gerado pelo MongoDB no qual o user está entrando'
+    
+    # Interest
+    interest.Request:
+      title: interest.Request
+      description: 'Object for interest'
+      type: object
+      properties:
+        subject_label:
+          type: string
+          description: 'Rótulo para o interest Ex: NodeJs'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
+    interest_read.Response:
+      title: interest_read.Response
+      description: 'Object for interest'
+      type: object
+      properties:
+        _id:
+          type: string
+          description: 'ID gerado pelo MongoDB'
+        subject_label:
+          type: string
+          description: 'Rótulo para o interest Ex: NodeJs'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
+    interest_read_all.Response:
+      title: interest_read_all.Response
+      description: 'Array for interests'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          subject_label:
+            type: string
+            description: 'Rótulo para o interest Ex: NodeJs'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
+    
+    # Subject
+    subject_create.Request:
+      title: subject.Request
+      description: 'Object for subject'
+      type: object
+      properties:
+        label:
+          type: string
+          description: 'Rotúlo para o assunto Ex: NodeJs'
+        categories:
+          type: array
+          items:
+            type: string
+            description: 'Array de categorias Ex: [Web, Mobile]'
+    subject_update.Request:
+      title: subject.Request
+      description: 'Object for subject'
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+            description: 'Array de categorias Ex: [Web, Mobile]'
+    subject_all.Response:
+      title: subject_read_all.Response
+      description: 'Array for subjects'
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: 'Id gerado pelo MongoDB'
+          label:
+            type: string
+            description: 'Rotúlo para o assunto Ex: NodeJs'
+          categories:
+            type: array
+            items:
+              type: string
+              description: 'Array de categorias Ex: [Web, Mobile]'
+    subject_read.Response:
+      title: subject_read.Response
+      description: 'Object for subject'
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Id gerado pelo MongoDB'
+        label:
+          type: string
+          description: 'Rotúlo para o assunto Ex: NodeJs'
+        categories:
+          type: array
+          items:
+            type: string
+            description: 'Array de categorias Ex: [Web, Mobile]'

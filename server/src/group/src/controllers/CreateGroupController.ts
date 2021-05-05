@@ -23,11 +23,12 @@ class CreateGroupController {
 				return response.status(406).send();
 			}
 
-			const data = await group.readByToken(token);
+			// deve ser apenas uma validacão interna para não repetir token
+			// const data = await group.readByToken(token);
 
-			if(data) {
-				return response.status(406).send();
-			}
+			// if(data) {
+			// 	return response.status(406).send();
+			// }
 
 			await group.create({
 				name,
