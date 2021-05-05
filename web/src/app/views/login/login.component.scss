@@ -1,3 +1,5 @@
+@import "../../variables";
+
 ::placeholder {
   color: #FFF;
 }
@@ -13,7 +15,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFC42E;
+  background: $cdl_yellow;
   border-radius: 6px;
 }
 
@@ -27,7 +29,7 @@
   width: 100vw;
   height: 100vh;
   z-index: -100;
-  background: #141648;
+  background: $cdl_darkGrey;
 }
 
 main {
@@ -38,7 +40,7 @@ main {
 
 article {
   padding: 35px 40px 35px;
-  background: #24276D;
+  background: $cdl_darkBlue;
   border-radius: 25px;
   margin-bottom: 25px;
 
@@ -47,8 +49,8 @@ article {
     height: 40px;
     border: none;
     background: none;
-    border-bottom: 1px solid #FFF;
-    color: #FFF;
+    border-bottom: 1px solid $cdl_white;
+    color: $cdl_white;
     font-size: 25px;
     margin-bottom: 30px;
     font-weight: 100;
@@ -63,7 +65,7 @@ article {
     justify-content: center;
     border-radius: 5px;
     background: none;
-    color: #FFF;
+    color: $cdl_white;
     height: 56px;
     display: flex;
     align-items: center;
@@ -78,7 +80,7 @@ article {
 }
 
 .btn_lm_filled {
-  border: 1px solid #FFF;
+  border: 1px solid $cdl_white;
   margin-bottom: 10px;
 }
 
@@ -101,15 +103,15 @@ article {
 }
 
 .btn_rm_filled {
-  background: #48DBDB;
-  color: #141648;
+  background: $cdl_lightBlue;
+  color: $cdl_darkBlue;
   height: 56px;
   border-radius: 5px;
 }
 
 .btn_rm_void {
   background: none;
-  color: #FFF;
+  color: $cdl_white;
 }
 
 form > div {

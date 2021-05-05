@@ -1,7 +1,4 @@
-$darkBlue: #141648;
-$indigoBlue: #24276d;
-$pink: #d13c74;
-$darkGrey: #2d2d2d;
+@import "../../../variables";
 
 h1 {
   font-family: Roboto;
@@ -11,8 +8,8 @@ h1 {
 }
 
 header > div > button {
-  border: 1px solid $pink;
-  color: $pink;
+  border: 1px solid $cdl_pink;
+  color: $cdl_pink;
   width: 277px;
 
   background-color: rgb(231 233 240);
@@ -37,7 +34,7 @@ section > ul {
   text-align: center;
   align-items: center;
   list-style: none;
-  color: $darkBlue;
+  color: $cdl_darkBlue;
   font-weight: 300;
   height: auto;
   width: 100%;
@@ -80,9 +77,9 @@ header ul > li > button {
 }
 
 header ul > li > button:hover {
-  color: $pink;
+  color: $cdl_pink;
   margin: -1px 23px;
-  border-bottom: 3px solid $pink;
+  border-bottom: 3px solid $cdl_pink;
 }
 
 header {
@@ -106,7 +103,7 @@ main {
   display: flex;
 
   > a > button {
-    background-color: $pink;
+    background-color: $cdl_pink;
 
     position: fixed;
     bottom: 28px;

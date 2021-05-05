@@ -11,7 +11,6 @@ export class DetailGroupComponent implements OnInit {
   public group;
   public modalShowController:boolean = false;
   public modalData;
-
   public user = userMock;
 
   constructor(private activatedRoute: ActivatedRoute) {
@@ -23,4 +22,5 @@ export class DetailGroupComponent implements OnInit {
     console.log(this.group)
   }
 
+  openScheduleLink = () => window.open(this.modalData.link, "_blank")
 }

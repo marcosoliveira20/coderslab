@@ -1,10 +1,8 @@
-$darkBlue: #141648;
-$pink: #d13c74;
-$darkGrey: #2d2d2d;
+@import "../../../variables";
 
 h1,
 h4 {
-  color: $darkBlue;
+  color: $cdl_darkBlue;
 }
 h1 {
   font-weight: 100;
@@ -19,7 +17,7 @@ h4 {
 }
 label {
   font-weight: 400;
-  color: $pink;
+  color: $cdl_pink;
 }
 input {
   width: 100%;
@@ -45,8 +43,8 @@ input:disabled {
     width: fit-content;
     border-radius: 50px;
     padding: 2px 10px;
-    border: 1px solid $pink;
-    color: $pink;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
     background: none;
   }
 }
@@ -72,8 +70,8 @@ input:disabled {
       padding: 10px 0;
       width: 280px;
       background: none;
-      border: 1px solid $pink;
-      color: $pink;
+      border: 1px solid $cdl_pink;
+      color: $cdl_pink;
       border-radius: 5px;
       font-weight: 300;
       font-size: 20px;
@@ -84,7 +82,7 @@ input:disabled {
 
   h2 {
     font-weight: 500;
-    color: $pink;
+    color: $cdl_pink;
     font-size: 25px;
   }
 }
@@ -111,7 +109,7 @@ section {
   input,
   select {
     border: none;
-    border-bottom: 1px solid $darkBlue;
+    border-bottom: 1px solid $cdl_darkBlue;
     display: block;
     font-weight: 300;
     font-size: 25px;
@@ -131,18 +129,18 @@ footer {
     width: 277px;
     height: 56px;
     padding: 0 100px;
-    color: $pink;
+    color: $cdl_pink;
     background: none;
     border-radius: 5px;
     font-weight: 300;
     font-size: 20px;
     letter-spacing: 4px;
-    border: 1px solid $pink;
+    border: 1px solid $cdl_pink;
   }
 
   button:hover{
-    background-color: $pink;
-    color: white;
+    background-color: $cdl_pink;
+    color: $cdl_white;
   }
 }
 
@@ -157,7 +155,7 @@ app-input-auto-complete {
   height: 57px;
   width: 57px;
   background-color: transparent;
-  border: 1.5px solid $pink;
+  border: 1.5px solid $cdl_pink;
 }
 
 /* Switch*/
@@ -182,7 +180,7 @@ app-input-auto-complete {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: white;
+  background-color: $cdl_white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -200,11 +198,11 @@ app-input-auto-complete {
 }
 
 input:checked + .slider {
-  background-color: white;
+  background-color: $cdl_white;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px white;
+  box-shadow: 0 0 1px $cdl_white;
 }
 
 input:checked + .slider:before {
@@ -215,7 +213,7 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider.round {
-  border: solid 1px $pink;
+  border: solid 1px $cdl_pink;
   border-radius: 34px;
 }
 

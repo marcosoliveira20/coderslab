@@ -1,7 +1,5 @@
-$darkBlue: #141648;
-$indigoBlue: #24276D;
-$pink: #D13C74;
-$darkGrey: #2D2D2D;
+@import "../../variables";
+
 
 main {
   height: 100%;
@@ -31,8 +29,8 @@ ul { list-style: none; }
     align-items: baseline;
     justify-content: space-between;
 
-    h1 { color: $darkBlue; font-weight: 300;}
-    h3 { color: $pink; font-weight: 500; }
+    h1 { color: $cdl_darkBlue; font-weight: 300;}
+    h3 { color: $cdl_pink; font-weight: 500; }
   }
 
   ul {
@@ -42,7 +40,7 @@ ul { list-style: none; }
     text-align: center;
     align-items: center;
     list-style: none;
-    color: $darkBlue;
+    color: $cdl_darkBlue;
     font-weight: 300;
     display: flex;
     width: 100%;
@@ -57,12 +55,12 @@ ul { list-style: none; }
 
     li:first-child {
       border: none;
-      border-right: 1px solid $darkBlue;
+      border-right: 1px solid $cdl_darkBlue;
     }
 
     li:last-child {
       border: none;
-      border-left: 1px solid $darkBlue;
+      border-left: 1px solid $cdl_darkBlue;
     }
   }
 }
@@ -71,7 +69,7 @@ ul { list-style: none; }
   grid-area: study-groups;
   height: 100%;
 
-  h1 { font-size: 28px; font-weight: 500; color: $darkBlue; }
+  h1 { font-size: 28px; font-weight: 500; color: $cdl_darkBlue; }
 
   >ul {
     display: flex;
@@ -90,7 +88,7 @@ ul { list-style: none; }
 
 .roadmap-status {
   grid-area: roadmap-status;
-  background: $darkGrey;
+  background: $cdl_darkGrey;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
 }
 
