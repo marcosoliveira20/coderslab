@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
-import { IGroupDTO } from "../interfaces/IGroupDTO";
 
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
@@ -41,10 +40,10 @@ class CreateGroupController {
 				_schedule_list
 			});
 
-			return response.status(201).send("Group created");
+			return response.status(201).send();
 		} catch(err) {
 			console.log(err.message);
-			return response.status(400).send("Bad Request");
+			return response.status(400).send();
 		}
 	}
 }

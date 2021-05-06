@@ -18,7 +18,7 @@ class DeleteUnionUserGroupController {
             });
 
             if(!data) {
-                return response.status(404).send("User is not already in the group");
+                return response.status(404).send();
             }
 
             await union.delete({
@@ -29,7 +29,7 @@ class DeleteUnionUserGroupController {
             return response.status(204).send();
         } catch(err) {
             console.log(err.message);
-            return response.status(400).send("Bad Request");
+            return response.status(400).send();
         }
     }
 }

@@ -18,7 +18,7 @@ class CreateUnionUserGroupController {
             });
 
             if(data) {
-                return response.status(403).send("User is already in the group");
+                return response.status(403).send();
             }
 
             await union.create({
@@ -26,10 +26,10 @@ class CreateUnionUserGroupController {
                 _id_group
             });
 
-            return response.status(201).send("User entered in the group");
+            return response.status(201).send();
         } catch(err) {
             console.log(err.message);
-            return response.status(400).send("Bad Request");
+            return response.status(400).send();
         }
 
     }

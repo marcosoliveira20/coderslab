@@ -12,7 +12,7 @@ class DeleteInterestController {
       const findIndex = await interests.readById(id);
 
       if(!findIndex) {
-        return response.status(404).send("Interest does not exist");
+        return response.status(404).send();
       }
 
       await interests.delete(id);
@@ -20,7 +20,7 @@ class DeleteInterestController {
       return response.status(204).send();
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

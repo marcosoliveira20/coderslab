@@ -19,7 +19,7 @@ class CreateInterestController {
       const findSubject = await interests.readBySubject(subject_label);
 
       if (findSubject) {
-        return response.status(403).send("Interest already exists");
+        return response.status(403).send();
       }
 
       await interests.create({
@@ -27,10 +27,10 @@ class CreateInterestController {
         level
       });
 
-      return response.status(201).send("Interest created");
+      return response.status(201).send();
     } catch(err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }
