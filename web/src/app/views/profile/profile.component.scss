@@ -1,4 +1,6 @@
-@import "../../variables";
+@import "../../../sass/abstracts/variables";
+@import "../../../sass/components/scrollbar";
+
 
 h1, h4 { color: $cdl_darkBlue }
 h1 {
@@ -10,14 +12,16 @@ h1 {
 
 h4 { font-weight: 500; margin-bottom: 25px; }
 label { font-weight: 400; color: $cdl_pink; }
-input { width: 100%; font-weight: 300; }
+input { width: 100%; font-weight: 300; background: transparent; }
 input:disabled { color: #888; }
+button { cursor: pointer; }
 
 .mainPage {
   padding: 48px 32px;
   display: grid;
   height: 100%;
   align-content: space-between;
+  overflow-y: auto;
 }
 
 .header {

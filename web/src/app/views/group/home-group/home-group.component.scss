@@ -1,4 +1,5 @@
-@import "../../../variables";
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
 
 h1 {
   font-family: Roboto;
@@ -122,24 +123,6 @@ app-card{
 
 .content {
   overflow-y: scroll;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #24276d;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ffc42e;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #b88b18;
 }
 
 .display {

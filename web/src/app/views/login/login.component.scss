@@ -1,27 +1,5 @@
-@import "../../variables";
-
-::placeholder {
-  color: #FFF;
-}
-
-// SCROLLBAR
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #24276D;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $cdl_yellow;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #B88B18;
-}
+@import "../../../sass/abstracts/variables";
+@import "../../../sass/components/scrollbar";
 
 // ELEMENTS
 .bg {
@@ -29,7 +7,7 @@
   width: 100vw;
   height: 100vh;
   z-index: -100;
-  background: $cdl_darkGrey;
+  background: $cdl_darkBlue;
 }
 
 main {
@@ -40,7 +18,7 @@ main {
 
 article {
   padding: 35px 40px 35px;
-  background: $cdl_darkBlue;
+  background: $cdl_blue;
   border-radius: 25px;
   margin-bottom: 25px;
 

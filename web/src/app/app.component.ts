@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+const userList = [
+  {username: "Luiz Carlos", discord_id: "luiz #4526"},
+  {username: "Maria Clara", discord_id: "marica #3860"},
+  {username: "João Carvalho", discord_id: "jcarvalho #3056"},
+  {username: "Larissa Soares", discord_id: "lari #0356"},
+]
+
 /**
  * Mock object for tests before integration
  */
@@ -14,7 +21,7 @@ export const userMock = {
     {
       token: 1,
       name: "Node para iniciantes",
-      user_list: 15,
+      user_list: userList,
       subject_label: "Lógica de programação",
       level: 0,
       schedule_list: [
@@ -46,7 +53,7 @@ export const userMock = {
     {
       token: 2,
       name: "MySQL básico",
-      user_list: 10,
+      user_list: userList,
       subject_label: "Lógica de programação",
       level: 1,
       schedule_list: [
@@ -78,7 +85,7 @@ export const userMock = {
     {
       token: 3,
       name: "Lógica de programação",
-      user_list: 35,
+      user_list: userList,
       subject_label: "Lógica de programação",
       level: 3,
       schedule_list: [
@@ -110,7 +117,7 @@ export const userMock = {
     {
       token: 4,
       name: "Node para iniciantes",
-      user_list: 15,
+      user_list: userList,
       subject_label: "Lógica de programação",
       level: 0,
       schedule_list: [
@@ -142,7 +149,7 @@ export const userMock = {
     {
       token: 5,
       name: "MySQL básico",
-      user_list: 10,
+      user_list: userList,
       subject_label: "Lógica de programação",
       level: 1,
       schedule_list: [
@@ -174,7 +181,7 @@ export const userMock = {
     {
       token: 6,
       name: "Lógica de programação",
-      user_list: 35,
+      user_list: userList,
       subject_label: "Lógica de programação",
       level: 3,
       schedule_list: [

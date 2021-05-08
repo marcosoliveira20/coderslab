@@ -1,4 +1,4 @@
-<div class="container mainPage">
+<div class="mainPage">
   <div class="header">
     <div>
       <h1>{{ group.name }}</h1>
@@ -19,7 +19,7 @@
       <li *ngFor="let date of group.schedule_list">
         <app-card
           (click)="modalShowController = true; modalData = date"
-          [isMinimal]="true"
+          [type]="'minimal'"
           [data]="date.datetime"
         ></app-card>
       </li>
@@ -29,33 +29,12 @@
   <section>
     <h4>Integrantes</h4>
     <ul class="member_list">
-      <li class="member_card">
-        <h3>Luiz Carlos</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>luiz #4526</p>
-        </div>
-      </li>
-      <li class="member_card">
-        <h3>Maria Clara</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>marica #3860</p>
-        </div>
-      </li>
-      <li class="member_card">
-        <h3>João Carvalho</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>jcarvalho #3056</p>
-        </div>
-      </li>
-      <li class="member_card">
-        <h3>Larissa Soares</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>lari #0356</p>
-        </div>
+      <li class="member_card" *ngFor="let user of group.user_list">
+        <app-card
+        [type]="'member'"
+        [data]="user"
+        [enableButton]="false"
+        ></app-card>
       </li>
     </ul>
   </section>

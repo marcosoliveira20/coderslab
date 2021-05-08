@@ -1,16 +1,9 @@
-@import "../../variables";
-
-label {
-  font-weight: 400;
-  color: $cdl_pink;
-}
-label {
-  display: block;
-}
+@import "../../../sass/abstracts/variables";
 
 
 .bg-blur {
   backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.2);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -22,15 +15,19 @@ label {
   z-index: 999;
 }
 
-.close {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+.close_button {
   border: solid 2px $cdl_pink;
   border-radius: 50%;
-  padding: 10px;
+  float: right;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $cdl_pink;
+  margin: -20px -20px 0 0;
 
-  svg { fill: $cdl_pink; stroke-width: 10px;}
+  svg { fill: $cdl_white; stroke-width: 10px;}
 
   p {
     margin: 0;

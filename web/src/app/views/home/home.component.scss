@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../../sass/abstracts/variables";
 
 
 main {
@@ -12,6 +12,7 @@ main {
                         "roadmap-status roadmap-details";
   column-gap: 48px;
   row-gap: 28px;
+  overflow-y: auto;
 
   div { width: 100%; }
 }

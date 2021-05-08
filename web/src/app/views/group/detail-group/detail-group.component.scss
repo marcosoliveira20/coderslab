@@ -1,24 +1,5 @@
-@import "../../../variables";
-
-// SCROLLBAR
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #24276D;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #FFC42E;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #B88B18;
-}
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
 
 h1 {
   font-weight: 100;
@@ -69,8 +50,10 @@ h4 {
   list-style: none;
   display: flex;
   gap: 24px;
-  height: 170px;
   overflow-x: auto;
+  width: calc( 100% + 32px );
+  height: fit-content;
+  padding-bottom: 10px;
 }
 
 section {
@@ -82,28 +65,11 @@ section {
 
 .member_list {
   list-style: none;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   li { margin-bottom: 25px; }
-}
-
-.member_card {
-  display: flex;
-  width: 100%;
-  padding: 24px;
-  background: $cdl_white;
-  border-radius: 15px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  display: grid;
-  grid-template-columns: 60% 40%;
-
-  >h3 { color: $cdl_darkBlue; font-weight: 400; margin: 0; }
-  >div {
-    display: flex;
-    align-items: center;
-
-    >h4 { font-weight: 300; color: $cdl_pink; font-size: 28px; margin: 0 28px 0 0; }
-    >p { color: $cdl_darkBlue; font-weight: 300; font-size: 28px; margin: 0; }
-  }
 }
 
 .tag_list {
@@ -121,22 +87,22 @@ section {
     border: 1px solid $cdl_pink;
     color: $cdl_pink;
     background: none;
+    cursor: default;
   }
 }
 
 // MODAL
 .modal_header {
   display: flex;
-  justify-content: space-between;
   margin-bottom: 40px;
 
-  >div { display: block; }
+  >div { display: flex; }
 
-  >div:last-child { align-items: flex-end; }
+  >div:last-child { align-items: flex-end; margin-left: 20px; }
 
-  >div p { margin: 0; }
-  >div p:first-child { color: $cdl_pink; font-weight: 500; font-size: 22px; }
-  >div p:last-child { color: $cdl_darkBlue; font-weight: 300; font-size: 30px; }
+  >div p { margin: 0; font-size: 22px; }
+  >div p:first-child { color: $cdl_pink; font-weight: 500; margin-right: 5px;}
+  >div p:last-child { color: $cdl_darkBlue; font-weight: 300; }
 }
 
 .modal_body p {

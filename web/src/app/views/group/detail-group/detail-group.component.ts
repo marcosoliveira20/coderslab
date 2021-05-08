@@ -20,6 +20,7 @@ export class DetailGroupComponent implements OnInit {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
     this.group = this.user.group_list.find(g => String(g.token) === urlToken)
     console.log(this.group)
+    console.log(this.group.user_list)
   }
 
   openScheduleLink = () => window.open(this.modalData.link, "_blank")
