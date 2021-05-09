@@ -12,7 +12,7 @@ class DeleteGroupController {
 			const findIndex = await group.readById(id);
 			
 			if(!findIndex) {
-				return response.status(404).send("Group does not exist");
+				return response.status(404).send();
 			} 
 			
 			if(findIndex._owner != idUser) {
@@ -24,7 +24,7 @@ class DeleteGroupController {
 			return response.status(204).send();
 		} catch(err) {
 			console.log(err.message);
-			return response.status(400).send("Bad Request");
+			return response.status(400).send();
 		}
 	}
 }

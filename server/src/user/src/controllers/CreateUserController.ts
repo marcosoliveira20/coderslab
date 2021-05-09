@@ -23,7 +23,7 @@ class CreateUserController {
       const findEmail = await user.readByEmail(email);
   
       if (findUsername || findEmail) {
-        return response.status(403).send("User already exists");
+        return response.status(403).send();
       }
   
       const passwordHash = await hash(password, 8);
@@ -39,10 +39,10 @@ class CreateUserController {
         _interest_list,
       });
 
-      return response.status(201).send("User created");
+      return response.status(201).send();
     } catch(err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }
