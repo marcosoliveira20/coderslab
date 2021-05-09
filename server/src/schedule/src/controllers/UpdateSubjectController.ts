@@ -1,19 +1,27 @@
 import { Request, Response } from "express";
 
-import { Schedulee } from "../modelSchedulele";
+import { IScheduleDTO } from "../interfaces/IScheduleDTO";
+import { Schedule } from "../model/Schedule";
 
 export default class UpdateScheduleeController {
   async handle(request: Request, response: Response) {
-    const { id, label, categories } = request.body;
+    const { id } = request.params;
+    const { datetime, link, description } = request.body;
 
-    const Schedulee = newSchedulele();
+    const schedule = new Schedule();
 
     try {
-      const data = Schedulee.update({ id, label, categories });
-      if (!data.Schedulee) {
-        return response.status(data.status).send(data.message);
-      }
-      return response.status(data.status).send(data.Schedulee);
+      let findScheduleId;
+      await schedule.readById(id).then((e) => {
+        findScheduleId = e;
+        if (!findScheduleId) {
+          return response.status(404).send("Schedule does not exist");
+        }
+        schedule.update(id, datetime, link, description).then((dataBd) => {
+          const data: IScheduleDTO = dataBd;
+          return response.status(200).send(data);
+        });
+      });
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");

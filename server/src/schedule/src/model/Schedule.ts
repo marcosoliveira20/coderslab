@@ -1,111 +1,40 @@
+import ScheduleSchema from "../database/schemas/ScheduleSchema";
 import { IScheduleDTO } from "../interfaces/IScheduleDTO";
 import { IScheduleRepository } from "../interfaces/IScheduleRepository";
 
-// TODO conexão com BD
-const schedules = [];
-
 class Schedule implements IScheduleRepository {
-  create({
-    id,
-    datetime,
-    link,
-    description,
-    owner,
-  }: IScheduleDTO): { message: string; status: number } {
-    const findIndex: number = schedules.findIndex((s) => s.id === id);
-    if (findIndex >= 0) {
-      return { message: "Schedule already exists", status: 403 };
-    }
-
-    schedules.push({
-      id,
-      datetime,
-      link,
-      description,
-      owner,
-    });
-    return { message: "Schedule created", status: 201 };
+  create(
+    datetime: Date,
+    link: string,
+    description: string,
+    owner: string
+  ): Promise<void> {
+    return ScheduleSchema.create({ datetime, link, description, owner });
   }
 
-  readById(
-    id: string
-  ): {
-    schedule?: IScheduleDTO;
-    message?: string;
-    status: number;
-  } {
-    const schedule: IScheduleDTO = schedules.find((s) => s.id === id);
-    if (!schedules) {
-      return { message: "Schedules does not exist", status: 404 };
-    }
-    return { schedule, status: 200 };
+  readById(_id: string): Promise<IScheduleDTO> {
+    return ScheduleSchema.findOne({ _id });
   }
 
-  readByLabel(
-    label: string
-  ): {
-    schedule?: IScheduleDTO;
-    message?: string;
-    status: number;
-  } {
-    const schedule: IScheduleDTO = schedules.find((s) => s.label === label);
-    if (!schedule) {
-      return { message: "Schedule does not exist", status: 404 };
-    }
-    return { schedule, status: 200 };
+  readAll(): Promise<Array<IScheduleDTO>> {
+    return ScheduleSchema.find();
   }
 
-  readAll(): {
-    schedules: Array<IScheduleDTO>;
-    status: number;
-  } {
-    if (schedules.length === 0) {
-      const schedules = [];
-      return { schedules, status: 200 };
-    }
-    return { schedules, status: 200 };
+  update(
+    _id: string,
+    datetime: Date,
+    link: string,
+    description: string
+  ): Promise<IScheduleDTO> {
+    return ScheduleSchema.findByIdAndUpdate(
+      _id,
+      { datetime, link, description },
+      { new: true }
+    );
   }
 
-  update({
-    id,
-    datetime,
-    link,
-    description,
-    owner,
-  }: IScheduleDTO): {
-    schedule?: IScheduleDTO;
-    message?: string;
-    status: number;
-  } {
-    const schedule: IScheduleDTO = schedules.find((s) => s.id === id);
-    if (!schedule) {
-      return { message: "Schedule does not exist", status: 404 };
-    }
-    if (schedule.datetime === datetime) {
-      return { message: "Schedule label already exists", status: 403 };
-    }
-    schedule.datetime = datetime;
-    schedule.link = link;
-    schedule.description = description;
-    schedule.owner = owner;
-
-    return { schedule, status: 200 };
-  }
-
-  delete(
-    id: string
-  ): {
-    message?: string;
-    status: number;
-  } {
-    const ScheduleIndex = schedules.findIndex((s) => s.id === id);
-
-    if (ScheduleIndex < 0) {
-      return { message: "Schedule does not exist", status: 404 };
-    }
-
-    schedules.splice(ScheduleIndex, 1);
-    return { status: 204 };
+  delete(_id: string): Promise<void> {
+    return ScheduleSchema.deleteOne({ _id });
   }
 }
 

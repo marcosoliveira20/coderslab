@@ -11,7 +11,7 @@ export default class DeleteSubjectController {
     try {
       const data = await subject.readById(id);
       if (!data) {
-        return response.status(404).send("Subject does not exist");
+        return response.status(404);
       }
       await subject.delete(id).then(() => {
         return response.status(204).send();

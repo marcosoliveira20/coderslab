@@ -15,7 +15,7 @@ export default class UpdateSubjectController {
       await subject.readById(id).then((e) => {
         findSubjectId = e;
         if (!findSubjectId) {
-          return response.status(404).send("Subject does not exist");
+          return response.status(404);
         }
         subject.update(id, categories).then((dataBd) => {
           const data: ISubjecDTO = {

@@ -5,5 +5,4 @@ interface IScheduleDTO {
   description: string;
   owner: string;
 }
-
 export { IScheduleDTO };

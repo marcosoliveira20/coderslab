@@ -12,7 +12,7 @@ export default class ReadByIdSubjectController {
     try {
       const dataBd = await subject.readById(id);
       if (!dataBd) {
-        return response.status(404).send("Subject does not exist");
+        return response.status(404);
       }
       const data: ISubjecDTO = {
         id: dataBd._id,

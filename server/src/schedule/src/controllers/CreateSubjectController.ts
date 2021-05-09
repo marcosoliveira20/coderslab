@@ -4,13 +4,14 @@ import { Schedule } from "../model/Schedule";
 
 export default class CreateScheduleController {
   async handle(request: Request, response: Response) {
-    const { id, label, categories } = request.body;
+    const { datetime, link, description, owner } = request.body;
 
-    const Schedule = new Schedule();
+    const schedule = new Schedule();
 
     try {
-      const data = Schedule.create({ id, label, categories });
-      return response.status(data.status).send(data.message);
+      schedule.create(datetime, link, description, owner).then(() => {
+        return response.status(201).send("Schedule created");
+      });
     } catch (err) {
       console.log(err.message);
       return response.status(400).send("Bad Request");
