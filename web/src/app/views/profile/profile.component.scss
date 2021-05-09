@@ -1,8 +1,8 @@
-$darkBlue: #141648;
-$pink: #D13C74;
-$darkGrey: #2D2D2D;
+@import "../../../sass/abstracts/variables";
+@import "../../../sass/components/scrollbar";
 
-h1, h4 { color: $darkBlue }
+
+h1, h4 { color: $cdl_darkBlue }
 h1 {
   font-weight: 100;
   font-size: 45px;
@@ -11,15 +11,17 @@ h1 {
 }
 
 h4 { font-weight: 500; margin-bottom: 25px; }
-label { font-weight: 400; color: $pink; }
-input { width: 100%; font-weight: 300; }
+label { font-weight: 400; color: $cdl_pink; }
+input { width: 100%; font-weight: 300; background: transparent; }
 input:disabled { color: #888; }
+button { cursor: pointer; }
 
 .mainPage {
   padding: 48px 32px;
   display: grid;
   height: 100%;
   align-content: space-between;
+  overflow-y: auto;
 }
 
 .header {
@@ -34,8 +36,8 @@ input:disabled { color: #888; }
       padding: 10px 0;
       width: 280px;
       background: none;
-      border: 1px solid $pink;
-      color: $pink;
+      border: 1px solid $cdl_pink;
+      color: $cdl_pink;
       border-radius: 5px;
       font-weight: 300;
       font-size: 20px;
@@ -68,7 +70,7 @@ section {
 
   input {
     border: none;
-    border-bottom: 1px solid $darkBlue;
+    border-bottom: 1px solid $cdl_darkBlue;
     display: block;
     font-weight: 300;
     font-size: 25px;
@@ -101,12 +103,12 @@ footer {
   }
 
   button:nth-child(1) {
-    color: $darkBlue;
+    color: $cdl_darkBlue;
   }
 
   button:nth-child(2) {
     width: 280px;
-    border: 1px solid $pink;
-    color: $pink;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
   }
 }

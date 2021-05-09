@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
-
+import {interestListMock} from "../../../app/app.component"
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -10,6 +10,7 @@ import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.
 })
 export class LoginComponent implements OnInit {
   private mode: string = "login";
+  private interestList:any[] =  interestListMock;
 
   @ViewChild(BasicAutoCompleterComponent, { static: false })
   autoCompleteComponent: BasicAutoCompleterComponent;
@@ -41,14 +42,14 @@ export class LoginComponent implements OnInit {
     console.log("loginForm", this.loginForm.value);
   }
 
-  onSubmitRegister() {
+  onSubmitRegister( ) {
     this.registerForm.patchValue({
-      objective: this.autoCompleteComponent.getInterestList(),
+      objective: this.interestList[0],
     });
     console.log("registerForm", this.registerForm.value);
   }
 
-  listenInput(event) {
-    console.log(event);
+  listenInput(interestListEvent) {
+    this.interestList = interestListEvent;
   }
 }

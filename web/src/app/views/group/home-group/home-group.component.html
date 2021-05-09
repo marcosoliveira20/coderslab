@@ -2,7 +2,7 @@
   <header>
     <div>
       <h1>José Bezerra</h1>
-      <button routerLink="./new">Novo Grupo</button>
+      <button class="button-default" routerLink="./new">Novo Grupo</button>
     </div>
     <ul>
       <li><button>Todos</button></li>
@@ -11,7 +11,7 @@
   </header>
   <main>
     <section class="">
-      <ul>
+      <ul class="card-list">
         <li *ngFor="let group of user.group_list">
           <app-card [data]="group"></app-card>
         </li>

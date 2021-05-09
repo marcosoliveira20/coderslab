@@ -1,37 +1,12 @@
-$darkBlue: #141648;
-$pink: #D13C74;
-$darkGrey: #2D2D2D;
-
-::placeholder {
-  color: #FFF;
-}
-
-// SCROLLBAR
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #24276D;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #FFC42E;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #B88B18;
-}
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
 
 h1 {
   font-weight: 100;
   font-size: 45px;
   margin: 10px 0;
   align-self: baseline;
-  color: $darkBlue;
+  color: $cdl_darkBlue;
 }
 
 h4 {
@@ -58,8 +33,8 @@ h4 {
       padding: 10px 0;
       width: 280px;
       background: none;
-      border: 1px solid $pink;
-      color: $pink;
+      border: 1px solid $cdl_pink;
+      color: $cdl_pink;
       border-radius: 5px;
       font-weight: 300;
       font-size: 20px;
@@ -68,15 +43,17 @@ h4 {
     }
   }
 
-  h2 { font-weight: 500; color: $pink; font-size: 25px; }
+  h2 { font-weight: 500; color: $cdl_pink; font-size: 25px; }
 }
 
 .cdl_card_group {
   list-style: none;
   display: flex;
   gap: 24px;
-  height: 170px;
   overflow-x: auto;
+  width: calc( 100% + 32px );
+  height: fit-content;
+  padding-bottom: 10px;
 }
 
 section {
@@ -88,28 +65,11 @@ section {
 
 .member_list {
   list-style: none;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   li { margin-bottom: 25px; }
-}
-
-.member_card {
-  display: flex;
-  width: 100%;
-  padding: 24px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  display: grid;
-  grid-template-columns: 60% 40%;
-
-  >h3 { color: $darkBlue; font-weight: 400; margin: 0; }
-  >div {
-    display: flex;
-    align-items: center;
-
-    >h4 { font-weight: 300; color: $pink; font-size: 28px; margin: 0 28px 0 0; }
-    >p { color: $darkBlue; font-weight: 300; font-size: 28px; margin: 0; }
-  }
 }
 
 .tag_list {
@@ -124,8 +84,46 @@ section {
     width: fit-content;
     border-radius: 50px;
     padding: 2px 10px;
-    border: 1px solid $pink;
-    color: $pink;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
     background: none;
+    cursor: default;
   }
+}
+
+// MODAL
+.modal_header {
+  display: flex;
+  margin-bottom: 40px;
+
+  >div { display: flex; }
+
+  >div:last-child { align-items: flex-end; margin-left: 20px; }
+
+  >div p { margin: 0; font-size: 22px; }
+  >div p:first-child { color: $cdl_pink; font-weight: 500; margin-right: 5px;}
+  >div p:last-child { color: $cdl_darkBlue; font-weight: 300; }
+}
+
+.modal_body p {
+  color: #2D2D2D;
+  font-weight: 300;
+  font-size: 25px;
+  letter-spacing: 15%;
+  margin-bottom: 70px;
+}
+
+.modal_footer button {
+  width: 100%;
+  background: transparent;
+  border: 1px solid $cdl_pink;
+  color: $cdl_pink;
+  font-size: 20px;
+  text-align: center;
+  align-self: center;
+  justify-content: center;
+  font-weight: 300;
+  height: 64px;
+  padding: 16px;
+  border-radius: 15px;
 }

@@ -1,7 +1,7 @@
-$darkBlue: #141648;
-$indigoBlue: #24276d;
-$pink: #d13c74;
-$darkGrey: #2d2d2d;
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
+@import "../../../../sass/components/card-list";
+@import "../../../../sass/components/button";
 
 h1 {
   font-family: Roboto;
@@ -11,60 +11,19 @@ h1 {
 }
 
 header > div > button {
-  border: 1px solid $pink;
-  color: $pink;
   width: 277px;
+}
 
-  background-color: rgb(231 233 240);
-  border-radius: 5px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 25px;
+div header div button:hover {
+  color: white;
+  background-color: $cdl_pink;
+  transition-delay: 50ms;
 }
 
 section {
   display: flex;
   height: 100%;
   flex-wrap: wrap;
-}
-
-section > ul {
-  list-style: none;
-  display: flex;
-  border-radius: 15px;
-  text-align: center;
-  align-items: center;
-  list-style: none;
-  color: $darkBlue;
-  font-weight: 300;
-  height: auto;
-  width: 100%;
-  justify-content: space-between;
-
-  flex-wrap: wrap;
-
-  li {
-    margin-bottom: 28px;
-    width: 246px;
-    height: 322px;
-  }
-
-  li p:first-child {
-    font-size: 20px;
-  }
-  li p:last-child {
-    font-size: 50px;
-  }
-
-  li:first-child {
-    border: none;
-  }
-
-  li:last-child {
-    border: none;
-  }
 }
 
 header ul > li > button {
@@ -80,9 +39,9 @@ header ul > li > button {
 }
 
 header ul > li > button:hover {
-  color: $pink;
+  color: $cdl_pink;
   margin: -1px 23px;
-  border-bottom: 3px solid $pink;
+  border-bottom: 3px solid $cdl_pink;
 }
 
 header {
@@ -106,7 +65,7 @@ main {
   display: flex;
 
   > a > button {
-    background-color: $pink;
+    background-color: $cdl_pink;
 
     position: fixed;
     bottom: 28px;
@@ -116,33 +75,16 @@ main {
     height: 80px;
     border: none;
     border-radius: 10em;
+    z-index: 20;
   }
 }
 
-app-card{
+app-card {
   text-align: left;
 }
 
 .content {
   overflow-y: scroll;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #24276d;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ffc42e;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #b88b18;
 }
 
 .display {

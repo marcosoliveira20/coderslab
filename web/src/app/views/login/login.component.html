@@ -121,7 +121,14 @@
       </article>
 
       <article>
-        <app-input-auto-complete theme="default" (onOutput)="listenInput($event)"> </app-input-auto-complete>
+        <app-input-auto-complete
+          theme="default"
+          (itemEvent)="listenInput($event)"
+          placeholder="Objetivo"
+          [interestLisInput]="interestList"
+
+          >
+      </app-input-auto-complete>
       </article>
     </div>
 

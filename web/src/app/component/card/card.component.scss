@@ -1,120 +1,204 @@
-$darkBlue: #141648;
-$indigoBlue: #24276D;
-$pink: #D13C74;
-$darkGrey: #2D2D2D;
-$cdl_yellow: #FFC42E;
-$cdl_grey: #E7E9F0;
+@import "../../../sass/abstracts/variables";
 
-.isDefault {
-  >main {
-    color: white;
-    background: $indigoBlue;
+/*
+  THEME
+*/
+// light
+.theme-light > button {
+  background: $cdl_pink;
+  border: 1px solid $cdl_pink;
+  color: $cdl_white;
+}
+
+.theme-light footer svg {
+  fill: $cdl_pink;
+}
+
+// dark
+.theme-dark main {
+  color: $cdl_white;
+  background: $cdl_blue;
+  border: 1px solid $cdl_yellow;
+
+  header ul li {
+    border-color: $cdl_yellow;
+  }
+  footer {
+    background: transparent;
+  }
+  footer svg {
+    fill: $cdl_yellow;
+  }
+  footer p {
+    color: $cdl_white;
+  }
+  footer > label {
+    background: transparent;
     border: 1px solid $cdl_yellow;
-    transition: all .3s;
-
-    header ul li { border-color: $cdl_yellow; }
-    footer { background: $indigoBlue; }
-    footer svg { fill: $cdl_yellow; }
-    footer p { color: white; }
-    footer >label { background: $indigoBlue; border: 1px solid $cdl_yellow; color: #FFF; }
-  }
-
-  >button {
-    transition: all .3s;
-    background: $cdl_yellow!important;
-    border: 1px solid $cdl_yellow!important;
-    color: $indigoBlue!important;
-  }
-
-  header div div { color: white; background: $pink; }
-}
-
-.minimalCard {
-  >main {
-    width: 250px;
-    border: none;
-    border-top: 10px solid $darkBlue;
-    height: fit-content!important;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)!important;
-
-    >header >p { font-size: 30px; font-weight: 300; text-align: center; }
-
-    >footer >div {
-      justify-content: space-between!important;
-
-      div:first-child p {
-        font-weight: 500;
-      }
-
-      div:last-child p {
-        color: $pink;
-        width: 100%;
-        text-align: right;
-      }
-    }
-
-    p { font-size: 22px; }
+    color: #fff;
   }
 }
 
-.pre-main {
+.theme-dark > button {
+  background: $cdl_yellow;
+  border: 1px solid $cdl_yellow;
+  color: $cdl_darkBlue;
+}
+
+
+/*
+  BASE
+*/
+.card-base {
   height: 100%;
   display: block;
   cursor: pointer;
-
-  >main {
-    height: 100%;
-    z-index: 15;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
-    transition: all .3s;
-  }
-
-  >button {
-    z-index: 1;
-    display: none;
-    margin-top: -20px;
-    height: 60px;
-    width: 100%;
-    position: relative;
-    background: $pink;
-    border: 1px solid $pink;
-    color: white;
-    border-radius: 0 0 15px 15px;
-    font-weight: 500;
-    font-size: 28px;
-    align-items: flex-end;
-    justify-content: center;
-    transition: all .3s;
-
-    p { margin: 0; }
-  }
-
-
 }
 
-.pre-main:hover {
-  >main {
-    height: calc(100% - 40px);
-    position: relative;
-    z-index: 2;
-    border: none;
-  }
-  >button {
-    display: flex;
-  }
-}
-
-main {
+.card-base > main {
+  z-index: 2;
   height: 100%;
-  display: grid;
-  align-content: space-between;
-  background: white;
-  padding: 18px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.card-base > button {
+  z-index: 1;
+  width: 100%;
+  position: relative;
+  border-radius: 0 0 15px 15px;
+  font-weight: 500;
+  font-size: 28px;
+  align-items: flex-end;
+  justify-content: center;
+  transition: all 0.3s;
+  display: flex;
+
+
+  p {
+    margin: 0;
+  }
+}
+
+/*
+  TYPES
+*/
+// minimal
+.minimal-type > main {
+  width: 250px;
+  border: none;
+  border-top: 10px solid $cdl_darkBlue;
+  height: fit-content;
+  box-shadow: 0px 4px 4px #00000040;
+
+  header > p {
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  footer > div {
+    justify-content: space-between;
+    font-size: 22px;
+
+    div:first-child p {
+      font-weight: 500;
+    }
+
+    div:last-child p {
+      color: $cdl_pink;
+      width: 100%;
+      text-align: right;
+    }
+  }
+}
+
+.minimal-type > button {
+  margin-top: -52px;
+  margin-bottom: 40px;
+}
+
+.minimal-type:hover > main {
+  border: none;
+}
+
+.minimal-type:hover {
+  > button {
+    margin-top: -5px;
+    margin-bottom: 0px;
+  }
+}
+
+
+// member
+.member-type {
+  width: 100%;
+  display: flex;
+  width: 100%;
   border-radius: 15px;
 }
 
-header {
-  p {
+.member-type > main {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 60% auto;
+
+  > header h3 {
+    color: $cdl_darkBlue;
+    font-weight: 400;
+    margin: 0;
+  }
+  > footer {
+    display: flex;
+    align-items: center;
+    float: right;
+
+    > h4 {
+      font-weight: 300;
+      color: $cdl_pink;
+      font-size: 28px;
+      margin: 0 28px 0 0;
+    }
+    > p {
+      color: $cdl_darkBlue;
+      font-weight: 300;
+      font-size: 28px;
+      margin: 0;
+    }
+  }
+}
+
+.member-type > button {
+  display: flex;
+  width: 0;
+  padding: 0;
+  margin-left: -20px;
+  height: auto;
+  margin: 0 0 0 -20px;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.member-type:hover {
+  > main {
+    height: fit-content;
+    width: calc(100% - 40px);
+  }
+  > button {
+    width: fit-content;
+    padding: 0 24px 0 44px;
+  }
+}
+
+
+// full
+.full-type main {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.full-type header {
+  > p {
     font-weight: 400;
     font-size: 28px;
     line-height: 33px;
@@ -131,27 +215,57 @@ header {
       width: fit-content;
       border-radius: 50px;
       padding: 2px 10px;
-      border: 1px solid $pink;
-      color: $pink;
+      border: 1px solid $cdl_pink;
+      color: $cdl_pink;
       background: none;
+      font-size: 14px;
     }
   }
+}
+
+.full-type footer {
+  p { font-size: 24px; font-weight: 300;}
+
+  label {
+    width: 100%;
+    background: $cdl_lightGrey;
+    text-align: center;
+    border-radius: 5px;
+    color: $cdl_darkBlue;
+    border: 1px solid $cdl_lightGrey;
+    margin: 10px 0 0;
+  }
+}
+
+.full-type > button {
+  height: 60px;
+  margin-top: -60px;
+  margin-bottom: 62px;
+}
+
+.full-type:hover main {
+  height: calc(100% - 40px);
+}
+
+.full-type:hover > button {
+  margin-top: -20px;
+  margin-bottom: 0;
+}
+
+/*
+  GENERAL TAGS
+*/
+main {
+  display: grid;
+  align-content: space-between;
+  background: $cdl_white;
+  padding: 18px;
+  border-radius: 15px;
 }
 
 footer {
   display: block;
   height: 100%;
-  background: white;
-
-  >label {
-    width: 100%;
-    background: $cdl_grey;
-    text-align: center;
-    border-radius: 5px;
-    color: $darkBlue;
-    border: 1px solid $cdl_grey;
-    margin: 10px 0 0;
-  }
 
   div {
     display: flex;
@@ -159,7 +273,6 @@ footer {
     width: 100%;
 
     svg {
-      fill: $pink;
       height: 30px;
       width: 30px;
       margin-right: 12px;
@@ -168,7 +281,7 @@ footer {
     p {
       font-size: 24px;
       font-weight: 300;
-      color: $darkBlue;
+      color: $cdl_darkBlue;
       margin: 0;
     }
   }

@@ -25,30 +25,9 @@
   <div class="study-groups">
     <h1>Grupos de estudo</h1>
     <ul>
-      <li *ngFor="let group of user.group_list">
+      <li *ngFor="let group of user.group_list.slice(0, 3)">
         <app-card [data]="group"></app-card>
       </li>
-      <!-- <li *ngFor="let group of user.group_list">
-        <div class="group-card-header">
-          <p>{{group.name}}</p>
-          <ul>
-            <li *ngFor="let category of group.category">
-              {{category.label}}
-            </li>
-          </ul>
-        </div>
-
-        <div class="group-card-footer">
-          <div>
-            <img src="assets/icons/user_icon.svg" alt="" class="custom_roadmap_icon" />
-            <p>{{group.user_list}}</p>
-          </div>
-          <div>
-            <img src="assets/icons/calendar_icon.svg" alt="" class="default_roadmap_icon" />
-            <p>{{group.schedule_list[0].datetime.getDay()}}/{{group.schedule_list[0].datetime.getMonth()}}</p>
-          </div>
-        </div>
-      </li> -->
     </ul>
   </div>
 
