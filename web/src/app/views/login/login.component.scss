@@ -1,7 +1,27 @@
 @import "../../../sass/abstracts/variables";
 @import "../../../sass/components/scrollbar";
+@import "../../../sass/base/typography";
 
-// ELEMENTS
+::placeholder {
+  color: #fff;
+  font-weight: $font-weight-light;
+  letter-spacing: 3px;
+}
+
+.content-frame {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+// Base
+.form-group-base {
+  padding: 35px 40px 35px;
+  background: $cdl_blue;
+  border-radius: 25px;
+  height: fit-content;
+}
+
 .bg {
   position: fixed;
   width: 100vw;
@@ -10,28 +30,18 @@
   background: $cdl_darkBlue;
 }
 
-main {
-  z-index: 10;
-  display: flex;
-  align-items: center;
-}
-
-article {
-  padding: 35px 40px 35px;
-  background: $cdl_blue;
-  border-radius: 25px;
-  margin-bottom: 25px;
-
+.form-group-base {
   input {
     width: 100%;
     height: 40px;
     border: none;
     background: none;
-    border-bottom: 1px solid $cdl_white;
-    color: $cdl_white;
-    font-size: 25px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-weight: $font-weight-light;
+    letter-spacing: 3px;
+    font-size: 20px;
     margin-bottom: 30px;
-    font-weight: 100;
   }
 
   input:last-child {
@@ -43,93 +53,159 @@ article {
     justify-content: center;
     border-radius: 5px;
     background: none;
-    color: $cdl_white;
-    height: 56px;
+    color: #fff;
     display: flex;
     align-items: center;
     text-align: center;
   }
 }
 
-// LOGIN MODE
-.section_loginMode {
+// LOGIN
+.section-login {
   width: 100%;
   padding: 25%;
+
+  .col {
+    padding: 0;
+  }
 }
 
-.btn_lm_filled {
-  border: 1px solid $cdl_white;
-  margin-bottom: 10px;
+.btn-login-primary {
+  border: 1px solid #fff;
+  margin-bottom: 28px;
+  color: #fff;
+  font-weight: $font-weight-light;
+  letter-spacing: 3px;
+  font-size: 20px;
+  height: 56px;
 }
 
-.btn_lm_void {
+.btn-login-secondary {
+  height: fit-content;
   border: 0px;
+  font-weight: $font-weight-light;
+  letter-spacing: 3px;
+  font-size: 15px;
 }
 
 // REGISTER MODE
-.section_registerMode {
+.section-register {
   width: 50%;
   display: block;
 
-  .row { margin-bottom: 30px; }
+  .form-group-base {
+    margin-bottom: 25px;
+  }
+
+  .row {
+    margin-bottom: 30px;
+  }
 
   button {
     width: 100%;
-    margin-top: 28px;
     border: 0px;
   }
 }
 
-.btn_rm_filled {
+.btn-register-primary {
   background: $cdl_lightBlue;
   color: $cdl_darkBlue;
   height: 56px;
   border-radius: 5px;
+  margin: 28px 0;
+  height: 56px;
 }
 
-.btn_rm_void {
+.btn-register-secondary {
   background: none;
-  color: $cdl_white;
+  color: #fff;
+  height: fit-content;
 }
 
-form > div {
+.section-register > div {
   height: 60vh;
   overflow-y: scroll;
   padding-right: 28px;
 }
 
 // BACKGROUND
-.bg img { position: fixed; max-width: 50%; }
+.bg img {
+  position: fixed;
+  max-width: 50%;
+}
 
-.img_blob_left, .img_blob_right { z-index: -99; }
-.img_blob_left { bottom: 0; left: 0; }
-.img_blob_right { top: 0; right: 0; }
+.img-blob-left,
+.img-blob-right {
+  z-index: -99;
+}
+.img-blob-left {
+  bottom: 0;
+  left: 0;
+}
+.img-blob-right {
+  top: 0;
+  right: 0;
+}
 
-#coderslab_icon, #poweredby_icon { z-index: -98; }
-#coderslab_icon { top: 50px; left: 50px; }
-#poweredby_icon { bottom: 50px; right: 50px; }
-
+#coderslab-icon,
+#poweredby-icon {
+  z-index: -98;
+}
+#coderslab-icon {
+  top: 50px;
+  left: 50px;
+}
+#poweredby-icon {
+  bottom: 50px;
+  right: 50px;
+}
 
 @media (max-width: 768px) {
-
-  article { margin-bottom: 15px; }
-  article input { font-size: 1em; }
-
-  .section_loginMode { padding: 0; }
-  .section_registerMode { height: calc(100vh - 250px); align-self: baseline; }
-
   form > div {
     height: 100%;
     margin-top: 100px;
     padding-right: 15px;
   }
 
-  .section_loginMode, .section_registerMode {
+  .form-group-base {
+    margin-bottom: 15px;
+  }
+  .form-group-base input {
+    font-size: 1em;
+  }
+
+  .section-login {
+    padding: 0;
+  }
+  .section-register {
+    height: calc(100vh - 250px);
+    align-self: baseline;
+  }
+
+  .section-login,
+  .section-register {
     width: 100%;
   }
 
-  .img_blob_left, .img_blob_right { display: none; }
-  #coderslab_icon, #poweredby_icon { height: 60px; min-height: 60px; }
-  #coderslab_icon { top: 10px; right: auto; bottom: auto; left: 15px; }
-  #poweredby_icon { top: 10px; right: 15px; bottom: auto; left: auto; }
+  .img-blob-left,
+  .img-blob-right {
+    display: none;
+  }
+  #coderslab-icon,
+  #poweredby-icon {
+    height: 60px;
+    min-height: 60px;
+  }
+  #coderslab-icon {
+    top: 10px;
+    right: auto;
+    bottom: auto;
+    left: 15px;
+  }
+  #poweredby-icon {
+    top: 10px;
+    right: 15px;
+    bottom: auto;
+    left: auto;
+  }
 }

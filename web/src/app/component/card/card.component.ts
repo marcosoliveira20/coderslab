@@ -11,7 +11,7 @@ export class CardComponent implements OnInit {
   @Input() data;
   @Input() type:string;
   @Input() buttonLabel:string = "ver mais";
-  @Input() enableButton:boolean;
+  @Input() disableButton:boolean;
 
   constructor(private router: Router) {
     this.type = this.type !== 'minimal' && this.type !== 'member' && 'default';

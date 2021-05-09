@@ -23,7 +23,7 @@
 
 
 <!-- MEMBER CARD -->
-<div class="card-base member-type theme-light" *ngIf="type === 'member'">
+<div class="card-base member-type theme-light" *ngIf="type === 'member'" [ngClass]="{'disable-member-card-button': disableButton}">
   <main>
     <header>
       <h3>{{data.username}}</h3>

@@ -43,7 +43,11 @@ h4 {
     }
   }
 
-  h2 { font-weight: 500; color: $cdl_pink; font-size: 25px; }
+  h2 {
+    font-weight: 500;
+    color: $cdl_pink;
+    font-size: 25px;
+  }
 }
 
 .cdl_card_group {
@@ -51,16 +55,9 @@ h4 {
   display: flex;
   gap: 24px;
   overflow-x: auto;
-  width: calc( 100% + 32px );
+  width: calc(100% + 32px);
   height: fit-content;
   padding-bottom: 10px;
-}
-
-section {
-  margin-top: 40px;
-  display: block;
-  height: auto;
-  width: 100%;
 }
 
 .member_list {
@@ -69,7 +66,9 @@ section {
   overflow-y: auto;
   overflow-x: hidden;
 
-  li { margin-bottom: 25px; }
+  li {
+    margin-bottom: 25px;
+  }
 }
 
 .tag_list {
@@ -96,17 +95,32 @@ section {
   display: flex;
   margin-bottom: 40px;
 
-  >div { display: flex; }
+  > div {
+    display: flex;
+  }
 
-  >div:last-child { align-items: flex-end; margin-left: 20px; }
+  > div:last-child {
+    align-items: flex-end;
+    margin-left: 20px;
+  }
 
-  >div p { margin: 0; font-size: 22px; }
-  >div p:first-child { color: $cdl_pink; font-weight: 500; margin-right: 5px;}
-  >div p:last-child { color: $cdl_darkBlue; font-weight: 300; }
+  > div p {
+    margin: 0;
+    font-size: 22px;
+  }
+  > div p:first-child {
+    color: $cdl_pink;
+    font-weight: 500;
+    margin-right: 5px;
+  }
+  > div p:last-child {
+    color: $cdl_darkBlue;
+    font-weight: 300;
+  }
 }
 
 .modal_body p {
-  color: #2D2D2D;
+  color: #2d2d2d;
   font-weight: 300;
   font-size: 25px;
   letter-spacing: 15%;

@@ -131,6 +131,11 @@
 
 
 // member
+.disable-member-card-button:hover {
+  > main {
+    width: 100%!important;
+  }
+}
 .member-type {
   width: 100%;
   display: flex;
