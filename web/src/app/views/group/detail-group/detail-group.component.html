@@ -1,4 +1,4 @@
-<div class="container mainPage">
+<div class="mainPage">
   <div class="header">
     <div>
       <h1>{{ group.name }}</h1>
@@ -17,7 +17,11 @@
     <h4>Reuniões</h4>
     <ul class="cdl_card_group">
       <li *ngFor="let date of group.schedule_list">
-        <app-card [isMinimal]="true" [data]="date.datetime"></app-card>
+        <app-card
+          (click)="modalShowController = true; modalData = date"
+          [type]="'minimal'"
+          [data]="date.datetime"
+        ></app-card>
       </li>
     </ul>
   </section>
@@ -25,34 +29,40 @@
   <section>
     <h4>Integrantes</h4>
     <ul class="member_list">
-      <li class="member_card">
-        <h3>Luiz Carlos</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>luiz #4526</p>
-        </div>
-      </li>
-      <li class="member_card">
-        <h3>Maria Clara</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>marica #3860</p>
-        </div>
-      </li>
-      <li class="member_card">
-        <h3>João Carvalho</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>jcarvalho #3056</p>
-        </div>
-      </li>
-      <li class="member_card">
-        <h3>Larissa Soares</h3>
-        <div>
-          <h4>Discord ID:</h4>
-          <p>lari #0356</p>
-        </div>
+      <li class="member_card" *ngFor="let user of group.user_list">
+        <app-card
+        [type]="'member'"
+        [data]="user"
+        ></app-card>
       </li>
     </ul>
   </section>
 </div>
+
+<!-- MODAL -->
+<app-modal
+  *ngIf="modalShowController"
+  [showController]="modalShowController"
+  (close)="modalShowController = false"
+>
+  <div class="modal_header">
+    <div>
+      <p>data:</p>
+      <p>{{ modalData.datetime | date: "dd MMM yyyy" }}</p>
+    </div>
+    <div>
+      <p>horário:</p>
+      <p>{{ modalData.datetime | date: "hh:mm" }}</p>
+    </div>
+  </div>
+
+  <div class="modal_body">
+    <p>
+      {{ modalData.description }}
+    </p>
+  </div>
+
+  <div class="modal_footer">
+    <button (click)="openScheduleLink()">ir para a reunião</button>
+  </div>
+</app-modal>

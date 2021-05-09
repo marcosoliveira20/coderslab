@@ -1,40 +1,40 @@
 <!-- BACKGROUND -->
 <div class="bg">
-  <img src="assets/icons/text_logo.svg" alt="" id="coderslab_icon" />
-  <img src="assets/icons/poweredby.svg" alt="" id="poweredby_icon" />
+  <img src="assets/icons/text_logo.svg" alt="" id="coderslab-icon" />
+  <img src="assets/icons/poweredby.svg" alt="" id="poweredby-icon" />
 
-  <div class="div_bg_login" *ngIf="mode === 'login'">
+  <div class="div-bg-login" *ngIf="mode === 'login'">
     <img
-      class="img_blob_left"
+      class="img-blob-left"
       src="assets/background/left_blob_stage1.svg"
       alt=""
     />
     <img
-      class="img_blob_right"
+      class="img-blob-right"
       src="assets/background/right_blob_stage1.svg"
       alt=""
     />
   </div>
 
-  <div class="div_bg_register" *ngIf="mode === 'register'">
+  <div class="div-bg-register" *ngIf="mode === 'register'">
     <img
-      class="img_blob_right"
+      class="img-blob-right"
       src="assets/background/right_blob_stage3.svg"
       alt=""
     />
   </div>
 </div>
 
-<main class="container h-100">
+<div class="container h-100 content-frame">
   <!-- LOGIN -->
   <form
     [formGroup]="loginForm"
     (ngSubmit)="onSubmitLogin()"
-    class="section_loginMode"
+    class="section-login"
     *ngIf="mode === 'login'"
   >
 
-    <article>
+    <div class="form-group-base">
       <input
         type="text"
         placeholder="Nome de Usuário"
@@ -50,7 +50,7 @@
 
       <button
         type="submit"
-        class="btn_lm_filled"
+        class="btn-login-primary"
         (click)="handleLoginMode('login')"
         routerLink="/"
       >
@@ -58,26 +58,26 @@
       </button>
       <div class="row">
         <div class="col">
-          <button class="btn_lm_void">Redefinir senha</button>
+          <button class="btn-login-secondary">Redefinir senha</button>
         </div>
         <div class="col">
-          <button class="btn_lm_void" (click)="handleLoginMode('register')">
+          <button class="btn-login-secondary" (click)="handleLoginMode('register')">
             Fazer cadastro
           </button>
         </div>
       </div>
-    </article>
+    </div>
   </form>
 
   <!-- REGISTER -->
   <form
     [formGroup]="registerForm"
     (ngSubmit)="onSubmitRegister()"
-    class="section_registerMode"
+    class="section-register"
     *ngIf="mode === 'register'"
   >
     <div>
-      <article>
+      <div class="form-group-base">
         <div class="row">
           <div class="col">
             <input type="text" placeholder="Nome" formControlName="name" />
@@ -96,18 +96,18 @@
           formControlName="username"
         />
         <input type="text" placeholder="E-mail" formControlName="email" />
-      </article>
+      </div>
 
-      <article>
+      <div class="form-group-base">
         <input type="text" placeholder="Senha" formControlName="password" />
         <input
           type="email"
           placeholder="Confirmar senha"
           formControlName="confirm_password"
         />
-      </article>
+      </div>
 
-      <article>
+      <div class="form-group-base">
         <input
           type="text"
           placeholder="Discord ID"
@@ -118,16 +118,23 @@
           placeholder="GitHub ID"
           formControlName="github_id"
         />
-      </article>
+      </div>
 
-      <article>
-        <app-input-auto-complete theme="default" (onOutput)="listenInput($event)"> </app-input-auto-complete>
-      </article>
+      <div class="form-group-base">
+        <app-input-auto-complete
+          theme="default"
+          (itemEvent)="listenInput($event)"
+          placeholder="Objetivo"
+          [interestLisInput]="interestList"
+
+          >
+      </app-input-auto-complete>
+      </div>
     </div>
 
-    <button type="submit" class="btn_rm_filled">Cadastrar</button>
-    <button class="btn_rm_void" (click)="handleLoginMode('login')">
+    <button type="submit" class="btn-register-primary">Cadastrar</button>
+    <button class="btn-register-secondary" (click)="handleLoginMode('login')">
       Fazer login
     </button>
   </form>
-</main>
+</div>

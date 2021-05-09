@@ -1,0 +1,50 @@
+.card-list{
+  list-style: none;
+  display: flex;
+  border-radius: 15px;
+  text-align: center;
+  align-items: center;
+  list-style: none;
+  color: $cdl_darkBlue;
+  font-weight: 300;
+  height: auto;
+  width: 100%;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+  li {
+    margin-bottom: 28px;
+    width: 246px;
+    height: 322px;
+  }
+
+  li p:first-child {
+    font-size: 20px;
+  }
+  li p:last-child {
+    font-size: 50px;
+  }
+
+  li:first-child {
+    border: none;
+  }
+
+  li:last-child {
+    border: none;
+  }
+}
+
+@media (min-width: 1200px){
+  .card-list{
+    justify-content:start;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 994px) and (max-width: 1199px){
+  .card-list{
+    justify-content:start;
+    gap: 40px;
+  }
+}

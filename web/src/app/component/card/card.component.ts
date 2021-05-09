@@ -1,3 +1,4 @@
+import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class CardComponent implements OnInit {
   @Input() data;
-  @Input() isMinimal:boolean;
+  @Input() type:string;
+  @Input() buttonLabel:string = "ver mais";
+  @Input() disableButton:boolean;
 
   constructor(private router: Router) {
+    this.type = this.type !== 'minimal' && this.type !== 'member' && 'default';
   }
 
   ngOnInit() {
