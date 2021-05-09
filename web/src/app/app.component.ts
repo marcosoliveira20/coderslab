@@ -217,6 +217,37 @@ export const userMock = {
   ]
 }
 
+export const interestListMock = [
+  {
+    token: 1,
+    name: "Java",
+  },
+  {
+    token: 2,
+    name: "Angular",
+  },
+  {
+    token: 3,
+    name: "Python",
+  },
+  {
+    token: 4,
+    name: "CSS",
+  },
+  {
+    token: 5,
+    name: "HTML",
+  },
+  {
+    token: 6,
+    name: "JS",
+  },
+  {
+    token: 7,
+    name: "C#",
+  },
+];
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

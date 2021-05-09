@@ -1,4 +1,5 @@
 @import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/card-list";
 
 main{
   height: 100vh;
@@ -68,6 +69,7 @@ input::placeholder {
   position: fixed;
   right: 28px;
   bottom: 37px;
+  z-index: 2;
 
   li {
     margin: 13px;
@@ -82,41 +84,7 @@ input::placeholder {
 }
 
 .card-list {
-  list-style: none;
-  display: flex;
-  border-radius: 15px;
-  align-items: center;
-  list-style: none;
-  color: $cdl_darkBlue;
-  font-weight: 300;
-  height: auto;
-  width: 100%;
-  justify-content: space-between;
-
-  padding-left: 0;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 1rem;
-
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-
-  flex-wrap: wrap;
-
-  li {
-    margin-bottom: 28px;
-    width: 245px;
-    height: 322px;
-  }
-
-  li p:first-child {
-    font-size: 20px;
-  }
-  li p:last-child {
-    font-size: 50px;
-  }
+  margin-top: 16px;
 }
 
 .center{

@@ -1,5 +1,7 @@
 @import "../../../../sass/abstracts/variables";
 @import "../../../../sass/components/scrollbar";
+@import "../../../../sass/components/card-list";
+@import "../../../../sass/components/button";
 
 h1 {
   font-family: Roboto;
@@ -9,60 +11,19 @@ h1 {
 }
 
 header > div > button {
-  border: 1px solid $cdl_pink;
-  color: $cdl_pink;
   width: 277px;
+}
 
-  background-color: rgb(231 233 240);
-  border-radius: 5px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 25px;
+div header div button:hover {
+  color: white;
+  background-color: $cdl_pink;
+  transition-delay: 50ms;
 }
 
 section {
   display: flex;
   height: 100%;
   flex-wrap: wrap;
-}
-
-section > ul {
-  list-style: none;
-  display: flex;
-  border-radius: 15px;
-  text-align: center;
-  align-items: center;
-  list-style: none;
-  color: $cdl_darkBlue;
-  font-weight: 300;
-  height: auto;
-  width: 100%;
-  justify-content: space-between;
-
-  flex-wrap: wrap;
-
-  li {
-    margin-bottom: 28px;
-    width: 246px;
-    height: 322px;
-  }
-
-  li p:first-child {
-    font-size: 20px;
-  }
-  li p:last-child {
-    font-size: 50px;
-  }
-
-  li:first-child {
-    border: none;
-  }
-
-  li:last-child {
-    border: none;
-  }
 }
 
 header ul > li > button {
@@ -114,10 +75,11 @@ main {
     height: 80px;
     border: none;
     border-radius: 10em;
+    z-index: 20;
   }
 }
 
-app-card{
+app-card {
   text-align: left;
 }
 

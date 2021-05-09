@@ -9,7 +9,7 @@
     <div>
       <ul>
         <li *ngFor="let item of interestListFilter">
-          <button class="{{ item.name }}" (click)="addInterest($event)">
+          <button type="button" class="{{ item.name }}" (click)="addInterest($event)">
             {{ item.name }}
           </button>
         </li>

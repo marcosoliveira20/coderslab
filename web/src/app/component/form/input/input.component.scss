@@ -69,14 +69,13 @@ button {
 }
 
 .interest-custom {
-  background-color:$cdl_white;
+  background-color: $cdl_white;
   border-radius: 0.5rem;
   padding: 0.3rem;
   margin: 10px;
   display: inline;
-  color:  $cdl_pink;
-  border: solid  $cdl_pink 1px;
-
+  color: $cdl_pink;
+  border: solid $cdl_pink 1px;
 
   button {
     border-radius: 1rem;
@@ -107,7 +106,12 @@ button {
   }
 }
 
-#interes-list{
+#interes-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+div div ul {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
