@@ -57,9 +57,11 @@
         <div class="row">
           <div class="col-11">
             <app-input-auto-complete
-              placeholder="Assuntos relacionados"
               theme="custom"
-              (onOutput)="listenInput($event)"
+              (itemEvent)="listenInput($event)"
+              placeholder="Assuntos relacionados"
+              [interestLisInput]="interestList"
+
             ></app-input-auto-complete>
           </div>
           <div class="col-1">

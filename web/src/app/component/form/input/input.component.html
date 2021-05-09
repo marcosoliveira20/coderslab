@@ -7,7 +7,7 @@
       (input)="filterList($event)"
     />
     <div>
-      <ul>
+      <ul class="interest-list-dropdown">
         <li *ngFor="let item of interestListFilter">
           <button type="button" class="{{ item.name }}" (click)="addInterest($event)">
             {{ item.name }}

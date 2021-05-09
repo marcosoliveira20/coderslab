@@ -106,12 +106,18 @@ button {
   }
 }
 
+.interest-list-dropdown,
+.interest-list-dropdown li button,
+.interest-list-dropdown li {
+  background: rgba(255, 255, 255, 0.29);
+  backdrop-filter: blur(4px);
+}
+
 #interes-list {
   display: flex;
   flex-wrap: wrap;
 }
 
 div div ul {
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: none;
 }

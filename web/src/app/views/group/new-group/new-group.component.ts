@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BasicAutoCompleterComponent } from 'src/app/component/form/input/input.component';
 import { FormBuilder, Validators } from "@angular/forms";
+import {interestListMock, userMock} from "../../../app.component";
 
 @Component({
   selector: 'app-new-group',
@@ -10,6 +11,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 })
 export class NewGroupComponent implements OnInit {
   public group;
+  private interestList:any[] =  interestListMock;
 
   @ViewChild(BasicAutoCompleterComponent, { static: false })
   autoCompleteComponent: BasicAutoCompleterComponent;
@@ -28,143 +30,11 @@ export class NewGroupComponent implements OnInit {
     console.log("registerForm", this.formGroup.value);
   }
 
-  listenInput(event) {
-    console.log(event);
+  listenInput(interestListEvent) {
+    this.interestList = interestListEvent;
   }
 
-  public user = {
-    name: "José",
-    lastname: "Bezerra",
-    username: "Flynn Rider",
-    email: "jose@email.com.br",
-    level: "Iniciante",
-    group_list: [
-      {
-        token: 1,
-        name: "Node para iniciantes",
-        user_list: 15,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [{ label: "back end" }, { label: "dev web" }],
-        isDefault: false,
-      },
-      {
-        token: 2,
-        name: "MySQL básico",
-        user_list: 10,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [
-          { label: "back end" },
-          { label: "dev web" },
-          { label: "dba" },
-        ],
-        isDefault: false,
-      },
-      {
-        token: 3,
-        name: "Lógica de programação",
-        user_list: 35,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [{ label: "back end" }, { label: "dev web" }],
-        isDefault: true,
-      },
-      {
-        token: 4,
-        name: "Node para iniciantes",
-        user_list: 15,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [{ label: "back end" }, { label: "dev web" }],
-        isDefault: false,
-      },
-      {
-        token: 5,
-        name: "MySQL básico",
-        user_list: 10,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [
-          { label: "back end" },
-          { label: "dev web" },
-          { label: "dba" },
-        ],
-        isDefault: false,
-      },
-      {
-        token: 6,
-        name: "Lógica de programação",
-        user_list: 35,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [{ label: "back end" }, { label: "dev web" }],
-        isDefault: true,
-      },
-      {
-        token: 7,
-        name: "Node para iniciantes",
-        user_list: 15,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [{ label: "back end" }, { label: "dev web" }],
-        isDefault: false,
-      },
-      {
-        token: 8,
-        name: "MySQL básico",
-        user_list: 10,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [
-          { label: "back end" },
-          { label: "dev web" },
-          { label: "dba" },
-        ],
-        isDefault: false,
-      },
-      {
-        token: 9,
-        name: "Lógica de programação",
-        user_list: 35,
-        level: "iniciante",
-        schedule_list: [
-          { datetime: new Date("2021-04-20") },
-          { datetime: new Date("2021-04-28") },
-        ],
-        category: [{ label: "back end" }, { label: "dev web" }],
-        isDefault: true,
-      },
-    ],
-    interest_list: [
-      { subject_label: "Lógica de programação", level: "", isDefault: true },
-      { subject_label: "Node", level: "", isDefault: false },
-    ],
-  };
+  public user = userMock;
 
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder) {
   }
