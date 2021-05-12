@@ -5,10 +5,14 @@
   background-color: rgb(231 233 240);
   border-radius: 5px;
 
-  font-family: Roboto;
+  font-family: inherit;
   font-style: normal;
   font-weight: 300;
   font-size: 25px;
+
+  height: auto ;
+  width: 270px ;
+
 }
 
 .button-default:hover{
