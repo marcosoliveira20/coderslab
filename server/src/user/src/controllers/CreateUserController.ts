@@ -13,7 +13,6 @@ class CreateUserController {
       discord_id,
       github_id,
       password,
-      _interest_list,
     } = request.body;
 
     const user = new User();
@@ -36,7 +35,6 @@ class CreateUserController {
         discord_id,
         github_id,
         password: passwordHash,
-        _interest_list,
       });
 
       return response.status(201).send();

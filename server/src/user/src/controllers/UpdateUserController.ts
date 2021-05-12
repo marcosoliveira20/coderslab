@@ -14,7 +14,6 @@ class UpdateUserController {
       discord_id,
       github_id,
       password,
-      _interest_list,
     } = request.body;
 
     const user = new User();
@@ -34,7 +33,6 @@ class UpdateUserController {
         discord_id,
         github_id,
         password,
-        _interest_list,
       });
 
       return response.status(200).send(data);
