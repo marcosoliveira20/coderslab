@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'groups', component: HomeGroupComponent, },
   { path: 'groups/explore', component: ExploreGroupComponent },
   { path: 'groups/new', component: NewGroupComponent },
+  { path: 'groups/edit/:token', component: NewGroupComponent },
   { path: 'groups/:token', component: DetailGroupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: '**', component: NotFoundComponent }

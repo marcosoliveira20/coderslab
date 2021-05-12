@@ -12,6 +12,7 @@ const userList = [
  * Mock object for tests before integration
  */
 export const userMock = {
+  id: 1,
   name: "José",
   lastname: "Bezerra",
   username: "Flynn Rider",
@@ -47,6 +48,7 @@ export const userMock = {
           owner: Math.random() * 1000
         },
       ],
+      owner: 1,
       category: [{label: "back end"}, {label: "dev web"}],
       isDefault: false
     },
@@ -79,6 +81,7 @@ export const userMock = {
           owner: Math.random() * 1000
         },
       ],
+      owner: 2,
       category: [{label: "back end"}, {label: "dev web"}, {label: "dba"}],
       isDefault: false
     },
@@ -111,6 +114,7 @@ export const userMock = {
           owner: Math.random() * 1000
         },
       ],
+      owner: 3,
       category: [{label: "back end"}, {label: "dev web"}],
       isDefault: true
     },
@@ -143,6 +147,7 @@ export const userMock = {
           owner: Math.random() * 1000
         },
       ],
+      owner: 1,
       category: [{label: "back end"}, {label: "dev web"}],
       isDefault: false
     },
@@ -175,6 +180,7 @@ export const userMock = {
           owner: Math.random() * 1000
         },
       ],
+      owner: 2,
       category: [{label: "back end"}, {label: "dev web"}, {label: "dba"}],
       isDefault: false
     },
@@ -207,6 +213,7 @@ export const userMock = {
           owner: Math.random() * 1000
         },
       ],
+      owner: 3,
       category: [{label: "back end"}, {label: "dev web"}],
       isDefault: true
     }
