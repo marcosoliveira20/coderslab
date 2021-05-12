@@ -25,7 +25,7 @@ export default class ReadByIdScheduleController {
       return response.status(200).send(dataBd);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400);
     }
   }
 }

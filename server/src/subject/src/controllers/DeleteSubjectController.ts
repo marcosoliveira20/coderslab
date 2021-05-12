@@ -14,11 +14,11 @@ export default class DeleteSubjectController {
         return response.status(404);
       }
       await subject.delete(id).then(() => {
-        return response.status(204).send();
+        return response.status(204);
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400);
     }
   }
 }

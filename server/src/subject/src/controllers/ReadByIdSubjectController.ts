@@ -14,15 +14,15 @@ export default class ReadByIdSubjectController {
       if (!dataBd) {
         return response.status(404);
       }
-      const data: ISubjecDTO = {
+      /* const data: ISubjecDTO = {
         id: dataBd._id,
         label: dataBd.label,
         categories: dataBd.categories,
-      };
-      return response.status(200).send(data);
+      }; */
+      return response.status(200).send(dataBd);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400);
     }
   }
 }
