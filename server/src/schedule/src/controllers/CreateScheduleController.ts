@@ -9,12 +9,12 @@ export default class CreateScheduleController {
     const schedule = new Schedule();
 
     try {
-      schedule.create(datetime, link, description, owner).then(() => {
-        return response.status(201).send("Schedule created");
+      await schedule.create(datetime, link, description, owner).then(() => {
+        return response.status(201);
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400);
     }
   }
 }

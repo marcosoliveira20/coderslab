@@ -14,10 +14,10 @@ const readAllScheduleController = new ReadAllScheduleController();
 const updateScheduleController = new UpdateScheduleController();
 const deleteScheduleController = new DeleteScheduleController();
 
-router.post("/Schedule/create", createScheduleController.handle);
-router.get("/Schedule/read/byId/:id", readByIdScheduleController.handle);
-router.get("/Schedule/read/all", readAllScheduleController.handle);
-router.put("/Schedule/update", updateScheduleController.handle);
-router.delete("/Schedule/delete/:id", deleteScheduleController.handle);
+router.post("/schedule/create", createScheduleController.handle);
+router.get("/schedule/read/byId/:id", readByIdScheduleController.handle);
+router.get("/schedule/read/all", readAllScheduleController.handle);
+router.put("/schedule/update", updateScheduleController.handle);
+router.delete("/schedule/delete/:id", deleteScheduleController.handle);
 
 export { router };

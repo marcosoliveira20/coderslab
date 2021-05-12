@@ -11,14 +11,14 @@ export default class DeleteScheduleController {
     try {
       const dataBd = await schedule.readById(id);
       if (!dataBd) {
-        return response.status(404).send("Schedule does not exist");
+        return response.status(404);
       }
       await schedule.delete(id).then(() => {
-        return response.status(204).send();
+        return response.status(204);
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400);
     }
   }
 }
