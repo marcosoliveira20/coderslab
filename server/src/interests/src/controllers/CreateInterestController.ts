@@ -5,7 +5,8 @@ import { Interests } from "../model/Interests";
 class CreateInterestController {
   async handle(request: Request, response: Response) {
     const {
-      subject_label,
+      _id_user,
+      _id_subject,
       level
     } = request.body;
 
@@ -16,14 +17,15 @@ class CreateInterestController {
         return response.status(406).send();
       }
 
-      const findSubject = await interests.readBySubject(subject_label);
+      const findSubject = await interests.readBySubject(_id_subject);
 
       if (findSubject) {
         return response.status(403).send();
       }
 
       await interests.create({
-        subject_label,
+        _id_user,
+        _id_subject,
         level
       });
 

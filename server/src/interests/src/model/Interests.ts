@@ -4,11 +4,13 @@ import InterestsSchema from "../database/Schemas/InterestsSchema";
 
 class Interests implements IInterestsRepository {
     create({
-        subject_label,
+        _id_user,
+        _id_subject,
         level
     }: IInterestsDTO): void {
         InterestsSchema.create({
-            subject_label,
+            _id_user,
+            _id_subject,
             level
         });
     }
@@ -17,8 +19,8 @@ class Interests implements IInterestsRepository {
         return InterestsSchema.findOne({ _id });
     }
 
-    readBySubject(subject_label: string): Promise<IInterestsDTO> {
-        return InterestsSchema.findOne({ subject_label });
+    readBySubject(_id_subject: string): Promise<IInterestsDTO> {
+        return InterestsSchema.findOne({ _id_subject });
     }
 
     readAll(): Promise<Array<IInterestsDTO>> {
@@ -26,11 +28,13 @@ class Interests implements IInterestsRepository {
     }
 
     update(_id: string, {
-        subject_label,
+        _id_user,
+        _id_subject,
         level
     }: IInterestsDTO): Promise<IInterestsDTO> {
         return InterestsSchema.findByIdAndUpdate(_id, {
-            subject_label,
+            _id_user,
+            _id_subject,
             level
         }, {new: true});
     }
