@@ -7,6 +7,7 @@ const GroupSchema = new Schema({
   level: { type: Number, required: true },
   token: { type: String, required: true, unique: true },
   is_public: { type: Boolean, required: true },
+  is_default: { type: Boolean, required: true },
   _owner: { type: Schema.Types.ObjectId, required: true },
   _schedule_list: { type: [Schema.Types.ObjectId], required: true },
 }, {

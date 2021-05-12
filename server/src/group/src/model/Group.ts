@@ -10,6 +10,7 @@ class Group implements IGroupRepository {
     level,
     token,
     is_public,
+    is_default,
     _owner,
     _schedule_list
   } : IGroupDTO) : void {
@@ -20,6 +21,7 @@ class Group implements IGroupRepository {
       level,
       token,
       is_public,
+      is_default,
       _owner,
       _schedule_list
     });
@@ -56,6 +58,7 @@ class Group implements IGroupRepository {
     level,
     token,
     is_public,
+    is_default,
     _owner,
     _schedule_list
   } : IGroupDTO) : Promise<IGroupDTO> {
@@ -66,6 +69,7 @@ class Group implements IGroupRepository {
       level,
       token,
       is_public,
+      is_default,
       _owner,
       _schedule_list
     }, {new: true});

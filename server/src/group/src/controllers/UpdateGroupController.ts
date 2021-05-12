@@ -13,6 +13,7 @@ class UpdateGroupController {
 			level,
   			token,
 			is_public,
+			is_default,
 			_owner,
 			_schedule_list
 		} = request.body;
@@ -41,6 +42,7 @@ class UpdateGroupController {
 				level,
   				token,
 				is_public,
+				is_default,
 				_owner,
 				_schedule_list
 			});
