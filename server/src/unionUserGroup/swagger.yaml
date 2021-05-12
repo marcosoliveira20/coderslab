@@ -210,6 +210,8 @@ paths:
           description: Created
         '400':
           description: Bad Request
+        '406':
+          description: Not Acceptable
       requestBody:
         content:
           application/json:
@@ -341,6 +343,32 @@ paths:
                 $ref: '#/components/schemas/group_read_all.Response'
         '400':
           description: Bad Request
+  /group/read/byLevel/{level}:
+    get:
+      tags:
+        - Group
+      summary: Busca uma lista de grupos com base em um nível
+      parameters:
+        - name: level
+          in: path
+          required: true
+          description: Nível dos grupos
+          schema:
+            type: string
+            minimum: 1
+      description: Busca todos os grupos já registrados na plataforma que possuem um determiando nível e retorna uma lista deles ordenada pelo nome em ordem alfabética.
+      operationId: group_byLevel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
+        '406':
+          description: Not Acceptable
   /group/read/all:
     get:
       tags:
@@ -841,11 +869,6 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-        _interest_list:
-          type: array
-          items:
-            type: string
-            description: 'Lista de interesses Ex: [Node, Java]'
     user_read.Response:
       title: user_read.Response
       description: 'Objeto para usuário'
@@ -875,11 +898,6 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-        _interest_list:
-          type: array
-          items:
-            type: string
-            description: 'Lista de interesses Ex: [Node, Java]'
     user_read_all.Response:
       title: user_read_all.Response
       description: 'Lista para usuários'
@@ -911,11 +929,6 @@ components:
           password:
             type: string
             description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-          _interest_list:
-            type: array
-            items:
-              type: string
-              description: 'Lista de interesses Ex: [Node, Java]'
     
     # Group
     group.Request:
@@ -940,6 +953,9 @@ components:
         is_public:
           type: boolean
           description: 'Identificação para dizer se o grupo é público ou particular'
+        is_default:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
         _owner:
           type: string
           description: 'ID do dono do grupo gerado pelo MongoDB'
@@ -973,6 +989,9 @@ components:
         is_public:
           type: boolean
           description: 'Identificação para dizer se o grupo é público ou particular'
+        is_default:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
         _owner:
           type: string
           description: 'ID do dono do grupo gerado pelo MongoDB'
@@ -1008,6 +1027,9 @@ components:
           is_public:
             type: boolean
             description: 'Identificação para dizer se o grupo é público ou particular'
+          is_default:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
           _owner:
             type: string
             description: 'ID do dono do grupo gerado pelo MongoDB'
@@ -1052,9 +1074,12 @@ components:
       description: 'Objeto para interesse'
       type: object
       properties:
-        subject_label:
+        _id_user:
           type: string
-          description: 'Rótulo para o interesse Ex: NodeJs'
+          description: 'ID do usuário gerado pelo MongoDB'
+        _id_subject:
+          type: string
+          description: 'ID do assunto gerado pelo MongoDB'
         level:
           type: number
           description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
@@ -1066,9 +1091,12 @@ components:
         _id:
           type: string
           description: 'ID gerado pelo MongoDB'
-        subject_label:
+        _id_user:
           type: string
-          description: 'Rótulo para o interesse Ex: NodeJs'
+          description: 'ID do usuário gerado pelo MongoDB'
+        _id_subject:
+          type: string
+          description: 'ID do assunto gerado pelo MongoDB'
         level:
           type: number
           description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
@@ -1082,9 +1110,12 @@ components:
           _id:
             type: string
             description: 'ID gerado pelo MongoDB'
-          subject_label:
+          _id_user:
             type: string
-            description: 'Rótulo para o interesse Ex: NodeJs'
+            description: 'ID do usuário gerado pelo MongoDB'
+          _id_subject:
+            type: string
+            description: 'ID do assunto gerado pelo MongoDB'
           level:
             type: number
             description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
