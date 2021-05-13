@@ -31,9 +31,13 @@ export class NewRoadmapComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.verifyUrlParam()
+  }
+
+  verifyUrlParam() {
     if (this.activatedRoute.snapshot.url[2])
-      this.isNewCustomRoadmap =
-        this.activatedRoute.snapshot.url[2].path === "custom";
+    this.isNewCustomRoadmap =
+      this.activatedRoute.snapshot.url[2].path === "custom";
   }
 
   addNewTaskObject() {

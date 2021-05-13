@@ -6,7 +6,23 @@
 
   <!-- CONTENT SELECT NEW ROADMAP -->
   <div class="content-select-new-roadmap" *ngIf="!isNewCustomRoadmap">
-    <h1>batata</h1>
+    <p>Aqui é onde se inicia sua jornada de aprendizado. Você deve escolher qual roadmap quer seguir. Na opção default você ira ter a opção de escolher um objetivo que teve todo seu caminho pensado pela equipe do Codando, e na opção custom você tera a liberdade de decidir cada etapa da sua jornada. Iai, qual a sua escolha pra hoje?</p>
+
+    <div>
+      <div>
+        <h4>Roadmap Default</h4>
+        <p>Comece seu objetivo direto ao ponto. Encontre trilhas com todo o conteúdo planejado pra você.</p>
+      </div>
+      <button routerLink="/roadmap/list">ver mais</button>
+    </div>
+
+    <div>
+      <div>
+        <h4>Roadmap Custom</h4>
+        <p>Tome as rédias do seu trajeto. Decida cada etapa do seu objetivo de acordo com as suas necessidades.</p>
+      </div>
+      <button routerLink="/roadmap/new/custom" (click)="verifyUrlParam()">ver mais</button>
+    </div>
   </div>
 
   <!-- CONTENT NEW CUSTOM ROADMAP -->
@@ -47,29 +63,31 @@
       </button>
     </div>
 
-    <section *ngFor="let task of taskList; index as i">
-      <div class="row">
-        <div class="col">
-          <label>título</label>
-          <input name="title" placeholder="Nome da sua task" (input)="handleTaskChange($event, i)">
+    <div class="task-creation-list">
+      <section *ngFor="let task of taskList; index as i">
+        <div class="row">
+          <div class="col">
+            <label>título</label>
+            <input name="title" placeholder="Nome da sua task" (input)="handleTaskChange($event, i)">
+          </div>
+          <div class="col">
+            <label>data de conclusão</label>
+            <input type="date" name="end_date" placeholder="dd/mm/yyy" (input)="handleTaskChange($event, i)">
+          </div>
+          <div class="col">
+            <label>link</label>
+            <input name="link" placeholder="Adicione uma referência" (input)="handleTaskChange($event, i)">
+          </div>
         </div>
-        <div class="col">
-          <label>data de conclusão</label>
-          <input type="date" name="end_date" placeholder="dd/mm/yyy" (input)="handleTaskChange($event, i)">
-        </div>
-        <div class="col">
-          <label>link</label>
-          <input name="link" placeholder="Adicione uma referência" (input)="handleTaskChange($event, i)">
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col">
-          <label>descrição</label>
-          <input name="description" placeholder="Fale um pouco sobre sua task" (input)="handleTaskChange($event, i)">
+        <div class="row">
+          <div class="col">
+            <label>descrição</label>
+            <input name="description" placeholder="Fale um pouco sobre sua task" (input)="handleTaskChange($event, i)">
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </form>
 
 </main>
