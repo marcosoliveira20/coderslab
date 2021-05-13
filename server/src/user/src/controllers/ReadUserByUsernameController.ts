@@ -12,13 +12,13 @@ class ReadUserByUsernameController {
       const data = await user.readByUsername(username);
 
       if(!data) {
-        return response.status(404).send("User does not exist");
+        return response.status(404).send();
       }
 
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

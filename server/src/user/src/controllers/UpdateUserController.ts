@@ -14,7 +14,6 @@ class UpdateUserController {
       discord_id,
       github_id,
       password,
-      _interest_list,
     } = request.body;
 
     const user = new User();
@@ -23,7 +22,7 @@ class UpdateUserController {
       const findIndex = await user.readById(id);
 
       if(!findIndex) {
-        return response.status(404).send("User does not exist");
+        return response.status(404).send();
       }
 
       const data = await user.update(id, {
@@ -34,13 +33,12 @@ class UpdateUserController {
         discord_id,
         github_id,
         password,
-        _interest_list,
       });
 
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
-import { IGroupDTO } from "../interfaces/IGroupDTO";
 
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
@@ -12,6 +11,7 @@ class CreateGroupController {
 			level,
   			token,
 			is_public,
+			is_default,
 			_owner,
 			_schedule_list
 		} = request.body;
@@ -23,11 +23,12 @@ class CreateGroupController {
 				return response.status(406).send();
 			}
 
-			const data = await group.readByToken(token);
+			// deve ser apenas uma validacão interna para não repetir token
+			// const data = await group.readByToken(token);
 
-			if(data) {
-				return response.status(406).send();
-			}
+			// if(data) {
+			// 	return response.status(406).send();
+			// }
 
 			await group.create({
 				name,
@@ -36,14 +37,15 @@ class CreateGroupController {
 				level,
   				token,
 				is_public,
+				is_default,
 				_owner,
 				_schedule_list
 			});
 
-			return response.status(201).send("Group created");
+			return response.status(201).send();
 		} catch(err) {
 			console.log(err.message);
-			return response.status(400).send("Bad Request");
+			return response.status(400).send();
 		}
 	}
 }

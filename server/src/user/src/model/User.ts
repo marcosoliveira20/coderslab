@@ -11,7 +11,6 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-    _interest_list,
   }: IUserDTO): void {
     UserSchema.create({
       username,
@@ -21,7 +20,6 @@ class User implements IUsersRepository {
       discord_id,
       github_id,
       password,
-      _interest_list,
     });
   }
 
@@ -49,7 +47,6 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-    _interest_list,
   } : IUserDTO) : Promise<IUserDTO> {
     return UserSchema.findByIdAndUpdate(_id, {
       username,
@@ -59,7 +56,6 @@ class User implements IUsersRepository {
       discord_id,
       github_id,
       password,
-      _interest_list,
     }, {new: true});
   }
 

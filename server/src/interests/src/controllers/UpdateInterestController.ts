@@ -7,8 +7,9 @@ class UpdateInterestController {
     const { id } = request.params;
 
     const {
-        subject_label,
-        level
+      _id_user,
+      _id_subject,
+      level
     } = request.body;
 
     const interests = new Interests();
@@ -21,17 +22,21 @@ class UpdateInterestController {
       const findIndex = await interests.readById(id);
 
       if(!findIndex) {
-        return response.status(404).send("Interest does not exist");
-      } else if(findIndex.subject_label != subject_label) {
+        return response.status(404).send();
+      } else if(findIndex._id_subject != _id_subject || findIndex._id_user != _id_user) {
           return response.status(406).send();
       }
 
-      const data = await interests.update(id, {subject_label, level});
+      const data = await interests.update(id, {
+        _id_user,
+        _id_subject,
+        level
+      });
 
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

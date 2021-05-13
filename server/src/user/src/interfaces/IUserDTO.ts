@@ -6,7 +6,6 @@ interface IUserDTO {
   discord_id: string;
   github_id: string;
   password: string;
-  _interest_list: Array<string>;
 }
 
 export { IUserDTO };

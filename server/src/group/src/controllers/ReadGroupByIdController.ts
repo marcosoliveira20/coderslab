@@ -12,13 +12,13 @@ class ReadGroupByIdController {
 			const data = await group.readById(id);
 
 			if(!data) {
-				return response.status(404).send("Group does not exist");
+				return response.status(404).send();
 			}
 
 			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);
-			return response.status(400).send("Bad Request");
+			return response.status(400).send();
 		}
 	}
 }

@@ -5,6 +5,7 @@ interface IGroupDTO {
   level: number;
   token: string;
   is_public: boolean;
+  is_default: boolean;
   _owner: string;
   _schedule_list: Array<string>;
 }

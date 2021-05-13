@@ -1,5 +1,6 @@
 interface IInterestsDTO {
-    subject_label: string;
+    _id_user: string;
+    _id_subject: string;
     level: number; 
 }
 
