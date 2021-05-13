@@ -2,7 +2,9 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
-import {interestListMock} from "../../../app/app.component"
+import {interestListMock} from "../../../app/app.component";
+import { UserService } from "src/app/services/user.service";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
     objective: [[], Validators.required],
   });
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {}
 
   ngOnInit() {}
 
@@ -41,12 +43,17 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
     console.log("loginForm", this.loginForm.value);
   }
-
+  
   onSubmitRegister( ) {
     this.registerForm.patchValue({
       objective: this.interestList[0],
     });
-    console.log("registerForm", this.registerForm.value);
+    
+    if ( this.registerForm.value.password == this.registerForm.value.confirm_password ) {
+      this.userService.createUser(this.registerForm.value).then(data => console.log(data))
+    } else {
+      console.log("senha errada")
+    }
   }
 
   listenInput(interestListEvent) {

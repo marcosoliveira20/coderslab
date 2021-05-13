@@ -24,6 +24,8 @@ import { HomeRoadmapComponent } from './views/roadmap/home-roadmap/home-roadmap.
 import { NewRoadmapComponent } from './views/roadmap/new-roadmap/new-roadmap.component';
 import { ListRoadmapComponent } from './views/roadmap/list-roadmap/list-roadmap.component';
 import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-roadmap.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -52,9 +54,10 @@ import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-ro
     ReactiveFormsModule,
     FormsModule,
     AutocompleteLibModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
