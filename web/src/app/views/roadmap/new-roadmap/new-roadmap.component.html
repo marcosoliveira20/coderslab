@@ -1,1 +1,76 @@
-<p>new-roadmap works!</p>
+<header>
+  <h1> {{isNewCustomRoadmap ? "Novo Roadmap" : "Roadmap"}} </h1>
+</header>
+
+<main>
+
+  <!-- CONTENT SELECT NEW ROADMAP -->
+  <div class="content-select-new-roadmap" *ngIf="!isNewCustomRoadmap">
+    <h1>batata</h1>
+  </div>
+
+  <!-- CONTENT NEW CUSTOM ROADMAP -->
+  <form class="content-new-custom-roadmap" *ngIf="isNewCustomRoadmap" [formGroup]="roadmapForm">
+    <section>
+      <div class="row row-switch">
+        <h4>Informações gerais</h4>
+      </div>
+
+      <div class="row">
+        <label>nome</label>
+        <input type="text" placeholder="Nome do roadmap" formControlName="name" />
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>objetivo</label>
+          <select name="objective" placeholder="Busque por um assunto" formControlName="objective">
+            <option *ngFor="let objective of interestList">{{objective.name}}</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label>nível</label>
+          <select name="level" formControlName="level">
+            <option value="0" selected>Iniciante</option>
+            <option value="1">Intermediário</option>
+            <option value="2">Avançado</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <div class="header-task-creation-list">
+      <h4>Crie uma nova tarefa</h4>
+      <button (click)="addNewTaskObject()">
+        <img src="assets/icons/plus.svg">
+      </button>
+    </div>
+
+    <section *ngFor="let task of taskList; index as i">
+      <div class="row">
+        <div class="col">
+          <label>título</label>
+          <input name="title" placeholder="Nome da sua task" (input)="handleTaskChange($event, i)">
+        </div>
+        <div class="col">
+          <label>data de conclusão</label>
+          <input type="date" name="end_date" placeholder="dd/mm/yyy" (input)="handleTaskChange($event, i)">
+        </div>
+        <div class="col">
+          <label>link</label>
+          <input name="link" placeholder="Adicione uma referência" (input)="handleTaskChange($event, i)">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>descrição</label>
+          <input name="description" placeholder="Fale um pouco sobre sua task" (input)="handleTaskChange($event, i)">
+        </div>
+      </div>
+    </section>
+  </form>
+
+</main>
+

@@ -1,0 +1,71 @@
+@import "../../../../sass/abstracts/variables";
+
+header {
+  padding: 48px 32px;
+  align-items: center;
+  display: block;
+}
+
+header h1 {
+  font-weight: 100;
+  color: $cdl_darkBlue;
+}
+
+// Bootstrap override
+.row {
+  margin: 0 0 40px;
+  column-gap: 40px;
+  .col {
+    padding: 0;
+  }
+}
+
+/*
+  CONTENT SELECT NEW ROADMAP
+*/
+.content-select-new-roadmap {
+}
+
+/*
+  CONTENT NEW CUSTOM ROADMAP
+*/
+.content-new-custom-roadmap {
+  label {
+    display: block;
+    font-weight: 400;
+    color: $cdl_pink;
+  }
+
+  input, select {
+    width: 100%;
+    font-weight: 300;
+    border: none;
+    border-bottom: 1px solid $cdl_darkBlue;
+    display: block;
+    font-size: 25px;
+    background: transparent;
+  }
+
+  > section {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding: 45px 45px 0;
+    background: #ffffff;
+    box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
+    border-radius: 15px;
+    margin-bottom: 43px;
+  }
+}
+
+.header-task-creation-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 13px;
+
+  button {
+    border: 1px solid $cdl_pink;
+    border-radius: 10px;
+    padding: 4px;
+  }
+}
