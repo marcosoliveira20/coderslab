@@ -1,4 +1,3 @@
-import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,13 +13,15 @@ export class CardComponent implements OnInit {
   @Input() disableButton:boolean;
 
   constructor(private router: Router) {
-    this.type = this.type !== 'minimal' && this.type !== 'member' && 'default';
+    this.type = this.type !== 'minimal'
+      && this.type !== 'member'
+      && this.type !== 'roadmap'
+      && 'default';
   }
 
   ngOnInit() {
   }
 
-  handleRedirect(token) {
-    this.router.navigate([`/groups`, token])
-  }
+  handleRedirectToGroup = (groupToken) => this.router.navigate([`/groups`, groupToken])
+  handleRedirectToRoadmap = (roadmapId) => this.router.navigate([`/roadmap`, roadmapId])
 }

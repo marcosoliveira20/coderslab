@@ -1,1 +1,14 @@
-<p>list-roadmap works!</p>
+<div class="cdl-container">
+  <header>
+    <h1>Roadmap</h1>
+    <nav>
+      <!-- TODO search bar uau e etc -->
+    </nav>
+  </header>
+
+  <ul class="card-list">
+    <li *ngFor="let roadmap of roadmap_list">
+      <app-card [data]="roadmap" [type]="'roadmap'"></app-card>
+    </li>
+  </ul>
+</div>

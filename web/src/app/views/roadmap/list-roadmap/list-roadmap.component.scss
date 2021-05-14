@@ -1,0 +1,12 @@
+@import "../../../../sass/abstracts/variables";
+
+header {
+  padding: 48px 32px;
+  align-items: center;
+  display: block;
+}
+
+header h1 {
+  font-weight: 100;
+  color: $cdl_darkBlue;
+}
