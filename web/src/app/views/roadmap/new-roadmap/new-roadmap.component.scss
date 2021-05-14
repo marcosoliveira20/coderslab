@@ -30,8 +30,48 @@ header h1 {
   CONTENT SELECT NEW ROADMAP
 */
 .content-select-new-roadmap {
+  > p {
+    color: $cdl_grey;
+    max-width: 900px;
+    margin-bottom: 115px;
+  }
+
+  > div {
+    display: flex;
+    padding-left: 47px;
+    gap: 82px;
+    flex-wrap: wrap;
+  }
 }
 
+.div-new-roadmap-option {
+  background: $cdl_white;
+  box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+  padding: 24px;
+  width: 400px;
+  height: auto;
+  display: grid;
+  align-content: space-between;
+
+  > div h4 {
+    color: $cdl_darkBlue;
+  }
+
+  > div p {
+    color: $cdl_grey;
+  }
+
+  > button {
+    color: $cdl_pink;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $cdl_pink;
+    justify-self: right;
+    width: fit-content;
+    margin-top: 100px;
+  }
+}
 /*
   CONTENT NEW CUSTOM ROADMAP
 */
@@ -42,7 +82,8 @@ header h1 {
     color: $cdl_pink;
   }
 
-  input, select {
+  input,
+  select {
     width: 100%;
     font-weight: 300;
     border: none;
