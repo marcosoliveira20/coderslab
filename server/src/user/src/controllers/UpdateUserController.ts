@@ -14,6 +14,7 @@ class UpdateUserController {
       discord_id,
       github_id,
       password,
+      interestList
     } = request.body;
 
     const user = new User();
