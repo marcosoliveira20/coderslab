@@ -6,6 +6,7 @@ interface IUserDTO {
   discord_id: string;
   github_id: string;
   password: string;
+  token?: string;
 }
 
 export { IUserDTO };

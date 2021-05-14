@@ -13,6 +13,7 @@ class CreateUserController {
       discord_id,
       github_id,
       password,
+      interestList
     } = request.body;
 
     const user = new User();
@@ -27,7 +28,7 @@ class CreateUserController {
   
       const passwordHash = await hash(password, 8);
 
-      await user.create({
+      let data = await user.create({
         username,
         name,
         last_name,
@@ -37,7 +38,9 @@ class CreateUserController {
         password: passwordHash,
       });
 
-      return response.status(201).send();
+      data.token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkJydW5vIiwiaWF0IjoxNTE2MjM5MDIyfQ.YDN0wJHLzyzmqdwycv4wgh-RMBwQR4C_0uehWmo_77ZrAB46YnPYmzJJ2Lb36GyyDXDwRP9Bt759hcVmUiGWEg";
+
+      return response.status(201).send(data);
     } catch(err) {
       console.log(err.message);
       return response.status(400).send();
