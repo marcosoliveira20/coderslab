@@ -4,6 +4,7 @@ interface IRoadmapDTO {
   objective: String,
   content_list: String,
   is_done?: Boolean,
+  level: String,
 }
 
 export { IRoadmapDTO };
