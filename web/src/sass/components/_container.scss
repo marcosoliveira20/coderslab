@@ -1,0 +1,15 @@
+.cdl-container-cards{
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 23vh 77vh;
+}
+
+.cdl-container{
+  padding: 0 172px;
+}
+
+@media (max-width: 1062px) {
+  .cdl-container{
+    padding: 32px;
+  }
+}

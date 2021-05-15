@@ -1,0 +1,28 @@
+.tabs{
+  display: flex;
+  padding: -2px;
+  border-bottom: 0.5px solid $cdl_grey;
+
+  li button {
+    background-color: transparent;
+    color: $cdl_darkGrey;
+
+    height: 100%;
+
+    padding: 15px 15px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0.15em;
+    border: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  li button:hover {
+    color: $cdl_pink;
+    border-bottom: 3px solid $cdl_pink;
+  }
+}

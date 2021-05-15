@@ -12,11 +12,30 @@
 
   height: auto ;
   width: 270px ;
-
 }
 
 .button-default:hover{
   color: white;
   background-color: $cdl_pink;
   transition-delay: 50ms;
+}
+
+.button-square{
+  background: transparent;
+  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  margin-top: 24px;
+}
+
+.button-dark{
+  color: $cdl_yellow;
+  background-color: $cdl_darkBlue;
+  border: solid 2px $cdl_yellow;
+}
+
+.button-ligth{
+  color: $cdl_yellow;
+  background-color: $cdl_darkBlue;
+  border: solid 2px $cdl_yellow;
 }
