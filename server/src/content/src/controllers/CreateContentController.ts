@@ -19,8 +19,6 @@ class CreateContentController {
 
     const contentAlreadyExists = findByTitle && findByTitle._roadmap_id ===  _roadmap_id ? true : false
 
-    console.log(findByTitle)
-
     if(!contentAlreadyExists) {
       try {
         const data = await content.create({

@@ -8,29 +8,25 @@ class Roadmap implements IRoadmapRepository {
   createDefault({
     name,
     objective,
-    content_list,
     level
-  }: IRoadmapDTO): object {
+  }: IRoadmapDTO): Promise<IRoadmapDTO> {
     const roadmap = RoadmapSchema.create({
       name,
       objective,
-      content_list,
       level,
     });
 
     return roadmap;
   }
 
-  createCustomized({
+  createCustom({
     name,
     objective,
-    content_list,
     level
-  }: IRoadmapDTO): object {
+  }: IRoadmapDTO): Promise<IRoadmapDTO> {
     const roadmap = RoadmapSchema.create({
       name,
       objective,
-      content_list,
       is_default: false,
       level,
     });
@@ -132,7 +128,7 @@ class Roadmap implements IRoadmapRepository {
     return roadmap;
   }
 
-  delete(_id: string): object {
+  delete(_id: String): object {
     const roadmap = RoadmapSchema.findByIdAndDelete(_id);
 
     return roadmap;
