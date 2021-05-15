@@ -4,47 +4,47 @@ servers:
   - description: Confirmar
     url: https://virtserver.swaggerhub.com/AlexsandroFGValencio/roadmap/1.0.0
 info:
-  description: Microsserviço para criação de conteúdo
+  description: Microsserviço para criação de desafio
   version: "1.0.0"
   title: Contents
   contact:
     email: alexsandrovalencio@gmail.com
 tags:
-  - name: content
-    description: Este microsserviço será utilizado para a criação de conteúdo
+  - name: challenge
+    description: Este microsserviço será utilizado para a criação de desafio
 paths:
   /content/create:
     post:
       tags:
-        - content
-      summary: Criação de conteúdo
+        - challenge
+      summary: Criação de desafio
       operationId: AddContent
-      description: Adiciona um conteúdo
+      description: Adiciona um desafio
       responses:
         '201':
           description: 'Created'
         '400':
           description: 'Bad request'
         '409':
-          description: 'Content already exists'
+          description: 'Challenge already exists'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddContent'
-        description: Adiciona um roadmap default
+              $ref: '#/components/schemas/AddChallenge'
+        description: Adiciona um desafio
   /content/update/done/{id}:
     put:
       tags:
-        - content
-      summary: Transforma o conteúdo em progresso em feito
-      operationId: TurnInProgressContentIntoDoneContent
-      description: Transforma o conteúdo em progresso em feito
+        - challenge
+      summary: Transforma o desafio em progresso em feito
+      operationId: TurnInProgressChallengeIntoDoneChallenge
+      description: Transforma o desafio em progresso em feito
       parameters:
         - name: id
           in: path
           required: true
-          description: ID do conteúdo gerado pelo MongoDB
+          description: ID do desafio gerado pelo MongoDB
           schema:
             type: string
             format: ObjectId
@@ -59,15 +59,15 @@ paths:
   /content/update/inprogress/{id}:
     put:
       tags:
-        - content
-      summary: Transforma o conteúdo em "Feito" em "Em progresso"
-      operationId: TurnDoneContentIntoInProgressContent
-      description: Transforma o conteúdo em "Feito" em "Em progresso"
+        - challenge
+      summary: Transforma o desafio em "Feito" em "Em progresso"
+      operationId: TurnDoneChallengeIntoInProgressChallenge
+      description: Transforma o desafio em "Feito" em "Em progresso"
       parameters:
         - name: id
           in: path
           required: true
-          description: ID do conteúdo gerado pelo MongoDB
+          description: ID do desafio gerado pelo MongoDB
           schema:
             type: string
             format: ObjectId
@@ -78,19 +78,19 @@ paths:
         '400':
           description: 'Bad request'
         '404':
-          description: 'Roadmap not found'
+          description: 'Challenge not found'
   /content/update/title/{id}:
     put:
       tags:
-        - content
-      summary: Atualiza o título do conteúdo
-      operationId: UpdateRoadmapTitle
-      description: Atualiza o título do roadmap
+        - challenge
+      summary: Atualiza o título do desafio
+      operationId: UpdateChallengeTitle
+      description: Atualiza o título do desafio
       parameters:
         - name: id
           in: path
           required: true
-          description: ID do roadmap gerado pelo MongoDB
+          description: ID do desafio gerado pelo MongoDB
           schema:
             type: string
             format: ObjectId
@@ -106,12 +106,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRoadmapTitle'
+              $ref: '#/components/schemas/UpdateChallengeTitle'
         description: Atualiza o nome do roadmap
   /content/update/description/{id}:
     put:
       tags:
-        - content
+        - challenge
       summary: Atualiza a descrição do conteúdo
       operationId: UpdateContentDescription
       description: Atualiza o objetivo do conteúdo
@@ -135,12 +135,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateContentDescription'
+              $ref: '#/components/schemas/UpdateChallengeDescription'
         description: Atualiza a descrição do conteúdo
   /content/update/deadline/{id}:
     put:
       tags:
-        - content
+        - challenge
       summary: Atualiza o prazo de término do conteúdo
       operationId: UpdateContentDeadline
       description: Atualiza o prazo de término do conteúdo
@@ -164,12 +164,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateContentDeadline'
+              $ref: '#/components/schemas/UpdateChallengeDeadline'
         description: Atualiza a descrição do conteúdo
   /content/update/reference/{id}:
     put:
       tags:
-        - content
+        - challenge
       summary: Atualiza a referencia do conteúdo
       operationId: UpdateContentReference
       description: Atualiza a referencia do conteúdo
@@ -193,12 +193,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateContentReference'
+              $ref: '#/components/schemas/UpdateChallengeReference'
         description: Atualiza a descrição do conteúdo
   /content/read/all:
     get:
       tags:
-        - content
+        - challenge
       summary: Lista todos os conteúdos criados
       operationId: ListAllContent
       description: Lista todos os conteúdos criados
@@ -210,7 +210,7 @@ paths:
   /content/read/all/{id}:
     get:
       tags:
-        - content
+        - challenge
       summary: Apresenta o conteúdo que possui o ID informado
       operationId: ReadContentById
       description: Apresenta o conteúdo que possui o ID informado
