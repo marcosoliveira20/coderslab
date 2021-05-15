@@ -60,7 +60,7 @@ class User implements IUsersRepository {
   }
 
   delete(_id : string) : void {
-    UserSchema.deleteOne({ _id });
+    return UserSchema.deleteOne({ _id });
   }
 }
 

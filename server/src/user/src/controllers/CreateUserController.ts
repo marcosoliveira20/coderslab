@@ -47,27 +47,22 @@ class CreateUserController {
         return response.status(201).send(data);
       }
 
-      // try {
-        let teste;
-        interest_list.map(async interest => {
-          interest._id_user = data._id;
-          teste = await api.interests.post("/interest/create", interest);
-          console.log("\nAqui ---------> ", typeof(teste.status));
-          
-          if(teste.status != 201) {
-            console.log("\n\nMDSSSSSSSS -----> Entrwi no if");
-            return response.status(500).send();
-          }
-        });
-      // } catch(err) {
-      //   await user.delete(data._id);
-      //   return response.status(500).send();
-      // }
+      try {
+        for(let i = 0; i < interest_list.length; i++) {
+          interest_list[i]._id_user = data._id;
+          await api.interests.post("/interest/create", interest_list[i]);
+        }
+      } catch(err) {
+        await api.interests.delete(`/interest/delete/byUserId/${data._id}`);
+        await api.user.delete(`/user/delete/${data._id}`);
+        return response.status(err.response.status).send();
+      }
+      
+      return response.status(201).send(data);
 
-      return response.status(200).send(data);
     } catch(err) {
       console.log(err.message);
-      return response.status(400).send();
+      return response.status(409).send();
     }
   }
 }

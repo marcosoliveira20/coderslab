@@ -42,6 +42,10 @@ class Interests implements IInterestsRepository {
     delete(_id: string): void {
         InterestsSchema.deleteOne({ _id });
     }
+
+    deleteByUserId(_id_user: string): void {
+        return InterestsSchema.deleteMany({ _id_user });
+    }
 }
 
 export { Interests };

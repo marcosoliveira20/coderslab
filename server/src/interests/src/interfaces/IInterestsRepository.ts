@@ -7,6 +7,7 @@ interface IInterestsRepository {
   readAll() : Promise<Array<IInterestsDTO>>;
   update(_id:string, data: IInterestsDTO) : Promise<IInterestsDTO>;
   delete(_id: string) : void;
+  deleteByUserId(_id_user: string) : void;
   
 }
 
