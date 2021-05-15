@@ -8,6 +8,7 @@ interface IUserDTO {
   github_id: string;
   password: string;
   token?: string;
+  interest_list?: Array<object>;
 }
 
 export { IUserDTO };
