@@ -1,7 +1,7 @@
 import { IContentSchemaDTO } from "./IContentSchemaDTO";
 
 interface IContentRepository {
-  create({ title, description, reference, challenge, deadline, is_done }: IContentSchemaDTO): object;
+  create({ title, description, reference, challenge, deadline, is_done, _roadmap_id }: IContentSchemaDTO): object;
   turnContentDone(_id: String): object
   turnContentNotDone(_id: String): object
   updateTitle(_id: String, title: String): object

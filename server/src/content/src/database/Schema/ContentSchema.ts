@@ -7,6 +7,7 @@ const ContentSchema = new Schema({
   reference: { type: String, required: true },
   is_done: { type: Boolean, required: false, default: false },
   challenge: { type: String, required: true },
+  _roadmap_id: { type: String, required: false}
 }, {
   timestamps: true,
 });

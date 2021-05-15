@@ -10,6 +10,7 @@ class CreateContentController {
       deadline,
       reference,
       challenge,
+      _roadmap_id,
     } = request.body;
 
     const content = new Content();
@@ -23,7 +24,8 @@ class CreateContentController {
           description,
           deadline,
           reference,
-          challenge
+          challenge,
+          _roadmap_id
         });
 
         return response.status(201).send(data);
