@@ -1,0 +1,27 @@
+<div>
+  <div class="">
+    <input
+      type="text"
+      placeholder="{{placeholder}}"
+      class="{{ theme }}"
+      (input)="filterList($event)"
+    />
+    <div>
+      <ul class="interest-list-dropdown">
+        <li *ngFor="let item of interestListFilter">
+          <button type="button" class="{{ item.name }}" (click)="addInterest($event)">
+            {{ item.name }}
+          </button>
+        </li>
+      </ul>
+      <div id="interest-list">
+        <p class="interest-{{theme}}" *ngFor="let item of interestList">
+          {{ item.name }}
+          <button  type="button" class="{{ item.name }}" (click)="removeInterest($event)">
+            x
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+@import "../../../sass/abstracts/variables";
+@import "../../../sass/components/scrollbar";
+@import "../../../sass/base/typography";
+
+::placeholder {
+  color: #fff;
+  font-weight: $font-weight-light;
+  letter-spacing: 3px;
+}
+
+.content-frame {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+// Base
+.form-group-base {
+  padding: 35px 40px 35px;
+  background: $cdl_blue;
+  border-radius: 25px;
+  height: fit-content;
+}
+
+.bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -100;
+  background: $cdl_darkBlue;
+}
+
+.form-group-base {
+  input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-weight: $font-weight-light;
+    letter-spacing: 3px;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  input:last-child {
+    margin-bottom: 0;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 5px;
+    background: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+// LOGIN
+.section-login {
+  width: 100%;
+  padding: 25%;
+
+  .col {
+    padding: 0;
+  }
+}
+
+.btn-login-primary {
+  border: 1px solid #fff;
+  margin-bottom: 28px;
+  color: #fff;
+  font-weight: $font-weight-light;
+  letter-spacing: 3px;
+  font-size: 20px;
+  height: 56px;
+}
+
+.btn-login-secondary {
+  height: fit-content;
+  border: 0px;
+  font-weight: $font-weight-light;
+  letter-spacing: 3px;
+  font-size: 15px;
+}
+
+// REGISTER MODE
+.section-register {
+  width: 50%;
+  display: block;
+
+  .form-group-base {
+    margin-bottom: 25px;
+  }
+
+  .row {
+    margin-bottom: 30px;
+  }
+
+  button {
+    width: 100%;
+    border: 0px;
+  }
+}
+
+.btn-register-primary {
+  background: $cdl_lightBlue;
+  color: $cdl_darkBlue;
+  height: 56px;
+  border-radius: 5px;
+  margin: 28px 0;
+  height: 56px;
+}
+
+.btn-register-secondary {
+  background: none;
+  color: #fff;
+  height: fit-content;
+}
+
+.section-register > div {
+  height: 60vh;
+  overflow-y: scroll;
+  padding-right: 28px;
+}
+
+// BACKGROUND
+.bg img {
+  position: fixed;
+  max-width: 50%;
+}
+
+.img-blob-left,
+.img-blob-right {
+  z-index: -99;
+}
+.img-blob-left {
+  bottom: 0;
+  left: 0;
+}
+.img-blob-right {
+  top: 0;
+  right: 0;
+}
+
+#coderslab-icon,
+#poweredby-icon {
+  z-index: -98;
+}
+#coderslab-icon {
+  top: 50px;
+  left: 50px;
+}
+#poweredby-icon {
+  bottom: 50px;
+  right: 50px;
+}
+
+@media (max-width: 768px) {
+  form > div {
+    height: 100%;
+    margin-top: 100px;
+    padding-right: 15px;
+  }
+
+  .form-group-base {
+    margin-bottom: 15px;
+  }
+  .form-group-base input {
+    font-size: 1em;
+  }
+
+  .section-login {
+    padding: 0;
+  }
+  .section-register {
+    height: calc(100vh - 250px);
+    align-self: baseline;
+  }
+
+  .section-login,
+  .section-register {
+    width: 100%;
+  }
+
+  .img-blob-left,
+  .img-blob-right {
+    display: none;
+  }
+  #coderslab-icon,
+  #poweredby-icon {
+    height: 60px;
+    min-height: 60px;
+  }
+  #coderslab-icon {
+    top: 10px;
+    right: auto;
+    bottom: auto;
+    left: 15px;
+  }
+  #poweredby-icon {
+    top: 10px;
+    right: 15px;
+    bottom: auto;
+    left: auto;
+  }
+}

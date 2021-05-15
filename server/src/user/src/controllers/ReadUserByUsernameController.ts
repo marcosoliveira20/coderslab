@@ -4,20 +4,21 @@ import { User } from "../model/User";
 
 class ReadUserByUsernameController {
   async handle(request: Request, response: Response) {
-    const {
-      username
-    } = request.params;
+    const { username } = request.params;
 
-    const readUser = new User();
+    const user = new User();
 
     try {
-      const user = readUser.readByUsername({
-        username
-      });
+      const data = await user.readByUsername(username);
 
-      return response.status(user.status).json({message: user.message, user: user.data});
+      if(!data) {
+        return response.status(404).send();
+      }
+
+      return response.status(200).send(data);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send();
     }
   }
 }

@@ -1,0 +1,109 @@
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/card-list";
+
+main{
+  height: 100vh;
+  width: 100vw;
+  background-color: $cdl_darkBlue;
+}
+
+input,
+select,
+div > button {
+  width: 100%;
+  height: 42px;
+  background-color: $cdl_darkBlue;
+  color: $cdl_yellow;
+  margin-top: 24px;
+
+  border: solid 2px $cdl_yellow;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+input,select{
+  border-radius: 50px;
+}
+
+div > button{
+  border-radius: 10px;
+}
+
+
+a,
+button {
+  border: none;
+}
+
+input,
+select {
+  padding-left: 20px;
+}
+
+input::placeholder {
+  color: $cdl_yellow;
+}
+
+.body {
+  background-color: $cdl_darkBlue;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+
+  h1 {
+
+    color: $cdl_white;
+
+    span {
+      display: block;
+    }
+  }
+}
+
+.button-list {
+  list-style: none;
+  position: fixed;
+  right: 28px;
+  bottom: 37px;
+  z-index: 2;
+
+  li {
+    margin: 13px;
+  }
+
+  button {
+    background-color: $cdl_pink;
+    height: 80px;
+    width: 80px;
+    border-radius: 10em;
+  }
+}
+
+.card-list {
+  margin-top: 16px;
+}
+
+.center{
+  text-align: center;
+  margin-top: 19px;
+  margin-bottom: 25px;
+}
+
+#logo {
+  top: 35px;
+  left: 34px;
+  position: absolute;
+  background-color: $cdl_darkBlue;
+}
+
+#order-alphabetic {
+  text-align: left;
+  padding-left: 20px;
+  width: 103px;
+  height: 43px;
+  border-radius: 50px;
+}

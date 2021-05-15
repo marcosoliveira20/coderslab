@@ -1,0 +1,68 @@
+<div class="mainPage">
+  <div class="header">
+    <div>
+      <h1>{{ group.name }}</h1>
+      <div>
+        <button>Sair do grupo</button>
+      </div>
+    </div>
+    <h2>Lógica de Programação</h2>
+    <div class="tag_list" *ngIf="group.category">
+      <div>back end</div>
+      <div>dev web</div>
+    </div>
+  </div>
+
+  <section>
+    <h4>Reuniões</h4>
+    <ul class="cdl_card_group">
+      <li *ngFor="let date of group.schedule_list">
+        <app-card
+          (click)="modalShowController = true; modalData = date"
+          [type]="'minimal'"
+          [data]="date.datetime"
+        ></app-card>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h4>Integrantes</h4>
+    <ul class="member_list">
+      <li class="member_card" *ngFor="let user of group.user_list">
+        <app-card
+        [type]="'member'"
+        [data]="user"
+        ></app-card>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<!-- MODAL -->
+<app-modal
+  *ngIf="modalShowController"
+  [showController]="modalShowController"
+  (close)="modalShowController = false"
+>
+  <div class="modal_header">
+    <div>
+      <p>data:</p>
+      <p>{{ modalData.datetime | date: "dd MMM yyyy" }}</p>
+    </div>
+    <div>
+      <p>horário:</p>
+      <p>{{ modalData.datetime | date: "hh:mm" }}</p>
+    </div>
+  </div>
+
+  <div class="modal_body">
+    <p>
+      {{ modalData.description }}
+    </p>
+  </div>
+
+  <div class="modal_footer">
+    <button (click)="openScheduleLink()">ir para a reunião</button>
+  </div>
+</app-modal>

@@ -1,0 +1,99 @@
+<main >
+  <div class="body">
+    <a routerLink="./../.."
+    ><button id="logo">
+      <img
+        src="../../../../assets/icons/vulcano_logo.svg"
+        alt=""
+        srcset=""
+      /></button
+  ></a>
+
+  <div class="container">
+    <div class="row">
+      <div class="col center">
+        <img
+          class=""
+          src="../../../../assets/icons/slogan.svg"
+          alt="May the community be with you"
+          srcset=""
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-11">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Pesquisar por um assunto"
+        />
+      </div>
+      <div class="col-1">
+        <button (click)="setShowInput()"><img src="../../../../assets/icons/filter.svg" /></button>
+      </div>
+    </div>
+    <div class="row" *ngIf="showInput">
+      <div class="col-3">
+        <select id="objective" name="objective">
+          <option value="" disabled>Objetivo</option>
+          <option
+            *ngFor="let objective of objective_list"
+            value="{{ objective.name }}"
+          >
+            {{ objective.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-3">
+        <select id="category" name="category">
+          <option value="" disabled>Categoria</option>
+          <option
+            *ngFor="let category of category_list"
+            value="{{ category.name }}"
+          >
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-3">
+        <input type="datetime" placeholder="dd/mm/yyyy" name="date" id="date" />
+      </div>
+
+      <div class="col-2">
+        <button id="order-alphabetic">A - Z</button>
+      </div>
+      <div class="col-1">
+        <button>
+          <img src="../../../../assets/icons/magnifying-glass.svg" srcset="" />
+        </button>
+      </div>
+    </div>
+    <ul class="card-list">
+      <li *ngFor="let group of user.group_list">
+        <app-card [data]="group"></app-card>
+      </li>
+    </ul>
+  </div>
+  <ul class="button-list">
+    <li>
+      <a routerLink="./"
+        ><button>
+          <img
+            src="../../../../assets/icons/key.svg"
+          /></button
+      ></a>
+    </li>
+    <li>
+      <a routerLink="./.."
+        ><button>
+          <img
+            src="../../../../assets/icons/earth.svg"
+          /></button
+      ></a>
+    </li>
+  </ul>
+  </div>
+</main>

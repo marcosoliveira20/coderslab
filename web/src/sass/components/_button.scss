@@ -1,0 +1,18 @@
+.button-default{
+  border: 1px solid $cdl_pink;
+  color: $cdl_pink;
+
+  background-color: rgb(231 233 240);
+  border-radius: 5px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+}
+
+.button-default:hover{
+  color: white;
+  background-color: $cdl_pink;
+  transition-delay: 50ms;
+}

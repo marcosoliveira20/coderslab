@@ -1,13 +1,13 @@
-import { IAllUserDTO, IIdUserDTO, IUsernameUserDTO } from "./IUserDTO";
+import { IUserDTO } from "./IUserDTO";
 
 interface IUsersRepository {
-  create(data: IAllUserDTO): object;
-  readById(data: IIdUserDTO) : object;
-  readByUsername(data: IUsernameUserDTO) : object;
-  readAll() : object;
-  update(data: IAllUserDTO) : object;
-  delete(data: IIdUserDTO) : object;
-  
+  create(data: IUserDTO): Promise<IUserDTO>;
+  readById(_id: string) : Promise<IUserDTO>;
+  readByUsername(username: string) : Promise<IUserDTO>;
+  readByEmail(email: string) : Promise<IUserDTO>;
+  readAll() : Promise<Array<IUserDTO>>;
+  update(_id: string, data: IUserDTO) : Promise<IUserDTO>;
+  delete(_id: string) : void;
 }
 
 export { IUsersRepository };

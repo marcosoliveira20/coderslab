@@ -1,19 +1,13 @@
-interface IAllGroupDTO {
-  id: string;
+interface IGroupDTO {
   name: string;
-  category: object;
-  subject: object;
+  category: Array<String>;
+  subject_label: string;
+  level: number;
+  token: string;
   is_public: boolean;
-  user_list: object;
-  schedule_list: object;
+  is_default: boolean;
+  _owner: string;
+  _schedule_list: Array<string>;
 }
 
-interface IIdGroupDTO {
-  id: string;
-}
-
-interface INameGroupDTO {
-  name: string;
-}
-
-export { IAllGroupDTO, IIdGroupDTO, INameGroupDTO };
+export { IGroupDTO };

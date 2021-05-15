@@ -1,0 +1,123 @@
+@import "../../../../sass/abstracts/variables";
+
+::placeholder {
+  color: $cdl_white;
+}
+.default {
+  width: 100%;
+  height: 35px;
+  border: none;
+  background: none;
+  border-bottom: 1px solid $cdl_white;
+  color: $cdl_white;
+  font-size: 25px;
+  margin-bottom: 0px;
+  font-weight: 100;
+}
+
+.custom {
+  width: 100%;
+  height: 35px;
+  border: none;
+  background: none;
+  border-bottom: 1px solid $cdl_darkBlue !important;
+  color: $cdl_grey;
+  font-size: 25px;
+  margin-bottom: 0px;
+  font-weight: 100;
+}
+
+.custom::placeholder {
+  color: $cdl_grey;
+}
+
+input {
+  width: 100%;
+  height: 35px;
+  border: none;
+  background: none;
+  border-bottom: 1px solid $cdl_white;
+  color: $cdl_white;
+  font-size: 25px;
+  margin-bottom: 35px;
+  font-weight: 100;
+}
+button {
+  width: 100%;
+  justify-content: center;
+  border-radius: 5px;
+  background: none;
+  color: $cdl_white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  margin-top: 28px;
+  border: 0px;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background-color: $cdl_white;
+  margin: 0;
+  color: black;
+  border-radius: 0;
+}
+
+.interest-custom {
+  background-color: $cdl_white;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  margin: 10px;
+  display: inline;
+  color: $cdl_pink;
+  border: solid $cdl_pink 1px;
+
+  button {
+    border-radius: 1rem;
+    border-style: none;
+    display: inline;
+    height: auto;
+    width: auto;
+    color: $cdl_pink;
+  }
+}
+
+.interest-default {
+  background-color: $cdl_pink;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  margin: 10px;
+  display: inline;
+  color: $cdl_white;
+
+  button {
+    border-radius: 1rem;
+    border-style: none;
+    display: inline;
+    background-color: $cdl_pink;
+    height: auto;
+    width: auto;
+    color: $cdl_white;
+  }
+}
+
+.interest-list-dropdown,
+.interest-list-dropdown li button,
+.interest-list-dropdown li {
+  background: rgba(255, 255, 255, 0.29);
+  backdrop-filter: blur(4px);
+}
+
+#interes-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div div ul {
+  background: none;
+}

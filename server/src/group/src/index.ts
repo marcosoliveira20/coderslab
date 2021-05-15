@@ -1,12 +1,8 @@
-import express from "express";
+import app from "./App";
 
 import { router } from "./routes";
 
-const app = express();
-app.use(express.json());
-
 app.use("/", router);
+console.log("Groups was started in port: 3000 ⚡");
 
-console.log("Groups was started in port: 4000 ⚡");
-
-app.listen(4000);
+app.listen(3000);

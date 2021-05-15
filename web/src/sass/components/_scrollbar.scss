@@ -1,0 +1,20 @@
+// This file contains all styles related to the scrollbar
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #24276D;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFC42E;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B88B18;
+}

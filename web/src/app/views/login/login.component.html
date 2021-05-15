@@ -1,0 +1,140 @@
+<!-- BACKGROUND -->
+<div class="bg">
+  <img src="assets/icons/text_logo.svg" alt="" id="coderslab-icon" />
+  <img src="assets/icons/poweredby.svg" alt="" id="poweredby-icon" />
+
+  <div class="div-bg-login" *ngIf="mode === 'login'">
+    <img
+      class="img-blob-left"
+      src="assets/background/left_blob_stage1.svg"
+      alt=""
+    />
+    <img
+      class="img-blob-right"
+      src="assets/background/right_blob_stage1.svg"
+      alt=""
+    />
+  </div>
+
+  <div class="div-bg-register" *ngIf="mode === 'register'">
+    <img
+      class="img-blob-right"
+      src="assets/background/right_blob_stage3.svg"
+      alt=""
+    />
+  </div>
+</div>
+
+<div class="container h-100 content-frame">
+  <!-- LOGIN -->
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmitLogin()"
+    class="section-login"
+    *ngIf="mode === 'login'"
+  >
+
+    <div class="form-group-base">
+      <input
+        type="text"
+        placeholder="Nome de Usuário"
+        formControlName="username"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Senha"
+        formControlName="password"
+        required
+      />
+
+      <button
+        type="submit"
+        class="btn-login-primary"
+        (click)="handleLoginMode('login')"
+        routerLink="/"
+      >
+        Login
+      </button>
+      <div class="row">
+        <div class="col">
+          <button class="btn-login-secondary">Redefinir senha</button>
+        </div>
+        <div class="col">
+          <button class="btn-login-secondary" (click)="handleLoginMode('register')">
+            Fazer cadastro
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- REGISTER -->
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmitRegister()"
+    class="section-register"
+    *ngIf="mode === 'register'"
+  >
+    <div>
+      <div class="form-group-base">
+        <div class="row">
+          <div class="col">
+            <input type="text" placeholder="Nome" formControlName="name" />
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              placeholder="Sobrenome"
+              formControlName="lastname"
+            />
+          </div>
+        </div>
+        <input
+          type="text"
+          placeholder="Nome de usuário"
+          formControlName="username"
+        />
+        <input type="text" placeholder="E-mail" formControlName="email" />
+      </div>
+
+      <div class="form-group-base">
+        <input type="text" placeholder="Senha" formControlName="password" />
+        <input
+          type="email"
+          placeholder="Confirmar senha"
+          formControlName="confirm_password"
+        />
+      </div>
+
+      <div class="form-group-base">
+        <input
+          type="text"
+          placeholder="Discord ID"
+          formControlName="discord_id"
+        />
+        <input
+          type="email"
+          placeholder="GitHub ID"
+          formControlName="github_id"
+        />
+      </div>
+
+      <div class="form-group-base">
+        <app-input-auto-complete
+          theme="default"
+          (itemEvent)="listenInput($event)"
+          placeholder="Objetivo"
+          [interestLisInput]="interestList"
+
+          >
+      </app-input-auto-complete>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-register-primary">Cadastrar</button>
+    <button class="btn-register-secondary" (click)="handleLoginMode('login')">
+      Fazer login
+    </button>
+  </form>
+</div>

@@ -1,0 +1,326 @@
+openapi: 3.0.0
+info:
+  description: |
+    Documentation
+  version: 1.0.0
+  title: 'Coderslab - Davi'
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    name: Davi Fonseca
+    email: davi.brandao.fonseca@gmail.com
+    url: https://github.com/davibrandao18
+#  license:
+#    name: Apache 2.0
+#    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Subject
+    description: everything about subject integration for Coderslab
+  - name: Category
+    description: everything about category integration for Coderslab
+paths:
+# Subject
+  /subject/create:
+    post:
+      tags:
+        - Subject
+      summary: API
+      description: Interface de Detalhes dos Pedidos de Compras
+      operationId: subject_create
+      responses:
+        '201':
+          description: Subject created
+        '403':
+          description: Subject already exists
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject.Request'
+        required: true
+  /subject/read/byId/:{id}:
+      get:
+        summary: Retorna o subject com base em um ID.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+        tags:
+          - Subject
+        description: API para retorno do array de subjects
+        operationId: subjects_byId
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/subject_read.Response'
+          '404':
+            description: Not Found
+          '400':
+            description: Bad Request
+  /subject/read/byLabel/:{label}:
+      get:
+        summary: Retorna o subject com base em uma Label.
+        parameters:
+          - name: label
+            in: path
+            required: true
+            description: Rótulo atribuido ao subject.
+            schema:
+              type : string
+              minimum: 1
+        tags:
+          - Subject
+        description: API para retorno do array de subjects
+        operationId: subjects_byLabel
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/subject_read.Response'
+          '400':
+            description: Bad Request
+          '404':
+            description: Not Found
+  /subject/read/all:
+      get:
+        tags:
+          - Subject
+        summary: API
+        description: API para retorno do array de subjects
+        operationId: subjects_all
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/subject_all.Response'
+          '400':
+            description: Bad Request
+          '404':
+            description: Not Found
+  /subject/update:
+    put:
+      tags:
+        - Subject
+      summary: API
+      description: Interface de Detalhes dos Pedidos de Compras
+      operationId: subject_update
+      responses:
+        '204':
+          description: Subject updated
+        '400':
+          description: Bad request
+        '403':
+          description: Subject label already exists
+        '404':
+          description: Subject does not exist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject.Request'
+        required: true
+  /subject/delete/:{id}:
+    delete:
+      summary: Deleta um subject com base em seu ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Subject
+      description: Interface de Detalhes dos Pedidos de Compras
+      operationId: subject_delete
+      responses:
+        '204':
+          description: Subject deleted
+        '400':
+          description: Bad request
+        '404':
+          description: Subject does not exist
+# Category
+  /category/create:
+    post:
+      tags:
+        - Category
+      summary: API
+      description: Interface de Detalhes dos Pedidos de Compras
+      operationId: category_create
+      responses:
+        '201':
+          description: Subject created
+        '403':
+          description: Subject already exists
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject.Request'
+        required: true
+  /category/read/byId/:{id}:
+      get:
+        summary: Retorna o subject com base em um ID.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+        tags:
+          - Category
+        description: API para retorno do array de subjects
+        operationId: category_byId
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/subject_read.Response'
+          '404':
+            description: Not Found
+          '400':
+            description: Bad Request
+  /category/read/all:
+      get:
+        tags:
+          - Category
+        summary: API
+        description: API para retorno do array de subjects
+        operationId: category_all
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/subject_all.Response'
+          '400':
+            description: Bad Request
+          '404':
+            description: Not Found
+  /category/update:
+    put:
+      tags:
+        - Category
+      summary: API
+      description: Interface de Detalhes dos Pedidos de Compras
+      operationId: category_update
+      responses:
+        '204':
+          description: Subject updated
+        '400':
+          description: Bad request
+        '403':
+          description: Subject label already exists
+        '404':
+          description: Subject does not exist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject.Request'
+        required: true
+  /category/delete/:{id}:
+    delete:
+      summary: Deleta um subject com base em seu ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Category
+      description: Interface de Detalhes dos Pedidos de Compras
+      operationId: category_delete
+      responses:
+        '204':
+          description: Subject deleted
+        '400':
+          description: Bad request
+        '404':
+          description: Subject does not exist
+servers:
+# Added by API Auto Mocking Plugin
+  - url: 'https://cluster.prod.com.br/coderslab'
+    description: Link do cluster produtivo - External URL PRD
+components:
+  schemas:
+    subject.Request:
+        title: subject.Request
+        description: 'Object for subject'
+        type: object
+        properties:
+          id:
+            type: string
+            description: 'Id gerado pelo MongoDB'
+          label:
+            type: string
+            description: 'Rotúlo para o assunto Ex: NodeJs'
+          categories:
+            type: array
+            items:
+              type: string
+              description: 'Array de categorias Ex: [Web, Mobile]'
+
+    subject_all.Response:
+        title: subject_read_all.Response
+        description: 'Array for subjects'
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              description: 'Id gerado pelo MongoDB'
+            label:
+              type: string
+              description: 'Rotúlo para o assunto Ex: NodeJs'
+            categories:
+              type: array
+              items:
+                type: string
+                description: 'Array de categorias Ex: [Web, Mobile]'
+
+    subject_read.Response:
+        title: subject_read.Response
+        description: 'Object for subject'
+        type: object
+        properties:
+          id:
+            type: string
+            description: 'Id gerado pelo MongoDB'
+          label:
+            type: string
+            description: 'Rotúlo para o assunto Ex: NodeJs'
+          categories:
+            type: array
+            items:
+              type: string
+              description: 'Array de categorias Ex: [Web, Mobile]'

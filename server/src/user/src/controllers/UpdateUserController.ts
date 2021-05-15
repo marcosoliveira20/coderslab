@@ -4,8 +4,9 @@ import { User } from "../model/User";
 
 class UpdateUserController {
   async handle(request: Request, response: Response) {
+    const { id } = request.params;
+    
     const {
-      id,
       username,
       name,
       last_name,
@@ -13,15 +14,19 @@ class UpdateUserController {
       discord_id,
       github_id,
       password,
-      interst_list,
-      group_list,
+      interestList
     } = request.body;
 
-    const updateUser = new User();
+    const user = new User();
 
     try {
-      const user = updateUser.update({
-        id,
+      const findIndex = await user.readById(id);
+
+      if(!findIndex) {
+        return response.status(404).send();
+      }
+
+      const data = await user.update(id, {
         username,
         name,
         last_name,
@@ -29,13 +34,12 @@ class UpdateUserController {
         discord_id,
         github_id,
         password,
-        interst_list,
-        group_list,
       });
 
-      return response.status(user.status).json({message: user.message, user: user.data});
+      return response.status(200).send(data);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send();
     }
   }
 }

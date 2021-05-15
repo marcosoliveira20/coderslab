@@ -4,14 +4,15 @@ import { User } from "../model/User";
 
 class ReadAllUsersController {
   async handle(request: Request, response: Response) {
-    const readUsers = new User();
+    const user = new User();
 
     try {
-      const users = readUsers.readAll();
+      const data = await user.readAll();
 
-      return response.status(users.status).json({message: users.message, users: users.data});
+      return response.status(200).send(data);
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send();
     }
   }
 }

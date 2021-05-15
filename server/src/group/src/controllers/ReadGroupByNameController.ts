@@ -4,20 +4,17 @@ import { Group } from "../model/Group";
 
 class ReadGroupByNameController {
 	async handle(request: Request, response: Response) {
-		const {
-			name
-		} = request.params;
+		const { name } = request.params;
 
-		const readGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = readGroup.readByName({
-				name
-			});
+			const data = await group.readByName(name);
 
-			response.status(group.status).json({message: group.message, group: group.data});
+			response.status(200).send(data);
 		} catch(err) {
-			response.status(404);
+			console.log(err.message);
+			return response.status(400).send();
 		}
 	}
 }

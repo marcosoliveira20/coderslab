@@ -1,0 +1,96 @@
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
+@import "../../../../sass/components/card-list";
+@import "../../../../sass/components/button";
+
+h1 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 45px;
+}
+
+header > div > button {
+  width: 277px;
+}
+
+div header div button:hover {
+  color: white;
+  background-color: $cdl_pink;
+  transition-delay: 50ms;
+}
+
+section {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+header ul > li > button {
+  margin: 0px 23px;
+  background-color: rgb(231 233 240);
+  border: none;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  border-bottom: 3px solid transparent;
+}
+
+header ul > li > button:hover {
+  color: $cdl_pink;
+  margin: -1px 23px;
+  border-bottom: 3px solid $cdl_pink;
+}
+
+header {
+  border-bottom: 1px solid;
+}
+
+header > ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+
+header > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+main {
+  height: 100%;
+  margin-top: 10px;
+  display: flex;
+
+  > a > button {
+    background-color: $cdl_pink;
+
+    position: fixed;
+    bottom: 28px;
+    right: 56px;
+
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 10em;
+    z-index: 20;
+  }
+}
+
+app-card {
+  text-align: left;
+}
+
+.content {
+  overflow-y: scroll;
+}
+
+.display {
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 100vh;
+  width: 100%;
+  padding: 48px 32px;
+}

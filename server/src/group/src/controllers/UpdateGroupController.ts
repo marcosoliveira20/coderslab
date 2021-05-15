@@ -4,33 +4,53 @@ import { Group } from "../model/Group";
 
 class UpdateGroupController {
 	async handle(request: Request, response: Response) {
+		const { id, idUser } = request.params;
+
 		const {
-			id,
 			name,
 			category,
-			subject,
+			subject_label,
+			level,
+  			token,
 			is_public,
-			user_list,
-			schedule_list
+			is_default,
+			_owner,
+			_schedule_list
 		} = request.body;
 
-		const updateGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = updateGroup.update({
-				id,
+			if(level < 0 || level > 2) {
+				return response.status(406).send();
+			}
+			
+			const findIndex = await group.readById(id);
+			
+			if(!findIndex) {
+				return response.status(404).send();
+			} 
+			
+			if(findIndex._owner != idUser) {
+				return response.status(401).send();
+			}
+
+			const data = await group.update(id, {
 				name,
 				category,
-				subject,
+				subject_label,
+				level,
+  				token,
 				is_public,
-				user_list,
-				schedule_list
+				is_default,
+				_owner,
+				_schedule_list
 			});
 
-
-			response.status(group.status).json({message: group.message, group: group.data});
+			response.status(200).send(data);
 		} catch(err) {
-			response.status(404);
+			console.log(err.message);
+			return response.status(400).send();
 		}
 	}
 }

@@ -1,0 +1,36 @@
+<main>
+  <!-- PERSONAL STATUS -->
+  <div class="personal-status">
+    <div>
+      <h1>{{user.name}} {{user.lastname}}</h1>
+      <h3>{{user.level}}</h3>
+    </div>
+    <ul>
+      <li>
+        <p>Grupos</p>
+        <p>{{user.group_list.length}}</p>
+      </li>
+      <li>
+        <p>Objetivos</p>
+        <p>{{user.interest_list.length}}</p>
+      </li>
+      <li>
+        <p>Conclusões</p>
+        <p>35</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- STUDY GROUPS -->
+  <div class="study-groups">
+    <h1>Grupos de estudo</h1>
+    <ul>
+      <li *ngFor="let group of user.group_list.slice(0, 3)">
+        <app-card [data]="group"></app-card>
+      </li>
+    </ul>
+  </div>
+
+  <div class="roadmap-status"></div>
+  <div class="roadmap-details"></div>
+</main>

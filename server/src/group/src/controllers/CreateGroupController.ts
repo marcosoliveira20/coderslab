@@ -5,31 +5,47 @@ import { Group } from "../model/Group";
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
 		const {
-			id,
 			name,
 			category,
-			subject,
+			subject_label,
+			level,
+  			token,
 			is_public,
-			user_list,
-			schedule_list
+			is_default,
+			_owner,
+			_schedule_list
 		} = request.body;
 
-		const createGroup = new Group();
+		const group = new Group();
 
 		try {
-			const group = createGroup.create({
-				id,
+			if(level < 0 || level > 2) {
+				return response.status(406).send();
+			}
+
+			// deve ser apenas uma validacão interna para não repetir token
+			// const data = await group.readByToken(token);
+
+			// if(data) {
+			// 	return response.status(406).send();
+			// }
+
+			await group.create({
 				name,
 				category,
-				subject,
+				subject_label,
+				level,
+  				token,
 				is_public,
-				user_list,
-				schedule_list
+				is_default,
+				_owner,
+				_schedule_list
 			});
 
-			return response.status(group.status).send(group.message);
+			return response.status(201).send();
 		} catch(err) {
-			return response.status(403);
+			console.log(err.message);
+			return response.status(400).send();
 		}
 	}
 }

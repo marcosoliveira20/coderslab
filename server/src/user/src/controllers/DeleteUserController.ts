@@ -4,20 +4,23 @@ import { User } from "../model/User";
 
 class DeleteUserController {
   async handle(request: Request, response: Response) {
-    const {
-      id
-    } = request.params;
+    const { id } = request.params;
 
-    const deleteUser = new User();
+    const user = new User();
 
     try {
-      const user = deleteUser.delete({
-        id
-      });
+      const findIndex = await user.readById(id);
 
-      return response.status(user.status).send(user.message);
+      if(!findIndex) {
+        return response.status(404).send();
+      }
+
+      await user.delete(id);
+
+      return response.status(204).send();
     } catch (err) {
-      return response.status(404);
+      console.log(err.message);
+      return response.status(400).send();
     }
   }
 }

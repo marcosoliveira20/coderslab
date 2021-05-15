@@ -1,0 +1,100 @@
+@import "../../../sass/abstracts/variables";
+
+
+main {
+  height: 100%;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-areas:  "personal-status roadmap-details"
+                        "study-groups roadmap-details"
+                        "roadmap-status roadmap-details";
+  column-gap: 48px;
+  row-gap: 28px;
+  overflow-y: auto;
+
+  div { width: 100%; }
+}
+
+ul { list-style: none; }
+
+.custom_roadmap_icon svg { fill: green; }
+
+.personal-status {
+  grid-area: personal-status;
+  display: block;
+
+  div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    h1 { color: $cdl_darkBlue; font-weight: 300;}
+    h3 { color: $cdl_pink; font-weight: 500; }
+  }
+
+  ul {
+    padding: 25px;
+    border-radius: 15px;
+    background-color: #FFF;
+    text-align: center;
+    align-items: center;
+    list-style: none;
+    color: $cdl_darkBlue;
+    font-weight: 300;
+    display: flex;
+    width: 100%;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+
+    li {
+      width: 100%;
+    }
+
+    li p:first-child { font-size: 20px; }
+    li p:last-child { font-size: 50px; }
+
+    li:first-child {
+      border: none;
+      border-right: 1px solid $cdl_darkBlue;
+    }
+
+    li:last-child {
+      border: none;
+      border-left: 1px solid $cdl_darkBlue;
+    }
+  }
+}
+
+.study-groups {
+  grid-area: study-groups;
+  height: 100%;
+
+  h1 { font-size: 28px; font-weight: 500; color: $cdl_darkBlue; }
+
+  >ul {
+    display: flex;
+    column-gap: 40px;
+    height: calc(100% - 38px);
+
+    >li {
+      width: 100%;
+    }
+  }
+}
+
+
+
+
+
+.roadmap-status {
+  grid-area: roadmap-status;
+  background: $cdl_darkGrey;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.roadmap-details {
+  grid-area: roadmap-details;
+  background: green;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+}
