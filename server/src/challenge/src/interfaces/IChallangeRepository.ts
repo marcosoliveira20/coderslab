@@ -1,6 +1,6 @@
 import { IChallengeDTO } from "./IChallengeDTO";
 
-interface IChallangeRepository {
+interface IchallengeRepository {
   create({ title, description, is_done }: IChallengeDTO): object;
   turnChallengeDone(_id: String): object
   turnChallengeNotDone(_id: String): object
@@ -16,4 +16,4 @@ interface IChallangeRepository {
   delete(_id: string): object;
 }
 
-export { IChallangeRepository };
+export { IchallengeRepository };
