@@ -2,14 +2,16 @@
   list-style: none;
   display: flex;
   border-radius: 15px;
-  text-align: center;
+  text-align: left;
   align-items: center;
   list-style: none;
   color: $cdl_darkBlue;
   font-weight: 300;
-  height: auto;
+  height: 100%;
   width: 100%;
   justify-content: space-between;
+
+  overflow-y: scroll;
 
   flex-wrap: wrap;
 

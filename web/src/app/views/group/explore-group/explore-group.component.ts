@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import {userMock} from "../../../app.component"
+import { FormBuilder, Validators } from "@angular/forms";
+import { userMock } from "../../../app.component";
 @Component({
   selector: "app-explore-group",
   templateUrl: "./explore-group.component.html",
   styleUrls: ["./explore-group.component.scss"],
 })
 export class ExploreGroupComponent implements OnInit {
-
-  showInput:boolean;
+  showInput: boolean;
 
   public user = userMock;
 
@@ -20,14 +20,25 @@ export class ExploreGroupComponent implements OnInit {
   public category_listMok = [
     { id: 1, name: "Backend" },
     { id: 2, name: "Frontend" },
-    { id: 3, name: "Desing" },
+    { id: 3, name: "Design" },
   ];
 
-  setShowInput(){
+  exploreForm = this.fb.group({
+    objective: [""],
+    subjectSearch: [""],
+    category: [""],
+    date: [""]
+  });
+
+  onSubmit() {
+    console.log(this.exploreForm.value);
+  }
+  setShowInput() {
     this.showInput = !this.showInput;
   }
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }
