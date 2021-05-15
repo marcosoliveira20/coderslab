@@ -35,16 +35,51 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
         '400':
           description: Bad Request
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/user.Request'
         required: true
+  
+  /user/login:
+    post:
+      tags: 
+        - User
+      summary: Realiza o login do usuário
+      description: Realiza o login do usuário para que ele possa ser redirecionado para dentro da plataforma.
+      operationId: user_login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_login.Request'
+        required: true
+  
+    
   /user/read/byId/{id}:
     get:
       summary: Busca um usuário com base em um ID
@@ -869,6 +904,28 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+        interest_list:
+          type: object
+          properties:
+            _id_subject:
+              type: string
+              description: 'ID do interesse gerado pelo MongoDB'
+            level:
+              type: number
+              description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+    
+    user_login.Request:
+      title: user_login.Request
+      description: 'Objeto para usuário'
+      type: object
+      properties:
+        username:
+          type: string
+          description: 'Username do usuário Ex: Joãozinho10'
+        password:
+          type: string
+          description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+  
     user_read.Response:
       title: user_read.Response
       description: 'Objeto para usuário'
@@ -898,6 +955,9 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+        token:
+          type: string
+          description: 'Token da sessão'
     user_read_all.Response:
       title: user_read_all.Response
       description: 'Lista para usuários'
