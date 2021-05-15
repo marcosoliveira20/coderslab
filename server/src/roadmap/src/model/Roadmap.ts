@@ -8,12 +8,14 @@ class Roadmap implements IRoadmapRepository {
   createDefault({
     name,
     objective,
-    content_list
+    content_list,
+    level
   }: IRoadmapDTO): object {
     const roadmap = RoadmapSchema.create({
       name,
       objective,
       content_list,
+      level,
     });
 
     return roadmap;
@@ -22,13 +24,15 @@ class Roadmap implements IRoadmapRepository {
   createCustomized({
     name,
     objective,
-    content_list
+    content_list,
+    level
   }: IRoadmapDTO): object {
     const roadmap = RoadmapSchema.create({
       name,
       objective,
       content_list,
       is_default: false,
+      level,
     });
 
     return roadmap;

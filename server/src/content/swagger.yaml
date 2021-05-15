@@ -285,7 +285,7 @@ components:
         - description
         - deadline
         - reference
-        - challange
+        - challenge
       properties:
         title:
           type: string

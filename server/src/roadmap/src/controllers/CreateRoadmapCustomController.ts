@@ -7,28 +7,24 @@ class CreateRoadmapCustomController {
     const {
       name,
       objective,
-      content_list
+      content_list,
+      level
     } = request.body;
 
     const roadmap = new Roadmap();
 
-    const roadmapAlreadyExists = await roadmap.readByName(name);
+    try {
+      const data = await roadmap.createCustomized({
+        name,
+        objective,
+        content_list,
+        level
+      });
 
-    if(!roadmapAlreadyExists) {
-      try {
-        const data = await roadmap.createCustomized({
-          name,
-          objective,
-          content_list
-        });
-
-        return response.status(201).send(data);
-      } catch(err) {
-        console.log(err.message);
-        return response.status(400).send();
-      }
-    } else {
-      return response.status(409).send()
+      return response.status(201).send(data);
+    } catch(err) {
+      console.log(err.message);
+      return response.status(400).send();
     }
   }
 }

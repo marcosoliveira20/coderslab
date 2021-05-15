@@ -5,8 +5,8 @@ import ContentSchema from "../database/Schema/ContentSchema"
 
 
 class Content implements IContentRepository {
-  create({ title, description, reference, challenge, deadline, is_done }: IContentSchemaDTO): object {
-    const content = ContentSchema.create({ title, description, reference, challenge, deadline, is_done});
+  create({ title, description, reference, challenge, deadline, is_done, _roadmap_id }: IContentSchemaDTO): object {
+    const content = ContentSchema.create({ title, description, reference, challenge, deadline, is_done, _roadmap_id});
 
     return content;
   }
@@ -71,26 +71,41 @@ class Content implements IContentRepository {
     return content;
   }
 
-  readAll(): object {
+  readAll(): IContentSchemaDTO {
     const content = ContentSchema.find();
 
     return content;
   }
 
-  readById(_id: string): object {
+  readById(_id: string): IContentSchemaDTO {
     const content = ContentSchema.findById({_id});
 
     return content;
   }
 
-  readByTitle(title: string): object {
-    const content = ContentSchema.findOne({title});
+  readByRoadmapId(_roadmap_id: String): IContentSchemaDTO {
+    const content = ContentSchema.find({_roadmap_id});
+
+    return content;
+  }
+
+  readByTitle(title: string): IContentSchemaDTO {
+    const content = ContentSchema.find({title});
 
     return content;
   }
 
   readAllDoneRepositories(): object {
     const content = ContentSchema.find({is_done: true});
+
+    return content;
+  }
+
+  readLateContents(_roadmap_id: String, today: String): object {
+    const content = ContentSchema.find({
+      _roadmap_id,
+      deadline: {$lte: today}
+    });
 
     return content;
   }
@@ -109,6 +124,12 @@ class Content implements IContentRepository {
 
   delete(_id: string): object {
     const content = ContentSchema.findByIdAndDelete(_id);
+
+    return content;
+  }
+
+  deleteByRoadmapId(_roadmap_id: String): object {
+    const content = ContentSchema.deleteMany({_roadmap_id});
 
     return content;
   }

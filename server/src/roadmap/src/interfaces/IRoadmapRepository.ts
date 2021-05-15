@@ -1,7 +1,7 @@
 import { IRoadmapDTO } from "./IRoadmapDTO";
 
 interface IRoadmapRepository {
-  createDefault({ content_list, name, objective, is_default, is_done }: IRoadmapDTO): object;
+  createDefault({ content_list, name, objective, is_default, is_done, level }: IRoadmapDTO): object;
   createCustomized(data: IRoadmapDTO): object;
   turnRoadmapCustomized(_id: String): object
   turnRoadmapDefault(_id: String): object

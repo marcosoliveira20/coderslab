@@ -10,11 +10,16 @@ class CreateContentController {
       deadline,
       reference,
       challenge,
+      _roadmap_id,
     } = request.body;
 
     const content = new Content();
 
-    const contentAlreadyExists = await content.readByTitle(title);
+    const findByTitle = await content.readByTitle(title)
+
+    const contentAlreadyExists = findByTitle && findByTitle._roadmap_id ===  _roadmap_id ? true : false
+
+    console.log(findByTitle)
 
     if(!contentAlreadyExists) {
       try {
@@ -23,7 +28,8 @@ class CreateContentController {
           description,
           deadline,
           reference,
-          challenge
+          challenge,
+          _roadmap_id
         });
 
         return response.status(201).send(data);

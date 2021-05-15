@@ -1,10 +1,10 @@
 import { IChallengeDTO } from "../interfaces/IChallengeDTO";
-import { IChallangeRepository } from "../interfaces/IChallangeRepository";
+import { IchallengeRepository } from "../interfaces/IchallengeRepository";
 
 import ChallengeSchema from "../database/Schema/ChallengeSchema"
 
 
-class Challenge implements IChallangeRepository {
+class Challenge implements IchallengeRepository {
   create({ title, description, is_done }: IChallengeDTO): object {
     const challenge = ChallengeSchema.create({ title, description, is_done});
 
