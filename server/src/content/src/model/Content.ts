@@ -5,8 +5,8 @@ import ContentSchema from "../database/Schema/ContentSchema"
 
 
 class Content implements IContentRepository {
-  create({ title, description, reference, challange, deadline, is_done }: IContentSchemaDTO): object {
-    const content = ContentSchema.create({ title, description, reference, challange, deadline, is_done});
+  create({ title, description, reference, challenge, deadline, is_done }: IContentSchemaDTO): object {
+    const content = ContentSchema.create({ title, description, reference, challenge, deadline, is_done});
 
     return content;
   }

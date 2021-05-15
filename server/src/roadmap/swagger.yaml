@@ -1,0 +1,391 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: Confirmar
+    url: https://virtserver.swaggerhub.com/AlexsandroFGValencio/roadmap/1.0.0
+info:
+  description: Microsserviço para criação de roadmap
+  version: "1.0.0"
+  title: Roadmaps
+  contact:
+    email: alexsandrovalencio@gmail.com
+tags:
+  - name: roadmap
+    description: Este microsserviço será utilizado para a criação de roadmap
+paths:
+  /roadmap/create/default:
+    post:
+      tags:
+        - roadmap
+      summary: Criação de roadmap default
+      operationId: AddRoadmapDefault
+      description: Adiciona um roadmap default
+      responses:
+        '201':
+          description: 'Created'
+        '400':
+          description: 'Bad request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRoadmapDefault'
+        description: Adiciona um roadmap default
+  /roadmap/create/custom:
+    post:
+      tags:
+        - roadmap
+      summary: Criação de roadmap customizado
+      operationId: AddRoadmapCustom
+      description: Adiciona um roadmap customizado
+      responses:
+        '201':
+          description: 'Created'
+        '400':
+          description: 'Bad request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRoadmapCustom'
+        description: Adiciona um roadmap default
+  /roadmap/update/custom/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Transforma o roadmap padrão em customizado
+      operationId: TurnDefaultRoadmapIntoCustomizedRoadmap
+      description: Transforma o roadmap padrão em customizado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/default/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Transforma o roadmap customizado em padrão
+      operationId: TurnCustomRoadmapIntoDefaultRoadmap
+      description: Transforma o roadmap customizado em padrão
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/done/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Transforma o roadmap em progresso em feito
+      operationId: TurnInProgressRoadmapIntoDoneRoadmap
+      description: Transforma o roadmap em progresso em feito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/inprogress/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Transforma o roadmap em "Feito" em "Em progresso"
+      operationId: TurnDoneRoadmapIntoInProgressRoadmap
+      description: Transforma o roadmap em "Feito" em "Em progresso"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/name/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Atualiza o nome do roadmap
+      operationId: UpdateRoadmapName
+      description: Atualiza o nome do roadmap
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoadmapName'
+        description: Atualiza o nome do roadmap
+  /roadmap/update/objective/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Atualiza o objetivo do roadmap
+      operationId: UpdateRoadmapObjective
+      description: Atualiza o objetivo do roadmap
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoadmapObjective'
+        description: Atualiza o objetivo do roadmap
+  /roadmap/update/list/{id}:
+    put:
+      tags:
+        - roadmap
+      summary: Atualiza a lista de conteúdos do roadmap
+      operationId: UpdateRoadmapContentList
+      description: Atualiza a lista de conteúdos do roadmap
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoadmapContentList'
+        description: Atualiza a lista de conteúdos do roadmap
+  /roadmap/read/all:
+    get:
+      tags:
+        - roadmap
+      summary: Lista todos os roadmap criados
+      operationId: ListAllRoadmap
+      description: Lista todos os roadmap criados
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/all/{id}:
+    get:
+      tags:
+        - roadmap
+      summary: Apresenta o roadmap que possui o ID informado
+      operationId: ReadRoadmapById
+      description: Apresenta o roadmap que possui o ID informado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/custom:
+    get:
+      tags:
+        - roadmap
+      summary: Lista todos os roadmap customizados
+      operationId: ListAllCustomRoadmap
+      description: Lista todos os roadmap customizados
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/default:
+    get:
+      tags:
+        - roadmap
+      summary: Lista todos os roadmap padrão
+      operationId: ListAllDefaultRoadmap
+      description: Lista todos os roadmap padrão
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/inprogress:
+    get:
+      tags:
+        - roadmap
+      summary: Lista todos os roadmap em progresso
+      operationId: ListAllInProgressRoadmap
+      description: Lista todos os roadmap em progresso
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/done:
+    get:
+      tags:
+        - roadmap
+      summary: Lista todos os roadmap concluídos
+      operationId: ListAllDoneRoadmap
+      description: Lista todos os roadmap concluídos
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/delete/{id}:
+    get:
+      tags:
+        - roadmap
+      summary: Deleta o roadmap que possui o ID informado
+      operationId: DeleteRoadmapById
+      description: Deleta o roadmap que possui o ID informado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '204':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Not found'
+
+components:
+  schemas:
+    AddRoadmapDefault:
+      type: object
+      required:
+        - name
+        - objective
+        - content_list
+      properties:
+        name:
+          type: string
+          example: NodeJS
+        objective:
+          type: string
+          example: Neste roadmap, você aprenderá o conteúdo básico para trabalhar com NodeJS
+        content_list:
+          type: string
+          format: Array
+          example: [NodeJS, Express]
+    AddRoadmapCustom:
+      type: object
+      required:
+        - name
+        - objective
+        - content_list
+      properties:
+        name:
+          type: string
+          example: NodeJS
+        objective:
+          type: string
+          example: Neste roadmap, você aprenderá o conteúdo básico para trabalhar com NodeJS
+        content_list:
+          type: string
+          format: Array
+          example: [NodeJS, Express]
+    UpdateRoadmapName:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: NodeJS
+    UpdateRoadmapObjective:
+      type: object
+      required:
+        - objective
+      properties:
+        objective:
+          type: string
+          example: NodeJS
+    UpdateRoadmapContentList:
+      type: object
+      required:
+        - content_list
+      properties:
+        content_list:
+          type: string
+          example: ["JS", "Node", "Python", "Go"]

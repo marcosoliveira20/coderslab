@@ -14,13 +14,13 @@ class ReadRoadmapByIdController {
       const data = await roadmap.readById(_id);
 
       if(!data) {
-        return response.status(404).send("Roadmap not found");
+        return response.status(404).send();
       }
 
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

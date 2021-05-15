@@ -47,7 +47,7 @@ RoadmapRoutes.put("/roadmap/update/objective/:_id", updateRepositoryObjectiveCon
 RoadmapRoutes.put("/roadmap/update/list/:_id", updateRepositoryContentListController.handle);
 RoadmapRoutes.get("/roadmap/read/all", readAllRoadmapController.handle);
 RoadmapRoutes.get("/roadmap/read/:_id", readRoadmapByIdController.handle);
-RoadmapRoutes.get("/roadmap/read/all/customized", readAllCustomRoadmapRepositories.handle);
+RoadmapRoutes.get("/roadmap/read/all/custom", readAllCustomRoadmapRepositories.handle);
 RoadmapRoutes.get("/roadmap/read/all/default", readAllDefaultRoadmapRepositories.handle);
 RoadmapRoutes.get("/roadmap/read/all/inprogress", readAllInProgressRoadmapRepositories.handle);
 RoadmapRoutes.get("/roadmap/read/all/done", readAllDoneRoadmapRepositories.handle);

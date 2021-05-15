@@ -6,7 +6,7 @@ const ContentSchema = new Schema({
   deadline: { type: Date, required: true },
   reference: { type: String, required: true },
   is_done: { type: Boolean, required: false, default: false },
-  challange: { type: String, required: true },
+  challenge: { type: String, required: true },
 }, {
   timestamps: true,
 });

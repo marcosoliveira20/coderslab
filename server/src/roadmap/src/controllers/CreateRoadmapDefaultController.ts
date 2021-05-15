@@ -25,10 +25,10 @@ class CreateRoadmapDefaultController {
         return response.status(201).send(data);
       } catch(err) {
         console.log(err.message);
-        return response.status(400).send("Bad Request");
+        return response.status(400).send();
       }
     } else {
-      return response.status(409).json({error: "Roadmap already exists"})
+      return response.status(409).send()
     }
   }
 }

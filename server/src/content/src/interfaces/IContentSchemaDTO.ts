@@ -4,7 +4,7 @@ interface IContentSchemaDTO {
   deadline: Date,
   reference: String,
   is_done?: Boolean,
-  challange: String,
+  challenge: String,
 }
 
 export { IContentSchemaDTO };

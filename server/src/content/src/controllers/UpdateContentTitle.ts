@@ -17,7 +17,7 @@ class UpdateContentTitle {
         try {
           const data = await content.updateTitle(_id, title);
 
-          return response.status(201).send(data);
+          return response.status(200).send(data);
 
         } catch (err) {
           console.log(err.message);

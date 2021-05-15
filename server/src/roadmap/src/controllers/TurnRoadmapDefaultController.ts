@@ -19,14 +19,14 @@ class TurnRoadmapDefaultController {
 
         } catch (err) {
           console.log(err.message);
-          return response.status(400).json({error: "Bad request"});
+          return response.status(400).send();
         }
       } else {
-        return response.status(404).json({error: "Roadmap not found"});
+        return response.status(404).send();
       }
     } catch (err) {
       console.log(err.message);
-      response.status(400).json({error: "Bad request"})
+      response.status(400).send()
     }
   }
 }

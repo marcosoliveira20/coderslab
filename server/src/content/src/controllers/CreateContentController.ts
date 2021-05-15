@@ -9,7 +9,7 @@ class CreateContentController {
       description,
       deadline,
       reference,
-      challange,
+      challenge,
     } = request.body;
 
     const content = new Content();
@@ -23,7 +23,7 @@ class CreateContentController {
           description,
           deadline,
           reference,
-          challange
+          challenge
         });
 
         return response.status(201).send(data);

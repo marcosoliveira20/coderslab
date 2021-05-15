@@ -20,10 +20,10 @@ class DeleteRoadmapController {
       } catch (err) {
 
         console.log(err.message);
-        return response.status(400).json({error: "Bad Request"});
+        return response.status(400).send();
       }
     } else {
-      return response.status(404).json({error: "Bad Request"});
+      return response.status(404).send();
     }
   }
 }
