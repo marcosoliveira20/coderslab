@@ -3,6 +3,6 @@ import { ContentRoutes } from "./routes";
 
 app.use("/", ContentRoutes);
 
-console.log("Content was started in port: 7000 ⚡");
+console.log("Content was started in port: 8000 ⚡");
 
-app.listen(7000);
+app.listen(8000);
