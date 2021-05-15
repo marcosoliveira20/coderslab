@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { roadmapMock } from 'src/app/app.component';
 
 @Component({
@@ -9,10 +10,24 @@ import { roadmapMock } from 'src/app/app.component';
 export class ListRoadmapComponent implements OnInit {
 
   public roadmap_list = roadmapMock;
+  showInput: boolean;
 
-  constructor() { }
+  searchForm = this.fb.group({
+    objective: [""],
+    subjectSearch: [""],
+    level: [""],
+  });
 
+  constructor(private fb: FormBuilder) {}
+
+  onSubmit() {
+    console.log(this.searchForm.value);
+  }
   ngOnInit() {
+
   }
 
+  setShowInput() {
+    this.showInput = !this.showInput;
+  }
 }

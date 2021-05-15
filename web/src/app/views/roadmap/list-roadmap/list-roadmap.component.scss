@@ -1,4 +1,9 @@
 @import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/card-list";
+@import "../../../../sass/components/input";
+@import "../../../../sass/components/button";
+@import "../../../../sass/components/scrollbar";
+@import "../../../../sass/components/container";
 
 header {
   padding: 48px 32px;
@@ -9,4 +14,8 @@ header {
 header h1 {
   font-weight: 100;
   color: $cdl_darkBlue;
+}
+
+ul{
+  list-style: none;
 }

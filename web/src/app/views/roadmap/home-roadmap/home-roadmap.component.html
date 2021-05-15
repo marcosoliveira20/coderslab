@@ -1,17 +1,29 @@
-<header>
-  <div>
-    <h1>José Bezerra</h1>
-    <button class="button-default">Novo Roadmap</button>
-  </div>
 
-  <nav>
-    <ul class="tabs">
-      <li><button class="button-nav">Todos</button></li>
-      <li><button class="button-nav">Concluídos</button></li>
-      <li><button class="button-nav">Em progresso</button></li>
-      <li><button class="button-nav">Default</button></li>
-      <li><button class="button-nav">Customizados</button></li>
+<div class="cdl-container">
+  <header>
+    <div>
+      <h1>José Bezerra</h1>
+      <button routerLink="./new" class="button-default">Novo Roadmap</button>
+    </div>
+
+    <nav>
+      <ul class="tabs">
+        <li><button class="button-nav">Todos</button></li>
+        <li><button class="button-nav">Concluídos</button></li>
+        <li><button class="button-nav">Em progresso</button></li>
+        <li><button class="button-nav">Default</button></li>
+        <li><button class="button-nav">Customizados</button></li>
+      </ul>
+    </nav>
+    <input type="text" name="" id="" placeholder="Pesquisar por roadmap" class="searchbar searchbar-ligth" />
+  </header>
+
+  <main >
+    <ul class="card-list-roadmap">
+      <li *ngFor="let roadmap of roadmap_list">
+        <app-card [data]="roadmap" [type]="'roadmap'"></app-card>
+      </li>
     </ul>
-  </nav>
-  <input type="text" name="" id="" placeholder="Pesquisar por roadmap" class="searchbar searchbar-ligth" />
-</header>
+  </main>
+
+</div>

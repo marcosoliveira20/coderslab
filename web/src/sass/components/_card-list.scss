@@ -1,4 +1,5 @@
 .card-list{
+
   list-style: none;
   display: flex;
   border-radius: 15px;
@@ -16,6 +17,7 @@
   flex-wrap: wrap;
 
   li {
+    list-style: none;
     margin-bottom: 28px;
     width: 246px;
     height: 322px;
@@ -35,6 +37,19 @@
   li:last-child {
     border: none;
   }
+}
+
+.card-list-roadmap{
+  list-style: none;
+  border-radius: 15px;
+  font-weight: 300;
+  height: 100%;
+  width: 100%;
+
+  margin-top: 28px;
+
+  overflow-y: scroll;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 1200px){
