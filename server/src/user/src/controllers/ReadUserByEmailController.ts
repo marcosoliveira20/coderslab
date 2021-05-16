@@ -11,7 +11,7 @@ class ReadUserByEmailController {
     try {
       const data = await user.readByEmail(email);
 
-      if(!data) {
+      if (!data) {
         return response.status(404).send();
       }
 

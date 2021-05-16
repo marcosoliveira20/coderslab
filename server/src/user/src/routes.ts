@@ -1,12 +1,12 @@
 import { Router } from "express";
 
 import { CreateUserController } from "./controllers/CreateUserController";
+import { DeleteUserController } from "./controllers/DeleteUserController";
+import { ReadAllUsersController } from "./controllers/ReadAllUsersController";
+import { ReadUserByEmailController } from "./controllers/ReadUserByEmailController";
 import { ReadUserByIdController } from "./controllers/ReadUserByIdController";
 import { ReadUserByUsernameController } from "./controllers/ReadUserByUsernameController";
-import { ReadUserByEmailController } from "./controllers/ReadUserByEmailController";
-import { ReadAllUsersController } from "./controllers/ReadAllUsersController";
 import { UpdateUserController } from "./controllers/UpdateUserController";
-import { DeleteUserController } from "./controllers/DeleteUserController";
 
 const router = Router();
 
@@ -20,7 +20,10 @@ const deleteUserController = new DeleteUserController();
 
 router.post("/user/create", createUserController.handle);
 router.get("/user/read/byId/:id", readUserByIdController.handle);
-router.get("/user/read/byUsername/:username", readUserByUsernameController.handle);
+router.get(
+  "/user/read/byUsername/:username",
+  readUserByUsernameController.handle
+);
 router.get("/user/read/byEmail/:email", readUserByEmailController.handle);
 router.get("/user/read/all", readAllUsersController.handle);
 router.put("/user/update/:id", updateUserController.handle);
