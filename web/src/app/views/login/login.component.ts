@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   registerForm = this.fb.group({
     name: ["", Validators.required],
-    lastname: ["", Validators.required],
+    last_name: ["", Validators.required],
     username: ["", Validators.required],
     email: ["", Validators.required],
     password: ["", Validators.required],
@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
     if ( this.registerForm.value.password == this.registerForm.value.confirm_password ) {
       this.userService.createUser(this.registerForm.value).then(data => console.log(data))
     } else {
-      console.log("senha errada")
+      //TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
+      console.log("senha divergente")
     }
   }
 

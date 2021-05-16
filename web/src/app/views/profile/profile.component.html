@@ -1,87 +1,90 @@
-<form
-  class="mainPage"
-  [formGroup]="profileForm"
-  (ngSubmit)="onSubmit()"
->
-  <div class="bodyForm">
-    <div class="header">
-      <h1>José Bezerra</h1>
-      <div>
-        <button>Redefinir Senha</button>
-        <button (click)="handleEditMode()">
-          <img src="assets/icons/edit_icon.svg" id="edit_icon" />
-        </button>
+<div *ngIf="showLoading">loading</div>
+<div>
+  <form
+    class="mainPage"
+    [formGroup]="profileForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="bodyForm">
+      <div class="header">
+        <h1>{{ profileForm.value.name }} {{profileForm.value.last_name}}</h1>
+        <div>
+          <button>Redefinir Senha</button>
+          <button (click)="handleEditMode()">
+            <img src="assets/icons/edit_icon.svg" id="edit_icon" />
+          </button>
+        </div>
       </div>
+  
+      <section>
+        <h4>Informações Pessoais</h4>
+        <div class="row">
+          <div class="col">
+            <label>nome</label>
+            <input type="text" id="" placeholder="José" formControlName="name"/>
+          </div>
+          <div class="col">
+            <label>sobrenome</label>
+            <input
+              type="text"
+              id=""
+              placeholder="Bezerra"
+              formControlName="last_name"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>nome de usuário</label>
+            <input
+              type="text"
+              id=""
+              placeholder="Flynn Rider"
+              formControlName="username"
+            />
+          </div>
+          <div class="col">
+            <label>e-mail</label>
+            <input
+              type="text"
+              id=""
+              placeholder="jose@email.com.br"
+              formControlName="email"
+            />
+          </div>
+        </div>
+      </section>
+  
+      <section>
+        <h4>Redes Sociais</h4>
+        <div class="row">
+          <div class="col">
+            <label>discord id</label>
+            <input
+              type="text"
+              id=""
+              placeholder="zébezerra#3503"
+              formControlName="discord_id"
+            />
+          </div>
+          <div class="col">
+            <label>github id</label>
+            <input
+              type="text"
+              id=""
+              placeholder="zebezerra"
+              formControlName="github_id"
+            />
+          </div>
+        </div>
+      </section>
     </div>
-
-    <section>
-      <h4>Informações Pessoais</h4>
-      <div class="row">
-        <div class="col">
-          <label>nome</label>
-          <input type="text" id="" placeholder="José" formControlName="name" />
-        </div>
-        <div class="col">
-          <label>sobrenome</label>
-          <input
-            type="text"
-            id=""
-            placeholder="Bezerra"
-            formControlName="lastname"
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>nome de usuário</label>
-          <input
-            type="text"
-            id=""
-            placeholder="Flynn Rider"
-            formControlName="username"
-          />
-        </div>
-        <div class="col">
-          <label>e-mail</label>
-          <input
-            type="text"
-            id=""
-            placeholder="jose@email.com.br"
-            formControlName="email"
-          />
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h4>Redes Sociais</h4>
-      <div class="row">
-        <div class="col">
-          <label>discord id</label>
-          <input
-            type="text"
-            id=""
-            placeholder="zébezerra#3503"
-            formControlName="discord_id"
-          />
-        </div>
-        <div class="col">
-          <label>github id</label>
-          <input
-            type="text"
-            id=""
-            placeholder="zebezerra"
-            formControlName="github_id"
-          />
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <button>Excluir Conta</button>
-    <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit">
-      Salvar
-    </button>
-  </footer>
-</form>
+  
+    <footer>
+      <button (click)="deleteUser()">Excluir Conta</button>
+      <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit">
+        Salvar
+      </button>
+    </footer>
+  </form>
+</div>
