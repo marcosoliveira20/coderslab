@@ -3,26 +3,6 @@
 @import "../../../../sass/components//header";
 @import "../../../../sass/components/tabs";
 @import "../../../../sass/components/input";
-@import "../../../../sass/components/scrollbar";
 @import "../../../../sass/components/card-list";
 @import "../../../../sass/components/container";
-
-main {
-  height: 100%;
-  margin-top: 10px;
-  display: flex;
-
-  > a > button {
-    background-color: $cdl_pink;
-
-    position: fixed;
-    bottom: 28px;
-    right: 56px;
-
-    width: 80px;
-    height: 80px;
-    border: none;
-    border-radius: 10em;
-    z-index: 20;
-  }
-}
+@import "../../../../sass/components/scrollbar";

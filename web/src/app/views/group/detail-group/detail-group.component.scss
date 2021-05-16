@@ -24,8 +24,9 @@ h4 {
   align-items: center;
   display: block;
 
+  div { display: flex; }
+
   div:first-child {
-    display: flex;
     justify-content: space-between;
     align-items: center;
 
@@ -125,6 +126,36 @@ h4 {
   font-size: 25px;
   letter-spacing: 15%;
   margin-bottom: 70px;
+}
+
+.modal_body {
+  .row { margin-bottom: 40px; }
+
+  label {
+    font-weight: 400;
+    color: $cdl_pink;
+  }
+  input, select, textarea {
+    width: 100%;
+    font-weight: 300;
+  }
+  input:disabled {
+    color: #888;
+  }
+  label {
+    display: block;
+  }
+
+  input,
+  select,
+  textarea {
+    border: none;
+    border-bottom: 1px solid $cdl_darkBlue;
+    display: block;
+    font-weight: 300;
+    font-size: 25px;
+    background: transparent;
+  }
 }
 
 .modal_footer button {

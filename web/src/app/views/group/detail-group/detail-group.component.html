@@ -3,7 +3,16 @@
     <div>
       <h1>{{ group.name }}</h1>
       <div>
-        <button>Sair do grupo</button>
+        <button
+          style="width: 52px; display: flex; justify-content: center;"
+          *ngIf="isGroupOwner"
+          (click)="showAddScheduleModal = true">
+          <img style="width: 25px;" src="assets/icons/plus.svg" />
+        </button>
+        <button *ngIf="isGroupOwner" (click)="handleRedirectToEdit()">
+          Editar grupo
+        </button>
+        <button *ngIf="!isGroupOwner">Sair do grupo</button>
       </div>
     </div>
     <h2>Lógica de Programação</h2>
@@ -18,7 +27,7 @@
     <ul class="cdl_card_group">
       <li *ngFor="let date of group.schedule_list">
         <app-card
-          (click)="modalShowController = true; modalData = date"
+          (click)="showScheduleModal = true; modalData = date"
           [type]="'minimal'"
           [data]="date.datetime"
         ></app-card>
@@ -30,20 +39,17 @@
     <h4>Integrantes</h4>
     <ul class="member_list">
       <li class="member_card" *ngFor="let user of group.user_list">
-        <app-card
-        [type]="'member'"
-        [data]="user"
-        ></app-card>
+        <app-card [type]="'member'" [data]="user" [disableButton]="!isGroupOwner"></app-card>
       </li>
     </ul>
   </section>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL: SCHEDULE DETAILS -->
 <app-modal
-  *ngIf="modalShowController"
-  [showController]="modalShowController"
-  (close)="modalShowController = false"
+  *ngIf="showScheduleModal"
+  [showController]="showScheduleModal"
+  (close)="showScheduleModal = false"
 >
   <div class="modal_header">
     <div>
@@ -65,4 +71,48 @@
   <div class="modal_footer">
     <button (click)="openScheduleLink()">ir para a reunião</button>
   </div>
+</app-modal>
+
+<!-- MODAL: ADD NEW SCHEDULE -->
+<app-modal
+  *ngIf="showAddScheduleModal"
+  [showController]="showAddScheduleModal"
+  (close)="showAddScheduleModal = false"
+>
+  <div class="modal_header"></div>
+
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmitNewSchedule()">
+    <div class="modal_body">
+      <div class="row">
+        <div class="col">
+          <label>data</label>
+          <input type="date" placeholder="dd/mm/yyyy">
+        </div>
+
+        <div class="col">
+          <label>horário</label>
+          <input type="time" placeholder="00:00">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>link</label>
+          <input type="text" placeholder="reuniao.com.br">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>descrição</label>
+          <textarea type="text" placeholder="Fale um pouco sobre o motivo da reunião"></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal_footer">
+      <button (click)="openScheduleLink()">marcar reunião</button>
+    </div>
+  </form>
 </app-modal>

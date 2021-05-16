@@ -1,46 +1,18 @@
 @import "../../../../sass/abstracts/variables";
 @import "../../../../sass/components/card-list";
+@import "../../../../sass/components/scrollbar";
+@import "../../../../sass/components/button";
+@import "../../../../sass/components/input";
 
-main{
+main {
   height: 100vh;
   width: 100vw;
   background-color: $cdl_darkBlue;
 }
 
-input,
-select,
-div > button {
-  width: 100%;
-  height: 42px;
-  background-color: $cdl_darkBlue;
-  color: $cdl_yellow;
-  margin-top: 24px;
-
-  border: solid 2px $cdl_yellow;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 18px;
-}
-
-input,select{
-  border-radius: 50px;
-}
-
-div > button{
-  border-radius: 10px;
-}
-
-
 a,
 button {
   border: none;
-}
-
-input,
-select {
-  padding-left: 20px;
 }
 
 input::placeholder {
@@ -55,7 +27,6 @@ input::placeholder {
   justify-content: center;
 
   h1 {
-
     color: $cdl_white;
 
     span {
@@ -87,10 +58,26 @@ input::placeholder {
   margin-top: 16px;
 }
 
-.center{
+.center {
   text-align: center;
   margin-top: 19px;
   margin-bottom: 25px;
+}
+
+.cdl-container{
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 24vh 76vh;
+}
+
+.cdl-container{
+  padding: 15px;
+}
+
+.cont {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  height: 100vh;
 }
 
 #logo {
@@ -106,4 +93,10 @@ input::placeholder {
   width: 103px;
   height: 43px;
   border-radius: 50px;
+}
+
+@media (min-width: 1040px) {
+  .cdl-container{
+    padding: 0 172px;
+  }
 }
