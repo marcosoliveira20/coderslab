@@ -27,6 +27,7 @@ export const roadmapMock = [
     id: Math.random()*1000,
     name: "Lógica de Programação",
     is_default: true,
+    is_done: true,
     level: 0,
     content_list: [
       { ...content },
@@ -39,6 +40,33 @@ export const roadmapMock = [
     id: Math.random()*1000,
     name: "Java",
     is_default: true,
+    is_done: true,
+    level: 0,
+    content_list: [
+      { ...content },
+      { ...content },
+      { ...content },
+      { ...content },
+    ],
+  },
+  {
+    id: Math.random()*1000,
+    name: "Node",
+    is_default: false,
+    is_done: false,
+    level: 0,
+    content_list: [
+      { ...content },
+      { ...content },
+      { ...content },
+      { ...content },
+    ],
+  },
+  {
+    id: Math.random()*1000,
+    name: "SQL",
+    is_default: false,
+    is_done: false,
     level: 0,
     content_list: [
       { ...content },

@@ -4,7 +4,7 @@
   display: flex;
   border-radius: 15px;
   text-align: left;
-  align-items: center;
+  align-items:initial;
   list-style: none;
   color: $cdl_darkBlue;
   font-weight: 300;
@@ -12,7 +12,7 @@
   width: 100%;
   justify-content: space-between;
 
-  overflow-y: scroll;
+  overflow-y: auto;
 
   flex-wrap: wrap;
 

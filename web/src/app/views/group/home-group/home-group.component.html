@@ -1,4 +1,4 @@
-<div class ="cdl-container">
+<div class ="cdl-container-group">
   <header>
     <div>
       <h1>José Bezerra</h1>
@@ -6,14 +6,14 @@
     </div>
     <nav>
       <ul class="tabs">
-        <li><button class="button-nav">Todos</button></li>
-        <li><button class="button-nav">Meus Grupos</button></li>
+        <li><button class="button-nav" (click)="filter('all')" [class.active]="typeFilter == 'all'">Todos</button></li>
+        <li><button class="button-nav" (click)="filter('myGroup')" [class.active]="typeFilter == 'myGroup'">Meus Grupos</button></li>
       </ul>
     </nav>
   </header>
   <main class="">
     <ul class="card-list">
-      <li *ngFor="let group of user.group_list">
+      <li *ngFor="let group of groupList">
         <app-card [data]="group"></app-card>
       </li>
     </ul>

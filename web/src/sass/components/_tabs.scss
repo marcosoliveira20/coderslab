@@ -20,9 +20,10 @@
     border: none;
     border-bottom: 3px solid transparent;
   }
+}
 
-  li button:hover {
-    color: $cdl_pink;
-    border-bottom: 3px solid $cdl_pink;
-  }
+
+.active {
+  color: $cdl_pink !important;
+  border-bottom: 3px solid $cdl_pink !important;
 }
