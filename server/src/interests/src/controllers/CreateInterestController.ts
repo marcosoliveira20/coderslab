@@ -17,7 +17,7 @@ class CreateInterestController {
         return response.status(406).send();
       }
 
-      const findSubject = await interests.readBySubject(_id_subject);
+      const findSubject = await interests.readByUserAndSubject(_id_user, _id_subject);
 
       if (findSubject) {
         return response.status(406).send();
