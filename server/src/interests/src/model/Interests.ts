@@ -19,6 +19,10 @@ class Interests implements IInterestsRepository {
         return InterestsSchema.findOne({ _id });
     }
 
+    readByUserId(_id_user: string): Array<Promise<IInterestsDTO>> {
+        return InterestsSchema.find({ _id_user });
+    }
+
     readBySubject(_id_subject: string): Promise<IInterestsDTO> {
         return InterestsSchema.findOne({ _id_subject });
     }
@@ -40,7 +44,7 @@ class Interests implements IInterestsRepository {
     }
 
     delete(_id: string): void {
-        InterestsSchema.deleteOne({ _id });
+        return InterestsSchema.deleteOne({ _id });
     }
 
     deleteByUserId(_id_user: string): void {
