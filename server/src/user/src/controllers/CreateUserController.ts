@@ -51,7 +51,8 @@ class CreateUserController {
       try {
         for(let i = 0; i < interest_list.length; i++) {
           interest_list[i]._id_user = data._id;
-          await api.interests.post("/create", interest_list[i]);
+          const interest = await api.interests.post("/create", interest_list[i]);
+          interest_list[i] = interest.data;
         }
       } catch(err) {
         await api.interests.delete(`/delete/byUserId/${data._id}`);

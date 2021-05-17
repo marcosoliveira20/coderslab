@@ -1,7 +1,7 @@
 import { IInterestsDTO } from "./IInterestsDTO";
 
 interface IInterestsRepository {
-  create(data: IInterestsDTO): void;
+  create(data: IInterestsDTO): Promise<IInterestsDTO>;
   readById(_id: string) : Promise<IInterestsDTO>;
   readByUserAndSubject(_id_user, _id_subject: string) : Promise<IInterestsDTO>;
   readByUserId(_id_user: string) : Array<Promise<IInterestsDTO>>;

@@ -7,8 +7,8 @@ class Interests implements IInterestsRepository {
         _id_user,
         _id_subject,
         level
-    }: IInterestsDTO): void {
-        InterestsSchema.create({
+    }: IInterestsDTO): Promise<IInterestsDTO> {
+        return InterestsSchema.create({
             _id_user,
             _id_subject,
             level

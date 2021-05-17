@@ -23,13 +23,13 @@ class CreateInterestController {
         return response.status(406).send();
       }
 
-      await interests.create({
+      const data = await interests.create({
         _id_user,
         _id_subject,
         level
       });
 
-      return response.status(201).send();
+      return response.status(201).send(data);
     } catch(err) {
       console.log(err.message);
       return response.status(400).send();
