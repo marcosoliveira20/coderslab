@@ -20,6 +20,10 @@ import { DetailGroupComponent } from './views/group/detail-group/detail-group.co
 import { NewGroupComponent } from './views/group/new-group/new-group.component';
 import { ExploreGroupComponent } from './views/group/explore-group/explore-group.component';
 import { ModalComponent } from './component/modal/modal.component';
+import { HomeRoadmapComponent } from './views/roadmap/home-roadmap/home-roadmap.component';
+import { NewRoadmapComponent } from './views/roadmap/new-roadmap/new-roadmap.component';
+import { ListRoadmapComponent } from './views/roadmap/list-roadmap/list-roadmap.component';
+import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-roadmap.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { ModalComponent } from './component/modal/modal.component';
     DetailGroupComponent,
     NewGroupComponent,
     ExploreGroupComponent,
-    ModalComponent
+    ModalComponent,
+    HomeRoadmapComponent,
+    NewRoadmapComponent,
+    ListRoadmapComponent,
+    DetailRoadmapComponent
   ],
   imports: [
     BrowserModule,

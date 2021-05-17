@@ -1,0 +1,63 @@
+<div class="cdl-container">
+  <header>
+    <h1>Roadmap</h1>
+    <nav>
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-11">
+            <input
+              placeholder="Pesquisar por um assunto"
+              formControlName="subjectSearch"
+              type="text"
+              class="input input-ligth"
+            />
+          </div>
+          <div class="col-1">
+            <button
+              (click)="setShowInput()"
+              class="button-square button-ligtht"
+            >
+              <img src="../../../../assets/icons/filter-dark.svg" alt="" />
+            </button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="showInput">
+          <div class="col-3">
+            <select
+              formControlName="objective"
+              class="input input-ligth"
+            ></select>
+          </div>
+          <div class="col-3">
+            <select formControlName="level" class="input input-ligth">
+              <option value="0">Iniciante</option>
+              <option value="1">Intermediário</option>
+              <option value="2">Avançado</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <button type="button" class="button-rounded button-ligtht">
+              A-Z
+            </button>
+          </div>
+          <div class="col-3"></div>
+          <div class="col-1">
+            <button class="button-square button-ligtht" type="submit">
+              <img
+                src="../../../../assets/icons/magnifying-glass-dark.svg"
+                alt=""
+              />
+            </button>
+          </div>
+        </div>
+      </form>
+    </nav>
+  </header>
+
+  <ul class="card-list-roadmap">
+    <li *ngFor="let roadmap of roadmap_list">
+      <app-card [data]="roadmap" [type]="'roadmap'"></app-card>
+    </li>
+  </ul>
+</div>

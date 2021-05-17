@@ -129,6 +129,54 @@
   }
 }
 
+// roadmap
+.roadmap-type > main {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 0px 4px 4px #00000040;
+  row-gap: 50px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    > div {
+      display: flex;
+      align-items: center;
+
+      h4 { margin:  0 13px 0 0; color: $cdl_yellow;}
+    }
+  }
+
+  header > h4 {
+    font-weight: 300;
+    text-align: center;
+    color: $cdl_white;
+  }
+}
+
+.roadmap-type > main > footer {
+  display: flex;
+  column-gap: 40px;
+
+  > div {
+    width: fit-content;
+    font-size: 22px;
+    color: $cdl_white;
+  }
+}
+
+.roadmap-type > button {
+  margin-top: -52px;
+  margin-bottom: 40px;
+}
+
+.roadmap-type:hover {
+  > button {
+    margin-top: -5px;
+    margin-bottom: 0px;
+  }
+}
+
 
 // member
 .disable-member-card-button:hover {

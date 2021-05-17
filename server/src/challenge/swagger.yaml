@@ -1,0 +1,339 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: Confirmar
+    url: https://virtserver.swaggerhub.com/AlexsandroFGValencio/roadmap/1.0.0
+info:
+  description: Microsserviço para criação de desafio
+  version: "1.0.0"
+  title: Contents
+  contact:
+    email: alexsandrovalencio@gmail.com
+tags:
+  - name: challenge
+    description: Este microsserviço será utilizado para a criação de desafio
+paths:
+  /content/create:
+    post:
+      tags:
+        - challenge
+      summary: Criação de desafio
+      operationId: AddContent
+      description: Adiciona um desafio
+      responses:
+        '201':
+          description: 'Created'
+        '400':
+          description: 'Bad request'
+        '409':
+          description: 'Challenge already exists'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddChallenge'
+        description: Adiciona um desafio
+  /content/update/done/{id}:
+    put:
+      tags:
+        - challenge
+      summary: Transforma o desafio em progresso em feito
+      operationId: TurnInProgressChallengeIntoDoneChallenge
+      description: Transforma o desafio em progresso em feito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do desafio gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /content/update/inprogress/{id}:
+    put:
+      tags:
+        - challenge
+      summary: Transforma o desafio em "Feito" em "Em progresso"
+      operationId: TurnDoneChallengeIntoInProgressChallenge
+      description: Transforma o desafio em "Feito" em "Em progresso"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do desafio gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Challenge not found'
+  /content/update/title/{id}:
+    put:
+      tags:
+        - challenge
+      summary: Atualiza o título do desafio
+      operationId: UpdateChallengeTitle
+      description: Atualiza o título do desafio
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do desafio gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChallengeTitle'
+        description: Atualiza o nome do roadmap
+  /content/update/description/{id}:
+    put:
+      tags:
+        - challenge
+      summary: Atualiza a descrição do conteúdo
+      operationId: UpdateContentDescription
+      description: Atualiza o objetivo do conteúdo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do conteúdo gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChallengeDescription'
+        description: Atualiza a descrição do conteúdo
+  /content/update/deadline/{id}:
+    put:
+      tags:
+        - challenge
+      summary: Atualiza o prazo de término do conteúdo
+      operationId: UpdateContentDeadline
+      description: Atualiza o prazo de término do conteúdo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do conteúdo gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChallengeDeadline'
+        description: Atualiza a descrição do conteúdo
+  /content/update/reference/{id}:
+    put:
+      tags:
+        - challenge
+      summary: Atualiza a referencia do conteúdo
+      operationId: UpdateContentReference
+      description: Atualiza a referencia do conteúdo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do conteúdo gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChallengeReference'
+        description: Atualiza a descrição do conteúdo
+  /content/read/all:
+    get:
+      tags:
+        - challenge
+      summary: Lista todos os conteúdos criados
+      operationId: ListAllContent
+      description: Lista todos os conteúdos criados
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /content/read/all/{id}:
+    get:
+      tags:
+        - challenge
+      summary: Apresenta o conteúdo que possui o ID informado
+      operationId: ReadContentById
+      description: Apresenta o conteúdo que possui o ID informado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /content/read/inprogress:
+    get:
+      tags:
+        - content
+      summary: Lista todos os conteúdos em progresso
+      operationId: ListAllInProgressContent
+      description: Lista todos os conteúdos em progresso
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /content/read/done:
+    get:
+      tags:
+        - content
+      summary: Lista todos os conteúdos concluídos
+      operationId: ListAllDoneRoadmap
+      description: Lista todos os conteúdos concluídos
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /content/delete/{id}:
+    get:
+      tags:
+        - content
+      summary: Deleta o conteúdo que possui o ID informado
+      operationId: DeleteRoadmapById
+      description: Deleta o conteúdo que possui o ID informado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '204':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Not found'
+
+components:
+  schemas:
+    AddContent:
+      type: object
+      required:
+        - title
+        - description
+        - deadline
+        - reference
+        - challenge
+      properties:
+        title:
+          type: string
+          example: "Lógica de Programação"
+        description:
+          type: string
+          example: "Neste conteúdo você aprenderá os principais conceitos de lógica de programação"
+        deadline:
+          type: string
+          format: string
+          example: "2021-05-12"
+        reference:
+          type: string
+          format: string
+          example: "Lógica de Programação"
+        challenge:
+          type: string
+          format: string
+          example: "Lógica de Programação"
+    UpdateRoadmapTitle:
+      type: object
+      required:
+        - name
+      properties:
+        title:
+          type: string
+          example: NodeJS
+    UpdateContentDescription:
+      type: object
+      required:
+        - objective
+      properties:
+        description:
+          type: string
+          example: NodeJS
+    UpdateContentDeadline:
+      type: object
+      required:
+        - deadline
+      properties:
+        deadline:
+          type: string
+          example: "2021-05-20"
+    UpdateContentReference:
+      type: object
+      required:
+        - reference
+      properties:
+        reference:
+          type: string
+          example: "referencia do node"
