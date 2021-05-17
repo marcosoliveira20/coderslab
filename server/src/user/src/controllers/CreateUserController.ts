@@ -51,11 +51,10 @@ class CreateUserController {
       try {
         for(let i = 0; i < interest_list.length; i++) {
           interest_list[i]._id_user = data._id;
-          await api.interests.post("/interest/create", interest_list[i]);
+          await api.interests.post("/create", interest_list[i]);
         }
       } catch(err) {
-        await api.interests.delete(`/interest/delete/byUserId/${data._id}`);
-        await api.user.delete(`/user/delete/${data._id}`);
+        await api.interests.delete(`/delete/byUserId/${data._id}`);
         return response.status(err.response.status).send();
       }
 
@@ -65,7 +64,7 @@ class CreateUserController {
 
     } catch(err) {
       console.log(err.message);
-      return response.status(409).send();
+      return response.status(400).send();
     }
   }
 }

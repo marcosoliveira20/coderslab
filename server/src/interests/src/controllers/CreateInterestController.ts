@@ -20,7 +20,7 @@ class CreateInterestController {
       const findSubject = await interests.readBySubject(_id_subject);
 
       if (findSubject) {
-        return response.status(403).send();
+        return response.status(406).send();
       }
 
       await interests.create({
