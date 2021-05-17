@@ -20,7 +20,7 @@ class LoginUserController {
         return response.status(404).send();
       } 
       
-      const comparePassword= await compare(password, data.password);
+      const comparePassword = await compare(password, data.password);
 
       if(!comparePassword) {
         return response.status(404).send();

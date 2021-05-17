@@ -960,6 +960,23 @@ components:
         token:
           type: string
           description: 'Token da sessão'
+        interest_list:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: 'ID do interesse gerado pelo MongoDB'
+              _id_user:
+                type: string
+                description: 'ID do usuário gerado pelo MongoDB'
+              _id_subject:
+                type: string
+                description: 'ID do interesse gerado pelo MongoDB'
+              level:
+                type: number
+                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
     user_read_all.Response:
       title: user_read_all.Response
       description: 'Lista para usuários'
