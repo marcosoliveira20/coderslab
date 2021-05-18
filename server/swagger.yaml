@@ -208,7 +208,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user.Request'
+              $ref: '#/components/schemas/user_update.Request'
         required: true
   /user/delete/{id}:
     delete:
@@ -911,6 +911,50 @@ components:
           items:
             type: object
             properties:
+              _id_subject:
+                type: string
+                description: 'ID do interesse gerado pelo MongoDB'
+              level:
+                type: number
+                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+    
+    user_update.Request:
+      title: user.Request
+      description: 'Objeto para usuário'
+      type: object
+      properties:
+        username:
+          type: string
+          description: 'Username do usuário Ex: Joãozinho10'
+        name:
+          type: string
+          description: 'Nome do usuário Ex: João'
+        last_name:
+          type: string
+          description: 'Sobrenome do usuário Ex: Silva'
+        email:
+          type: string
+          description: 'E-mail do usuário Ex: joao@email.com'
+        discord_id:
+          type: string
+          description: 'ID do usuário no Discord Ex: joao#0134'
+        github_id:
+          type: string
+          description: 'ID do usuário no GitHub Ex: joaosilva10'
+        password:
+          type: string
+          description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+        interest_list:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: 'ID do interesse gerado pelo MongoDB'
+              _id_user:
+                type: string
+                description: 'ID do usuário gerado pelo MongoDB'
               _id_subject:
                 type: string
                 description: 'ID do interesse gerado pelo MongoDB'
