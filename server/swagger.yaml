@@ -202,6 +202,8 @@ paths:
           description: Bad Request
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
       requestBody:
         content:
           application/json:

@@ -40,21 +40,14 @@ class UpdateUserController {
       const api = new Api();
 
       try {
+        await api.interests.delete(`/delete/byUserId/${id}`);
+
         if(interest_list.length == 0) {
-          await api.interests.delete(`/delete/byUserId/${id}`);
           return response.status(200).send(data);
         } else {
           for(let i = 0; i < interest_list.length; i++) {
-            const interest = await api.interests.get(`/read/byId/${interest_list[i]._id}`);
-
-            if(interest.data) {
-              console.log("Achou");
-              // interest_list[i] = await api.interests.put(`/update/${interest_list[i]._id}`, interest_list[i]);
-            } else {
-              console.log("Não achou");
-            }
-
-            console.log("Saiu");
+            const interest = await api.interests.post("/create", interest_list[i]);
+            interest_list[i] = interest.data;
           }
         }
       } catch(err) {
