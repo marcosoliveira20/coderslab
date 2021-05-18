@@ -40,6 +40,28 @@ class UpdateUserController {
       const api = new Api();
 
       try {
+        // if(interest_list.length == 0) {
+        //   await api.interests.delete(`/delete/byUserId/${id}`);
+        //   return response.status(200).send(data);
+        // } else {
+        //   for(let i = 0; i < interest_list.length; i++) {
+            // const interest = await api.interests.get(`/read/byId/${interest_list[i]._id}`);
+            // let aux;
+
+            // if(interest_list[i]._id) {
+            //   console.log("cima");
+            //   aux = await api.interests.put(`/update/${interest_list[i]._id}`, interest_list[i]);
+            // } else {
+            //   console.log("baixo");
+
+            //   aux = await api.interests.post("/create", interest_list[i]);
+            // }
+
+            // interest_list[i] = aux.data;
+
+            // console.log("Saiu");
+          // }
+        // }
         await api.interests.delete(`/delete/byUserId/${id}`);
 
         if(interest_list.length == 0) {
