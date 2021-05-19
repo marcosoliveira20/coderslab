@@ -4,6 +4,7 @@
   THEME
 */
 // light
+
 .theme-light > button {
   background: $cdl_pink;
   border: 1px solid $cdl_pink;
@@ -150,7 +151,6 @@
   header > h4 {
     font-weight: 300;
     text-align: center;
-    color: $cdl_white;
   }
 }
 
@@ -251,10 +251,19 @@
 }
 
 .full-type header {
-  > p {
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 33px;
+  >div:first-child {
+
+    p {
+      width: calc(100% - 18px);
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 33px;
+    }
+
+    img {
+      position: absolute;
+      right: 18px;
+    }
   }
 
   div {

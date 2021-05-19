@@ -32,7 +32,7 @@ class="card-base roadmap-type theme-light"
       <h4>{{data.name}}</h4>
       <div>
         <h4>{{data.level === 0 ? "Iniciante" : data.level === 1 ? "Intermediário" : "Avançado"}}</h4>
-        <img src="../../../../assets/icons/verifyied_icon.svg" alt=""/>
+        <img *ngIf="data.is_default" src="../../../../assets/icons/verifyied_icon.svg" alt=""/>
       </div>
     </header>
 
@@ -75,10 +75,13 @@ class="card-base roadmap-type theme-light"
 
 
 <!-- DEFAULT CARD -->
-<div class="card-base full-type" [ngClass]="{'theme-dark': data.isDefault, 'theme-light': !data.isDefault}" (click)="handleRedirectToGroup(data.token)" *ngIf="type === 'default'">
+<div class="card-base full-type" [ngClass]="{'theme-dark': data.is_default, 'theme-light': !data.is_default}" (click)="handleRedirectToGroup(data.token)" *ngIf="type === 'default'">
   <main>
     <header>
-      <p>{{data.name}}</p>
+      <div>
+        <p>{{data.name}}</p>
+        <img *ngIf="data.is_default" src="../../../../assets/icons/verifyied_icon.svg" alt=""/>
+      </div>
       <div *ngIf="data.category">
         <div *ngFor="let category of data.category">
           {{category.label}}

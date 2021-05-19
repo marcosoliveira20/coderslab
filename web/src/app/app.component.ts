@@ -122,7 +122,7 @@ export const userMock = {
       ],
       owner: 1,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 2,
@@ -158,7 +158,7 @@ export const userMock = {
       ],
       owner: 2,
       category: [{ label: "back end" }, { label: "dev web" }, { label: "dba" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 3,
@@ -194,7 +194,7 @@ export const userMock = {
       ],
       owner: 3,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: true,
+      is_default: true,
     },
     {
       token: 4,
@@ -230,7 +230,7 @@ export const userMock = {
       ],
       owner: 1,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 5,
@@ -266,7 +266,7 @@ export const userMock = {
       ],
       owner: 2,
       category: [{ label: "back end" }, { label: "dev web" }, { label: "dba" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 6,
@@ -302,12 +302,12 @@ export const userMock = {
       ],
       owner: 3,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: true,
+      is_default: true,
     },
   ],
   interest_list: [
-    { subject_label: "Lógica de programação", level: "", isDefault: true },
-    { subject_label: "Node", level: "", isDefault: false },
+    { subject_label: "Lógica de programação", level: "", is_default: true },
+    { subject_label: "Node", level: "", is_default: false },
   ],
 };
 
