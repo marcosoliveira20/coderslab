@@ -33,22 +33,6 @@ class Group implements IGroupRepository {
     return GroupSchema.findOne({ token });
   }
 
-  readByName(name: string) : Promise<Array<IGroupDTO>> {
-    return GroupSchema.find({ name: { "$regex": name }, is_public: true}).sort({ name: 1 });
-  }
-
-  readByCategory(category: string) : Promise<Array<IGroupDTO>> {
-    return GroupSchema.find({ category, is_public: true}).sort({ name: 1 });
-  }
-
-  readBySubject(subject_label: string) : Promise<Array<IGroupDTO>> {
-    return GroupSchema.find({ subject_label, is_public: true }).sort({ name: 1 });
-  }
-
-  readByLevel(level: number) : Promise<Array<IGroupDTO>> {
-    return GroupSchema.find({ level, is_public: true }).sort({ name: 1 });
-  }
-
   readByOwner(_owner: string) : Promise<Array<IGroupDTO>> {
     return GroupSchema.find({ _owner }).sort({ name: 1 });
   }
