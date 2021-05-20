@@ -11,8 +11,7 @@ class CreateGroupController {
 			level,
 			is_public,
 			is_default,
-			_owner,
-			_schedule_list
+			_owner
 		} = request.body;
 
 		const group = new Group();
@@ -22,13 +21,6 @@ class CreateGroupController {
 				return response.status(406).send();
 			}
 
-			// deve ser apenas uma validacão interna para não repetir token
-			// const data = await group.readByToken(token);
-
-			// if(data) {
-			// 	return response.status(406).send();
-			// }
-
 			await group.create({
 				name,
 				category,
@@ -37,8 +29,7 @@ class CreateGroupController {
   				token: Math.random().toString(36).substring(8),
 				is_public,
 				is_default,
-				_owner,
-				_schedule_list
+				_owner
 			});
 
 			return response.status(201).send();

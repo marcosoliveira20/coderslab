@@ -11,8 +11,7 @@ class Group implements IGroupRepository {
     token,
     is_public,
     is_default,
-    _owner,
-    _schedule_list
+    _owner
   } : IGroupDTO) : void {
     GroupSchema.create({
       name,
@@ -22,8 +21,7 @@ class Group implements IGroupRepository {
       token,
       is_public,
       is_default,
-      _owner,
-      _schedule_list
+      _owner
     });
   }
 
@@ -67,8 +65,7 @@ class Group implements IGroupRepository {
     token,
     is_public,
     is_default,
-    _owner,
-    _schedule_list
+    _owner
   } : IGroupDTO) : Promise<IGroupDTO> {
     return GroupSchema.findByIdAndUpdate(_id, {
       name,
@@ -78,8 +75,7 @@ class Group implements IGroupRepository {
       token,
       is_public,
       is_default,
-      _owner,
-      _schedule_list
+      _owner
     }, {new: true});
   }
 
