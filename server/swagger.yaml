@@ -52,8 +52,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/user.Request'
-        required: true
-  
+        required: true 
   /user/login:
     post:
       tags: 
@@ -77,9 +76,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/user_login.Request'
-        required: true
-  
-    
+        required: true 
   /user/read/byId/{id}:
     get:
       summary: Busca um usuário com base em um ID
@@ -369,7 +366,7 @@ paths:
           schema:
             type: string
             minimum: 1
-      description: Busca todos os grupos já registrados na plataforma que possuem um determiando assunto e retorna uma lista deles ordenada pelo nome em ordem alfabética.
+      description: Busca todos os grupos já registrados na plataforma que possuem um determiando assunto e retorna uma lista deles ordenada pelo nome em ordem alfabética. Sem a quantidade de integrantes desse grupo.
       operationId: group_bySubject
       responses:
         '200':
@@ -393,7 +390,7 @@ paths:
           schema:
             type: string
             minimum: 1
-      description: Busca todos os grupos já registrados na plataforma que possuem um determiando nível e retorna uma lista deles ordenada pelo nome em ordem alfabética.
+      description: Busca todos os grupos já registrados na plataforma que possuem um determiando nível e retorna uma lista deles ordenada pelo nome em ordem alfabética. Sem a quantidade de integrantes desse grupo.
       operationId: group_byLevel
       responses:
         '200':
@@ -406,6 +403,30 @@ paths:
           description: Bad Request
         '406':
           description: Not Acceptable
+  /group/read/byOwner/{idUser}:
+    get:
+      tags:
+        - Group
+      summary: Busca uma lista de grupos com base em seu dono
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: ID do usuário dono dos grupos gerado pelo MongoDB
+          schema:
+            type: string
+            minimum: 1
+      description: Busca todos os grupos da plataforma dos quais o usuário informado é donoe retorna uma lista deles ordenada pelo nome em ordem alfabética. Sem a quantidade de integrantes desse grupo.
+      operationId: group_byGroup
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
   /group/read/all:
     get:
       tags:
@@ -444,7 +465,7 @@ paths:
             type: string
             format: ObjectId
             minimum: 1
-      description: Atualiza os dados de um grupo com base em seu ID e o ID do usuário dono do grupo gerados pelo MongoDB.
+      description: Atualiza os dados de um grupo com base em seu ID e o ID do usuário dono do grupo gerados pelo MongoDB. Sem a quantidade de integrantes desse grupo.
       operationId: group_update
       responses:
         '200':
@@ -522,7 +543,7 @@ paths:
             schema:
               $ref: '#/components/schemas/unionUserGroup.Request'
         required: true
-  /unionUserGroup/read/users/{idGroup}:
+  /unionUserGroup/read/allUsersByGroup/{idGroup}:
     get:
       tags:
         - UnionUserGroup
@@ -535,7 +556,7 @@ paths:
           schema:
             type: string
             minimum: 1
-      description: Busca o ID de todos os usuário que fazem parte de determinado grupo.
+      description: Busca os dados de todos os usuário que fazem parte de determinado grupo.
       operationId: unionUserGroup_byGroup
       responses:
         '200':
@@ -543,10 +564,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/unionUserGroup_read_all.Response'
+                $ref: '#/components/schemas/user_read_all.Response'
         '400':
           description: Bad Request
-  /unionUserGroup/read/groups/{idUser}:
+  /unionUserGroup/read/allGroupsByUser/{idUser}:
     get:
       tags:
         - UnionUserGroup
@@ -559,8 +580,32 @@ paths:
           schema:
             type: string
             minimum: 1
-      description: Busca o ID de todos os grupos dos quais determinado usuário faz parte.
+      description: Busca todos os grupos dos quais determinado usuário faz parte. Com a quantidade de integrantes de cada grupo.
       operationId: unionUserGroup_byUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unionUserGroup_read_all.Response'
+        '400':
+          description: Bad Request
+  /unionUserGroup/read/allGroupsByOwner/{idUser}:
+    get:
+      tags:
+        - UnionUserGroup
+      summary: Busca uma lista de grupos com base em um ID de um usuário
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: ID do usuário dono dos grupos gerado pelo MongoDB
+          schema:
+            type: string
+            minimum: 1
+      description: Busca todos os grupos da plataforma dos quais o usuário informado é dono. Com a quantidade de integrantes de cada grupo.
+      operationId: unionUserGroup_byOwner
       responses:
         '200':
           description: OK
@@ -917,7 +962,6 @@ components:
               level:
                 type: number
                 description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-    
     user_update.Request:
       title: user.Request
       description: 'Objeto para usuário'
@@ -961,7 +1005,6 @@ components:
               level:
                 type: number
                 description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-    
     user_login.Request:
       title: user_login.Request
       description: 'Objeto para usuário'
@@ -973,7 +1016,6 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-  
     user_read.Response:
       title: user_read.Response
       description: 'Objeto para usuário'
@@ -1020,7 +1062,6 @@ components:
               level:
                 type: number
                 description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-    
     user_read_token.Response:
       title: user_read.Response
       description: 'Objeto para usuário'
@@ -1069,8 +1110,7 @@ components:
                 description: 'ID do interesse gerado pelo MongoDB'
               level:
                 type: number
-                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-                
+                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'               
     user_read_all.Response:
       title: user_read_all.Response
       description: 'Lista para usuários'
@@ -1102,6 +1142,23 @@ components:
           password:
             type: string
             description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
+          interest_list:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: 'ID do interesse gerado pelo MongoDB'
+                _id_user:
+                  type: string
+                  description: 'ID do usuário gerado pelo MongoDB'
+                _id_subject:
+                  type: string
+                  description: 'ID do interesse gerado pelo MongoDB'
+                level:
+                  type: number
+                  description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
     
     # Group
     group.Request:
@@ -1120,9 +1177,6 @@ components:
         level:
           type: number
           description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-        token:
-          type: string
-          description: 'Token de acesso para grupo'
         is_public:
           type: boolean
           description: 'Identificação para dizer se o grupo é público ou particular'
@@ -1211,7 +1265,7 @@ components:
             items:
               type: string
               description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
-
+    
     # Union User Group
     unionUserGroup.Request:
       title: unionUserGroup.Request
@@ -1234,13 +1288,38 @@ components:
           _id:
             type: string
             description: 'ID gerado pelo MongoDB'
-          _id_user:
+          name:
             type: string
-            description: 'ID do usuário gerado pelo MongoDB que está entrando no grupo'
-          _id_group:
+            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+          number_members:
+            type: number
+            description: 'Quantidade de usuários que existem no grupo'
+          category:
+            type: array
+            items:
+              type: string
+              description: 'Lista de assuntos Ex: [Node, Java]'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+          token:
             type: string
-            description: 'ID do grupo gerado pelo MongoDB no qual o usuário está entrando'
-    
+            description: 'Token de acesso para grupo'
+          is_public:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é público ou particular'
+          is_default:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+          _owner:
+            type: string
+            description: 'ID do dono do grupo gerado pelo MongoDB'
+          _schedule_list:
+            type: array
+            items:
+              type: string
+              description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
+            
     # Interest
     interest.Request:
       title: interest.Request
