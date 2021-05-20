@@ -189,7 +189,7 @@ paths:
             type: string
             format: ObjectId
             minimum: 1
-      description: Atualiza os dados de perfil de um usuário com base em seu ID gerado pelo MongoDB.
+      description: Atualiza os dados de perfil de um usuário e sua lista de interesses com base em seu ID gerado pelo MongoDB. Caso haja um interesse novo, ele deve vir com _id = "", caso o campo esteja preenchido, é considerado como um interesse já existente que tem que ser atualizado.
       operationId: user_update
       responses:
         '200':

@@ -40,44 +40,25 @@ class UpdateUserController {
       const api = new Api();
 
       try {
-        // if(interest_list.length == 0) {
-        //   await api.interests.delete(`/delete/byUserId/${id}`);
-        //   return response.status(200).send(data);
-        // } else {
-        //   for(let i = 0; i < interest_list.length; i++) {
-            // const interest = await api.interests.get(`/read/byId/${interest_list[i]._id}`);
-            // let aux;
-
-            // if(interest_list[i]._id) {
-            //   console.log("cima");
-            //   aux = await api.interests.put(`/update/${interest_list[i]._id}`, interest_list[i]);
-            // } else {
-            //   console.log("baixo");
-
-            //   aux = await api.interests.post("/create", interest_list[i]);
-            // }
-
-            // interest_list[i] = aux.data;
-
-            // console.log("Saiu");
-          // }
-        // }
-        await api.interests.delete(`/delete/byUserId/${id}`);
-
-        if(interest_list.length == 0) {
-          return response.status(200).send(data);
-        } else {
+        if(interest_list.length != 0) {
           for(let i = 0; i < interest_list.length; i++) {
-            const interest = await api.interests.post("/create", interest_list[i]);
+            let interest;
+
+            if(interest_list[i]._id != "") {
+              interest = await api.interests.put(`/update/${interest_list[i]._id}`, interest_list[i]);
+            } else {
+              interest = await api.interests.post("/create", interest_list[i]);
+            }
+
             interest_list[i] = interest.data;
           }
         }
+
       } catch(err) {
         return response.status(err.response.status).send();
       }
 
       data.interest_list = interest_list;
-
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
