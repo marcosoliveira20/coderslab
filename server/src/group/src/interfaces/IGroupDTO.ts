@@ -1,5 +1,6 @@
 interface IGroupDTO {
   name: string;
+  number_members?: number;
   category: Array<String>;
   subject_label: string;
   level: number;

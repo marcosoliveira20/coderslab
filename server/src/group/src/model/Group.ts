@@ -51,6 +51,10 @@ class Group implements IGroupRepository {
     return GroupSchema.find({ level, is_public: true }).sort({ name: 1 });
   }
 
+  readByOwner(_owner: string) : Promise<Array<IGroupDTO>> {
+    return GroupSchema.find({ _owner }).sort({ name: 1 });
+  }
+
   readAll() : Promise<Array<IGroupDTO>> {
     return GroupSchema.find({ is_public: true }).sort({ name: 1 });
   }

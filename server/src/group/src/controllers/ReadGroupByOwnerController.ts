@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 
-import { UnionUserGroup } from "../model/UnionUserGroup";
+import { Group } from "../model/Group";
 
-class ReadGroupsController {
+class ReadGroupByOwnerController {
 	async handle(request: Request, response: Response) {
 		const { idUser } = request.params;
 
-		const union = new UnionUserGroup();
+		const group = new Group();
 
 		try {
-			const data = await union.readGroups(idUser);
+			const data = await group.readByOwner(idUser);
 
 			response.status(200).send(data);
 		} catch(err) {
@@ -19,4 +19,4 @@ class ReadGroupsController {
 	}
 }
 
-export { ReadGroupsController };
+export { ReadGroupByOwnerController };
