@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { CreateGroupController } from "./controllers/CreateGroupController";
+import { ReadGroupBySearchController } from "./controllers/ReadGroupBySearchController";
 import { ReadGroupByIdController } from "./controllers/ReadGroupByIdController";
 import { ReadGroupByTokenController } from "./controllers/ReadGroupByTokenController";
 import { ReadGroupByOwnerController } from "./controllers/ReadGroupByOwnerController";
@@ -11,6 +12,7 @@ import { DeleteGroupController } from "./controllers/DeleteGroupController";
 const router = Router();
 
 const createGroupController = new CreateGroupController();
+const readGroupBySearchController = new ReadGroupBySearchController();
 const readGroupByIdController = new ReadGroupByIdController();
 const readGroupByTokenController = new ReadGroupByTokenController();
 const readGroupByOwnerController = new ReadGroupByOwnerController();
@@ -19,6 +21,7 @@ const updateGroupController = new UpdateGroupController();
 const deleteGroupController = new DeleteGroupController();
 
 router.post("/group/create", createGroupController.handle);
+router.post("/group/read/search", readGroupBySearchController.handle);
 router.get("/group/read/byId/:id", readGroupByIdController.handle);
 router.get("/group/read/byToken/:token", readGroupByTokenController.handle);
 router.get("/group/read/byOwner/:idUser", readGroupByOwnerController.handle);
