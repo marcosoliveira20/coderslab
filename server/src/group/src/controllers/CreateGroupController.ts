@@ -44,7 +44,7 @@ class CreateGroupController {
 				return response.status(err.response.status).send();
 			}
 
-			return response.status(201).send();
+			return response.status(201).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send();
