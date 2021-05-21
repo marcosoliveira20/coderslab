@@ -10,8 +10,7 @@ const GroupSchema = new Schema({
   token: { type: String, required: true, unique: true },
   is_public: { type: Boolean, required: true },
   is_default: { type: Boolean, required: true },
-  _owner: { type: Schema.Types.ObjectId, required: true },
-  _schedule_list: { type: [Object], required: false },
+  _owner: { type: Schema.Types.ObjectId, required: true }
 }, {
   timestamps: true,
 })

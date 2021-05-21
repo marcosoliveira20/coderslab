@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
+import Api from "../../../Api";
 
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
@@ -21,7 +22,7 @@ class CreateGroupController {
 				return response.status(406).send();
 			}
 
-			await group.create({
+			const data = await group.create({
 				name,
 				category,
 				subject_label,
@@ -31,6 +32,17 @@ class CreateGroupController {
 				is_default,
 				_owner
 			});
+
+			const api = new Api();
+
+			try {
+				await api.unionUserGroup.post("/create", {
+					_id_user: data._owner,
+					_id_group: data._id
+				});
+			} catch(err) {
+				return response.status(err.response.status).send();
+			}
 
 			return response.status(201).send();
 		} catch(err) {

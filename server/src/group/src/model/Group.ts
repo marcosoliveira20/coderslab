@@ -12,8 +12,8 @@ class Group implements IGroupRepository {
     is_public,
     is_default,
     _owner
-  } : IGroupDTO) : void {
-    GroupSchema.create({
+  } : IGroupDTO) : Promise<IGroupDTO> {
+    return GroupSchema.create({
       name,
       category,
       subject_label,

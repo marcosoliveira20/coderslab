@@ -1,4 +1,5 @@
 interface IGroupDTO {
+  _id?: string;
   name: string;
   number_members?: number;
   next_schedule?: Date;

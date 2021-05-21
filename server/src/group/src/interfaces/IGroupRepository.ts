@@ -1,7 +1,7 @@
 import { IGroupDTO } from "./IGroupDTO";
 
 interface IGroupRepository {
-    create(data: IGroupDTO) : void;
+    create(data: IGroupDTO) : Promise<IGroupDTO>;
     readById(_id: string) : Promise<IGroupDTO>;
     readByToken(token: string) : Promise<IGroupDTO>;
     readByOwner(_owner: string) : Promise<Array<IGroupDTO>>;
