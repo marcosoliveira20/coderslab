@@ -37,6 +37,10 @@ class UnionUserGroup implements IUnionUserGroupRepository {
             }
         });
     }
+
+    deleteAllGroup(_id_group: string): void {
+        return UnionUserGroupSchema.deleteMany({ _id_group });
+    }
 }
 
 export { UnionUserGroup };
