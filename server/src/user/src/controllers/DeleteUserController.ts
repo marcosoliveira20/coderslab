@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { User } from "../model/User";
+import Api from "../../../Api";
 
 class DeleteUserController {
   async handle(request: Request, response: Response) {
@@ -13,6 +14,14 @@ class DeleteUserController {
 
       if(!findIndex) {
         return response.status(404).send();
+      }
+
+      const api = new Api();
+
+      try {
+        await api.interests.delete(`/delete/byUserId/${id}`);
+      } catch(err) {
+        return response.status(err.response.status).send();
       }
 
       await user.delete(id);

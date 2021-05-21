@@ -17,19 +17,19 @@ class CreateInterestController {
         return response.status(406).send();
       }
 
-      const findSubject = await interests.readBySubject(_id_subject);
+      const findSubject = await interests.readByUserAndSubject(_id_user, _id_subject);
 
       if (findSubject) {
-        return response.status(403).send();
+        return response.status(406).send();
       }
 
-      await interests.create({
+      const data = await interests.create({
         _id_user,
         _id_subject,
         level
       });
 
-      return response.status(201).send();
+      return response.status(201).send(data);
     } catch(err) {
       console.log(err.message);
       return response.status(400).send();

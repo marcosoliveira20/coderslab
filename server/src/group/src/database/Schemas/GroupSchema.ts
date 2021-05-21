@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose"
 
 const GroupSchema = new Schema({
   name: { type: String, required: true },
+  number_members: { type: Number, required: false},
   category: { type: [String], required: true },
   subject_label: { type: String, required: true },
   level: { type: Number, required: true },

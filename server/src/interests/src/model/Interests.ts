@@ -7,8 +7,8 @@ class Interests implements IInterestsRepository {
         _id_user,
         _id_subject,
         level
-    }: IInterestsDTO): void {
-        InterestsSchema.create({
+    }: IInterestsDTO): Promise<IInterestsDTO> {
+        return InterestsSchema.create({
             _id_user,
             _id_subject,
             level
@@ -19,8 +19,12 @@ class Interests implements IInterestsRepository {
         return InterestsSchema.findOne({ _id });
     }
 
-    readBySubject(_id_subject: string): Promise<IInterestsDTO> {
-        return InterestsSchema.findOne({ _id_subject });
+    readByUserId(_id_user: string): Array<Promise<IInterestsDTO>> {
+        return InterestsSchema.find({ _id_user });
+    }
+
+    readByUserAndSubject(_id_user: string, _id_subject: string): Promise<IInterestsDTO> {
+        return InterestsSchema.findOne({ _id_user, _id_subject });
     }
 
     readAll(): Promise<Array<IInterestsDTO>> {
@@ -40,7 +44,11 @@ class Interests implements IInterestsRepository {
     }
 
     delete(_id: string): void {
-        InterestsSchema.deleteOne({ _id });
+        return InterestsSchema.deleteOne({ _id });
+    }
+
+    deleteByUserId(_id_user: string): void {
+        return InterestsSchema.deleteMany({ _id_user });
     }
 }
 

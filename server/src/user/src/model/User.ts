@@ -11,8 +11,8 @@ class User implements IUsersRepository {
     discord_id,
     github_id,
     password,
-  }: IUserDTO): void {
-    UserSchema.create({
+  }: IUserDTO): Promise<IUserDTO> {
+    return UserSchema.create({
       username,
       name,
       last_name,
@@ -60,7 +60,7 @@ class User implements IUsersRepository {
   }
 
   delete(_id : string) : void {
-    UserSchema.deleteOne({ _id });
+    return UserSchema.deleteOne({ _id });
   }
 }
 

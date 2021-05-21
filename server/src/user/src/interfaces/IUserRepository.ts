@@ -1,7 +1,7 @@
 import { IUserDTO } from "./IUserDTO";
 
 interface IUsersRepository {
-  create(data: IUserDTO): void;
+  create(data: IUserDTO): Promise<IUserDTO>;
   readById(_id: string) : Promise<IUserDTO>;
   readByUsername(username: string) : Promise<IUserDTO>;
   readByEmail(email: string) : Promise<IUserDTO>;

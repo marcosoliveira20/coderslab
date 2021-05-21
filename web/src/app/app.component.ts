@@ -1,12 +1,81 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
 const userList = [
-  {username: "Luiz Carlos", discord_id: "luiz #4526"},
-  {username: "Maria Clara", discord_id: "marica #3860"},
-  {username: "João Carvalho", discord_id: "jcarvalho #3056"},
-  {username: "Larissa Soares", discord_id: "lari #0356"},
-]
+  { username: "Luiz Carlos", discord_id: "luiz #4526" },
+  { username: "Maria Clara", discord_id: "marica #3860" },
+  { username: "João Carvalho", discord_id: "jcarvalho #3056" },
+  { username: "Larissa Soares", discord_id: "lari #0356" },
+];
+
+const content = {
+  title: "titulo conteudo",
+  description: "descricao conteudo",
+  deadline: new Date("2021-06-20"),
+  reference: "https://matias.ma/nsfw/",
+  is_done: false,
+  challenge: {
+    id: Math.random() * 1000,
+    title: "titulo challenge",
+    description: "descricao challenge",
+    is_done: false,
+  },
+};
+
+export const roadmapMock = [
+  {
+    id: Math.random()*1000,
+    name: "Lógica de Programação",
+    is_default: true,
+    is_done: true,
+    level: 0,
+    content_list: [
+      { ...content },
+      { ...content },
+      { ...content },
+      { ...content },
+    ],
+  },
+  {
+    id: Math.random()*1000,
+    name: "Java",
+    is_default: true,
+    is_done: true,
+    level: 0,
+    content_list: [
+      { ...content },
+      { ...content },
+      { ...content },
+      { ...content },
+    ],
+  },
+  {
+    id: Math.random()*1000,
+    name: "Node",
+    is_default: false,
+    is_done: false,
+    level: 0,
+    content_list: [
+      { ...content },
+      { ...content },
+      { ...content },
+      { ...content },
+    ],
+  },
+  {
+    id: Math.random()*1000,
+    name: "SQL",
+    is_default: false,
+    is_done: false,
+    level: 0,
+    content_list: [
+      { ...content },
+      { ...content },
+      { ...content },
+      { ...content },
+    ],
+  },
+];
 
 /**
  * Mock object for tests before integration
@@ -30,27 +99,30 @@ export const userMock = {
           id: Math.random() * 1000,
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
       ],
       owner: 1,
-      category: [{label: "back end"}, {label: "dev web"}],
-      isDefault: false
+      category: [{ label: "back end" }, { label: "dev web" }],
+      isDefault: false,
     },
     {
       token: 2,
@@ -63,27 +135,30 @@ export const userMock = {
           id: Math.random() * 1000,
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
       ],
       owner: 2,
-      category: [{label: "back end"}, {label: "dev web"}, {label: "dba"}],
-      isDefault: false
+      category: [{ label: "back end" }, { label: "dev web" }, { label: "dba" }],
+      isDefault: false,
     },
     {
       token: 3,
@@ -96,27 +171,30 @@ export const userMock = {
           id: Math.random() * 1000,
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
       ],
       owner: 3,
-      category: [{label: "back end"}, {label: "dev web"}],
-      isDefault: true
+      category: [{ label: "back end" }, { label: "dev web" }],
+      isDefault: true,
     },
     {
       token: 4,
@@ -129,27 +207,30 @@ export const userMock = {
           id: Math.random() * 1000,
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
       ],
       owner: 1,
-      category: [{label: "back end"}, {label: "dev web"}],
-      isDefault: false
+      category: [{ label: "back end" }, { label: "dev web" }],
+      isDefault: false,
     },
     {
       token: 5,
@@ -162,27 +243,30 @@ export const userMock = {
           id: Math.random() * 1000,
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
       ],
       owner: 2,
-      category: [{label: "back end"}, {label: "dev web"}, {label: "dba"}],
-      isDefault: false
+      category: [{ label: "back end" }, { label: "dev web" }, { label: "dba" }],
+      isDefault: false,
     },
     {
       token: 6,
@@ -195,34 +279,37 @@ export const userMock = {
           id: Math.random() * 1000,
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
         {
           id: Math.random() * 1000,
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
+          owner: Math.random() * 1000,
         },
       ],
       owner: 3,
-      category: [{label: "back end"}, {label: "dev web"}],
-      isDefault: true
-    }
+      category: [{ label: "back end" }, { label: "dev web" }],
+      isDefault: true,
+    },
   ],
   interest_list: [
-    {subject_label: "Lógica de programação", level: "", isDefault: true },
-    {subject_label: "Node", level: "", isDefault: false },
-  ]
-}
+    { subject_label: "Lógica de programação", level: "", isDefault: true },
+    { subject_label: "Node", level: "", isDefault: false },
+  ],
+};
 
 export const interestListMock = [
   {
@@ -256,9 +343,9 @@ export const interestListMock = [
 ];
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
   constructor(private router: Router) {}
