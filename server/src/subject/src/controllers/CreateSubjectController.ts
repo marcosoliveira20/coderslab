@@ -17,15 +17,15 @@ export default class CreateSubjectController {
       subject.readByLabel(label).then((e) => {
         findSubjectLabel = e;
         if (findSubjectLabel) {
-          return response.status(403);
+          return response.status(403).send();
         }
         subject.create(label, categories).then(() => {
-          return response.status(201);
+          return response.status(201).send();
         });
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400);
+      return response.status(400).send();
     }
   }
 }

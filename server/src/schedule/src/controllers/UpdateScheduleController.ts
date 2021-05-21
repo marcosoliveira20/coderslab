@@ -15,7 +15,7 @@ export default class UpdateScheduleController {
       await schedule.readById(id).then((e) => {
         findScheduleId = e;
         if (!findScheduleId) {
-          return response.status(404);
+          return response.status(404).send();
         }
         schedule.update(id, datetime, link, description).then((dataBd) => {
           const data: IScheduleDTO = dataBd;
@@ -24,7 +24,7 @@ export default class UpdateScheduleController {
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400);
+      return response.status(400).send();
     }
   }
 }

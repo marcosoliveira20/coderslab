@@ -12,7 +12,7 @@ export default class ReadByIdSubjectController {
     try {
       const dataBd = await subject.readById(id);
       if (!dataBd) {
-        return response.status(404);
+        return response.status(404).send();
       }
       /* const data: ISubjecDTO = {
         id: dataBd._id,
@@ -22,7 +22,7 @@ export default class ReadByIdSubjectController {
       return response.status(200).send(dataBd);
     } catch (err) {
       console.log(err.message);
-      return response.status(400);
+      return response.status(400).send();
     }
   }
 }

@@ -5,12 +5,12 @@ import { Schedule } from "../model/Schedule";
 
 export default class ReadByIdScheduleController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
+    const { id_group } = request.params;
 
     const schedule = new Schedule();
 
     try {
-      const dataBd = await schedule.readById(id);
+      const dataBd = await schedule.readByGroup(id_group);
       if (!dataBd) {
         return response.status(404).send();
       }

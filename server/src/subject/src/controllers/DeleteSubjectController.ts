@@ -11,14 +11,14 @@ export default class DeleteSubjectController {
     try {
       const data = await subject.readById(id);
       if (!data) {
-        return response.status(404);
+        return response.status(404).send();
       }
       await subject.delete(id).then(() => {
-        return response.status(204);
+        return response.status(204).send();
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400);
+      return response.status(400).send();
     }
   }
 }

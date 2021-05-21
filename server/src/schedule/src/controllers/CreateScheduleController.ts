@@ -4,17 +4,27 @@ import { Schedule } from "../model/Schedule";
 
 export default class CreateScheduleController {
   async handle(request: Request, response: Response) {
-    const { datetime, link, description, owner } = request.body;
+    const { datetime, link, description, owner, id_group } = request.body;
 
     const schedule = new Schedule();
 
     try {
-      await schedule.create(datetime, link, description, owner).then(() => {
-        return response.status(201);
+      let findScheduleOwner;
+      schedule.readByOwner(owner).then((e) => {
+        findScheduleOwner = e;
+        if (findScheduleOwner) {
+          return response.status(403).send();
+        }
+        schedule
+          .create(datetime, link, description, owner, id_group)
+          .then(() => {
+            console.log(id_group);
+            return response.status(201).send();
+          });
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400);
+      return response.status(400).send();
     }
   }
 }

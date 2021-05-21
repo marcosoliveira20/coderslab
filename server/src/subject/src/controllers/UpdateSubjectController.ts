@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { ISubjecDTO } from "../interfaces/ISubjectDTO";
+// import { ISubjecDTO } from "../interfaces/ISubjectDTO";
 import { Subject } from "../model/Subject";
 
 export default class UpdateSubjectController {
@@ -15,7 +15,7 @@ export default class UpdateSubjectController {
       await subject.readById(id).then((e) => {
         findSubjectId = e;
         if (!findSubjectId) {
-          return response.status(404);
+          return response.status(404).send();
         }
         subject.update(id, categories).then((dataBd) => {
           /* const data: ISubjecDTO = {
@@ -28,7 +28,7 @@ export default class UpdateSubjectController {
       });
     } catch (err) {
       console.log(err.message);
-      return response.status(400);
+      return response.status(400).send();
     }
   }
 }
