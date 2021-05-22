@@ -242,6 +242,10 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read.Response'
         '400':
           description: Bad Request
         '406':
@@ -251,6 +255,28 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/group.Request'
+        required: true
+  /group/read/search:
+    post:
+      tags: 
+        - Group
+      summary: Busca uma lista de grupos com base em um filtro
+      description: Realiza a busca de todos os grupos correspondentes a um filtro passadado.
+      operationId: group_search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group_read_all.Response'
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/unionUserGroup_search.Request'
         required: true
   /group/read/byId/{id}:
     get:
@@ -445,6 +471,28 @@ paths:
             schema:
               $ref: '#/components/schemas/unionUserGroup.Request'
         required: true
+  /unionUserGroup/read/search:
+    post:
+      tags: 
+        - UnionUserGroup
+      summary: Busca uma lista de grupos com base em um filtro
+      description: Realiza a busca de todos os grupos correspondentes a um filtro passadado.
+      operationId: unionUserGroup_search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unionUserGroup_search.Response'
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/unionUserGroup_search.Request'
+        required: true
   /unionUserGroup/read/allUsersByGroup/{idGroup}:
     get:
       tags:
@@ -517,7 +565,7 @@ paths:
                 $ref: '#/components/schemas/unionUserGroup_read_all.Response'
         '400':
           description: Bad Request
-  /unionUserGroup/delete/{idUser}/{idGroup}:
+  /unionUserGroup/delete/one/{idUser}/{idGroup}:
     delete:
       tags:
         - UnionUserGroup
@@ -540,7 +588,7 @@ paths:
             format: ObjectId
             minimum: 1
       description: Realiza a remoção de um determinado usuário de um grupo do qual ele pertence.
-      operationId: unionUserGroup_delete
+      operationId: unionUserGroup_one_delete
       responses:
         '204':
           description: No Content
@@ -548,7 +596,27 @@ paths:
           description: Bad request
         '404':
             description: Not Found
-
+  /unionUserGroup/delete/allGroup/{idGroup}:
+    delete:
+      tags:
+        - UnionUserGroup
+      summary: Remove todos os usuário de um determinado grupo
+      parameters:
+        - name: idGroup
+          in: path
+          required: true
+          description: ID do grupo gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: Remove todos os usuário de um grupo quando o grupo é excluído
+      operationId: unionUserGroup_all_delete
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad request
   # Interest
   /interest/create:
     post:
@@ -820,8 +888,8 @@ paths:
           description: Bad request
         '404':
             description: Not Found
-servers:
 # Added by API Auto Mocking Plugin
+servers:
   - url: 'https://cluster.prod.com.br/coderslab'
     description: Link do cluster produtivo - External URL PRD
 components:
@@ -1071,11 +1139,14 @@ components:
         name:
           type: string
           description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        subject_label:
+          type: string
+          description: 'Assunto do grupo Ex: Node'
         category:
           type: array
           items:
             type: string
-            description: 'Lista de assuntos Ex: [Node, Java]'
+            description: 'Lista de categorias Ex: [Web, Mobile]'
         level:
           type: number
           description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
@@ -1088,11 +1159,6 @@ components:
         _owner:
           type: string
           description: 'ID do dono do grupo gerado pelo MongoDB'
-        _schedule_list:
-          type: array
-          items:
-            type: string
-            description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
     group_read.Response:
       title: group_read.Response
       description: 'Objeto para grupo'
@@ -1104,11 +1170,14 @@ components:
         name:
           type: string
           description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        subject_label:
+          type: string
+          description: 'Assunto do grupo Ex: Node'
         category:
           type: array
           items:
             type: string
-            description: 'Lista de assuntos Ex: [Node, Java]'
+            description: 'Lista de categorias Ex: [Web, Mobile]'
         level:
           type: number
           description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
@@ -1124,11 +1193,6 @@ components:
         _owner:
           type: string
           description: 'ID do dono do grupo gerado pelo MongoDB'
-        _schedule_list:
-          type: array
-          items:
-            type: string
-            description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
     group_read_all.Response:
       title: group_read_all.Response
       description: 'Lista para grupos'
@@ -1162,11 +1226,6 @@ components:
           _owner:
             type: string
             description: 'ID do dono do grupo gerado pelo MongoDB'
-          _schedule_list:
-            type: array
-            items:
-              type: string
-              description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
     
     # Union User Group
     unionUserGroup.Request:
@@ -1180,6 +1239,62 @@ components:
         _id_group:
           type: string
           description: 'ID do grupo gerado pelo MongoDB no qual o usuário está entrando'
+    unionUserGroup_search.Request:
+      title: unionUserGroup_search.Request
+      description: 'Objeto para busca de grupos por filtro'
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Parte do nome do(s) grupo(s)'
+        subject_label:
+          type: string
+          description: 'Assunto dos grupos'
+        category:
+          type: string
+          description: 'Categoria dos grupos'
+        level:
+          type: number
+          description: 'Nível dos grupos'
+        is_alphabetical:
+          type: boolean
+          description: 'Se a resposta deve ser ordenada de A-Z ou de Z-A. Sendo true para o primeiro caso e false para o segundo' 
+    unionUserGroup_search.Response:
+      title: unionUserGroup_search.Response
+      description: 'Lista para grupos'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          name:
+            type: string
+            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+          category:
+            type: array
+            items:
+              type: string
+              description: 'Lista de assuntos Ex: [Node, Java]'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+          token:
+            type: string
+            description: 'Token de acesso para grupo'
+          is_public:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é público ou particular'
+          is_default:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+          _owner:
+            type: string
+            description: 'ID do dono do grupo gerado pelo MongoDB'
+          number_members:
+            type: number
+            description: 'Quantidade de membros contidos no grupo'
     unionUserGroup_read_all.Response:
       title: unionUserGroup_read_users.Response
       description: 'Lista para a união entre usuário e grupo'
