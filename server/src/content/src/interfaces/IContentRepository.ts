@@ -8,6 +8,7 @@ interface IContentRepository {
   updateDescription(_id: String, description: String): object
   updateDeadline(_id: String, deadline: String): object
   updateReference(_id: String, reference: String): object
+  updateChallenge(_id: String, challenge: String): object
   readAll(): IContentSchemaDTO;
   readById(_id: string): IContentSchemaDTO;
   readByRoadmapId(_roadmap_id: string): IContentSchemaDTO;
