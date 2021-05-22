@@ -13,226 +13,21 @@ info:
 #    name: Apache 2.0
 #    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 tags:
-  - name: User
-    description: integração de usuário no Coderslab
   - name: Group
-    description: integração de grupo no Coderslab
-  - name: UnionUserGroup
-    description: integração da união entre usuário e grupo no Coderslab
+    description: Microsserviço de grupo no Coderslab
   - name: Interest
-    description: integração de interesse no Coderslab
+    description: Microsserviço de interesse no Coderslab
+  - name: Roadmap
+    description: Microsserviço de roadmap no Coderslab
+  - name: Schedule
+    description: Microsserviço de agendamento no Coderslab
   - name: Subject
-    description: integração de assunto no Coderslab
-  - name: roadmap
-    description: Este microsserviço será utilizado para a criação de roadmap    
+    description: Microsserviço de assunto no Coderslab
+  - name: UnionUserGroup
+    description: Microsserviço da união entre usuário e grupo no Coderslab
+  - name: User
+    description: Microsserviço de usuário no Coderslab
 paths:
-  # User
-  /user/create:
-    post:
-      tags: 
-        - User
-      summary: Cria um novo usuário
-      description: Cria um novo perfil para o usuário que precisa acessar a aplicação pela primeira vez.
-      operationId: user_create
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read_token.Response'
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user.Request'
-        required: true 
-  /user/login:
-    post:
-      tags: 
-        - User
-      summary: Realiza o login do usuário
-      description: Realiza o login do usuário para que ele possa ser redirecionado para dentro da plataforma.
-      operationId: user_login
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read_token.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user_login.Request'
-        required: true 
-  /user/read/byId/{id}:
-    get:
-      summary: Busca um usuário com base em um ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do usuário gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      tags:
-        - User
-      description: Busca por um usuário já resgistrado na plataforma com base em seu ID gerado pelo MongoDB.
-      operationId: user_byId
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-  /user/read/byUsername/{username}:
-    get:
-      summary: Busca um usuário com base em um username
-      parameters:
-        - name: username
-          in: path
-          required: true
-          description: Username informado pelo usuário durante cadastro
-          schema:
-            type: string
-            minimum: 1
-      tags:
-        - User
-      description: Busca por um usuário já resgistrado na plataforma com base em seu username fornecido durante o cadastro.
-      operationId: user_byUsername
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-  /user/read/byEmail/{email}:
-    get:
-      summary: Busca um usuário com base em um e-mail
-      parameters:
-        - name: email
-          in: path
-          required: true
-          description: E-mail informado pelo usuário durante cadastro
-          schema:
-            type: string
-            minimum: 1
-      tags:
-        - User
-      description: Busca por um usuário já resgistrado na plataforma com base em seu e-mail fornecido durante o cadastro.
-      operationId: user_byEmail
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-  /user/read/all:
-    get:
-      tags:
-        - User
-      summary: Busca uma lista de usuários
-      description: Busca por todos os usuários já registrados na plataforma e retorna uma lista deles ordenada por seu username em ordem alfabética.
-      operationId: user_all
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read_all.Response'
-        '400':
-          description: Bad Request
-  /user/update/{id}:
-    put:
-      tags:
-        - User
-      summary: Atualiza um usuário com base em um ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do usuário gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      description: Atualiza os dados de perfil de um usuário e sua lista de interesses com base em seu ID gerado pelo MongoDB. Caso haja um interesse novo, ele deve vir com _id = "", caso o campo esteja preenchido, é considerado como um interesse já existente que tem que ser atualizado.
-      operationId: user_update
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user_read.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user_update.Request'
-        required: true
-  /user/delete/{id}:
-    delete:
-      tags:
-        - User
-      summary: Deleta um usuário com base em um ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do usuário gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      description: Deleta o registro do usuário na aplicação não sendo mais possível acessa-la após o processo.
-      operationId: user_delete
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad request
-        '404':
-            description: Not Found
-
   # Group
   /group/create:
     post:
@@ -452,6 +247,768 @@ paths:
         '404':
           description: Not Found
   
+  # Interest
+  /interest/create:
+    post:
+      tags: 
+        - Interest
+      summary: Cria de um novo interesse
+      description: Cria um novo interesse.
+      operationId: interest_create
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '406':
+          description: Not Acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/interest.Request'
+        required: true
+  /interest/read/byId/{id}:
+    get:
+      summary: Busca um interesse com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do interesse gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      tags:
+        - Interest
+      description: Busca por um interesse já resgistrado na plataforma com base em seu ID gerado pelo MongoDB.
+      operationId: interest_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/interest_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /interest/read/all:
+    get:
+      tags:
+        - Interest
+      summary: Busca uma lista de interesses
+      description: Busca todos os interesse já registrados e retorna uma lista deles ordenada pelo assunto em ordem alfabética.
+      operationId: interest_all
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/interest_read_all.Response'
+        '400':
+          description: Bad Request
+  /interest/update/{id}:
+    put:
+      tags:
+        - Interest
+      summary: Atualiza um interesse com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do interesse gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: Atualiza o nível de um interesse com base em seu ID gerado pelo MongoDB.
+      operationId: interest_update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/interest_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/interest.Request'
+        required: true
+  /interest/delete/{id}:
+    delete:
+      tags:
+        - Interest
+      summary: Deleta um interesse com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do interesse gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: Deleta o registro do interesse na aplicação não sendo mais possível acessa-lo após o processo.
+      operationId: interest_delete
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+  
+  #Roadmap
+  /roadmap/create/default:
+    post:
+      tags:
+        - Roadmap
+      summary: Criação de roadmap default
+      operationId: AddRoadmapDefault
+      description: Adiciona um roadmap default
+      responses:
+        '201':
+          description: 'Created'
+        '400':
+          description: 'Bad request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRoadmapDefault'
+        description: Adiciona um roadmap default
+  /roadmap/create/custom:
+    post:
+      tags:
+        - Roadmap
+      summary: Criação de roadmap customizado
+      operationId: AddRoadmapCustom
+      description: Adiciona um roadmap customizado
+      responses:
+        '201':
+          description: 'Created'
+        '400':
+          description: 'Bad request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRoadmapCustom'
+        description: Adiciona um roadmap default
+  /roadmap/update/custom/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Transforma o roadmap padrão em customizado
+      operationId: TurnDefaultRoadmapIntoCustomizedRoadmap
+      description: Transforma o roadmap padrão em customizado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/default/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Transforma o roadmap customizado em padrão
+      operationId: TurnCustomRoadmapIntoDefaultRoadmap
+      description: Transforma o roadmap customizado em padrão
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/done/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Transforma o roadmap em progresso em feito
+      operationId: TurnInProgressRoadmapIntoDoneRoadmap
+      description: Transforma o roadmap em progresso em feito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/inprogress/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Transforma o roadmap em "Feito" em "Em progresso"
+      operationId: TurnDoneRoadmapIntoInProgressRoadmap
+      description: Transforma o roadmap em "Feito" em "Em progresso"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+  /roadmap/update/name/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Atualiza o nome do roadmap
+      operationId: UpdateRoadmapName
+      description: Atualiza o nome do roadmap
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoadmapName'
+        description: Atualiza o nome do roadmap
+  /roadmap/update/objective/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Atualiza o objetivo do roadmap
+      operationId: UpdateRoadmapObjective
+      description: Atualiza o objetivo do roadmap
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoadmapObjective'
+        description: Atualiza o objetivo do roadmap
+  /roadmap/update/list/{id}:
+    put:
+      tags:
+        - Roadmap
+      summary: Atualiza a lista de conteúdos do roadmap
+      operationId: UpdateRoadmapContentList
+      description: Atualiza a lista de conteúdos do roadmap
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Roadmap not found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoadmapContentList'
+        description: Atualiza a lista de conteúdos do roadmap
+  /roadmap/read/all:
+    get:
+      tags:
+        - Roadmap
+      summary: Lista todos os roadmap criados
+      operationId: ListAllRoadmap
+      description: Lista todos os roadmap criados
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/all/{id}:
+    get:
+      tags:
+        - Roadmap
+      summary: Apresenta o roadmap que possui o ID informado
+      operationId: ReadRoadmapById
+      description: Apresenta o roadmap que possui o ID informado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/custom:
+    get:
+      tags:
+        - Roadmap
+      summary: Lista todos os roadmap customizados
+      operationId: ListAllCustomRoadmap
+      description: Lista todos os roadmap customizados
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/default:
+    get:
+      tags:
+        - Roadmap
+      summary: Lista todos os roadmap padrão
+      operationId: ListAllDefaultRoadmap
+      description: Lista todos os roadmap padrão
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/inprogress:
+    get:
+      tags:
+        - Roadmap
+      summary: Lista todos os roadmap em progresso
+      operationId: ListAllInProgressRoadmap
+      description: Lista todos os roadmap em progresso
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/read/done:
+    get:
+      tags:
+        - Roadmap
+      summary: Lista todos os roadmap concluídos
+      operationId: ListAllDoneRoadmap
+      description: Lista todos os roadmap concluídos
+      responses:
+        '200':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+  /roadmap/delete/{id}:
+    get:
+      tags:
+        - Roadmap
+      summary: Deleta o roadmap que possui o ID informado
+      operationId: DeleteRoadmapById
+      description: Deleta o roadmap que possui o ID informado
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do roadmap gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      responses:
+        '204':
+          description: 'Success'
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Not found'
+
+  #Schedule
+  /schedule/create:
+    post:
+      tags:
+        - Schedule
+      summary: API
+      description: API de criação de schedule
+      operationId: schedule_create
+      responses:
+        '201':
+          description: Schedule created
+        '400':
+          description: Bad Request
+        '403':
+          description: Schedule already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schedule_create.Request'
+        required: true
+  /schedule/read/byId/{id}:
+    get:
+      summary: Retorna o schedule com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id do schedule gerado pelo MongoDB.
+          schema:
+            type : string
+            format: uuid
+            minimum: 1
+      tags:
+        - Schedule
+      description: API para retorno de um schedule
+      operationId: schedule_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /schedule/read/byOwner/{idOwner}:
+    get:
+      summary: Retorna o schedule com base no id do user que o criou.
+      parameters:
+        - name: idOwner
+          in: path
+          required: true
+          description: Id do usuario dono do agendamento.
+          schema:
+            type : string
+            minimum: 1
+      tags:
+        - Schedule
+      description: API para retorno de um schedule com base no id do user que o criou
+      operationId: schedule_byOwner
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /schedule/read/byGroup/{idGroup}:
+    get:
+      summary: Retorna o schedule com base no id do user que o criou.
+      parameters:
+        - name: idGroup
+          in: path
+          required: true
+          description: Id do usuario dono do agendamento.
+          schema:
+            type : string
+            minimum: 1
+      tags:
+        - Schedule
+      description: API para retorno de array de schedules com base no id do grupo associado a eles.
+      operationId: schedule_byGroup
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule_all.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /schedule/read/all:
+    get:
+      tags:
+        - Schedule
+      summary: API
+      description: API para retorno do array de schedules
+      operationId: schedule_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule_all.Response'
+        '400':
+          description: Bad Request
+  /schedule/update/{id}:
+    put:
+      summary: Atualiza algumas informações de um schedule com base em seu ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do schedule gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Schedule
+      description: API para update de um schedule
+      operationId: schedule_update
+      responses:
+        '200':
+          description: Schedule update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule_read.Response'
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schedule_update.Request'
+        required: true
+  /schedule/delete/{id}:
+    delete:
+      summary: Deleta um schedule com base em seu ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do schedule gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Schedule
+      description: API para deletar um schedule com base em seu id
+      operationId: schedule_delete
+      responses:
+        '204':
+          description: Schedule deleted
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+  
+  # Subject
+  /subject/create:
+    post:
+      tags:
+        - Subject
+      summary: API
+      description: API de criação de subject
+      operationId: subject_create
+      responses:
+        '201':
+          description: Subject created
+        '400':
+          description: Bad Request
+        '403':
+          description: Subject already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject_create.Request'
+        required: true
+  /subject/read/byId/{id}:
+    get:
+      summary: Retorna o subject com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id do subject gerado pelo MongoDB.
+          schema:
+            type : string
+            format: uuid
+            minimum: 1
+      tags:
+        - Subject
+      description: API para retorno de um subject
+      operationId: subjects_byId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /subject/read/byLabel/{label}:
+    get:
+      summary: Retorna o subject com base em uma Label.
+      parameters:
+        - name: label
+          in: path
+          required: true
+          description: Rótulo atribuido ao subject.
+          schema:
+            type : string
+            minimum: 1
+      tags:
+        - Subject
+      description: API para retorno do array de subjects
+      operationId: subjects_byLabel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /subject/read/all:
+    get:
+      tags:
+        - Subject
+      summary: API
+      description: API para retorno do array de subjects
+      operationId: subjects_all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_all.Response'
+        '400':
+          description: Bad Request
+  /subject/update/{id}:
+    put:
+      summary: Atualiza as categories de um subject com base no ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Subject
+      description: API para update de um subject
+      operationId: subject_update
+      responses:
+        '200':
+          description: Subject updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subject_read.Response'
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject_update.Request'
+        required: true
+  /subject/delete/{id}:
+    delete:
+      summary: Deleta um subject com base em seu ID.
+      parameters:
+          - name: id
+            in: path
+            required: true
+            description: Id do subject gerado pelo MongoDB.
+            schema:
+              type : string
+              format: uuid
+              minimum: 1
+      tags:
+        - Subject
+      description: API para deletar um subject com base em seu id
+      operationId: subject_delete
+      responses:
+        '204':
+          description: Subject deleted
+        '400':
+          description: Bad request
+        '404':
+            description: Not Found
+  
   # Union User Group
   /unionUserGroup/create:
     post:
@@ -619,95 +1176,178 @@ paths:
           description: No Content
         '400':
           description: Bad request
-  # Interest
-  /interest/create:
+  
+  # User
+  /user/create:
     post:
       tags: 
-        - Interest
-      summary: Cria de um novo interesse
-      description: Cria um novo interesse.
-      operationId: interest_create
+        - User
+      summary: Cria um novo usuário
+      description: Cria um novo perfil para o usuário que precisa acessar a aplicação pela primeira vez.
+      operationId: user_create
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read_token.Response'
         '400':
           description: Bad Request
         '403':
           description: Forbidden
+        '404':
+          description: Not Found
         '406':
           description: Not Acceptable
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/interest.Request'
-        required: true
-  /interest/read/byId/{id}:
+              $ref: '#/components/schemas/user.Request'
+        required: true 
+  /user/login:
+    post:
+      tags: 
+        - User
+      summary: Realiza o login do usuário
+      description: Realiza o login do usuário para que ele possa ser redirecionado para dentro da plataforma.
+      operationId: user_login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read_token.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_login.Request'
+        required: true 
+  /user/read/byId/{id}:
     get:
-      summary: Busca um interesse com base em um ID
+      summary: Busca um usuário com base em um ID
       parameters:
         - name: id
           in: path
           required: true
-          description: ID do interesse gerado pelo MongoDB
+          description: ID do usuário gerado pelo MongoDB
           schema:
             type: string
             format: ObjectId
             minimum: 1
       tags:
-        - Interest
-      description: Busca por um interesse já resgistrado na plataforma com base em seu ID gerado pelo MongoDB.
-      operationId: interest_byId
+        - User
+      description: Busca por um usuário já resgistrado na plataforma com base em seu ID gerado pelo MongoDB.
+      operationId: user_byId
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/interest_read.Response'
+                $ref: '#/components/schemas/user_read.Response'
         '400':
           description: Bad Request
         '404':
           description: Not Found
-  /interest/read/all:
+  /user/read/byUsername/{username}:
     get:
+      summary: Busca um usuário com base em um username
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: Username informado pelo usuário durante cadastro
+          schema:
+            type: string
+            minimum: 1
       tags:
-        - Interest
-      summary: Busca uma lista de interesses
-      description: Busca todos os interesse já registrados e retorna uma lista deles ordenada pelo assunto em ordem alfabética.
-      operationId: interest_all
+        - User
+      description: Busca por um usuário já resgistrado na plataforma com base em seu username fornecido durante o cadastro.
+      operationId: user_byUsername
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/interest_read_all.Response'
+                $ref: '#/components/schemas/user_read.Response'
         '400':
           description: Bad Request
-  /interest/update/{id}:
+        '404':
+          description: Not Found
+  /user/read/byEmail/{email}:
+    get:
+      summary: Busca um usuário com base em um e-mail
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: E-mail informado pelo usuário durante cadastro
+          schema:
+            type: string
+            minimum: 1
+      tags:
+        - User
+      description: Busca por um usuário já resgistrado na plataforma com base em seu e-mail fornecido durante o cadastro.
+      operationId: user_byEmail
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read.Response'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /user/read/all:
+    get:
+      tags:
+        - User
+      summary: Busca uma lista de usuários
+      description: Busca por todos os usuários já registrados na plataforma e retorna uma lista deles ordenada por seu username em ordem alfabética.
+      operationId: user_all
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_read_all.Response'
+        '400':
+          description: Bad Request
+  /user/update/{id}:
     put:
       tags:
-        - Interest
-      summary: Atualiza um interesse com base em um ID
+        - User
+      summary: Atualiza um usuário com base em um ID
       parameters:
         - name: id
           in: path
           required: true
-          description: ID do interesse gerado pelo MongoDB
+          description: ID do usuário gerado pelo MongoDB
           schema:
             type: string
             format: ObjectId
             minimum: 1
-      description: Atualiza o nível de um interesse com base em seu ID gerado pelo MongoDB.
-      operationId: interest_update
+      description: Atualiza os dados de perfil de um usuário e sua lista de interesses com base em seu ID gerado pelo MongoDB. Caso haja um interesse novo, ele deve vir com _id = "", caso o campo esteja preenchido, é considerado como um interesse já existente que tem que ser atualizado.
+      operationId: user_update
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/interest_read.Response'
+                $ref: '#/components/schemas/user_read.Response'
         '400':
           description: Bad Request
         '404':
@@ -718,24 +1358,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/interest.Request'
+              $ref: '#/components/schemas/user_update.Request'
         required: true
-  /interest/delete/{id}:
+  /user/delete/{id}:
     delete:
       tags:
-        - Interest
-      summary: Deleta um interesse com base em um ID
+        - User
+      summary: Deleta um usuário com base em um ID
       parameters:
         - name: id
           in: path
           required: true
-          description: ID do interesse gerado pelo MongoDB
+          description: ID do usuário gerado pelo MongoDB
           schema:
             type: string
             format: ObjectId
             minimum: 1
-      description: Deleta o registro do interesse na aplicação não sendo mais possível acessa-lo após o processo.
-      operationId: interest_delete
+      description: Deleta o registro do usuário na aplicação não sendo mais possível acessa-la após o processo.
+      operationId: user_delete
       responses:
         '204':
           description: No Content
@@ -744,476 +1384,548 @@ paths:
         '404':
             description: Not Found
   
-  # Subject
-  /subject/create:
-    post:
-      tags:
-        - Subject
-      summary: API
-      description: API de criação de subject
-      operationId: subject_create
-      responses:
-        '201':
-          description: Subject created
-        '400':
-          description: Bad Request
-        '403':
-          description: Subject already exists
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/subject_create.Request'
-        required: true
-  /subject/read/byId/{id}:
-    get:
-      summary: Retorna o subject com base em um ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: Id do subject gerado pelo MongoDB.
-          schema:
-            type : string
-            format: uuid
-            minimum: 1
-      tags:
-        - Subject
-      description: API para retorno de um subject
-      operationId: subjects_byId
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/subject_read.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-  /subject/read/byLabel/{label}:
-    get:
-      summary: Retorna o subject com base em uma Label.
-      parameters:
-        - name: label
-          in: path
-          required: true
-          description: Rótulo atribuido ao subject.
-          schema:
-            type : string
-            minimum: 1
-      tags:
-        - Subject
-      description: API para retorno do array de subjects
-      operationId: subjects_byLabel
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/subject_read.Response'
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-  /subject/read/all:
-    get:
-      tags:
-        - Subject
-      summary: API
-      description: API para retorno do array de subjects
-      operationId: subjects_all
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/subject_all.Response'
-        '400':
-          description: Bad Request
-  /subject/update/{id}:
-    put:
-      summary: Atualiza as categories de um subject com base no ID.
-      parameters:
-          - name: id
-            in: path
-            required: true
-            description: Id do subject gerado pelo MongoDB.
-            schema:
-              type : string
-              format: uuid
-              minimum: 1
-      tags:
-        - Subject
-      description: API para update de um subject
-      operationId: subject_update
-      responses:
-        '200':
-          description: Subject updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/subject_read.Response'
-        '400':
-          description: Bad request
-        '404':
-            description: Not Found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/subject_update.Request'
-        required: true
-  /subject/delete/{id}:
-    delete:
-      summary: Deleta um subject com base em seu ID.
-      parameters:
-          - name: id
-            in: path
-            required: true
-            description: Id do subject gerado pelo MongoDB.
-            schema:
-              type : string
-              format: uuid
-              minimum: 1
-      tags:
-        - Subject
-      description: API para deletar um subject com base em seu id
-      operationId: subject_delete
-      responses:
-        '204':
-          description: Subject deleted
-        '400':
-          description: Bad request
-        '404':
-            description: Not Found
-            
-  # roadmap
-  /roadmap/create/default:
-    post:
-      tags:
-        - roadmap
-      summary: Criação de roadmap default
-      operationId: AddRoadmapDefault
-      description: Adiciona um roadmap default
-      responses:
-        '201':
-          description: 'Created'
-        '400':
-          description: 'Bad request'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddRoadmapDefault'
-        description: Adiciona um roadmap default
-  /roadmap/create/custom:
-    post:
-      tags:
-        - roadmap
-      summary: Criação de roadmap customizado
-      operationId: AddRoadmapCustom
-      description: Adiciona um roadmap customizado
-      responses:
-        '201':
-          description: 'Created'
-        '400':
-          description: 'Bad request'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddRoadmapCustom'
-        description: Adiciona um roadmap default
-  /roadmap/update/custom/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Transforma o roadmap padrão em customizado
-      operationId: TurnDefaultRoadmapIntoCustomizedRoadmap
-      description: Transforma o roadmap padrão em customizado
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-  /roadmap/update/default/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Transforma o roadmap customizado em padrão
-      operationId: TurnCustomRoadmapIntoDefaultRoadmap
-      description: Transforma o roadmap customizado em padrão
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-  /roadmap/update/done/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Transforma o roadmap em progresso em feito
-      operationId: TurnInProgressRoadmapIntoDoneRoadmap
-      description: Transforma o roadmap em progresso em feito
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-  /roadmap/update/inprogress/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Transforma o roadmap em "Feito" em "Em progresso"
-      operationId: TurnDoneRoadmapIntoInProgressRoadmap
-      description: Transforma o roadmap em "Feito" em "Em progresso"
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-  /roadmap/update/name/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Atualiza o nome do roadmap
-      operationId: UpdateRoadmapName
-      description: Atualiza o nome do roadmap
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateRoadmapName'
-        description: Atualiza o nome do roadmap
-  /roadmap/update/objective/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Atualiza o objetivo do roadmap
-      operationId: UpdateRoadmapObjective
-      description: Atualiza o objetivo do roadmap
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateRoadmapObjective'
-        description: Atualiza o objetivo do roadmap
-  /roadmap/update/list/{id}:
-    put:
-      tags:
-        - roadmap
-      summary: Atualiza a lista de conteúdos do roadmap
-      operationId: UpdateRoadmapContentList
-      description: Atualiza a lista de conteúdos do roadmap
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Roadmap not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateRoadmapContentList'
-        description: Atualiza a lista de conteúdos do roadmap
-  /roadmap/read/all:
-    get:
-      tags:
-        - roadmap
-      summary: Lista todos os roadmap criados
-      operationId: ListAllRoadmap
-      description: Lista todos os roadmap criados
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-  /roadmap/read/all/{id}:
-    get:
-      tags:
-        - roadmap
-      summary: Apresenta o roadmap que possui o ID informado
-      operationId: ReadRoadmapById
-      description: Apresenta o roadmap que possui o ID informado
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-  /roadmap/read/custom:
-    get:
-      tags:
-        - roadmap
-      summary: Lista todos os roadmap customizados
-      operationId: ListAllCustomRoadmap
-      description: Lista todos os roadmap customizados
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-  /roadmap/read/default:
-    get:
-      tags:
-        - roadmap
-      summary: Lista todos os roadmap padrão
-      operationId: ListAllDefaultRoadmap
-      description: Lista todos os roadmap padrão
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-  /roadmap/read/inprogress:
-    get:
-      tags:
-        - roadmap
-      summary: Lista todos os roadmap em progresso
-      operationId: ListAllInProgressRoadmap
-      description: Lista todos os roadmap em progresso
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-  /roadmap/read/done:
-    get:
-      tags:
-        - roadmap
-      summary: Lista todos os roadmap concluídos
-      operationId: ListAllDoneRoadmap
-      description: Lista todos os roadmap concluídos
-      responses:
-        '200':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-  /roadmap/delete/{id}:
-    get:
-      tags:
-        - roadmap
-      summary: Deleta o roadmap que possui o ID informado
-      operationId: DeleteRoadmapById
-      description: Deleta o roadmap que possui o ID informado
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID do roadmap gerado pelo MongoDB
-          schema:
-            type: string
-            format: ObjectId
-            minimum: 1
-      responses:
-        '204':
-          description: 'Success'
-        '400':
-          description: 'Bad request'
-        '404':
-          description: 'Not found'
-  
 # Added by API Auto Mocking Plugin
 servers:
   - url: 'https://cluster.prod.com.br/coderslab'
     description: Link do cluster produtivo - External URL PRD
 components:
   schemas:
+    # Group
+    group.Request:
+      title: group.Request
+      description: 'Objeto para grupo'
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        subject_label:
+          type: string
+          description: 'Assunto do grupo Ex: Node'
+        category:
+          type: array
+          items:
+            type: string
+            description: 'Lista de categorias Ex: [Web, Mobile]'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+        is_public:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é público ou particular'
+        is_default:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+        _owner:
+          type: string
+          description: 'ID do dono do grupo gerado pelo MongoDB'
+    group_read.Response:
+      title: group_read.Response
+      description: 'Objeto para grupo'
+      type: object
+      properties:
+        _id:
+          type: string
+          description: 'ID gerado pelo MongoDB'
+        name:
+          type: string
+          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        subject_label:
+          type: string
+          description: 'Assunto do grupo Ex: Node'
+        category:
+          type: array
+          items:
+            type: string
+            description: 'Lista de categorias Ex: [Web, Mobile]'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+        token:
+          type: string
+          description: 'Token de acesso para grupo'
+        is_public:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é público ou particular'
+        is_default:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+        _owner:
+          type: string
+          description: 'ID do dono do grupo gerado pelo MongoDB'
+    group_read_all.Response:
+      title: group_read_all.Response
+      description: 'Lista para grupos'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          name:
+            type: string
+            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+          category:
+            type: array
+            items:
+              type: string
+              description: 'Lista de assuntos Ex: [Node, Java]'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+          token:
+            type: string
+            description: 'Token de acesso para grupo'
+          is_public:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é público ou particular'
+          is_default:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+          _owner:
+            type: string
+            description: 'ID do dono do grupo gerado pelo MongoDB'
+    
+    # Interest
+    interest.Request:
+      title: interest.Request
+      description: 'Objeto para interesse'
+      type: object
+      properties:
+        _id_user:
+          type: string
+          description: 'ID do usuário gerado pelo MongoDB'
+        _id_subject:
+          type: string
+          description: 'ID do assunto gerado pelo MongoDB'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
+    interest_read.Response:
+      title: interest_read.Response
+      description: 'Objeto para interesse'
+      type: object
+      properties:
+        _id:
+          type: string
+          description: 'ID gerado pelo MongoDB'
+        _id_user:
+          type: string
+          description: 'ID do usuário gerado pelo MongoDB'
+        _id_subject:
+          type: string
+          description: 'ID do assunto gerado pelo MongoDB'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
+    interest_read_all.Response:
+      title: interest_read_all.Response
+      description: 'Lista para interesses'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          _id_user:
+            type: string
+            description: 'ID do usuário gerado pelo MongoDB'
+          _id_subject:
+            type: string
+            description: 'ID do assunto gerado pelo MongoDB'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
+    
+    #Roadmap
+    AddRoadmapDefault:
+      type: object
+      required:
+        - name
+        - objective
+        - content_list
+      properties:
+        name:
+          type: string
+          example: NodeJS
+        objective:
+          type: string
+          example: Neste roadmap, você aprenderá o conteúdo básico para trabalhar com NodeJS
+        content_list:
+          type: string
+          format: Array
+          example: [NodeJS, Express]
+    AddRoadmapCustom:
+      type: object
+      required:
+        - name
+        - objective
+        - content_list
+      properties:
+        name:
+          type: string
+          example: NodeJS
+        objective:
+          type: string
+          example: Neste roadmap, você aprenderá o conteúdo básico para trabalhar com NodeJS
+        content_list:
+          type: string
+          format: Array
+          example: [NodeJS, Express]
+    UpdateRoadmapName:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: NodeJS
+    UpdateRoadmapObjective:
+      type: object
+      required:
+        - objective
+      properties:
+        objective:
+          type: string
+          example: NodeJS
+    UpdateRoadmapContentList:
+      type: object
+      required:
+        - content_list
+      properties:
+        content_list:
+          type: string
+          example: ["JS", "Node", "Python", "Go"]
+    
+    # Subject
+    subject_create.Request:
+      title: subject.Request
+      description: 'Object for subject'
+      type: object
+      properties:
+        label:
+          type: string
+          description: 'Rotúlo para o assunto Ex: NodeJs'
+        categories:
+          type: array
+          items:
+            type: string
+            description: 'Array de categorias Ex: [Web, Mobile]'
+    subject_update.Request:
+      title: subject.Request
+      description: 'Object for subject'
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: 'Id gerado pelo MongoDB'
+        label:
+          type: string
+          description: 'Rotúlo para o assunto Ex: NodeJs'
+        categories:
+          type: array
+          items:
+            type: string
+            description: 'Array de categorias Ex: [Web, Mobile]'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+        __v:
+          type: number
+          description: 'Vesão'
+    subject_all.Response:
+      title: subject_read_all.Response
+      description: 'Array for subjects'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            format: uuid
+            description: 'Id gerado pelo MongoDB'
+          label:
+            type: string
+            description: 'Rotúlo para o assunto Ex: NodeJs'
+          categories:
+            type: array
+            items:
+              type: string
+              description: 'Array de categorias Ex: [Web, Mobile]'
+          createdAt:
+            type: string
+            format: date-time
+            description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+          updatedAt:
+            type: string
+            format: date-time
+            description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+          __v:
+            type: number
+            description: 'Vesão'
+    subject_read.Response:
+      title: subject_read.Response
+      description: 'Object for subject'
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: 'Id gerado pelo MongoDB'
+        label:
+          type: string
+          description: 'Rotúlo para o assunto Ex: NodeJs'
+        categories:
+          type: array
+          items:
+            type: string
+            description: 'Array de categorias Ex: [Web, Mobile]'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+        __v:
+          type: number
+          description: 'Vesão'
+    
+    #Schedule
+    schedule_create.Request:
+      title: schedule.Request
+      description: 'Object for subject'
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+          description: 'Data e hora da reunião Ex: 2021-05-13T21:50:49-03:00'
+        link:
+          type: string
+          description: 'Link para a sala do agendamento Ex: https://apps.google.com/meet/??-xx-ff'
+        description:
+          type: string
+          description: 'Descrição do que será tratado Ex: Reunião de estudos sobre promise em Node'
+        owner:
+          type: string
+          format: uuid
+          description: 'Id do usuário gerado pelo mongo DB'
+        id_group:
+          type: string
+          format: uuid
+          description: 'Id do grupo gerado pelo mongo DB'
+    schedule_update.Request:
+      title: schedule.Request
+      description: 'Object for schedule'
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+          description: 'Data e hora da reunião Ex: 2021-05-13T21:50:49-03:00'
+        link:
+          type: string
+          description: 'Link para a sala do agendamento Ex: https://apps.google.com/meet/??-xx-ff'
+        description:
+          type: string
+          description: 'Descrição do que será tratado Ex: Reunião de estudos sobre promise em Node'
+    schedule_all.Response:
+      title: schedule_read_all.Response
+      description: 'Array for schedules'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            format: uuid
+            description: 'Id gerado pelo MongoDB'
+          datetime:
+            type: string
+            description: 'Data e hora da reunião Ex: 2021-05-13T21:50:49-03:00'
+          link:
+            type: string
+            description: 'Link para a sala do agendamento Ex: https://apps.google.com/meet/??-xx-ff'
+          description:
+            type: string
+            description: 'Descrição do que será tratado Ex: Reunião de estudos sobre promise em Node'
+          owner:
+            type: string
+            format: uuid
+            description: 'Id do usuário gerado pelo mongo DB'
+          _id_group:
+            type: string
+            format: uuid
+            description: 'Id do group gerado pelo mongo DB'
+          createdAt:
+            type: string
+            format: date-time
+            description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+          updatedAt:
+            type: string
+            format: date-time
+            description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+          __v:
+            type: number
+            description: 'Vesão'
+    schedule_read.Response:
+      title: schedule_read.Response
+      description: 'Object for schedule'
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: 'Id gerado pelo MongoDB'
+        datetime:
+          type: string
+          description: 'Data e hora da reunião Ex: 2021-05-13T21:50:49-03:00'
+        link:
+          type: string
+          description: 'Link para a sala do agendamento Ex: https://apps.google.com/meet/??-xx-ff'
+        description:
+          type: string
+          description: 'Descrição do que será tratado Ex: Reunião de estudos sobre promise em Node'
+        owner:
+          type: string
+          format: uuid
+          description: 'Id do usuário gerado pelo mongo DB'
+        _id_group:
+          type: string
+          format: uuid
+          description: 'Id do group gerado pelo mongo DB'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'Data e hora da criação deste registro no Mongo BD EX: 2021-05-21T00:14:07.404Z'
+        __v:
+          type: number
+          description: 'Vesão'
+    
+    # Union User Group
+    unionUserGroup.Request:
+      title: unionUserGroup.Request
+      description: 'Objeto para união entre usuário e grupo'
+      type: object
+      properties:
+        _id_user:
+          type: string
+          description: 'ID do usuário gerado pelo MongoDB que está entrando no grupo'
+        _id_group:
+          type: string
+          description: 'ID do grupo gerado pelo MongoDB no qual o usuário está entrando'
+    unionUserGroup_search.Request:
+      title: unionUserGroup_search.Request
+      description: 'Objeto para busca de grupos por filtro'
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Parte do nome do(s) grupo(s)'
+        subject_label:
+          type: string
+          description: 'Assunto dos grupos'
+        category:
+          type: string
+          description: 'Categoria dos grupos'
+        level:
+          type: number
+          description: 'Nível dos grupos'
+        is_alphabetical:
+          type: boolean
+          description: 'Se a resposta deve ser ordenada de A-Z ou de Z-A. Sendo true para o primeiro caso e false para o segundo' 
+    unionUserGroup_search.Response:
+      title: unionUserGroup_search.Response
+      description: 'Lista para grupos'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          name:
+            type: string
+            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+          category:
+            type: array
+            items:
+              type: string
+              description: 'Lista de assuntos Ex: [Node, Java]'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+          token:
+            type: string
+            description: 'Token de acesso para grupo'
+          is_public:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é público ou particular'
+          is_default:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+          _owner:
+            type: string
+            description: 'ID do dono do grupo gerado pelo MongoDB'
+          number_members:
+            type: number
+            description: 'Quantidade de membros contidos no grupo'
+    unionUserGroup_read_all.Response:
+      title: unionUserGroup_read_users.Response
+      description: 'Lista para a união entre usuário e grupo'
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: 'ID gerado pelo MongoDB'
+          name:
+            type: string
+            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+          number_members:
+            type: number
+            description: 'Quantidade de usuários que existem no grupo'
+          category:
+            type: array
+            items:
+              type: string
+              description: 'Lista de assuntos Ex: [Node, Java]'
+          level:
+            type: number
+            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+          token:
+            type: string
+            description: 'Token de acesso para grupo'
+          is_public:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é público ou particular'
+          is_default:
+            type: boolean
+            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+          _owner:
+            type: string
+            description: 'ID do dono do grupo gerado pelo MongoDB'
+          _schedule_list:
+            type: array
+            items:
+              type: string
+              description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
+    
     # User
     user.Request:
       title: user.Request
@@ -1449,431 +2161,3 @@ components:
                 level:
                   type: number
                   description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-    
-    # Group
-    group.Request:
-      title: group.Request
-      description: 'Objeto para grupo'
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-        subject_label:
-          type: string
-          description: 'Assunto do grupo Ex: Node'
-        category:
-          type: array
-          items:
-            type: string
-            description: 'Lista de categorias Ex: [Web, Mobile]'
-        level:
-          type: number
-          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-        is_public:
-          type: boolean
-          description: 'Identificação para dizer se o grupo é público ou particular'
-        is_default:
-          type: boolean
-          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-        _owner:
-          type: string
-          description: 'ID do dono do grupo gerado pelo MongoDB'
-    group_read.Response:
-      title: group_read.Response
-      description: 'Objeto para grupo'
-      type: object
-      properties:
-        _id:
-          type: string
-          description: 'ID gerado pelo MongoDB'
-        name:
-          type: string
-          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-        subject_label:
-          type: string
-          description: 'Assunto do grupo Ex: Node'
-        category:
-          type: array
-          items:
-            type: string
-            description: 'Lista de categorias Ex: [Web, Mobile]'
-        level:
-          type: number
-          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-        token:
-          type: string
-          description: 'Token de acesso para grupo'
-        is_public:
-          type: boolean
-          description: 'Identificação para dizer se o grupo é público ou particular'
-        is_default:
-          type: boolean
-          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-        _owner:
-          type: string
-          description: 'ID do dono do grupo gerado pelo MongoDB'
-    group_read_all.Response:
-      title: group_read_all.Response
-      description: 'Lista para grupos'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          name:
-            type: string
-            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-          category:
-            type: array
-            items:
-              type: string
-              description: 'Lista de assuntos Ex: [Node, Java]'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-          token:
-            type: string
-            description: 'Token de acesso para grupo'
-          is_public:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é público ou particular'
-          is_default:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-          _owner:
-            type: string
-            description: 'ID do dono do grupo gerado pelo MongoDB'
-    
-    # Union User Group
-    unionUserGroup.Request:
-      title: unionUserGroup.Request
-      description: 'Objeto para união entre usuário e grupo'
-      type: object
-      properties:
-        _id_user:
-          type: string
-          description: 'ID do usuário gerado pelo MongoDB que está entrando no grupo'
-        _id_group:
-          type: string
-          description: 'ID do grupo gerado pelo MongoDB no qual o usuário está entrando'
-    unionUserGroup_search.Request:
-      title: unionUserGroup_search.Request
-      description: 'Objeto para busca de grupos por filtro'
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Parte do nome do(s) grupo(s)'
-        subject_label:
-          type: string
-          description: 'Assunto dos grupos'
-        category:
-          type: string
-          description: 'Categoria dos grupos'
-        level:
-          type: number
-          description: 'Nível dos grupos'
-        is_alphabetical:
-          type: boolean
-          description: 'Se a resposta deve ser ordenada de A-Z ou de Z-A. Sendo true para o primeiro caso e false para o segundo' 
-    unionUserGroup_search.Response:
-      title: unionUserGroup_search.Response
-      description: 'Lista para grupos'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          name:
-            type: string
-            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-          category:
-            type: array
-            items:
-              type: string
-              description: 'Lista de assuntos Ex: [Node, Java]'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-          token:
-            type: string
-            description: 'Token de acesso para grupo'
-          is_public:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é público ou particular'
-          is_default:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-          _owner:
-            type: string
-            description: 'ID do dono do grupo gerado pelo MongoDB'
-          number_members:
-            type: number
-            description: 'Quantidade de membros contidos no grupo'
-    unionUserGroup_read_all.Response:
-      title: unionUserGroup_read_users.Response
-      description: 'Lista para a união entre usuário e grupo'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          name:
-            type: string
-            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-          number_members:
-            type: number
-            description: 'Quantidade de usuários que existem no grupo'
-          category:
-            type: array
-            items:
-              type: string
-              description: 'Lista de assuntos Ex: [Node, Java]'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-          token:
-            type: string
-            description: 'Token de acesso para grupo'
-          is_public:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é público ou particular'
-          is_default:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-          _owner:
-            type: string
-            description: 'ID do dono do grupo gerado pelo MongoDB'
-          _schedule_list:
-            type: array
-            items:
-              type: string
-              description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
-            
-    # Interest
-    interest.Request:
-      title: interest.Request
-      description: 'Objeto para interesse'
-      type: object
-      properties:
-        _id_user:
-          type: string
-          description: 'ID do usuário gerado pelo MongoDB'
-        _id_subject:
-          type: string
-          description: 'ID do assunto gerado pelo MongoDB'
-        level:
-          type: number
-          description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
-    interest_read.Response:
-      title: interest_read.Response
-      description: 'Objeto para interesse'
-      type: object
-      properties:
-        _id:
-          type: string
-          description: 'ID gerado pelo MongoDB'
-        _id_user:
-          type: string
-          description: 'ID do usuário gerado pelo MongoDB'
-        _id_subject:
-          type: string
-          description: 'ID do assunto gerado pelo MongoDB'
-        level:
-          type: number
-          description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
-    interest_read_all.Response:
-      title: interest_read_all.Response
-      description: 'Lista para interesses'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          _id_user:
-            type: string
-            description: 'ID do usuário gerado pelo MongoDB'
-          _id_subject:
-            type: string
-            description: 'ID do assunto gerado pelo MongoDB'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
-    
-    # Subject
-    subject_create.Request:
-      title: subject.Request
-      description: 'Object for subject'
-      type: object
-      properties:
-        label:
-          type: string
-          description: 'Rotúlo para o assunto Ex: NodeJs'
-        categories:
-          type: array
-          items:
-            type: string
-            description: 'Array de categorias Ex: [Web, Mobile]'
-    subject_update.Request:
-      title: subject.Request
-      description: 'Object for subject'
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            type: string
-            description: 'Array de categorias Ex: [Web, Mobile]'
-    subject_all.Response:
-      title: subject_read_all.Response
-      description: 'Array for subjects'
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: string
-            description: 'Id gerado pelo MongoDB'
-          label:
-            type: string
-            description: 'Rotúlo para o assunto Ex: NodeJs'
-          categories:
-            type: array
-            items:
-              type: string
-              description: 'Array de categorias Ex: [Web, Mobile]'
-    subject_read.Response:
-      title: subject_read.Response
-      description: 'Object for subject'
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'Id gerado pelo MongoDB'
-        label:
-          type: string
-          description: 'Rotúlo para o assunto Ex: NodeJs'
-        categories:
-          type: array
-          items:
-            type: string
-            description: 'Array de categorias Ex: [Web, Mobile]'
-
-  #roadmap
-    AddRoadmapDefault:
-      type: object
-      required:
-        - name
-        - objective
-        - content_list
-        - level
-      properties:
-        name:
-          type: string
-          example: NodeJS
-        objective:
-          type: string
-          example: Neste roadmap, você aprenderá o conteúdo básico para trabalhar com NodeJS
-        content_list:
-          type: string
-          format: Array
-          example: [{
-          "title": "teste",
-          "description": "Teste - Description",
-          "deadline": "01-05-2021",
-          "reference": "Teste - Reference",
-          "challenge": "Teste - Desafio"
-        },
-        {
-          "title": "teste 2",
-          "description": "Teste 2 - Description",
-          "deadline": "01-05-2022",
-          "reference": "Teste 2 - Reference",
-          "challenge": "Teste 2 - Desafio"
-        },
-        {
-          "title": "teste 3",
-          "description": "Teste 3 - Description",
-          "deadline": "01-05-2023",
-          "reference": "Teste 3 - Reference",
-          "challenge": "Teste 3 - Desafio"
-        }
-      ]
-        level:
-          type: integer
-          example: 1
-    AddRoadmapCustom:
-      type: object
-      required:
-        - name
-        - objective
-        - content_list
-        - level
-      properties:
-        name:
-          type: string
-          example: NodeJS
-        objective:
-          type: string
-          example: Neste roadmap, você aprenderá o conteúdo básico para trabalhar com NodeJS
-        content_list:
-          type: string
-          format: Array
-          example: [{
-          "title": "teste",
-          "description": "Teste - Description",
-          "deadline": "01-05-2021",
-          "reference": "Teste - Reference",
-          "challenge": "Teste - Desafio"
-        },
-        {
-          "title": "teste 2",
-          "description": "Teste 2 - Description",
-          "deadline": "01-05-2022",
-          "reference": "Teste 2 - Reference",
-          "challenge": "Teste 2 - Desafio"
-        },
-        {
-          "title": "teste 3",
-          "description": "Teste 3 - Description",
-          "deadline": "01-05-2023",
-          "reference": "Teste 3 - Reference",
-          "challenge": "Teste 3 - Desafio"
-        }]
-        level:
-          type: integer
-          example: 1
-    UpdateRoadmapName:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          example: NodeJS
-    UpdateRoadmapObjective:
-      type: object
-      required:
-        - objective
-      properties:
-        objective:
-          type: string
-          example: NodeJS
-    UpdateRoadmapContentList:
-      type: object
-      required:
-        - content_list
-      properties:
-        content_list:
-          type: string
-          example: ["JS", "Node", "Python", "Go"]
-  
