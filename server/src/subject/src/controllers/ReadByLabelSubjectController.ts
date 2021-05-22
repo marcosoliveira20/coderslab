@@ -12,17 +12,17 @@ export default class ReadByLabelSubjectController {
     try {
       const dataBd = await subject.readByLabel(label);
       if (!dataBd) {
-        return response.status(404);
+        return response.status(404).send();
       }
-      const data: ISubjecDTO = {
+      /* const data: ISubjecDTO = {
         id: dataBd._id,
         label: dataBd.label,
         categories: dataBd.categories,
-      };
-      return response.status(200).send(data);
+      }; */
+      return response.status(200).send(dataBd);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

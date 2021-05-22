@@ -3,6 +3,6 @@ import { router } from "./routes";
 
 app.use("/", router);
 
-console.log("Subject was started in port: 5000 ⚡");
+console.log("Subject was started in port: 6000 ⚡");
 
-app.listen(5000);
+app.listen(6000);

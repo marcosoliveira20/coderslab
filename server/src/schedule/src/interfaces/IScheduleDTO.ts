@@ -4,5 +4,6 @@ interface IScheduleDTO {
   link: string;
   description: string;
   owner: string;
+  id_group: string;
 }
 export { IScheduleDTO };

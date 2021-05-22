@@ -1,26 +1,22 @@
 import { Request, Response } from "express";
 
-// import { IScheduleDTO } from "../interfaces/IScheduleDTO";
 import { Schedule } from "../model/Schedule";
 
-export default class ReadByIdScheduleController {
+export default class ReadByOwnerScheduleController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
+    const { owner } = request.params;
 
     const schedule = new Schedule();
 
     try {
-      const dataBd = await schedule.readById(id);
+      const dataBd = await schedule.readByOwner(owner);
       if (!dataBd) {
         return response.status(404).send();
       }
-      // TODO converter dataBd na estrutura data (legivel de acordo com o swagger)
-      /* const data: IScheduleDTO {
+      /* const data: ISubjecDTO = {
         id: dataBd._id,
-        datetime: dataBd.datetime,
-        link: dataBd.link,
-        description: dataBd.description,
-        owner: dataBd.owner,
+        label: dataBd.label,
+        categories: dataBd.categories,
       }; */
       return response.status(200).send(dataBd);
     } catch (err) {

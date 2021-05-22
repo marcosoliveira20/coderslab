@@ -7,13 +7,33 @@ class Schedule implements IScheduleRepository {
     datetime: Date,
     link: string,
     description: string,
-    owner: string
+    owner: string,
+    _id_group: string
   ): Promise<void> {
-    return ScheduleSchema.create({ datetime, link, description, owner });
+    return ScheduleSchema.create({
+      datetime,
+      link,
+      description,
+      owner,
+      _id_group,
+    });
   }
 
   readById(_id: string): Promise<IScheduleDTO> {
     return ScheduleSchema.findOne({ _id });
+  }
+
+  readByOwner(owner: string): Promise<IScheduleDTO> {
+    return ScheduleSchema.findOne({ owner });
+  }
+
+  // TODO implementação
+  readByDate(datetime: Date): Promise<IScheduleDTO> {
+    return ScheduleSchema.findOne({ datetime });
+  }
+
+  readByGroup(_id_group: string): Promise<IScheduleDTO> {
+    return ScheduleSchema.find({ _id_group }).sort({ datetime: -1 });
   }
 
   readAll(): Promise<Array<IScheduleDTO>> {
