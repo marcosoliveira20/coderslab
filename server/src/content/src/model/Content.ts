@@ -111,6 +111,17 @@ class Content implements IContentRepository {
     return content;
   }
 
+  readByRoadmapDeadlineContents(_roadmap_id: String, roadmap_deadline: String): object {
+    let content = ContentSchema.find({
+      _roadmap_id,
+      deadline: {$gte: roadmap_deadline}
+    });
+
+    console.log(content)
+
+    return content;
+  }
+
   readLateContents(_roadmap_id: String, today: String): object {
     const content = ContentSchema.find({
       _roadmap_id,

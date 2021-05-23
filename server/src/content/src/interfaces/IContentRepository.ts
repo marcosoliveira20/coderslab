@@ -16,7 +16,7 @@ interface IContentRepository {
   readAllDoneRepositories(): object;
   readAllInProgressRepositories(): object;
   readLateContents(_roadmap_id: String, today: String): object;
-
+  readByRoadmapDeadlineContents(_roadmap_id: String, roadmap_deadline: String): object;
   update(id: String): object;
   delete(_id: string): object;
   deleteByRoadmapId(_roadmap_id: String): object

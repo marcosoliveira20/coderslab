@@ -4,7 +4,7 @@ interface IContentSchemaDTO {
   deadline: Date,
   reference: String,
   is_done?: Boolean,
-  challenge: [],
+  challenge?: [],
   _roadmap_id?: String,
 }
 
