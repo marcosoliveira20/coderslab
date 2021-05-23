@@ -14,6 +14,7 @@ const content = {
   deadline: new Date("2021-06-20"),
   reference: "https://matias.ma/nsfw/",
   is_done: false,
+  status: "late",
   challenge: {
     id: Math.random() * 1000,
     title: "titulo challenge",
@@ -24,7 +25,7 @@ const content = {
 
 export const roadmapMock = [
   {
-    id: Math.random()*1000,
+    id: 1,
     name: "Lógica de Programação",
     is_default: true,
     is_done: true,
@@ -43,7 +44,7 @@ export const roadmapMock = [
     ],
   },
   {
-    id: Math.random()*1000,
+    id: 2,
     name: "Java",
     is_default: true,
     is_done: true,
@@ -62,7 +63,7 @@ export const roadmapMock = [
     ],
   },
   {
-    id: Math.random()*1000,
+    id: 3,
     name: "Node",
     is_default: false,
     is_done: false,
@@ -81,7 +82,7 @@ export const roadmapMock = [
     ],
   },
   {
-    id: Math.random()*1000,
+    id: 4,
     name: "SQL",
     is_default: false,
     is_done: false,

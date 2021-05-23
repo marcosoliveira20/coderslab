@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accordion',
@@ -11,17 +12,24 @@ export class AccordionComponent implements OnInit {
    * Accepted values: "complete", "late", "challenge" and "default"
    * Will be applied "default" if anyone value is passed,
    */
-  @Input() status:string = "complete";
-  @Input() isChallenge:boolean = true;
-  @Input() index:number = 7;
-  @Input() data = {
-    link: null
-  };
+  @Input() status:string;
+  @Input() isChallenge:boolean;
+  @Input() index:number;
+  @Input() data;
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.status)
+    if (this.status !== undefined)
+      this.status = this.data.status
 
+    console.log(this.data)
+  }
+
+  verifyUrlParam() {
+    if (this.activatedRoute.snapshot.url[2])
+     console.log(this.activatedRoute.snapshot.url[2])
   }
 
   openReferenceLink() {

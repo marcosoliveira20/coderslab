@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { roadmapMock } from "src/app/app.component";
 
 @Component({
   selector: "app-detail-roadmap",
@@ -6,6 +7,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./detail-roadmap.component.scss"],
 })
 export class DetailRoadmapComponent implements OnInit {
+  public roadmap_list = roadmapMock;
+  public typeFilter:string = "all";
+
   graphList = [
     {
       date: "20/04",
@@ -37,4 +41,20 @@ export class DetailRoadmapComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  filter(type: string) {
+
+    this.typeFilter = type;
+
+    switch (type) {
+      case "concluded":
+        this.roadmap_list = roadmapMock.filter(roadmap => roadmap.is_done)
+        break;
+      case "inProgress":
+        this.roadmap_list = roadmapMock.filter(roadmap => !roadmap.is_done)
+        break;
+      default:
+        this.roadmap_list = roadmapMock;
+    }
+  }
 }
