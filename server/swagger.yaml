@@ -1331,11 +1331,6 @@ components:
           _owner:
             type: string
             description: 'ID do dono do grupo gerado pelo MongoDB'
-          _schedule_list:
-            type: array
-            items:
-              type: string
-              description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
             
     # Interest
     interest.Request:

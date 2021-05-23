@@ -10,7 +10,6 @@ interface IGroupDTO {
   is_public: boolean;
   is_default: boolean;
   _owner: string;
-  _schedule_lis?: Array<object>;
 }
 
 export { IGroupDTO };
