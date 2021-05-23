@@ -14,7 +14,6 @@ export class HomeGroupComponent implements OnInit {
 
   filter(type:string){
     this.typeFilter = type;
-    console.log(type);
     if(type === "all"){
       this.groupList = this.user.group_list;
     }else{
