@@ -18,7 +18,6 @@ export default class CreateScheduleController {
         schedule
           .create(datetime, link, description, owner, id_group)
           .then(() => {
-            console.log(id_group);
             return response.status(201).send();
           });
       });

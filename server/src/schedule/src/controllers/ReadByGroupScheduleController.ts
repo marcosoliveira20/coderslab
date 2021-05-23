@@ -8,9 +8,10 @@ export default class ReadByIdScheduleController {
     const { id_group } = request.params;
 
     const schedule = new Schedule();
+    const datetime = new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000);
 
     try {
-      const dataBd = await schedule.readByGroup(id_group);
+      const dataBd = await schedule.readByGroup(id_group, datetime);
       if (!dataBd) {
         return response.status(404).send();
       }
