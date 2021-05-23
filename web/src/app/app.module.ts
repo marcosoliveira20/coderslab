@@ -24,6 +24,7 @@ import { HomeRoadmapComponent } from './views/roadmap/home-roadmap/home-roadmap.
 import { NewRoadmapComponent } from './views/roadmap/new-roadmap/new-roadmap.component';
 import { ListRoadmapComponent } from './views/roadmap/list-roadmap/list-roadmap.component';
 import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-roadmap.component';
+import { AccordionComponent } from './component/accordion/accordion.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-ro
     HomeRoadmapComponent,
     NewRoadmapComponent,
     ListRoadmapComponent,
-    DetailRoadmapComponent
+    DetailRoadmapComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,12 @@ export const roadmapMock = [
     is_default: true,
     is_done: true,
     level: 0,
+    progress: "10%",
+    content_status: {
+      total: 40,
+      complete: 20,
+      late: 3
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -42,6 +48,12 @@ export const roadmapMock = [
     is_default: true,
     is_done: true,
     level: 0,
+    progress: "40%",
+    content_status: {
+      total: 60,
+      complete: 22,
+      late: 2
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -55,6 +67,12 @@ export const roadmapMock = [
     is_default: false,
     is_done: false,
     level: 0,
+    progress: "60%",
+    content_status: {
+      total: 100,
+      complete: 60,
+      late: 1
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -68,6 +86,12 @@ export const roadmapMock = [
     is_default: false,
     is_done: false,
     level: 0,
+    progress: "10%",
+    content_status: {
+      total: 10,
+      complete: 1,
+      late: 1
+    },
     content_list: [
       { ...content },
       { ...content },
