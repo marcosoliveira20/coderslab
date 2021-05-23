@@ -1,0 +1,122 @@
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
+
+main {
+  overflow-y: auto;
+  height: 100%;
+}
+
+header {
+  padding: 48px 32px;
+  align-items: center;
+  display: block;
+}
+
+header h1 {
+  font-weight: 100;
+  color: $cdl_darkBlue;
+}
+
+// Bootstrap override
+.row {
+  margin: 0 0 40px;
+  column-gap: 40px;
+  .col {
+    padding: 0;
+  }
+}
+
+/*
+  CONTENT SELECT NEW ROADMAP
+*/
+.content-select-new-roadmap {
+  > p {
+    color: $cdl_grey;
+    max-width: 900px;
+    margin-bottom: 115px;
+  }
+
+  > div {
+    display: flex;
+    padding-left: 47px;
+    gap: 82px;
+    flex-wrap: wrap;
+  }
+}
+
+.div-new-roadmap-option {
+  background: $cdl_white;
+  box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+  padding: 24px;
+  width: 400px;
+  height: auto;
+  display: grid;
+  align-content: space-between;
+
+  > div h4 {
+    color: $cdl_darkBlue;
+  }
+
+  > div p {
+    color: $cdl_grey;
+  }
+
+  > button {
+    color: $cdl_pink;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $cdl_pink;
+    justify-self: right;
+    width: fit-content;
+    margin-top: 100px;
+  }
+}
+/*
+  CONTENT NEW CUSTOM ROADMAP
+*/
+.content-new-custom-roadmap {
+  label {
+    display: block;
+    font-weight: 400;
+    color: $cdl_pink;
+  }
+
+  input,
+  select {
+    width: 100%;
+    font-weight: 300;
+    border: none;
+    border-bottom: 1px solid $cdl_darkBlue;
+    display: block;
+    font-size: 25px;
+    background: transparent;
+  }
+
+  section {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding: 45px 45px 0;
+    background: #ffffff;
+    box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
+    border-radius: 15px;
+    margin-bottom: 43px;
+  }
+}
+
+.header-task-creation-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 13px;
+
+  button {
+    border: 1px solid $cdl_pink;
+    border-radius: 10px;
+    padding: 4px;
+  }
+}
+
+.task-creation-list {
+  overflow-y: auto;
+}

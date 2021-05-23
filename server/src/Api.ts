@@ -19,7 +19,7 @@ class Api {
     });
 
     public interests = axios.create({
-        baseURL: "http://localhost:5000/interests",
+        baseURL: "http://localhost:5000/interest",
     });
 
     public subject = axios.create({

@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { userMock } from "src/app/app.component";
 
 @Component({
@@ -8,11 +7,24 @@ import { userMock } from "src/app/app.component";
   styleUrls: ["./home-group.component.scss"],
 })
 export class HomeGroupComponent implements OnInit {
-  public a: string = "socorro";
 
   public user = userMock;
+  groupList = userMock.group_list;
+  typeFilter: string="all";
 
-  constructor(private route: ActivatedRoute) {
+  filter(type:string){
+    this.typeFilter = type;
+    console.log(type);
+    if(type === "all"){
+      this.groupList = this.user.group_list;
+    }else{
+      this.groupList = this.groupList.filter( group => group.owner === this.user.id)
+    }
+
+  }
+
+
+  constructor() {
   }
 
   ngOnInit() {}

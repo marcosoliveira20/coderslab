@@ -1,5 +1,14 @@
 @import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/scrollbar";
 
+// Bootstrap override
+.row {
+  margin: 0 0 40px;
+  column-gap: 40px;
+  .col { padding: 0; }
+}
+
+// TAGS
 h1,
 h4 {
   color: $cdl_darkBlue;
@@ -31,35 +40,14 @@ input:disabled {
   color: #888;
 }
 
-.tag_list {
-  list-style: none;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-
-  div {
-    min-width: fit-content;
-    width: fit-content;
-    border-radius: 50px;
-    padding: 2px 10px;
-    border: 1px solid $cdl_pink;
-    color: $cdl_pink;
-    background: none;
-  }
-}
-
-.mainPage {
+header {
   padding: 48px 32px;
-  display: grid;
-  height: 100%;
-  align-content: space-between;
-}
-
-.header {
-  margin-bottom: 55px;
   align-items: center;
   display: block;
+
+  h1 {
+    color: $cdl_darkBlue;
+  }
 
   div:first-child {
     display: flex;
@@ -79,17 +67,6 @@ input:disabled {
       margin-right: 30px;
     }
   }
-
-  h2 {
-    font-weight: 500;
-    color: $cdl_pink;
-    font-size: 25px;
-  }
-}
-
-.editMode {
-}
-.viewMode {
 }
 
 section {
@@ -113,11 +90,8 @@ section {
     display: block;
     font-weight: 300;
     font-size: 25px;
+    background: transparent;
   }
-}
-
-.row {
-  margin-bottom: 45px;
 }
 
 footer {
@@ -138,7 +112,7 @@ footer {
     border: 1px solid $cdl_pink;
   }
 
-  button:hover{
+  button:hover {
     background-color: $cdl_pink;
     color: $cdl_white;
   }
@@ -150,21 +124,48 @@ app-input-auto-complete {
   padding-top: 0px;
 }
 
-#call-modal {
-  border-radius: 10px;
-  height: 57px;
-  width: 57px;
-  background-color: transparent;
-  border: 1.5px solid $cdl_pink;
+// CLASSES
+.tag_list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  div {
+    min-width: fit-content;
+    width: fit-content;
+    border-radius: 50px;
+    padding: 2px 10px;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
+    background: none;
+  }
 }
 
-/* Switch*/
+.main-content {
+  padding: 0 32px;
+  display: grid;
+  grid-template-rows: auto 100%;
+  align-content: space-between;
+  overflow-y: auto;
+}
 
+.row-switch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+
+  div >p { margin: 0; text-align: center;}
+
+}
+
+// SWITCH
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 23px;
 }
 
 .switch input {
@@ -180,7 +181,7 @@ app-input-auto-complete {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $cdl_white;
+  background-color: transparent;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -188,32 +189,41 @@ app-input-auto-complete {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 17px;
+  width: 17px;
   left: 4px;
   bottom: 4px;
-  background-color: #d13c74;
+  top: 2px;
+  background-color: $cdl_pink;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
-input:checked + .slider {
-  background-color: $cdl_white;
+// NOT CHECKED
+.switch input:not(:checked) + .slider::before {
+  background-color: #999;
+}
+.switch input:not(:checked) + .slider.round {
+  border-color: #999;
 }
 
-input:focus + .slider {
+// CHECKED
+.switch input:checked + .slider.round {
+  border-color: $cdl_pink;
+}
+.switch input:focus + .slider {
   box-shadow: 0 0 1px $cdl_white;
 }
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(33px);
+  -ms-transform: translateX(33px);
+  transform: translateX(33px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border: solid 1px $cdl_pink;
+  border-style: solid;
+  border-width: 1px;
   border-radius: 34px;
 }
 

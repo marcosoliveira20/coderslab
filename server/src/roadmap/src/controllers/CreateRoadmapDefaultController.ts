@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { Roadmap } from "../model/Roadmap";
 import Api from "../../../Api";
 
-class CreateRoadmapDefaultController {
+class CreateRoadmapCustomController {
   async handle(request: Request, response: Response) {
     const {
       name,
@@ -12,22 +12,28 @@ class CreateRoadmapDefaultController {
       level
     } = request.body;
 
-
-
     const roadmap = new Roadmap();
     const api = new Api();
+
+    let quantityChallenge = 0
+    for(let i = 0; i < content_list.length; i++) {
+      const challenge = content_list[i].challenge.length
+      quantityChallenge = quantityChallenge + challenge
+    }
 
     try {
       const data = await roadmap.createDefault({
         name,
         objective,
         level,
-        quantity_contents: content_list.length
+        quantity_contents: content_list.length,
+        quantity_challenges: quantityChallenge
       });
 
       await roadmap.updateQuantityOfContents(data._id, content_list.length)
 
       data.quantity_contents = content_list.length
+      data.quantity_challenges = quantityChallenge
 
       if(content_list.length == 0) {
         return response.status(201).send(data);
@@ -57,4 +63,4 @@ class CreateRoadmapDefaultController {
   }
 }
 
-export { CreateRoadmapDefaultController };
+export { CreateRoadmapCustomController };

@@ -1,8 +1,13 @@
-<div *ngIf="router.url === '/login' || router.url === '/groups/explore'">
+<div
+  class="main"
+  *ngIf="router.url === '/login' || router.url === '/groups/explore'"
+>
   <router-outlet></router-outlet>
 </div>
 
 <main *ngIf="router.url !== '/login' && router.url !== '/groups/explore'">
   <app-navbar></app-navbar>
-  <router-outlet></router-outlet>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </main>

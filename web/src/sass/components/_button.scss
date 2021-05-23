@@ -5,14 +5,46 @@
   background-color: rgb(231 233 240);
   border-radius: 5px;
 
-  font-family: Roboto;
+  font-family: inherit;
   font-style: normal;
   font-weight: 300;
   font-size: 25px;
+
+  height: 100% ;
+  width: 270px ;
 }
 
 .button-default:hover{
   color: white;
   background-color: $cdl_pink;
   transition-delay: 50ms;
+}
+
+.button-square{
+  background: transparent;
+  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  margin-top: 24px;
+}
+
+.button-rounded{
+  background: transparent;
+  border-radius: 25px;
+  width: 100%;
+  height: 42px;
+  margin-top: 24px;
+}
+
+
+.button-dark{
+  color: $cdl_yellow;
+  background-color: $cdl_darkBlue;
+  border: solid 3px $cdl_yellow;
+}
+
+.button-ligth{
+  color: $cdl_darkBlue ;
+  background-color: transparent;
+  border: solid 3px $cdl_darkBlue;
 }

@@ -1,0 +1,27 @@
+@import "./list-default";
+
+header{
+  margin-top: 47px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  h1{
+    color: $cdl_darkBlue;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 53px;
+    letter-spacing: 0.15em;
+  }
+
+  div{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ul{
+    list-style: none;
+  }
+}

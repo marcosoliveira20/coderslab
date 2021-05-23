@@ -11,10 +11,6 @@ class ReadInterestByIdController {
     try {
       const data = await interests.readById(id);
 
-      if(!data) {
-        return response.status(404).send();
-      }
-
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);

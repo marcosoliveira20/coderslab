@@ -14,8 +14,7 @@ class UpdateGroupController {
   			token,
 			is_public,
 			is_default,
-			_owner,
-			_schedule_list
+			_owner
 		} = request.body;
 
 		const group = new Group();
@@ -43,8 +42,7 @@ class UpdateGroupController {
   				token,
 				is_public,
 				is_default,
-				_owner,
-				_schedule_list
+				_owner
 			});
 
 			response.status(200).send(data);

@@ -1,5 +1,8 @@
 interface IGroupDTO {
+  _id?: string;
   name: string;
+  number_members?: number;
+  next_schedule?: Date;
   category: Array<String>;
   subject_label: string;
   level: number;
@@ -7,7 +10,7 @@ interface IGroupDTO {
   is_public: boolean;
   is_default: boolean;
   _owner: string;
-  _schedule_list: Array<string>;
+  _schedule_lis?: Array<object>;
 }
 
 export { IGroupDTO };

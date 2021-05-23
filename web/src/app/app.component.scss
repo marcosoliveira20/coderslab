@@ -1,10 +1,17 @@
-div {
+.main {
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 main {
   display: grid;
-  grid-template-columns: 103px 0 calc(100% - 103px);
+  grid-template-columns: 103px calc(100% - 103px);
   grid-template-rows: 100vh;
+
+  overflow: hidden;
+
+  > div {
+    padding: 0 32px ;
+  }
 }

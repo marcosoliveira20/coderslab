@@ -31,7 +31,6 @@ class CreateRoadmapCustomController {
       });
 
       await roadmap.updateQuantityOfContents(data._id, content_list.length)
-      // await roadmap.updateQuantityOfChallenges(data._id, quantityChallenge)
 
       data.quantity_contents = content_list.length
       data.quantity_challenges = quantityChallenge
