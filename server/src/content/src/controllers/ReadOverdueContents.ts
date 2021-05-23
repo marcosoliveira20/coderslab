@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 
 import { Content } from "../model/Content";
 
-class ReadContentByRoadmapIdController {
+class ReadOverdueContents {
   async handle(request: Request, response: Response) {
-    const {
-      _id
-    } = request.params;
+    const { _roadmap_id } = request.params;
+
+    const today = new Date(Date.now()).toISOString().split('T')[0];
 
     const content = new Content();
 
     try {
-      const data = await content.readByRoadmapId(_id);
+      const data = await content.readLateContents(_roadmap_id, today)
 
       if(!data) {
         return response.status(404).send("Content not found");
@@ -25,4 +25,4 @@ class ReadContentByRoadmapIdController {
   }
 }
 
-export { ReadContentByRoadmapIdController };
+export { ReadOverdueContents };

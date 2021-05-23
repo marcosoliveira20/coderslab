@@ -3,10 +3,9 @@ import { IchallengeRepository } from "../interfaces/IchallengeRepository";
 
 import ChallengeSchema from "../database/Schema/ChallengeSchema"
 
-
 class Challenge implements IchallengeRepository {
-  create({ title, description, is_done }: IChallengeDTO): object {
-    const challenge = ChallengeSchema.create({ title, description, is_done});
+  create({ content_id, title, description, is_done }: IChallengeDTO): object {
+    const challenge = ChallengeSchema.create({ content_id, title, description, is_done});
 
     return challenge;
   }

@@ -14,10 +14,11 @@ import { UpdateRepositoryContentList } from "../controllers/UpdateRepositoryCont
 import { ReadAllRoadmapController } from "../controllers/ReadAllRoadmapController";
 import { ReadRoadmapByIdController } from "../controllers/ReadRoadmapByIdController";
 import { DeleteRoadmapController } from "../controllers/DeleteRoadmapController";
-import { ReadAllCustomRoadmapRepositories } from "../controllers/ReadAllCustomRoadmapRepositories"
-import { ReadAllDefaultRoadmapRepositories } from "../controllers/ReadAllDefaultRoadmapRepositories"
-import { ReadAllInProgressRoadmapRepositories } from "../controllers/ReadAllInProgressRoadmapRepositories"
-import { ReadAllDoneRoadmapRepositories } from "../controllers/ReadAllDoneRoadmapRepositories"
+import { ReadAllCustomRoadmapRepositories } from "../controllers/ReadAllCustomRoadmapRepositories";
+import { ReadAllDefaultRoadmapRepositories } from "../controllers/ReadAllDefaultRoadmapRepositories";
+import { ReadAllInProgressRoadmapRepositories } from "../controllers/ReadAllInProgressRoadmapRepositories";
+import { ReadAllDoneRoadmapRepositories } from "../controllers/ReadAllDoneRoadmapRepositories";
+import { UpdateLevelController } from "../controllers/UpdateLevelController";
 
 const createRoadmapDefaultController = new CreateRoadmapDefaultController();
 const createRoadmapCustomController = new CreateRoadmapCustomController();
@@ -35,6 +36,7 @@ const readAllCustomRoadmapRepositories = new ReadAllCustomRoadmapRepositories();
 const readAllDefaultRoadmapRepositories = new ReadAllDefaultRoadmapRepositories();
 const readAllInProgressRoadmapRepositories = new ReadAllInProgressRoadmapRepositories();
 const readAllDoneRoadmapRepositories = new ReadAllDoneRoadmapRepositories();
+const updateLevelController = new UpdateLevelController();
 
 RoadmapRoutes.post("/roadmap/create/default", createRoadmapDefaultController.handle);
 RoadmapRoutes.post("/roadmap/create/custom", createRoadmapCustomController.handle);
@@ -45,6 +47,8 @@ RoadmapRoutes.put("/roadmap/update/inprogress/:_id", turnRoadmapNotDoneControlle
 RoadmapRoutes.put("/roadmap/update/name/:_id", updateRepositoryNameController.handle);
 RoadmapRoutes.put("/roadmap/update/objective/:_id", updateRepositoryObjectiveController.handle);
 RoadmapRoutes.put("/roadmap/update/list/:_id", updateRepositoryContentListController.handle);
+RoadmapRoutes.put("/roadmap/update/level/:_id", updateLevelController.handle);
+
 RoadmapRoutes.get("/roadmap/read/all", readAllRoadmapController.handle);
 RoadmapRoutes.get("/roadmap/read/:_id", readRoadmapByIdController.handle);
 RoadmapRoutes.get("/roadmap/read/all/custom", readAllCustomRoadmapRepositories.handle);
