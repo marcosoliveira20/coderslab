@@ -12,6 +12,7 @@ import { ReadAllInProgressChallengeController } from "../controllers/ReadAllInPr
 import { ReadAllDoneChallengeController } from "../controllers/ReadAllDoneChallengeController";
 import { UpdateChallengeTitleController } from "../controllers/UpdateChallengeTitleController";
 import { UpdateChallengeDescriptionController } from "../controllers/UpdateChallengeDescriptionController"
+import { CreateChallengeByRoadmapController } from "../controllers/CreateChallengeByRoadmapController";
 
 const createChallengeController = new CreateChallengeController();
 const turnChallengeDoneController = new TurnChallengeDoneController();
@@ -23,8 +24,11 @@ const readAllInProgressChallengeController = new ReadAllInProgressChallengeContr
 const readAllDoneChallengeController = new ReadAllDoneChallengeController();
 const updateChallengeTitleController = new UpdateChallengeTitleController();
 const updateChallengeDescriptionController = new UpdateChallengeDescriptionController();
+const createChallengeByRoadmapController = new CreateChallengeByRoadmapController();
 
 ChallengeRoutes.post("/challenge/create", createChallengeController.handle);
+ChallengeRoutes.post("/challenge/create/By/Roadmap", createChallengeByRoadmapController.handle);
+
 ChallengeRoutes.put("/challenge/update/done/:_id", turnChallengeDoneController.handle);
 ChallengeRoutes.put("/challenge/update/inprogress/:_id", turnChallengeNotDoneController.handle);
 ChallengeRoutes.put("/challenge/update/title/:_id", updateChallengeTitleController.handle);

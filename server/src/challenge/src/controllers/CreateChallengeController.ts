@@ -4,29 +4,25 @@ import { Challenge } from "../model/Challenge";
 
 class CreateChallengeController {
   async handle(request: Request, response: Response) {
-    const {
-      title,
-      description,
-    } = request.body;
+    const challenge = request.body.challenge;
 
-    const challenge = new Challenge();
+    const challenge_class = new Challenge();
 
-    const contentAlreadyExists = await challenge.readByTitle(title);
-
-    if(!contentAlreadyExists) {
-      try {
-        const data = await challenge.create({
-          title,
-          description,
-        });
-
-        return response.status(201).send(data);
-      } catch(err) {
-        console.log(err.message);
-        return response.status(400).send("Bad Request");
-      }
+    if(!challenge.length) {
+      return response.status(204).send();
     } else {
-      return response.status(409).json({error: "Challenge already exists"})
+      try {
+        let new_challenge_list = []
+        for(let i = 0; i < challenge.length; i++) {
+          const new_challenge = await challenge_class.create(challenge[i]);
+
+          new_challenge_list.push(new_challenge)
+        }
+
+          return response.status(201).send(new_challenge_list)
+      } catch(err) {
+        return response.status(404).send(err.message);
+      }
     }
   }
 }

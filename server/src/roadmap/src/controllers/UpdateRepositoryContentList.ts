@@ -10,25 +10,16 @@ class UpdateRepositoryContentList {
 
     const roadmap = new Roadmap();
 
-    try{
-      const roadmapAlreadyExists = await roadmap.turnRoadmapNotDone(_id);
+    try {
+      const data = await roadmap.updateContent_list(_id, content_list);
 
-      if (roadmapAlreadyExists) {
-        try {
-          const data = await roadmap.updateContent_list(_id, content_list);
+      console.log(data)
 
-          return response.status(200).send(data);
+      return response.status(200).send(data);
 
-        } catch (err) {
-          console.log(err.message);
-          return response.status(400).send();
-        }
-      } else {
-        return response.status(404).send();
-      }
     } catch (err) {
       console.log(err.message);
-      response.status(400).send()
+      return response.status(400).send();
     }
   }
 }

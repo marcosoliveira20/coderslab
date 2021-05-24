@@ -1,7 +1,7 @@
 import { IChallengeDTO } from "./IChallengeDTO";
 
 interface IchallengeRepository {
-  create({ title, description, is_done }: IChallengeDTO): object;
+  create({title,description,is_done,content_id}: IChallengeDTO): object;
   turnChallengeDone(_id: String): object
   turnChallengeNotDone(_id: String): object
   updateTitle(_id: String, title: String): object
