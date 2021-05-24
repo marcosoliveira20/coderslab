@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { interestListMock } from "src/app/app.component";
 
 @Component({
   selector: "app-new-roadmap",
@@ -9,6 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class NewRoadmapComponent implements OnInit {
   public isNewCustomRoadmap: boolean;
+  public interestList = interestListMock
 
   private taskModel = {
     title: "",

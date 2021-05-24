@@ -122,28 +122,30 @@
         />
       </div>
 
-      <div class="form-group-base">
-        <select formControlName="subjectForm">
-          <option value="" selected disabled>Interesse</option>
-          <option *ngFor="let subject of subjectList">
-            {{ subject.label }}
-          </option>
-        </select>
+      <div class="form-group-base" id="teste">
+        <div *ngFor="let interest of interestList; index as i">
+          <select formControlName="subjectForm" (change)="handleChangeSelect($event, '_id_subject', i)">
+            <option value="" selected disabled>Interesse</option>
+            <option *ngFor="let subject of subjectList" value="{{subject.id}}">
+              {{ subject.label }}
+            </option>
+          </select>
 
-        <select formControlName="level">
-          <option value="-1" selected disabled>Nível</option>
-          <option value="0">Iniciante</option>
-          <option value="1">Intermediário</option>
-          <option value="2">Avançado</option>
-        </select>
-        <button id="add-interest" (click)="addInterest()">
-          <img src="../../../assets/icons/plus-white.svg" alt="" srcset="" />
-        </button>
+          <select formControlName="level" (change)="handleChangeSelect($event, 'level', i)">
+            <option value="-1" selected disabled>Nível</option>
+            <option value="0">Iniciante</option>
+            <option value="1">Intermediário</option>
+            <option value="2">Avançado</option>
+          </select>
 
-        <div *ngFor="let subject of selectedCustomSubjectList; index as i">
-          <select
-            (change)="updateInterest(subject, $event, 'label')"
-          >
+          <button type="button" id="add-interest" (click)="i === 0 ? addNewInterestItem(i) : deleteInterest(i)">
+            <img src="../../../assets/icons/plus-white.svg" alt="" srcset="" *ngIf="i === 0"/>
+            <img [style.transform]="'rotate(45deg)'" src="../../../assets/icons/plus-white.svg" *ngIf="i !== 0"/>
+          </button>
+        </div>
+
+        <!-- <div *ngFor="let interest of interestList; index as i">
+          <select>
             <option selected>{{ subject.label }}</option>
             <option *ngFor="let subject of subjectList">
               {{ subject.label }}
@@ -159,9 +161,9 @@
           </select>
 
           <button (click)="updateInterest(subject)" id="add-interest">
-            <img id="rotate" src="../../../assets/icons/plus-white.svg" />
+            <img [style.transform]="rotate(45deg)" src="../../../assets/icons/plus-white.svg" />
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
 

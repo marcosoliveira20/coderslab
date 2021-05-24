@@ -1,20 +1,22 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { subjectMock } from "../../../mock";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  private mode: string = "login";
-  private interestList: any[] = [];
-  private subjectList: any[] = subjectMock;
-  private selectedSubjectList: any[] = [];
-  private selectedCustomSubjectList: any[] = [];
+  private interestModel = { _id_subject: "", _id_user: 3, level: "" };
 
-  private interestModel = { _id_subject: "", _id_user: "", level: 0 };
+  public mode: string = "register";
+
+  public interestList: any[] = [{...this.interestModel}];
+  public subjectList: any[] = subjectMock;
+
+  public selectedSubjectList: any[] = [];
+  public selectedCustomSubjectList: any[] = [];
 
   loginForm = this.fb.group({
     username: [""],
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit {
     subjectForm: [""],
   });
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {}
 
@@ -49,11 +51,50 @@ export class LoginComponent implements OnInit {
     this.registerForm.patchValue({
       objective: this.interestList[0],
     });
-    console.log("registerForm", this.registerForm.value);
+    console.log("onSubmit: ", this.registerForm.value);
   }
 
-  listenInput(interestListEvent) {
-    this.interestList = interestListEvent;
+  handleChangeSelect(event, type, index) {
+    this.interestList[index][type] = event.target.value
+  }
+
+  handleSubjectList(subjectId) {
+    const subjectIndex = subjectMock.findIndex(
+      (item) => item.id == subjectId
+    );
+
+    this.selectedSubjectList.push(this.subjectList[subjectIndex]);
+    this.subjectList.splice(subjectIndex, 1);
+
+    // this.selectedSubjectList.push(this.subjectList[subjectIndex]);
+    // this.subjectList.splice(subjectIndex, 1);
+
+    // this.subjectList.push(this.selectedSubjectList[selectedSubjectIndex]);
+    // this.selectedSubjectList.splice(selectedSubjectIndex, 1);
+  }
+
+  validateFirstSelect():boolean {
+    console.log(
+      this.interestList[0]._id_subject !== "",
+      this.interestList[0]._id_user !== "",
+      this.interestList[0].level !== ""
+    )
+    return this.interestList[0]._id_subject !== ""
+      && this.interestList[0]._id_user !== ""
+      && this.interestList[0].level !== ""
+  }
+
+  addNewInterestItem(index) {
+    if (this.validateFirstSelect()) {
+      let firstSelect = this.interestList[0]
+      this.interestList.push({...firstSelect})
+      this.interestList[0] = {...this.interestModel}
+
+      this.handleSubjectList(this.interestList[index]._id_subject)
+      // var mainDiv = document.getElementById('teste');
+      console.log("interestList: ", this.interestList)
+      console.log("sblist: ", this.subjectList, "selescted custom: ", this.selectedCustomSubjectList, "selected sb:", this.selectedSubjectList)
+    }
   }
 
   addInterest() {
@@ -102,7 +143,9 @@ export class LoginComponent implements OnInit {
         1
       );
 
-      const subjectIndex = this.subjectList.findIndex((i) => i.label == event.target.value);
+      const subjectIndex = this.subjectList.findIndex(
+        (i) => i.label == event.target.value
+      );
       const selectedSubjectIndex = this.selectedSubjectList.findIndex(
         (i) => i.label == subject.label
       );
@@ -125,7 +168,7 @@ export class LoginComponent implements OnInit {
         _id_subject: subjectAdd.id,
         label: event.target.value,
         _id_user: "",
-        level: subject.level
+        level: subject.level,
       });
 
       this.selectedCustomSubjectList.sort(function (a, b) {
@@ -138,12 +181,22 @@ export class LoginComponent implements OnInit {
         return 0;
       });
     } else {
-      this.selectedCustomSubjectList[index][event.target.name] = event.target.value;
+      this.selectedCustomSubjectList[index][event.target.name] =
+        event.target.value;
       this.interestList[index][event.target.name] = event.target.value;
-
     }
   }
 
-  deleteInterest(subject) {}
+  deleteInterest(index) {
+    const subjectIndex = subjectMock.findIndex(
+      (item) => item.id == this.interestList[index]._id_subject
+    );
 
+    console.log("sblist: ", this.subjectList, "selescted custom: ", this.selectedCustomSubjectList, "selected sb:", this.selectedSubjectList)
+    // this.selectedSubjectList.push(this.subjectList[subjectIndex]);
+    // this.subjectList.splice(subjectIndex, 1);
+
+    this.interestList.splice(index, 1);
+
+  }
 }

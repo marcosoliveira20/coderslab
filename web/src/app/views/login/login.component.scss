@@ -50,7 +50,7 @@
 
   select {
     width: 37.5%;
-    margin-right: 33px;
+    margin-right: 25px;
   }
   input:last-child {
     margin-bottom: 0;
@@ -66,10 +66,19 @@
     align-items: center;
     text-align: center;
   }
+
+  option{
+    background: $cdl_darkBlue;;
+  }
+
+  img{
+    width: 1.5em;
+  }
 }
 #add-interest {
   display: inline;
-  width: calc(25% - 66px);
+  width: fit-content;
+  padding: 5px;
 
   border: 1px solid #ffffff;
   box-sizing: border-box;
@@ -103,9 +112,6 @@
   font-size: 15px;
 }
 
-#rotate{
-  transform: rotate(45deg);
-}
 // REGISTER MODE
 .section-register {
   width: 50%;
