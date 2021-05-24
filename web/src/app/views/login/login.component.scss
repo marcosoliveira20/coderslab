@@ -31,8 +31,8 @@
 }
 
 .form-group-base {
-  input {
-    width: 100%;
+  input,
+  select {
     height: 40px;
     border: none;
     background: none;
@@ -44,6 +44,14 @@
     margin-bottom: 30px;
   }
 
+  input {
+    width: 100%;
+  }
+
+  select {
+    width: 37.5%;
+    margin-right: 33px;
+  }
   input:last-child {
     margin-bottom: 0;
   }
@@ -59,7 +67,14 @@
     text-align: center;
   }
 }
+#add-interest {
+  display: inline;
+  width: calc(25% - 66px);
 
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
 // LOGIN
 .section-login {
   width: 100%;
