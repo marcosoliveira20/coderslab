@@ -14,7 +14,7 @@
   border: solid 2px #ffc42e;
 }
 
-.searchbar-ligth {
+.searchbar-light {
   border: solid 2px #2b2b2b;
   color: #2b2b2b;
   background: transparent;
@@ -31,6 +31,7 @@
   margin-top: 24px;
 
   padding-left: 20px;
+  padding-right: 17px;
 
   font-family: Roboto;
   font-style: normal;
@@ -46,8 +47,9 @@
   border: solid 2px $cdl_yellow;
 }
 
-.input-ligth{
+.input-light{
   color: $cdl_darkBlue;
   background-color: transparent;
   border: solid 2px $cdl_darkBlue;
 }
+
