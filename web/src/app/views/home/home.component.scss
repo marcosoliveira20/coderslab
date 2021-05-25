@@ -9,7 +9,7 @@ main {
   grid-template-rows: 1fr 2fr 2fr;
   grid-template-areas:  "personal-status roadmap-details"
                         "study-groups roadmap-details"
-                        "roadmap-status roadmap-details";
+                        "study-groups roadmap-details";
   column-gap: 48px;
   row-gap: 28px;
   overflow-y: auto;
@@ -68,7 +68,7 @@ ul { list-style: none; }
 
 .study-groups {
   grid-area: study-groups;
-  height: 100%;
+  height: 350px;
 
   h1 { font-size: 28px; font-weight: 500; color: $cdl_darkBlue; }
 
