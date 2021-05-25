@@ -12,7 +12,7 @@ class ReadUserByIdController {
     try {
       const data = await user.readById(id);
 
-      if(!data) {
+      if (!data) {
         return response.status(404).send();
       }
 

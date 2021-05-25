@@ -4,16 +4,12 @@ import { Interests } from "../model/Interests";
 
 class CreateInterestController {
   async handle(request: Request, response: Response) {
-    const {
-      _id_user,
-      _id_subject,
-      level
-    } = request.body;
+    const { _id_user, _id_subject, level } = request.body;
 
     const interests = new Interests();
 
     try {
-      if(level < 0 || level > 2) {
+      if (level < 0 || level > 2) {
         return response.status(406).send();
       }
 
@@ -23,13 +19,13 @@ class CreateInterestController {
         return response.status(406).send();
       }
 
-      const data = await interests.create({
+      await interests.create({
         _id_user,
         _id_subject,
-        level
+        level,
       });
 
-      return response.status(201).send(data);
+      return response.status(201).send();
     } catch(err) {
       console.log(err.message);
       return response.status(400).send();

@@ -18,15 +18,15 @@ class CreateUserController {
     } = request.body;
 
     const user = new User();
-    
+
     try {
       const findUsername = await user.readByUsername(username);
       const findEmail = await user.readByEmail(email);
-  
+
       if (findUsername || findEmail) {
         return response.status(403).send();
       }
-  
+
       const passwordHash = await hash(password, 8);
 
       let data = await user.create({
