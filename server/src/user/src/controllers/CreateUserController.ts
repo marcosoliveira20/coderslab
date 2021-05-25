@@ -18,15 +18,15 @@ class CreateUserController {
     } = request.body;
 
     const user = new User();
-    
+
     try {
       const findUsername = await user.readByUsername(username);
       const findEmail = await user.readByEmail(email);
-  
+
       if (findUsername || findEmail) {
         return response.status(403).send();
       }
-  
+
       const passwordHash = await hash(password, 8);
 
       let data = await user.create({
@@ -44,7 +44,6 @@ class CreateUserController {
       const api = new Api();
 
       if(interest_list.length == 0) {
-        data.interest_list = [];
         return response.status(201).send(data);
       }
 
@@ -58,8 +57,6 @@ class CreateUserController {
         await api.interests.delete(`/delete/byUserId/${data._id}`);
         return response.status(err.response.status).send();
       }
-
-      data.interest_list = interest_list;
       
       return response.status(201).send(data);
 

@@ -24,10 +24,10 @@ export class ExploreGroupComponent implements OnInit {
   ];
 
   exploreForm = this.fb.group({
-    objective: [""],
     subjectSearch: [""],
+    objective: [""],
     category: [""],
-    date: [""]
+    level: ["-1"]
   });
 
   onSubmit() {

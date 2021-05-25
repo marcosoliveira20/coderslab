@@ -21,7 +21,7 @@ export default class ReadAllSubjectController {
       return response.status(200).send(data);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send();
     }
   }
 }

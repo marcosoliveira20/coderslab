@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
+import Api from "../../../Api";
 
 class DeleteGroupController {
 	async handle(request: Request, response: Response) {
@@ -20,6 +21,14 @@ class DeleteGroupController {
 			}
 			
 			await group.delete(id);
+
+			const api = new Api();
+
+			try {
+				await api.unionUserGroup.delete(`/delete/allGroup/${id}`);
+			} catch(err) {
+				return response.status(err.response.status).send();
+			}
 
 			return response.status(204).send();
 		} catch(err) {

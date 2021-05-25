@@ -1,12 +1,8 @@
-import express from "express";
+import app from "./App";
+import { router } from "./routes";
 
-import { ScheduleRoutes } from "./routes";
+app.use("/", router);
 
-const app = express();
-app.use(express.json());
+console.log("Schedule was started in port: 4000 ⚡");
 
-app.use("/", ScheduleRoutes);
-
-console.log("Schedule was started in port: 5000 ⚡");
-
-app.listen(5000);
+app.listen(4000);

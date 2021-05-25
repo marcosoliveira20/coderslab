@@ -14,6 +14,7 @@ const content = {
   deadline: new Date("2021-06-20"),
   reference: "https://matias.ma/nsfw/",
   is_done: false,
+  status: "late",
   challenge: {
     id: Math.random() * 1000,
     title: "titulo challenge",
@@ -24,11 +25,17 @@ const content = {
 
 export const roadmapMock = [
   {
-    id: Math.random()*1000,
+    id: 1,
     name: "Lógica de Programação",
     is_default: true,
     is_done: true,
     level: 0,
+    progress: "10%",
+    content_status: {
+      total: 40,
+      complete: 20,
+      late: 3
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -37,11 +44,17 @@ export const roadmapMock = [
     ],
   },
   {
-    id: Math.random()*1000,
+    id: 2,
     name: "Java",
     is_default: true,
     is_done: true,
     level: 0,
+    progress: "40%",
+    content_status: {
+      total: 60,
+      complete: 22,
+      late: 2
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -50,11 +63,17 @@ export const roadmapMock = [
     ],
   },
   {
-    id: Math.random()*1000,
+    id: 3,
     name: "Node",
     is_default: false,
     is_done: false,
     level: 0,
+    progress: "60%",
+    content_status: {
+      total: 100,
+      complete: 60,
+      late: 1
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -63,11 +82,17 @@ export const roadmapMock = [
     ],
   },
   {
-    id: Math.random()*1000,
+    id: 4,
     name: "SQL",
     is_default: false,
     is_done: false,
     level: 0,
+    progress: "10%",
+    content_status: {
+      total: 10,
+      complete: 1,
+      late: 1
+    },
     content_list: [
       { ...content },
       { ...content },
@@ -122,7 +147,7 @@ export const userMock = {
       ],
       owner: 1,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 2,
@@ -158,7 +183,7 @@ export const userMock = {
       ],
       owner: 2,
       category: [{ label: "back end" }, { label: "dev web" }, { label: "dba" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 3,
@@ -194,7 +219,7 @@ export const userMock = {
       ],
       owner: 3,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: true,
+      is_default: true,
     },
     {
       token: 4,
@@ -230,7 +255,7 @@ export const userMock = {
       ],
       owner: 1,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 5,
@@ -266,7 +291,7 @@ export const userMock = {
       ],
       owner: 2,
       category: [{ label: "back end" }, { label: "dev web" }, { label: "dba" }],
-      isDefault: false,
+      is_default: false,
     },
     {
       token: 6,
@@ -302,12 +327,12 @@ export const userMock = {
       ],
       owner: 3,
       category: [{ label: "back end" }, { label: "dev web" }],
-      isDefault: true,
+      is_default: true,
     },
   ],
   interest_list: [
-    { subject_label: "Lógica de programação", level: "", isDefault: true },
-    { subject_label: "Node", level: "", isDefault: false },
+    { subject_label: "Lógica de programação", level: "", is_default: true },
+    { subject_label: "Node", level: "", is_default: false },
   ],
 };
 

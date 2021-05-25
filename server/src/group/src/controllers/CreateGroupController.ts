@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Group } from "../model/Group";
+import Api from "../../../Api";
 
 class CreateGroupController {
 	async handle(request: Request, response: Response) {
@@ -11,8 +12,7 @@ class CreateGroupController {
 			level,
 			is_public,
 			is_default,
-			_owner,
-			_schedule_list
+			_owner
 		} = request.body;
 
 		const group = new Group();
@@ -22,14 +22,7 @@ class CreateGroupController {
 				return response.status(406).send();
 			}
 
-			// deve ser apenas uma validacão interna para não repetir token
-			// const data = await group.readByToken(token);
-
-			// if(data) {
-			// 	return response.status(406).send();
-			// }
-
-			await group.create({
+			const data = await group.create({
 				name,
 				category,
 				subject_label,
@@ -37,11 +30,21 @@ class CreateGroupController {
   				token: Math.random().toString(36).substring(8),
 				is_public,
 				is_default,
-				_owner,
-				_schedule_list
+				_owner
 			});
 
-			return response.status(201).send();
+			const api = new Api();
+
+			try {
+				await api.unionUserGroup.post("/create", {
+					_id_user: data._owner,
+					_id_group: data._id
+				});
+			} catch(err) {
+				return response.status(err.response.status).send();
+			}
+
+			return response.status(201).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send();

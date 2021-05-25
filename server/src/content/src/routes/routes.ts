@@ -16,7 +16,9 @@ import { UpdateContenDeadline } from "../controllers/UpdateContenDeadline";
 import { UpdateContenReferenceController } from "../controllers/UpdateContenReferenceController";
 import { ReadContentByRoadmapIdController } from "../controllers/ReadContentByRoadmapIdController"
 import { DeleteContentByRoadmapIDController } from "../controllers/DeleteContentByRoadmapIDController"
-import { ReadByDateRepositories } from "../controllers/ReadByDateRepositories";
+import { ReadOverdueContents } from "../controllers/ReadOverdueContents";
+import { UpdateContenChallenge } from "../controllers/UpdateContenChallenge"
+import { ReadByRoadmapDeadline } from "../controllers/ReadByRoadmapDeadline";
 
 const createContentController = new CreateContentController();
 const turnContentDoneController = new TurnContentDone();
@@ -30,9 +32,11 @@ const updateContentTitleController = new UpdateContentTitle();
 const updateContentDescription = new UpdateContenDescription();
 const updateContenDeadline = new UpdateContenDeadline();
 const updateContenReference = new UpdateContenReferenceController();
+const updateContenChallenge = new UpdateContenChallenge();
 const readContentByRoadmapIdController = new ReadContentByRoadmapIdController();
 const deleteContentByRoadmapIDController = new DeleteContentByRoadmapIDController();
-const readByDateRepositories = new ReadByDateRepositories();
+const readOverdueContents = new ReadOverdueContents();
+const readByRoadmapDeadline = new ReadByRoadmapDeadline();
 
 ContentRoutes.post("/content/create", createContentController.handle);
 ContentRoutes.put("/content/update/done/:_id", turnContentDoneController.handle);
@@ -41,13 +45,15 @@ ContentRoutes.put("/content/update/title/:_id", updateContentTitleController.han
 ContentRoutes.put("/content/update/description/:_id", updateContentDescription.handle);
 ContentRoutes.put("/content/update/deadline/:_id", updateContenDeadline.handle);
 ContentRoutes.put("/content/update/reference/:_id", updateContenReference.handle);
+ContentRoutes.put("/content/update/challenge/:_id", updateContenChallenge.handle);
 
 ContentRoutes.get("/content/read/all", readAllContentController.handle);
 ContentRoutes.get("/content/read/:_id", readContentByIdController.handle);
 ContentRoutes.get("/content/read/byroadmapid/:_id", readContentByRoadmapIdController.handle);
 ContentRoutes.get("/content/read/all/inprogress", readAllInProgressContentRepositories.handle);
 ContentRoutes.get("/content/read/all/done", readAllDoneContentRepositories.handle);
-ContentRoutes.get("/roadmap/read/byDate/:_roadmap_id", readByDateRepositories.handle);
+ContentRoutes.get("/content/read/overdue/:_roadmap_id", readOverdueContents.handle);
+ContentRoutes.get("/content/read/By/Date/:_roadmap_id", readByRoadmapDeadline.handle);
 ContentRoutes.delete("/content/delete/:_id", deleteContentController.handle);
 ContentRoutes.delete("/content/delete/roadmapid/:_id", deleteContentByRoadmapIDController.handle);
 

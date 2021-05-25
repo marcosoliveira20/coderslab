@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
     this.init();
     this.spinnerService.requestStarted();
     this.userService.getUserById().then(data => {
-      console.log(data);
+      // console.log(data);
       this.profileForm.patchValue({
         name: data.name,
         last_name: data.last_name,

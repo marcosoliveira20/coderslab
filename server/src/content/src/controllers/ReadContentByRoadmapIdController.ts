@@ -7,7 +7,6 @@ class ReadContentByRoadmapIdController {
     const {
       _id
     } = request.params;
-    console.log(_id)
 
     const content = new Content();
 
