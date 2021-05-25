@@ -24,7 +24,7 @@ class ReadGroupByOwnerController {
 					}
 				}
 			} catch(err) {
-				console.log(err.response)
+				console.log(err.response);
 				return response.status(err.response.status).send();
 			}
 

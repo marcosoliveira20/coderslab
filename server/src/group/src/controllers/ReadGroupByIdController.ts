@@ -22,7 +22,7 @@ class ReadGroupByIdController {
 				const schedule = (await api.schedule.get(`/read/byIdGroup/nextSchedule/${id}`)).data;
 				data.next_schedule = schedule.datetime;
 			} catch(err) {
-				console.log(err.response)
+				console.log(err.response);
 				return response.status(err.response.status).send();
 			}
 
