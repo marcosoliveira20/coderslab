@@ -57,7 +57,6 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.userService.updateUser(this.profileForm.value).then(data => console.log(data));
-    console.log(this.profileForm, this.isEditMode)
   }
 
   deleteUser() {
