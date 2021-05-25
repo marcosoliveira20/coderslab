@@ -9,7 +9,8 @@ interface IScheduleRepository {
     id_group: string
   ): Promise<void>; // TODO transformar em IScheduleDTO que não passa id
   readById(id: string): Promise<IScheduleDTO>;
-  readByGroup(id: string, datetime: Date): Promise<IScheduleDTO>;
+  readByGroup(id: string, datetime: Date): Promise<Array<IScheduleDTO>>;
+  readByGroupNextSchedule(id: string, datetime: Date): Promise<Array<IScheduleDTO>>;
   readAll(): Promise<Array<IScheduleDTO>>;
   update(
     _id: string,
