@@ -1,49 +1,67 @@
-<div class="mainPage">
-  <div class="header">
+<div class="mainPage cdl-container">
+  <header>
     <div>
       <h1>{{ group.name }}</h1>
+
       <div>
         <button
-          style="width: 52px; display: flex; justify-content: center;"
+          class="button-default add-schedule-button"
           *ngIf="isGroupOwner"
-          (click)="showAddScheduleModal = true">
-          <img style="width: 25px;" src="assets/icons/plus.svg" />
+          (click)="showAddScheduleModal = true"
+        >
+        <svg fill="none" viewBox="0 0 43 43" xmlns="http://www.w3.org/2000/svg">
+        <path d="m40.85 19.35h-17.2v-17.2c0-1.1865-0.9633-2.1499-2.1502-2.1499-1.1866 0-2.1499 0.96333-2.1499 2.1499v17.2h-17.2c-1.1865 0-2.1499 0.9633-2.1499 2.1499 0 1.1869 0.96333 2.1502 2.1499 2.1502h17.2v17.2c0 1.1869 0.9633 2.1502 2.1499 2.1502 1.1869 0 2.1502-0.9633 2.1502-2.1502v-17.2h17.2c1.1869 0 2.1502-0.9633 2.1502-2.1502 0-1.1866-0.9633-2.1499-2.1502-2.1499z"/>
+        </svg>
         </button>
-        <button *ngIf="isGroupOwner" (click)="handleRedirectToEdit()">
-          Editar grupo
+
+        <button
+          class="button-default"
+          (click)="isGroupOwner && handleRedirectToEdit()"
+        >
+          {{ isGroupOwner ? 'Editar grupo' : 'Sair do grupo' }}
         </button>
-        <button *ngIf="!isGroupOwner">Sair do grupo</button>
       </div>
     </div>
-    <h2>Lógica de Programação</h2>
-    <div class="tag_list" *ngIf="group.category">
-      <div>back end</div>
-      <div>dev web</div>
-    </div>
-  </div>
 
-  <section>
-    <h4>Reuniões</h4>
-    <ul class="cdl_card_group">
-      <li *ngFor="let date of group.schedule_list">
-        <app-card
-          (click)="showScheduleModal = true; modalData = date"
-          [type]="'minimal'"
-          [data]="date.datetime"
-        ></app-card>
+    <h2 class="subject-label">{{ group.subject_label }}</h2>
+
+    <ul class="tag_list" *ngIf="group.category">
+      <li *ngFor="let category of group.category">
+        {{ category.label }}
       </li>
     </ul>
-  </section>
 
-  <section>
-    <h4>Integrantes</h4>
-    <ul class="member_list">
-      <li class="member_card" *ngFor="let user of group.user_list">
-        <app-card [type]="'member'" [data]="user" [disableButton]="!isGroupOwner"></app-card>
-      </li>
-    </ul>
-  </section>
+  </header>
+
+  <main>
+    <section>
+      <h4>Reuniões</h4>
+      <ul class="cdl_card_group">
+        <li *ngFor="let date of group.schedule_list">
+          <app-card
+            (click)="showScheduleModal = true; modalData = date"
+            [type]="'schedule'"
+            [data]="date.datetime"
+          ></app-card>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>Integrantes</h4>
+      <ul class="member_list">
+        <li class="member_card" *ngFor="let user of group.user_list">
+          <app-card
+            [type]="'member'"
+            [data]="user"
+            [disableButton]="!isGroupOwner"
+          ></app-card>
+        </li>
+      </ul>
+    </section>
+  </main>
 </div>
+
 
 <!-- MODAL: SCHEDULE DETAILS -->
 <app-modal
@@ -73,7 +91,8 @@
   </div>
 </app-modal>
 
-<!-- MODAL: ADD NEW SCHEDULE -->
+
+<!-- MODAL NEW SCHEDULE -->
 <app-modal
   *ngIf="showAddScheduleModal"
   [showController]="showAddScheduleModal"
@@ -86,29 +105,31 @@
       <div class="row">
         <div class="col">
           <label>data</label>
-          <input type="date" placeholder="dd/mm/yyyy">
+          <input type="date" placeholder="dd/mm/yyyy" />
         </div>
 
         <div class="col">
           <label>horário</label>
-          <input type="time" placeholder="00:00">
+          <input type="time" placeholder="00:00" />
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <label>link</label>
-          <input type="text" placeholder="reuniao.com.br">
+          <input type="text" placeholder="reuniao.com.br" />
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <label>descrição</label>
-          <textarea type="text" placeholder="Fale um pouco sobre o motivo da reunião"></textarea>
+          <textarea
+            type="text"
+            placeholder="Fale um pouco sobre o motivo da reunião"
+          ></textarea>
         </div>
       </div>
-
     </div>
 
     <div class="modal_footer">
