@@ -44,7 +44,6 @@ class CreateUserController {
       const api = new Api();
 
       if(interest_list.length == 0) {
-        data.interest_list = [];
         return response.status(201).send(data);
       }
 
@@ -58,8 +57,6 @@ class CreateUserController {
         await api.interests.delete(`/delete/byUserId/${data._id}`);
         return response.status(err.response.status).send();
       }
-
-      data.interest_list = interest_list;
       
       return response.status(201).send(data);
 

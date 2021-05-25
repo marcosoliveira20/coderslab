@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { Api } from "../../../api";
+import Api  from "../../../Api";
 import { Interests } from "../model/Interests";
 
 class ReadInterestByIdController {

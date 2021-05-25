@@ -8,8 +8,7 @@ const UserSchema = new Schema({
   discord_id: { type: String, required: true },
   github_id: { type: String, required: true },
   password: { type: String, required: true, selected: false },
-  token: { type: String, required: false },
-  interest_list: { type: [Object], required: false }
+  token: { type: String, required: false }
 }, {
   timestamps: true,
 })
