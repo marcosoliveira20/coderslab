@@ -21,15 +21,17 @@ class ReadInterestByIdController {
 
       try {
         const subject = await api.subject.get(
-          `/subject/read/byId/${data._id_subject}`
+          `/read/byId/${data._id_subject}`
         );
         interest = {
-          user: data._id_user,
+          _id: data._id,
+          _id_user: data._id_user,
           subject: subject.data,
           level: data.level,
         };
       } catch (err) {
         console.log(err);
+        return response.status(err.response.status).send();
       }
 
       return response.status(200).send(interest);

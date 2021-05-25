@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Interests } from "../model/Interests";
+import Api from "../../../Api";
 
 class UpdateInterestController {
   async handle(request: Request, response: Response) {
@@ -33,7 +34,25 @@ class UpdateInterestController {
         level
       });
 
-      return response.status(200).send(data);
+      const api = new Api();
+      let interest = null;
+
+      try {
+        const subject = await api.subject.get(
+          `/read/byId/${data._id_subject}`
+        );
+        interest = {
+          _id: data._id,
+          _id_user: data._id_user,
+          subject: subject.data,
+          level: data.level,
+        };
+      } catch (err) {
+        console.log(err);
+        return response.status(err.response.status).send();
+      }
+
+      return response.status(200).send(interest);
     } catch (err) {
       console.log(err.message);
       return response.status(400).send();
