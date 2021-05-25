@@ -19,10 +19,6 @@ class Interests implements IInterestsRepository {
     return InterestsSchema.findOne({ _id });
   }
 
-  readByUserId(_id_user: string): Array<Promise<IInterestsDTO>> {
-    return InterestsSchema.find({ _id_user });
-  }
-
   readByUserAndSubject(_id_user: string, _id_subject: string): Promise<IInterestsDTO> {
     return InterestsSchema.findOne({ _id_user, _id_subject });
   }
