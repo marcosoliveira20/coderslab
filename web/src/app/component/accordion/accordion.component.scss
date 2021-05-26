@@ -9,7 +9,6 @@
 
 .badge {
   display: flex;
-  position: absolute;
   width: 33px;
   height: 33px;
   margin-left: -47px;
@@ -27,7 +26,7 @@
 
 // Status
 .status-default { border-color: $cdl_pink; }
-.status-complete { border-color: $cdl_green; }
+.status-done { border-color: $cdl_green; }
 .status-late { border-color: $cdl_orange; }
 .status-challenge { border-color: $cdl_blue; }
 

@@ -1,7 +1,7 @@
 <div class="cdl-container">
   <header>
     <div>
-      <h1>José Bezerra</h1>
+      <h1>{{ roadmap.name }}</h1>
     </div>
 
     <nav>
@@ -18,8 +18,8 @@
         <li>
           <button
             class="button-nav"
-            (click)="filter('concluded')"
-            [class.active]="typeFilter == 'concluded'"
+            (click)="filter('done')"
+            [class.active]="typeFilter == 'done'"
           >
             Concluídos
           </button>
@@ -46,8 +46,18 @@
 
   <main>
     <ul class="accordion-area">
-      <li *ngFor="let roadmap of roadmap_list, let i = index">
-        <app-accordion [data]="roadmap" [index]="i+1"></app-accordion>
+      <li *ngFor="let content of filteredContentList; let i = index">
+        <app-accordion
+          [data]="content"
+          [index]="getContentNumber(content)"
+        ></app-accordion>
+
+        <div class="challenge" *ngIf="content.challenge !== null">
+          <app-accordion
+            [data]="content.challenge"
+            [isChallenge]="true"
+          ></app-accordion>
+        </div>
       </li>
     </ul>
     <div class="chart-area">
@@ -58,7 +68,7 @@
       </p>
 
       <div>
-          <app-line-chart [graphList]="graphList"></app-line-chart>
+        <app-line-chart [graphList]="graphData"></app-line-chart>
       </div>
     </div>
   </main>
