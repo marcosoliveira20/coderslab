@@ -1,5 +1,4 @@
 import app from "./App";
-
 import { router } from "./routes";
 
 app.use("/", router);

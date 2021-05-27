@@ -71,6 +71,16 @@ class Content implements IContentRepository {
     return content;
   }
 
+  updateChallenge(_id: String, challenge: String): object {
+    const content = ContentSchema.findByIdAndUpdate(
+      {_id},
+      {challenge},
+      {new: true}
+    );
+
+    return content;
+  }
+
   readAll(): IContentSchemaDTO {
     const content = ContentSchema.find();
 
@@ -97,6 +107,17 @@ class Content implements IContentRepository {
 
   readAllDoneRepositories(): object {
     const content = ContentSchema.find({is_done: true});
+
+    return content;
+  }
+
+  readByRoadmapDeadlineContents(_roadmap_id: String, roadmap_deadline: String): object {
+    let content = ContentSchema.find({
+      _roadmap_id,
+      deadline: {$gte: roadmap_deadline}
+    });
+
+    console.log(content)
 
     return content;
   }

@@ -6,6 +6,7 @@ const ScheduleSchema = new Schema(
     link: { type: String, required: true },
     description: { type: String, required: true },
     owner: { type: String, required: true, unique: true, lowercase: true },
+    _id_group: { type: String, required: true, lowercase: true },
   },
   {
     timestamps: true,

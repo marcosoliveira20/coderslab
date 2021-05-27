@@ -12,7 +12,7 @@ class DeleteUserController {
     try {
       const findIndex = await user.readById(id);
 
-      if(!findIndex) {
+      if (!findIndex) {
         return response.status(404).send();
       }
 

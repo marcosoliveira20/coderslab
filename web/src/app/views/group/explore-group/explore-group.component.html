@@ -26,13 +26,12 @@
           <div class="col-11">
             <input
               class="input-dark input"
-              type="email"
               placeholder="Pesquisar por um assunto"
               formControlName="subjectSearch"
             />
           </div>
           <div class="col-1">
-            <button (click)="setShowInput()" class="button-square">
+            <button (click)="setShowInput()" class="button-square button-dark">
               <img src="../../../../assets/icons/filter.svg" />
             </button>
           </div>
@@ -45,6 +44,7 @@
               class="input-dark input"
               formControlName="objective"
             >
+            <option  value="" disabled selected> Objetivo</option>
               <option
                 *ngFor="let objective of objective_list"
                 value="{{ objective.name }}"
@@ -57,9 +57,10 @@
             <select
               id="category"
               name="category"
-              class="input-dark input"
+              class="input-dark input select-default"
               formControlName="category"
             >
+            <option  value="" disabled selected> Categoria</option>
               <option
                 *ngFor="let category of category_listMok"
                 value="{{ category.name }}"
@@ -70,14 +71,13 @@
           </div>
 
           <div class="col-3">
-            <input
-              class="input-dark input"
-              type="date"
-              placeholder="dd/mm/yyyy"
-              name="date"
-              id="date"
-              formControlName="date"
-            />
+            <select formControlName="level"  class="input-dark input">
+              <option value="-1" disabled selected>Nível</option>
+              <option value="0">Iniciante</option>
+              <option value="1">Intermediário</option>
+              <option value="2">Avançado</option>
+            </select>
+
           </div>
 
           <div class="col-2">
@@ -86,7 +86,7 @@
             </button>
           </div>
           <div class="col-1">
-            <button type="submit" class="button-square">
+            <button type="submit" class="button-square button-dark">
               <img
                 src="../../../../assets/icons/magnifying-glass.svg"
                 srcset=""

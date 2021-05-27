@@ -6,8 +6,7 @@ import { Injectable } from "@angular/core";
 })
 export class UserService {
   private url: string;
-  // private user_id: string = "609da03cd9926e45e1019337";
-  private user_id = "60a16b64d9fc8506a44cb1a5";
+  private user_id = "60ac594c68ec2ca3d561db6f";
 
   constructor(private http: HttpClient) {
     this.url = "http://localhost:1000";
@@ -44,8 +43,6 @@ export class UserService {
   }
 
   public deleteUser() {
-    console.log("delete", this.user_id);
-    // const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
     return this.http
       .delete<any>(`${this.url}/user/delete/${this.user_id}`)
       .toPromise();
