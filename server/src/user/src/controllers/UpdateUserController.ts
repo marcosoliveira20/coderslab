@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { hash } from "bcrypt";
 
 import { User } from "../model/User";
 
@@ -25,6 +26,8 @@ class UpdateUserController {
         return response.status(404).send();
       }
 
+      const passwordHash = await hash(password, 8);
+
       const data = await user.update(id, {
         username,
         name,
@@ -32,7 +35,7 @@ class UpdateUserController {
         email,
         discord_id,
         github_id,
-        password,
+        password: passwordHash,
       });
       
       return response.status(200).send(data);

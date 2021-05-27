@@ -17,7 +17,7 @@ class LoginUserController {
   
       if (!data) {
         return response.status(404).send();
-      } 
+      }
       
       const comparePassword = await compare(password, data.password);
 
