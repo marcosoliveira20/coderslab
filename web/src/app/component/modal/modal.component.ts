@@ -22,7 +22,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ],
 })
 export class ModalComponent implements OnInit {
-  @Input() showController:boolean;
+  @Input() showController:boolean = false;
   @Output() close = new EventEmitter();
 
   handleShowController = () => this.close.emit(null);
