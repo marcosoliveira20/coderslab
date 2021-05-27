@@ -16,9 +16,14 @@ class ReadAllGroupsByUserController {
 
 			try {
 				for(let i = 0; i < data.length; i++) {
-					let group = await api.group.get(`/read/byId/${data[i]._id_group}`);
-					group.data.number_members = (await union.readAllUsersByGroup(data[i]._id_group)).length;
-					data[i] = group.data;
+					let group = (await api.group.get(`/read/byId/${data[i]._id_group}`)).data;
+					group.number_members = (await union.readAllUsersByGroup(data[i]._id_group)).length;
+					
+					if(!group.next_schedule) {
+						group.next_schedule = null;
+					}
+
+					data[i] = group;
 				}
 
 			} catch(err) {

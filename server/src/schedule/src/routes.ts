@@ -4,6 +4,7 @@ import CreateScheduleController from "./controllers/CreateScheduleController";
 import DeleteScheduleController from "./controllers/DeleteScheduleController";
 import ReadAllScheduleController from "./controllers/ReadAllScheduleController";
 import ReadByGroupScheduleController from "./controllers/ReadByGroupScheduleController";
+import ReadByGroupNextScheduleController from "./controllers/ReadByGroupNextScheduleController";
 import ReadByIdScheduleController from "./controllers/ReadByIdScheduleController";
 import ReadByOwnerScheduleController from "./controllers/ReadByOwnerScheduleController";
 import UpdateScheduleController from "./controllers/UpdateScheduleController";
@@ -14,6 +15,7 @@ const createScheduleController = new CreateScheduleController();
 const readByIdScheduleController = new ReadByIdScheduleController();
 const readByOwnerScheduleController = new ReadByOwnerScheduleController();
 const readByGroupScheduleController = new ReadByGroupScheduleController();
+const readByGroupNextScheduleController = new ReadByGroupNextScheduleController();
 const readAllScheduleController = new ReadAllScheduleController();
 const updateScheduleController = new UpdateScheduleController();
 const deleteScheduleController = new DeleteScheduleController();
@@ -27,6 +29,10 @@ router.get(
 router.get(
   "/schedule/read/byIdGroup/:id_group",
   readByGroupScheduleController.handle
+);
+router.get(
+  "/schedule/read/byIdGroup/nextSchedule/:id_group",
+  readByGroupNextScheduleController.handle
 );
 router.get("/schedule/read/all", readAllScheduleController.handle);
 router.put("/schedule/update/:id", updateScheduleController.handle);

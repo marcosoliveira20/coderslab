@@ -18,6 +18,10 @@ class ReadAllGroupsByOwnerController {
 
 				for(let i = 0; i < data.length; i++) {
 					data[i].number_members = (await union.readAllUsersByGroup(data[i]._id)).length;
+
+					if(!data[i].next_schedule) {
+						data[i].next_schedule = null;
+					}
 				}
 
 			} catch(err) {
