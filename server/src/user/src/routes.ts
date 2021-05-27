@@ -8,6 +8,7 @@ import { ReadAllUsersController } from "./controllers/ReadAllUsersController";
 import { ReadUserByEmailController } from "./controllers/ReadUserByEmailController";
 import { ReadUserByIdController } from "./controllers/ReadUserByIdController";
 import { ReadUserByUsernameController } from "./controllers/ReadUserByUsernameController";
+import { UpdatePasswordUserController } from "./controllers/UpdatePasswordUserController";
 import { UpdateUserController } from "./controllers/UpdateUserController";
 
 const router = Router();
@@ -20,19 +21,18 @@ const readUserByUsernameController = new ReadUserByUsernameController();
 const readUserByEmailController = new ReadUserByEmailController();
 const readAllUsersController = new ReadAllUsersController();
 const updateUserController = new UpdateUserController();
+const updatePasswordUserController = new UpdatePasswordUserController();
 const deleteUserController = new DeleteUserController();
 
 router.post("/user/create", createUserController.handle);
 router.post("/user/login", loginUserController.handle);
 router.post("/user/logout/:id/:token", logoutUserController.handle);
 router.get("/user/read/byId/:id", readUserByIdController.handle);
-router.get(
-  "/user/read/byUsername/:username",
-  readUserByUsernameController.handle
-);
+router.get("/user/read/byUsername/:username", readUserByUsernameController.handle);
 router.get("/user/read/byEmail/:email", readUserByEmailController.handle);
 router.get("/user/read/all", readAllUsersController.handle);
 router.put("/user/update/:id", updateUserController.handle);
+router.put("/user/update/password/:id", updatePasswordUserController.handle);
 router.delete("/user/delete/:id", deleteUserController.handle);
 
 export { router };
