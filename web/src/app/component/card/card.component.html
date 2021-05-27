@@ -151,14 +151,14 @@
 
     <footer>
       <div>
-        <div>
+        <div *ngIf="data.user_list">
           <img
             src="assets/icons/{{ themeName() }}/user.svg"
             alt="quantidade de usuários"
           />
           <p>{{ data.user_list.length }}</p>
         </div>
-        <div>
+        <div *ngIf="data.schedule_list">
           <img
             src="assets/icons/{{ themeName() }}/calendar.svg"
             alt="próxima reunião agendada"
