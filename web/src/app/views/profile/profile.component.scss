@@ -1,90 +1,114 @@
 @import "../../../sass/abstracts/variables";
+@import "../../../sass/components/button";
+@import "../../../sass/components/header";
+@import "../../../sass/components/tabs";
+@import "../../../sass/components/input";
+@import "../../../sass/components/card-list";
+@import "../../../sass/components/container";
 @import "../../../sass/components/scrollbar";
 
+.user-info-area {
+  .info-block {
+    padding: 45px 45px 0;
 
-h1, h4 { color: $cdl_darkBlue }
-h1 {
-  font-weight: 100;
-  font-size: 45px;
-  margin: 0;
-  align-self: baseline;
-}
-
-h4 { font-weight: 500; margin-bottom: 25px; }
-label { font-weight: 400; color: $cdl_pink; }
-input { width: 100%; font-weight: 300; background: transparent; }
-input:disabled { color: #888; }
-button { cursor: pointer; }
-
-.mainPage {
-  padding: 48px 32px;
-  display: grid;
-  height: 100%;
-  align-content: space-between;
-  overflow-y: auto;
-}
-
-.header {
-  margin-bottom: 55px;
-  align-items: center;
-
-  div {
-    display: flex;
-    align-items: center;
-
-    button:first-child {
-      padding: 10px 0;
-      width: 280px;
-      background: none;
-      border: 1px solid $cdl_pink;
-      color: $cdl_pink;
-      border-radius: 5px;
-      font-weight: 300;
-      font-size: 20px;
-      letter-spacing: 4px;
-      margin-right: 30px;
-    }
-
-    button:last-child {
-      border: 0px;
+    select, input {
+      margin-bottom: 45px;
     }
   }
 }
 
-.editMode {}
-.viewMode {}
+.interest-area {
+  .info-block:first-child {
+    margin: 0;
+  }
 
-section {
+  .info-block {
+    margin-top: 30px;
+    padding: 35px 35px 0;
+
+    select, input {
+      margin-bottom: 35px;
+    }
+  }
+}
+
+.edit-button {
+  border: none;
+  background: transparent;
+  margin-left: 30px;
+}
+
+.title-info-block {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  letter-spacing: 0.05em;
+  color: $cdl_darkBlue;
+  margin-bottom: 15px;
+}
+
+.label-info-block {
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.15em;
+  color: $cdl_pink;
+}
+
+.info-block {
   display: inline-block;
   width: 100%;
   height: auto;
-  padding: 45px 45px 0;
   background: #FFFFFF;
   box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
   border-radius: 15px;
   margin-bottom: 43px;
 
-  label {
-    display: block;
-  }
-
-  input {
+  input, select {
+    background: transparent;
     border: none;
     border-bottom: 1px solid $cdl_darkBlue;
     display: block;
     font-weight: 300;
     font-size: 25px;
+    width: 100%;
   }
 
   .col:first-child { padding-right: 40px; }
   .col:last-child { padding-left: 40px; }
 }
 
-.row { margin-bottom: 45px; }
-
-.header {
+.add-new-interest-button {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 10px;
+  background: $cdl_pink;
+  border: 1px solid $cdl_pink;
+  border-radius: 5px;
+  margin-top: 20px;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #FFF;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 29px;
+  text-align: center;
+  letter-spacing: 0.15em;
+}
+
+.delete-interest-button {
+  border: none;
+  background: transparent;
+  margin-bottom: 25px;
+
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 29px;
+  letter-spacing: 0.15em;
+  color: $cdl_darkBlue;
 }
 
 footer {
@@ -111,4 +135,31 @@ footer {
     border: 1px solid $cdl_pink;
     color: $cdl_pink;
   }
+}
+
+// MODAL
+.modal-body {
+  p {
+    color: #2d2d2d;
+    font-weight: 300;
+    font-size: 25px;
+    letter-spacing: 15%;
+    margin-bottom: 70px;
+  }
+
+  button {
+    width: 100%;
+    background: transparent;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
+    font-size: 20px;
+    text-align: center;
+    align-self: center;
+    justify-content: center;
+    font-weight: 300;
+    height: 64px;
+    padding: 16px;
+    border-radius: 15px;
+  }
+
 }

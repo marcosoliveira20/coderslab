@@ -1,4 +1,13 @@
-.main {
+.navbar-area {
+  grid-area: navbar;
+}
+
+.router-outlet-area {
+  grid-area: router-outlet;
+  padding: 0 32px;
+}
+
+.main-without-navbar {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -8,10 +17,16 @@ main {
   display: grid;
   grid-template-columns: 103px calc(100% - 103px);
   grid-template-rows: 100vh;
+  grid-template-areas: "navbar router-outlet";
 
   overflow: hidden;
+}
 
-  > div {
-    padding: 0 32px;
+@media (max-width: 768px) {
+  main {
+    grid-template-rows: calc(100vh - 100px) 100px;
+    grid-template-columns: 100vw;
+    grid-template-areas:  "router-outlet"
+                          "navbar";
   }
 }
