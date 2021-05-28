@@ -9,22 +9,38 @@ import { ActivatedRoute } from '@angular/router';
 export class AccordionComponent implements OnInit {
   public showBody:boolean = false;
   /**
-   * Accepted values: "complete", "late", "challenge" and "default"
+   * Accepted values: "done", "late", "challenge" and "default"
    * Will be applied "default" if anyone value is passed,
    */
-  @Input() status:string;
-  @Input() isChallenge:boolean;
+  public status:string;
+  @Input() isChallenge:boolean = false;
   @Input() index:number;
   @Input() data;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.status)
-    if (this.status !== undefined)
-      this.status = this.data.status
+    this.checkTaskStatus()
+    console.log("data: ", this.data)
+    console.log("isChallenge: ", this.isChallenge)
+    console.log("status: ", this.status)
+    console.log("deadline: ", this.data.deadline > new Date())
+  }
 
-    console.log(this.data)
+  checkTaskStatus() {
+    if (this.data.deadline) {
+      if (this.data.is_done)
+        this.status = "done"
+
+      else if (this.data.deadline >= new Date())
+        this.status = "default"
+
+      else if (this.data.deadline < new Date())
+        this.status = "late"
+
+    } else if (this.isChallenge && this.data.is_done) {
+      this.status = "done"
+    }
   }
 
   verifyUrlParam() {
@@ -33,7 +49,7 @@ export class AccordionComponent implements OnInit {
   }
 
   openReferenceLink() {
-    window.open(this.data.link, "_blank")
+    window.open(this.data.reference, "_blank")
   }
 
   handleDisplay() {
