@@ -32,7 +32,8 @@
 
 .form-group-base {
   input,
-  select {
+  select,
+  p {
     height: 40px;
     border: none;
     background: none;
@@ -48,9 +49,10 @@
     width: 100%;
   }
 
-  select {
+  select,p {
     width: 37.5%;
     margin-right: 25px;
+    display: inline-block;
   }
   input:last-child {
     margin-bottom: 0;

@@ -8,15 +8,13 @@ import { subjectMock } from "../../../mock";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  private interestModel = { _id_subject: "", _id_user: 3, level: "" };
-
   public mode: string = "register";
 
-  public interestList: any[] = [{...this.interestModel}];
+  public interest_list: any[] = [];
   public subjectList: any[] = subjectMock;
 
   public selectedSubjectList: any[] = [];
-  public selectedCustomSubjectList: any[] = [];
+  public customInterestList: any[] = [];
 
   loginForm = this.fb.group({
     username: [""],
@@ -32,7 +30,7 @@ export class LoginComponent implements OnInit {
     confirm_password: ["", Validators.required],
     discord_id: [""],
     github_id: [""],
-    objective: [[], Validators.required],
+    interest_list: [[], Validators.required],
     level: ["-1"],
     subjectForm: [""],
   });
@@ -49,154 +47,59 @@ export class LoginComponent implements OnInit {
 
   onSubmitRegister() {
     this.registerForm.patchValue({
-      objective: this.interestList[0],
+      interest_list: this.interest_list,
     });
+    this.registerForm.removeControl("level");
+    this.registerForm.removeControl("subjectForm");
     console.log("onSubmit: ", this.registerForm.value);
   }
 
   handleChangeSelect(event, type, index) {
-    this.interestList[index][type] = event.target.value
+    this.interest_list[index][type] = event.target.value;
   }
 
-  handleSubjectList(subjectId) {
-    const subjectIndex = subjectMock.findIndex(
-      (item) => item.id == subjectId
+  validateFirstSelect(): boolean {
+    return (
+      this.registerForm.value.subjectForm !== "" &&
+      this.registerForm.value.level !== "-1"
     );
-
-    this.selectedSubjectList.push(this.subjectList[subjectIndex]);
-    this.subjectList.splice(subjectIndex, 1);
-
-    // this.selectedSubjectList.push(this.subjectList[subjectIndex]);
-    // this.subjectList.splice(subjectIndex, 1);
-
-    // this.subjectList.push(this.selectedSubjectList[selectedSubjectIndex]);
-    // this.selectedSubjectList.splice(selectedSubjectIndex, 1);
-  }
-
-  validateFirstSelect():boolean {
-    console.log(
-      this.interestList[0]._id_subject !== "",
-      this.interestList[0]._id_user !== "",
-      this.interestList[0].level !== ""
-    )
-    return this.interestList[0]._id_subject !== ""
-      && this.interestList[0]._id_user !== ""
-      && this.interestList[0].level !== ""
-  }
-
-  addNewInterestItem(index) {
-    if (this.validateFirstSelect()) {
-      let firstSelect = this.interestList[0]
-      this.interestList.push({...firstSelect})
-      this.interestList[0] = {...this.interestModel}
-
-      this.handleSubjectList(this.interestList[index]._id_subject)
-      // var mainDiv = document.getElementById('teste');
-      console.log("interestList: ", this.interestList)
-      console.log("sblist: ", this.subjectList, "selescted custom: ", this.selectedCustomSubjectList, "selected sb:", this.selectedSubjectList)
-    }
   }
 
   addInterest() {
-    let subjectLabel = this.registerForm.value.subjectForm;
+    if (this.validateFirstSelect()) {
+      let subjectId = this.registerForm.value.subjectForm;
+      let levelName = this.registerForm.value.level.split(" ")[1];
+      let level = this.registerForm.value.level.split(" ")[0];
 
-    const subjectIndex = this.subjectList.findIndex(
-      (i) => i.label == subjectLabel
-    );
+      const subjectIndex = this.subjectList.findIndex((i) => i.id == subjectId);
 
-    let subjectId = this.subjectList[subjectIndex].id;
+      this.interest_list.push({
+        _id_subject: Number(subjectId),
+        level: Number(level),
+      });
 
-    this.selectedSubjectList.push(this.subjectList[subjectIndex]);
-
-    this.subjectList.splice(subjectIndex, 1);
-
-    this.interestList.push({
-      _id_subject: subjectId,
-      _id_user: "",
-      level: Number(this.registerForm.value.level),
-    });
-
-    this.selectedCustomSubjectList.push({
-      _id_subject: subjectId,
-      label: subjectLabel,
-      _id_user: "",
-      level: Number(this.registerForm.value.level),
-    });
-
-    this.registerForm.controls["level"].setValue("-1");
-    this.registerForm.controls["subjectForm"].setValue("");
-  }
-
-  updateInterest(subject, event, change, index) {
-    if (change === "label") {
-      this.interestList.splice(
-        this.interestList.findIndex(
-          (i) => i._id_subject == subject._id_subject
-        ),
-        1
-      );
-
-      this.selectedCustomSubjectList.splice(
-        this.selectedCustomSubjectList.findIndex(
-          (i) => i._id_subject == subject._id_subject
-        ),
-        1
-      );
-
-      const subjectIndex = this.subjectList.findIndex(
-        (i) => i.label == event.target.value
-      );
-      const selectedSubjectIndex = this.selectedSubjectList.findIndex(
-        (i) => i.label == subject.label
-      );
-
-      let subjectAdd = this.subjectList[subjectIndex];
+      this.customInterestList.push({
+        _id_subject: subjectId,
+        label: this.subjectList[subjectIndex].label,
+        level: levelName,
+      });
 
       this.selectedSubjectList.push(this.subjectList[subjectIndex]);
       this.subjectList.splice(subjectIndex, 1);
-
-      this.subjectList.push(this.selectedSubjectList[selectedSubjectIndex]);
-      this.selectedSubjectList.splice(selectedSubjectIndex, 1);
-
-      this.interestList.push({
-        _id_subject: subjectAdd.id,
-        _id_user: "",
-        level: subject.level,
-      });
-
-      this.selectedCustomSubjectList.push({
-        _id_subject: subjectAdd.id,
-        label: event.target.value,
-        _id_user: "",
-        level: subject.level,
-      });
-
-      this.selectedCustomSubjectList.sort(function (a, b) {
-        if (a.label < b.label) {
-          return -1;
-        }
-        if (a.label > b.label) {
-          return 1;
-        }
-        return 0;
-      });
-    } else {
-      this.selectedCustomSubjectList[index][event.target.name] =
-        event.target.value;
-      this.interestList[index][event.target.name] = event.target.value;
+      this.registerForm.controls["level"].setValue("-1");
+      this.registerForm.controls["subjectForm"].setValue("");
     }
   }
 
   deleteInterest(index) {
-    const subjectIndex = subjectMock.findIndex(
-      (item) => item.id == this.interestList[index]._id_subject
+    const subjectIndex = this.selectedSubjectList.findIndex(
+      (item) => item.id == this.interest_list[index]._id_subject
     );
 
-    console.log("sblist: ", this.subjectList, "selescted custom: ", this.selectedCustomSubjectList, "selected sb:", this.selectedSubjectList)
-    // this.selectedSubjectList.push(this.subjectList[subjectIndex]);
-    // this.subjectList.splice(subjectIndex, 1);
+    this.subjectList.push(this.selectedSubjectList[subjectIndex]);
+    this.selectedSubjectList.splice(subjectIndex, 1);
 
-    this.interestList.splice(index, 1);
-
+    this.interest_list.splice(index, 1);
+    this.customInterestList.splice(index, 1);
   }
 }
