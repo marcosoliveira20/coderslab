@@ -83,18 +83,48 @@ ul { list-style: none; }
   }
 }
 
-
-
-
-
 .roadmap-status {
   grid-area: roadmap-status;
   background: $cdl_darkGrey;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
 }
 
-.roadmap-details {
+//
+.roadmap-overview {
   grid-area: roadmap-details;
-  background: green;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+  background: #FFF;
+  box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+}
+
+.roadmap-overview-header {
+
+}
+
+.roadmap-overview-progress-area {
+
+}
+
+.progressbar {
+  background: $cdl_lightGrey;
+
+  p {
+    color: $cdl_pink;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: right;
+    letter-spacing: 0.1em;
+  }
+
+  > div {
+    background: $cdl_lightBlue;
+  }
+}
+
+.roadmap-overview-calendar {
+  border: 1px solid $cdl_darkBlue;
+}
+
+.roadmap-overview-accordion-group {
+  background: $cdl_lightGrey;
 }
