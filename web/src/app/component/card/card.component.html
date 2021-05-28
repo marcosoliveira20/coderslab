@@ -151,19 +151,19 @@
 
     <footer>
       <div>
-        <div *ngIf="data.user_list">
+        <div *ngIf="data.number_members">
           <img
             src="assets/icons/{{ themeName() }}/user.svg"
             alt="quantidade de usuários"
           />
-          <p>{{ data.user_list.length }}</p>
+          <p>{{ data.number_members }}</p>
         </div>
-        <div *ngIf="data.schedule_list">
+        <div *ngIf="data.next_schedule">
           <img
             src="assets/icons/{{ themeName() }}/calendar.svg"
             alt="próxima reunião agendada"
           />
-          <p>{{ data.schedule_list[0].datetime | date: "dd/MM" }}</p>
+          <p>{{ data.next_schedule | date: "dd/MM" }}</p>
         </div>
       </div>
       <label class="group-level">{{ levelLabel() }}</label>

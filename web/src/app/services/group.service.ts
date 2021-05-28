@@ -19,6 +19,15 @@ export class GroupService {
         return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allGroupsByUser/${this.user_id}`).toPromise()
     }
 
+    public getAllGroups() {
+        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allGroups`).toPromise()
+    }
+
+    public getAllGroupsBySearch(body: object) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/read/search`, body, httpOptions).toPromise()
+    }
+
     public createGroup() {
 
     }
