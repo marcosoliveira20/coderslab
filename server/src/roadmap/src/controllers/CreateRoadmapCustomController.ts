@@ -12,6 +12,8 @@ class CreateRoadmapCustomController {
       level
     } = request.body;
 
+    const { user_id } = request.query;
+
     const roadmap = new Roadmap();
     const api = new Api();
 
@@ -27,7 +29,8 @@ class CreateRoadmapCustomController {
         objective,
         level,
         quantity_contents: content_list.length,
-        quantity_challenges: quantityChallenge
+        quantity_challenges: quantityChallenge,
+        user_id
       });
 
       await roadmap.updateQuantityOfContents(data._id, content_list.length)

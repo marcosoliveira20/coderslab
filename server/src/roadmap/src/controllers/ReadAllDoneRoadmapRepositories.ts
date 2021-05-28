@@ -6,8 +6,10 @@ class ReadAllDoneRoadmapRepositories {
   async handle(request: Request, response: Response) {
     const roadmap = new Roadmap();
 
+    const { user_id } = request.query;
+
     try {
-      const data = await roadmap.readAllDoneRepositories();
+      const data = await roadmap.readAllDoneRepositories(user_id);
 
       if(!data) {
         return response.status(404).send();
