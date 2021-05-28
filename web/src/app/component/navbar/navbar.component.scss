@@ -1,38 +1,76 @@
 @import "../../../sass/abstracts/variables";
 
 nav {
-  width: calc(100% - 13px);
-  height: calc(100% - 26px);
-  margin: 13px 0 0 13px;
   background: $cdl_blue;
   border-radius: 15px;
-  display: grid;
   justify-content: center;
   align-content: space-between;
   padding: 25px;
 
-  div {
-    display: block;
-
-    a {
-      display: block;
-      cursor: pointer;
-
-      svg {
-        fill: $cdl_white;
-      }
-    }
+  a {
+    cursor: pointer;
   }
-
-  div:first-child {
-    a { margin-bottom: 30px; }
-  }
-
-  div:last-child {
-    a { margin-top: 30px; }
+  svg {
+    fill: $cdl_white;
   }
 }
 
 #hand_logo {
   width: 54px;
+}
+
+@media (min-width: 769px) {
+  nav {
+    width: calc(100% - 13px);
+    height: calc(100% - 26px);
+    margin: 13px 0 0 13px;
+    display: grid;
+
+    div {
+      display: block;
+    }
+
+    a { display: block; }
+
+    div:first-child {
+      a { margin-bottom: 30px; }
+    }
+
+    div:last-child {
+      a { margin-top: 30px; }
+    }
+  }
+
+  .mobile-profile-button {
+    display: none;
+  }
+}
+
+
+@media (max-width: 768px) {
+  nav {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    div:last-child {
+      display: none;
+    }
+
+    a {
+      margin: 0;
+    }
+  }
+
+  .mobile-profile-button {
+    display: block;
+  }
 }
