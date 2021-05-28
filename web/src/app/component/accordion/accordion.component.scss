@@ -1,0 +1,119 @@
+@import "../../../sass/abstracts/variables";
+
+.mountains {
+  float: right;
+  margin-top: -86px;
+  margin-right: -18px;
+  border-radius: 15px;
+}
+
+.badge {
+  display: flex;
+  width: 33px;
+  height: 33px;
+  margin-left: -47px;
+
+  float: left;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: $cdl_white;
+  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.15));
+
+  p { margin: 0; }
+}
+
+// Status
+.status-default { border-color: $cdl_pink; }
+.status-done { border-color: $cdl_green; }
+.status-late { border-color: $cdl_orange; }
+.status-challenge { border-color: $cdl_blue; }
+
+// Theme
+.theme-light {
+  background: #fff;
+  .title, .text { color: $cdl_darkGrey }
+}
+
+.theme-dark {
+  background: $cdl_blue;
+  .title, .text { color: $cdl_white }
+
+}
+
+.accordion {
+  display: block;
+  width: 100%;
+  padding: 18px 18px 18px 32px;
+  row-gap: 30px;
+
+  color: #444;
+  text-align: left;
+  font-size: 15px;
+
+  outline: none;
+  border-width: 0 0 0 20px;
+  border-style: solid;
+  border-radius: 15px;
+
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.accordion-content {
+}
+
+.accordion-header {
+  .title {
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+}
+
+.accordion-body {
+  display: none;
+  height: 0;
+  margin-top: 15px;
+
+  font-size: 0px;
+  transition: 0.4s;
+
+  .text {
+    font-weight: 300;
+   font-size: 16px;
+   letter-spacing: 1px;
+  }
+}
+
+.accordion-body-expand {
+  display: block;
+  height: auto;
+  transition: 0.4s;
+  font-size: inherit;
+}
+
+.accordion-footer {
+  display: flex;
+  justify-content: space-between;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    p {
+      margin: 0 0 0 10px;
+    }
+  }
+
+  .icon {
+    transition: .3s;
+  }
+}

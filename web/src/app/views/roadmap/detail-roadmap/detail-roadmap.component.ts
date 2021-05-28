@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { roadmapMock } from "src/app/app.component";
+import { graphDataMock } from "src/mock";
 
 @Component({
   selector: "app-detail-roadmap",
@@ -6,35 +9,55 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./detail-roadmap.component.scss"],
 })
 export class DetailRoadmapComponent implements OnInit {
-  graphList = [
-    {
-      date: "20/04",
-      quantity: 4,
-      completedQuantity: 4,
-    },
-    {
-      date: "20/05",
-      quantity: 3,
-      completedQuantity: 3,
-    },
-    {
-      date: "20/06",
-      quantity: 2,
-      completedQuantity: 1,
-    },
-    {
-      date: "20/06",
-      quantity: 1,
-      completedQuantity: 2,
-    },
-    {
-      date: "20/07",
-      quantity: 0,
-      completedQuantity: 0,
-    },
-  ];
+  public graphData = graphDataMock
 
-  constructor() {}
+  public contentIndexList: string[] = [];
+  public filteredContentList: any;
+  public roadmap: any;
+  public typeFilter: string = "all";
 
-  ngOnInit() {}
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    const token = this.activatedRoute.snapshot.paramMap.get("token");
+    this.roadmap = roadmapMock.find((roadmap) => String(roadmap.id) === token); // TODO integration query here
+
+    this.roadmap.content_list.map((content) =>
+      this.contentIndexList.push(content.id)
+    );
+
+    this.filter("all");
+  }
+
+  /**
+   * filter content list
+   * @param type
+   */
+  filter(type: string) {
+    this.typeFilter = type;
+
+    switch (type) {
+      case "done":
+        this.filteredContentList = this.roadmap.content_list.filter(
+          (content) => content.is_done
+        );
+        break;
+      case "inProgress":
+        this.filteredContentList = this.roadmap.content_list.filter(
+          (content) => !content.is_done
+        );
+        break;
+      default:
+        this.filteredContentList = this.roadmap.content_list;
+    }
+  }
+
+  /**
+   * get content number based on index at content list
+   * @param content;
+   * @returns content number
+   */
+  getContentNumber(content): number {
+    return this.contentIndexList.findIndex((c) => c === content.id) + 1;
+  }
 }

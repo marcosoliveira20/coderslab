@@ -1,91 +1,8 @@
 @import "../../../sass/abstracts/variables";
+@import "../../../sass/components/card";
 
-/*
-  THEME
-*/
-// light
-
-.theme-light > button {
-  background: $cdl_pink;
-  border: 1px solid $cdl_pink;
-  color: $cdl_white;
-}
-
-.theme-light footer svg {
-  fill: $cdl_pink;
-}
-
-// dark
-.theme-dark main {
-  color: $cdl_white;
-  background: $cdl_blue;
-  border: 1px solid $cdl_yellow;
-
-  header ul li {
-    border-color: $cdl_yellow;
-  }
-  footer {
-    background: transparent;
-  }
-  footer svg {
-    fill: $cdl_yellow;
-  }
-  footer p {
-    color: $cdl_white;
-  }
-  footer > label {
-    background: transparent;
-    border: 1px solid $cdl_yellow;
-    color: #fff;
-  }
-}
-
-.theme-dark > button {
-  background: $cdl_yellow;
-  border: 1px solid $cdl_yellow;
-  color: $cdl_darkBlue;
-}
-
-
-/*
-  BASE
-*/
-.card-base {
-  height: 100%;
-  display: block;
-  cursor: pointer;
-}
-
-.card-base > main {
-  z-index: 2;
-  height: 100%;
-  transition: all 0.3s;
-  position: relative;
-}
-
-.card-base > button {
-  z-index: 1;
-  width: 100%;
-  position: relative;
-  border-radius: 0 0 15px 15px;
-  font-weight: 500;
-  font-size: 28px;
-  align-items: flex-end;
-  justify-content: center;
-  transition: all 0.3s;
-  display: flex;
-
-
-  p {
-    margin: 0;
-  }
-}
-
-/*
-  TYPES
-*/
-// minimal
-.minimal-type > main {
+// schedule
+.schedule-type > main {
   width: 250px;
   border: none;
   border-top: 10px solid $cdl_darkBlue;
@@ -114,16 +31,16 @@
   }
 }
 
-.minimal-type > button {
+.schedule-type > button {
   margin-top: -52px;
   margin-bottom: 40px;
 }
 
-.minimal-type:hover > main {
+.schedule-type:hover > main {
   border: none;
 }
 
-.minimal-type:hover {
+.schedule-type:hover {
   > button {
     margin-top: -5px;
     margin-bottom: 0px;
@@ -144,7 +61,10 @@
       display: flex;
       align-items: center;
 
-      h4 { margin:  0 13px 0 0; color: $cdl_yellow;}
+      h4 {
+        margin: 0 13px 0 0;
+        color: $cdl_yellow;
+      }
     }
   }
 
@@ -177,11 +97,75 @@
   }
 }
 
+// roadmap-progress-type
+.roadmap-progress-type main {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 0px 4px 4px #00000040;
+  row-gap: 40px;
+  letter-spacing: 1px;
+}
+
+.roadmap-progress-type header {
+  display: flex;
+  justify-content: space-between;
+
+  > div {
+    display: flex;
+    align-items: center;
+
+    h4 {
+      margin: 0 13px 0 0;
+    }
+  }
+  > h4 {
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+.roadmap-progress-type footer {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 200;
+  }
+
+  > div {
+    width: fit-content;
+    font-size: 22px;
+    color: $cdl_white;
+  }
+}
+
+.roadmap-progress-type .progress-bar {
+  width: 100%;
+  height: 32px;
+  background: $cdl_white;
+  border-radius: 0 0 15px 15px;
+  margin-top: -20px;
+
+  > div {
+    height: 100%;
+    border-radius: 0 0 15px 15px;
+    background: $cdl_lightBlue;
+  }
+}
+
+.roadmap-progress-type:hover {
+  > button {
+    margin-top: -5px;
+    margin-bottom: 0px;
+  }
+}
 
 // member
 .disable-member-card-button:hover {
   > main {
-    width: 100%!important;
+    width: 100% !important;
   }
 }
 .member-type {
@@ -244,15 +228,13 @@
   }
 }
 
-
-// full
-.full-type main {
+// group
+.group-type main {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
 }
 
-.full-type header {
-  >div:first-child {
-
+.group-type header {
+  > div:first-child {
     p {
       width: calc(100% - 18px);
       font-weight: 400;
@@ -271,80 +253,32 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-
-    div {
-      min-width: fit-content;
-      width: fit-content;
-      border-radius: 50px;
-      padding: 2px 10px;
-      border: 1px solid $cdl_pink;
-      color: $cdl_pink;
-      background: none;
-      font-size: 14px;
-    }
   }
 }
 
-.full-type footer {
-  p { font-size: 24px; font-weight: 300;}
-
-  label {
-    width: 100%;
-    background: $cdl_lightGrey;
-    text-align: center;
-    border-radius: 5px;
-    color: $cdl_darkBlue;
-    border: 1px solid $cdl_lightGrey;
-    margin: 10px 0 0;
-  }
+.group-type footer p {
+  font-size: 24px;
+  font-weight: 300;
 }
 
-.full-type > button {
+.group-level {
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px 0 0;
+}
+
+.group-type > button {
   height: 60px;
   margin-top: -60px;
   margin-bottom: 62px;
 }
 
-.full-type:hover main {
+.group-type:hover main {
   height: calc(100% - 40px);
 }
 
-.full-type:hover > button {
+.group-type:hover > button {
   margin-top: -20px;
   margin-bottom: 0;
-}
-
-/*
-  GENERAL TAGS
-*/
-main {
-  display: grid;
-  align-content: space-between;
-  background: $cdl_white;
-  padding: 18px;
-  border-radius: 15px;
-}
-
-footer {
-  display: block;
-  height: 100%;
-
-  div {
-    display: flex;
-    height: fit-content;
-    width: 100%;
-
-    svg {
-      height: 30px;
-      width: 30px;
-      margin-right: 12px;
-    }
-
-    p {
-      font-size: 24px;
-      font-weight: 300;
-      color: $cdl_darkBlue;
-      margin: 0;
-    }
-  }
 }

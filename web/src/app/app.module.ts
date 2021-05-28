@@ -26,6 +26,7 @@ import { ListRoadmapComponent } from './views/roadmap/list-roadmap/list-roadmap.
 import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-roadmap.component';
 import { LineChartComponent } from './component/line-chart/line-chart.component';
 import { ChartsModule, ThemeService } from 'ng2-charts';
+import { AccordionComponent } from './component/accordion/accordion.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ChartsModule, ThemeService } from 'ng2-charts';
     NewRoadmapComponent,
     ListRoadmapComponent,
     DetailRoadmapComponent,
-    LineChartComponent
+    LineChartComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,

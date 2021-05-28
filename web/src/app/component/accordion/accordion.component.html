@@ -1,0 +1,55 @@
+<div
+  class="accordion"
+  (click)="handleDisplay()"
+  [ngClass]="{
+    'status-default': status === 'default',
+    'status-done': status === 'done',
+    'status-late': status === 'late',
+    'status-challenge': isChallenge,
+
+    'theme-light': !isChallenge,
+    'theme-dark': isChallenge
+  }"
+  >
+  <div class="accordion-content">
+    <div class="badge" *ngIf="!isChallenge || (isChallenge && status === 'done')">
+      <img src="assets/icons/accordion_ok.svg" *ngIf="status === 'done'"/>
+      <img src="assets/icons/accordion_late.svg" *ngIf="status === 'late'"/>
+      <p *ngIf="status === 'default' ">{{ index }}</p>
+    </div>
+
+    <div class="accordion-header">
+      <p class="title">{{ data.title }}</p>
+    </div>
+
+    <div
+      class="accordion-body"
+      [class.accordion-body-expand]="showBody"
+    >
+      <p class="text">
+        {{ data.description }}
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion-footer">
+    <div>
+      <div *ngIf="data && data.deadline">
+        <img src="assets/icons/calendar_accordion.svg"/>
+        <p class="text">{{ data.deadline | date:'dd/MM'}}</p>
+      </div>
+
+      <div (click)="openReferenceLink()" *ngIf="data && data.reference">
+        <img src="assets/icons/go_to_icon.svg"/>
+        <p class="text">Referência</p>
+      </div>
+    </div>
+
+    <div class="icon" [style.transform]="showBody ? 'rotate(180deg)' : 'rotate(0deg)'">
+      <img src="assets/icons/light/arrow-down.svg" *ngIf="!isChallenge"/>
+      <img src="assets/icons/dark/arrow-down.svg"  *ngIf="isChallenge"/>
+    </div>
+  </div>
+
+  <img class="mountains" src="assets/icons/mountains.svg" *ngIf="isChallenge"/>
+</div>

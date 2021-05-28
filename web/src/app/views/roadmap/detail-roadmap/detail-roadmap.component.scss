@@ -1,0 +1,81 @@
+@import "../../../../sass/abstracts/variables";
+@import "../../../../sass/components/button";
+@import "../../../../sass/components//header";
+@import "../../../../sass/components/tabs";
+@import "../../../../sass/components/input";
+@import "../../../../sass/components/card-list";
+@import "../../../../sass/components/container";
+@import "../../../../sass/components/scrollbar";
+
+main {
+  display: flex;
+  grid-template-columns: 50% 50%;
+  column-gap: 45px;
+  margin-bottom: 60px;
+
+  @media (max-width: 1099px) {
+    display: block;
+    overflow-y: auto;
+
+    .chart-area {
+      margin-top: 45px;
+    }
+  }
+}
+
+.accordion-area {
+  width: 100%;
+  overflow-y: auto;
+
+  li:first-child {
+    margin: 0;
+  }
+
+  li {
+    margin-top: 20px;
+  }
+}
+
+.challenge {
+  margin-top: 20px;
+}
+
+.chart-area h4 {
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: $cdl_darkBlue;
+}
+
+.chart-area p {
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: $cdl_darkBlue;
+}
+
+.chart-area div {
+  height: fit-content;
+  padding: 25px;
+  margin-top: 36px;
+
+  background-color: #fff;
+  border-radius: 15px;
+
+  @media (max-width: 1099px) {
+    width: 100%;
+  }
+
+  @media (min-width: 1100px) and (max-width: 1299px) {
+    width: 480px;
+  }
+
+  @media (min-width: 1300px) and (max-width: 1599px) {
+    width: 600px;
+  }
+
+  @media (min-width: 1600px) {
+    width: 800px;
+  }
+
+}
