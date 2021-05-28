@@ -12,11 +12,7 @@ export class ExploreGroupComponent implements OnInit {
 
   public user = userMock;
 
-  public objective_list = [
-    { id: 1, name: "Java" },
-    { id: 2, name: "CSS" },
-    { id: 3, name: "HTML" },
-  ];
+  public objective_list = [];
 
   public category_listMok = [
     { id: 1, name: "Backend" },

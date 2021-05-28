@@ -6,19 +6,19 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 
 export class GroupService {
-    private groupUrl: string;
     private unionGroupUrl: string;
+    private groupUrl: string;
     private user_id: string = "60ac594c68ec2ca3d561db6f";
     public group_list = [];
 
     constructor(private http: HttpClient) {
-        this.groupUrl = "http://localhost:3000";
         this.unionGroupUrl = "http://localhost:2000"
+        this.groupUrl = "http://localhost:3000";
     }
 
     public listGroup(data) {
         this.group_list = [];
-        
+
         data.map(group => {
         let obj = {
             token: group.token,
@@ -27,6 +27,7 @@ export class GroupService {
             level: group.level,
             next_schedule: group.next_schedule,
             number_members: group.number_members,
+            is_default: group.is_default
         }
             this.group_list.push(obj);
         });
