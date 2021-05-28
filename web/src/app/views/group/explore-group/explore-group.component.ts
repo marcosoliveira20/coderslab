@@ -11,7 +11,6 @@ export class ExploreGroupComponent implements OnInit {
   showInput: boolean;
 
   public user = userMock;
-  public group_list = [];
 
   public objective_list = [
     { id: 1, name: "Java" },
@@ -34,22 +33,10 @@ export class ExploreGroupComponent implements OnInit {
   });
 
   onSubmit() {
-    this.group_list = [];
     this.exploreForm.controls["level"].setValue(Number(this.exploreForm.value.level));
 
     this.groupService.getAllGroupsBySearch(this.exploreForm.value).then(data => {
-      data.map(x => {
-        let obj = {
-          token: x.token,
-          name: x.name,
-          subject_label: x.subject_label,
-          level: x.level,
-          next_schedule: x.next_schedule,
-          number_members: x.number_members,
-        }
-        this.group_list.push(obj);
-      });
-      this.user.group_list = this.group_list;
+      this.user.group_list = this.groupService.listGroup(data);
     });
   }
 
@@ -65,18 +52,7 @@ export class ExploreGroupComponent implements OnInit {
 
   ngOnInit() {
     this.groupService.getAllGroups().then(data => {
-      data.map(x => {
-        let obj = {
-          token: x.token,
-          name: x.name,
-          subject_label: x.subject_label,
-          level: x.level,
-          next_schedule: x.next_schedule,
-          number_members: x.number_members,
-        }
-        this.group_list.push(obj);
-      });
+      this.user.group_list = this.groupService.listGroup(data);
     });
-    this.user.group_list = this.group_list;
   }
 }
