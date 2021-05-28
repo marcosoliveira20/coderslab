@@ -31,7 +31,6 @@ class CreateContentController {
       let new_challenge_list = []
       for(let i = 0; i < challenge.length; i++) {
         challenge[i].content_id = data._id;
-        console.log(challenge[i])
         new_challenge = await api.challenge.post("/create/By/Roadmap", challenge[i]);
         new_challenge_list.push(new_challenge.data)
       }

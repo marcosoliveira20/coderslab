@@ -10,14 +10,16 @@
       objective,
       level,
       quantity_contents,
-      quantity_of_challenge
+      quantity_of_challenge, 
+      user_id
     }: IRoadmapDTO): Promise<IRoadmapDTO> {
       const roadmap = RoadmapSchema.create({
         name,
         objective,
         level,
         quantity_contents,
-        quantity_of_challenge
+        quantity_of_challenge,
+        user_id
       });
 
       return roadmap;
@@ -28,7 +30,8 @@
       objective,
       level,
       quantity_contents,
-      quantity_challenges
+      quantity_challenges,
+      user_id,
     }: IRoadmapDTO): Promise<IRoadmapDTO> {
       const roadmap = RoadmapSchema.create({
         name,
@@ -36,7 +39,8 @@
         is_default: false,
         level,
         quantity_contents,
-        quantity_challenges
+        quantity_challenges,
+        user_id,
       });
 
       return roadmap;
@@ -149,9 +153,7 @@
     }
 
     readLateContents(_roadmap_id: String, today: String): object {
-      // console.log(_roadmap_id)
       const content = RoadmapSchema.find({
-        // _roadmap_id
         deadline: {$lte: today}
       });
 
@@ -164,8 +166,8 @@
       return roadmap;
     }
 
-    readAll(): object {
-      const roadmaps = RoadmapSchema.find();
+    readAll(user_id: String): object {
+      const roadmaps = RoadmapSchema.find({user_id});
 
       return roadmaps;
     }
@@ -183,27 +185,48 @@
     }
 
     readAllDefaultRepositories(): object {
-      const roadmap = RoadmapSchema.find({is_default: true});
+      const roadmap = RoadmapSchema.find({
+        is_default: true
+      })      
 
       return roadmap;
     }
 
-    readAllCustomRepositories(): object {
-      const roadmap = RoadmapSchema.find({is_default: false});
+    readAllDefaultRepositoriesByUserId(user_id: String): object {
+      const roadmap = RoadmapSchema.find({
+        user_id,
+        is_default: true
+      })      
 
       return roadmap;
     }
 
-    readAllDoneRepositories(): object {
-      const roadmap = RoadmapSchema.find({is_done: true});
+
+    readAllCustomRepositories(user_id: String): object {
+      const roadmap = RoadmapSchema.find({
+        user_id,
+        is_default: false
+      })      
 
       return roadmap;
     }
 
-    readAllInProgressRepositories(): object {
-      const roadmap = RoadmapSchema.find({is_done: false});
+    readAllDoneRepositories(user_id: String): object {
+      const roadmap = RoadmapSchema.find({
+        user_id,
+        is_done: true
+      })      
 
       return roadmap;
+    }
+
+    readAllInProgressRepositories(user_id: String): object {
+      const roadmap = RoadmapSchema.find({
+        user_id,
+        is_done: false
+      })   
+
+      return roadmap
     }
 
     UpdateContentListByRoadmapId(_roadmap_id: String, content_list: String): object {
