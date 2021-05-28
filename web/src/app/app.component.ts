@@ -138,6 +138,8 @@ export const userMock = {
   username: "Flynn Rider",
   email: "jose@email.com.br",
   level: "Iniciante",
+  discord_id: "batata#4566",
+  github_id: "socorrokkkk",
   group_list: [
     {
       token: 1,
