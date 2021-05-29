@@ -16,7 +16,7 @@ class ReadAllGroupsController {
 				let groups = (await api.group.get(`/read/all`)).data;
 				if(groups !== []) {
 					for(let i = 0; i < groups.length; i++) {
-						groups[i].number_members = (await union.readAllUsersByGroup(groups[i]._id_group)).length;
+						groups[i].number_members = (await union.readAllUsersByGroup(groups[i]._id)).length;
 						
 						if(!groups[i].next_schedule) {
 							groups[i].next_schedule = null;

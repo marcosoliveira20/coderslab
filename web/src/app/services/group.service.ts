@@ -9,7 +9,7 @@ export class GroupService {
     private unionGroupUrl: string;
     private groupUrl: string;
     public user_id: string = "60ac594c68ec2ca3d561db6f";
-    public group_list = [];
+    public groupList = [];
 
     constructor(private http: HttpClient) {
         this.unionGroupUrl = "http://localhost:2000"
@@ -34,10 +34,11 @@ export class GroupService {
     }
 
     public listGroup(data) {
-        this.group_list = [];
+        this.groupList = [];
 
         data.map(group => {
         let obj = {
+            id: group._id,
             token: group.token,
             name: group.name,
             subject_label: group.subject_label,
@@ -48,9 +49,9 @@ export class GroupService {
             owner: group._owner,
             category: group.category,
         }
-            this.group_list.push(obj);
+            this.groupList.push(obj);
         });
 
-        return this.group_list;
+        return this.groupList;
     }
 }

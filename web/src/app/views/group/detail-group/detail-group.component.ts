@@ -34,18 +34,19 @@ export class DetailGroupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.group.id = "60a709af962a5edf506298eb";
-
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-
-    // this.scheduleService.getAllSchedulesByGroup(this.group.id).then(data => {
-    //   // this.user.group_list = this.scheduleService.listGroup(data);
-    //   console.log(data);
-    // });
-
     this.group = this.user.group_list.find((group) => String(group.token) === urlToken)
     this.isGroupOwner = this.group.owner === this.user.id;
+
+    this.scheduleService.getAllSchedulesByGroup(this.group.id)
+    .then(data => {
+      this.group.schedule_list = this.scheduleService.listSchedule(data);
+    })
+    .catch(err => {
+      console.log("Erro: ", err);
+    });
   }
+
 
   openScheduleLink = () => window.open(this.modalData.link, "_blank");
 
