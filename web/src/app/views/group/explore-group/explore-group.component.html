@@ -27,11 +27,11 @@
             <input
               class="input-dark input"
               placeholder="Pesquisar por um assunto"
-              formControlName="subjectSearch"
+              formControlName="name"
             />
           </div>
           <div class="col-1">
-            <button (click)="setShowInput()" class="button-square button-dark">
+            <button type="button" (click)="setShowInput()" class="button-square button-dark">
               <img src="../../../../assets/icons/filter.svg" />
             </button>
           </div>
@@ -42,7 +42,7 @@
               id="objective"
               name="objective"
               class="input-dark input"
-              formControlName="objective"
+              formControlName="subject_label"
             >
             <option  value="" disabled selected> Objetivo</option>
               <option
@@ -81,12 +81,12 @@
           </div>
 
           <div class="col-2">
-            <button id="order-alphabetic" class="input-dark input">
-              A - Z
+            <button id="order-alphabetic" class="input-dark input" (click)="changeAlphabetical()" type="button">
+              {{ exploreForm.value.is_alphabetical ? "A - Z" : "Z - A" }}
             </button>
           </div>
           <div class="col-1">
-            <button type="submit" class="button-square button-dark">
+            <button type="button" class="button-square button-dark" (click)="onSubmit()">
               <img
                 src="../../../../assets/icons/magnifying-glass.svg"
                 srcset=""

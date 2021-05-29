@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { subjectMock } from "../../../mock";
+import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
+// import { interestListMock } from "../../../app/app.component";
+import { interestListMock, subjectMock } from "../../../mock";
+import { UserService } from "src/app/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -23,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   registerForm = this.fb.group({
     name: ["", Validators.required],
-    lastname: ["", Validators.required],
+    last_name: ["", Validators.required],
     username: ["", Validators.required],
     email: ["", Validators.required],
     password: ["", Validators.required],
@@ -35,7 +39,7 @@ export class LoginComponent implements OnInit {
     subjectForm: [""],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {}
 
   ngOnInit() {}
 
@@ -49,6 +53,13 @@ export class LoginComponent implements OnInit {
     this.registerForm.patchValue({
       interest_list: this.interest_list,
     });
+    
+    if ( this.registerForm.value.password == this.registerForm.value.confirm_password ) {
+      this.userService.createUser(this.registerForm.value).then(data => console.log(data))
+    } else {
+      //TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
+      console.log("senha divergente")
+    }
     this.registerForm.removeControl("level");
     this.registerForm.removeControl("subjectForm");
     console.log("onSubmit: ", this.registerForm.value);
