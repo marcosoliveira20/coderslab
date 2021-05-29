@@ -5,9 +5,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
     providedIn: "root"
 })
 
-export class GroupService {
+export class ScheduleService {
     private scheduleUrl: string;
-    private group_id: string = "60a709af962a5edf506298eb";
 
     constructor(private http: HttpClient) {
         this.scheduleUrl = "http://localhost:4000";

@@ -13,13 +13,13 @@ export class ExploreGroupComponent implements OnInit {
   public user = userMock;
 
   public objective_list = [];
-
+  
   public category_listMok = [
     { id: 1, name: "Backend" },
     { id: 2, name: "Frontend" },
     { id: 3, name: "Design" },
   ];
-
+  
   exploreForm = this.fb.group({
     name: [""],
     subject_label: [""],
@@ -27,6 +27,8 @@ export class ExploreGroupComponent implements OnInit {
     level: [-1],
     is_alphabetical: [true]
   });
+  
+  constructor(private fb: FormBuilder, private groupService: GroupService) {}
 
   onSubmit() {
     this.exploreForm.controls["level"].setValue(Number(this.exploreForm.value.level));
@@ -43,8 +45,6 @@ export class ExploreGroupComponent implements OnInit {
   setShowInput() {
     this.showInput = !this.showInput;
   }
-
-  constructor(private fb: FormBuilder, private groupService: GroupService) {}
 
   ngOnInit() {
     this.groupService.getAllGroups().then(data => {

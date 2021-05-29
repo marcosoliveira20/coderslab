@@ -22,9 +22,15 @@ class CreateGroupController {
 				return response.status(406).send();
 			}
 
+			let categoryList = [];
+
+			for(let i = 0; i < category.length; i++) {
+				categoryList.push(category[i].name);
+			}
+
 			const data = await group.create({
 				name,
-				category,
+				category: categoryList,
 				subject_label,
 				level,
   				token: Math.random().toString(36).substring(8),

@@ -8,31 +8,12 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class GroupService {
     private unionGroupUrl: string;
     private groupUrl: string;
-    private user_id: string = "60ac594c68ec2ca3d561db6f";
+    public user_id: string = "60ac594c68ec2ca3d561db6f";
     public group_list = [];
 
     constructor(private http: HttpClient) {
         this.unionGroupUrl = "http://localhost:2000"
         this.groupUrl = "http://localhost:3000";
-    }
-
-    public listGroup(data) {
-        this.group_list = [];
-
-        data.map(group => {
-        let obj = {
-            token: group.token,
-            name: group.name,
-            subject_label: group.subject_label,
-            level: group.level,
-            next_schedule: group.next_schedule,
-            number_members: group.number_members,
-            is_default: group.is_default
-        }
-            this.group_list.push(obj);
-        });
-
-        return this.group_list;
     }
 
     public getAllGroupsByUser() {
@@ -50,5 +31,26 @@ export class GroupService {
 
     public createGroup() {
 
+    }
+
+    public listGroup(data) {
+        this.group_list = [];
+
+        data.map(group => {
+        let obj = {
+            token: group.token,
+            name: group.name,
+            subject_label: group.subject_label,
+            level: group.level,
+            next_schedule: group.next_schedule,
+            number_members: group.number_members,
+            is_default: group.is_default,
+            owner: group._owner,
+            category: group.category,
+        }
+            this.group_list.push(obj);
+        });
+
+        return this.group_list;
     }
 }
