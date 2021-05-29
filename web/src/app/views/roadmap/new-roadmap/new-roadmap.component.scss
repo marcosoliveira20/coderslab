@@ -1,6 +1,8 @@
 @import "../../../../sass/abstracts/variables";
 @import "../../../../sass/components/scrollbar";
-
+@import "../../../../sass/components/tabs";
+@import "../../../../sass/components/button";
+@import "../../../../sass/components/container";
 main {
   overflow-y: auto;
   height: 100%;
@@ -119,4 +121,27 @@ header h1 {
 
 .task-creation-list {
   overflow-y: auto;
+}
+
+li {
+  list-style: none;
+}
+.simple-button {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 29px;
+  letter-spacing: 0.15em;
+
+  border: none;
+  color: $cdl_grey;
+  background-color: transparent;
+}
+
+.conclusion{
+  position: absolute;
+  bottom: 0px !important;
+  width: 100%;
+  background-color: #E7E9F0;
 }
