@@ -9,27 +9,26 @@ class ReadAllGroupsController {
 		const union = new UnionUserGroup();
 
 		try {
-			const data = await union.readAllGroups();
 
 			const api = new Api();
 
 			try {
-				for(let i = 0; i < data.length; i++) {
-					let group = (await api.group.get(`/read/byId/${data[i]._id_group}`)).data;
-					group.number_members = (await union.readAllUsersByGroup(data[i]._id_group)).length;
-					
-					if(!group.next_schedule) {
-						group.next_schedule = null;
+				let groups = (await api.group.get(`/read/all`)).data;
+				if(groups !== []) {
+					for(let i = 0; i < groups.length; i++) {
+						groups[i].number_members = (await union.readAllUsersByGroup(groups[i]._id_group)).length;
+						
+						if(!groups[i].next_schedule) {
+							groups[i].next_schedule = null;
+						}
 					}
-
-					data[i] = group;
 				}
 
+				response.status(200).send(groups);
 			} catch(err) {
 				return response.status(err.response.status).send();
 			}
 
-			response.status(200).send(data);
 		} catch(err) {
 			console.log(err.message);
 			return response.status(400).send();
