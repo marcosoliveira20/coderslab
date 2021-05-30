@@ -3,17 +3,12 @@ import { hash } from "bcrypt";
 
 import { User } from "../model/User";
 
-class UpdateUserController {
+class UpdatePasswordUserController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
     
     const {
-      username,
-      name,
-      last_name,
       email,
-      discord_id,
-      github_id,
       password
     } = request.body;
 
@@ -26,19 +21,16 @@ class UpdateUserController {
         return response.status(404).send();
       }
 
-      const passwordHash = await hash(password, 8);
+      if(findIndex.email !== email) {
+        return response.status(403).send();
+      }
 
-      const data = await user.update(id, {
-        username,
-        name,
-        last_name,
-        email,
-        discord_id,
-        github_id,
-        password: passwordHash,
-      });
+      const passwordHash = await hash(password, 8);
+      findIndex.password = passwordHash;
+
+      await user.update(id, findIndex);
       
-      return response.status(200).send(data);
+      return response.status(200).send();
     } catch (err) {
       console.log(err.message);
       return response.status(400).send();
@@ -46,4 +38,4 @@ class UpdateUserController {
   }
 }
 
-export { UpdateUserController };
+export { UpdatePasswordUserController };

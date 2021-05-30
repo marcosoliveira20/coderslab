@@ -32,13 +32,24 @@ class Schedule implements IScheduleRepository {
     return ScheduleSchema.findOne({ datetime });
   }
 
-  readByGroup(_id_group: string, datetime: Date): Promise<IScheduleDTO> {
+  readByGroup(_id_group: string, datetime: Date): Promise<Array<IScheduleDTO>> {
     return ScheduleSchema.find({
       _id_group,
       datetime: {
         $gte : datetime.toISOString()
       }
     }).sort({ datetime: 1 });
+  }
+
+  readByGroupNextSchedule(_id_group: string, datetime: Date): Promise<IScheduleDTO> {
+    return ScheduleSchema.findOne({
+      _id_group,
+      datetime: {
+        $gte : datetime.toISOString()
+      }
+    })
+    .sort({ datetime: 1 })
+    .limit(1);
   }
 
   readAll(): Promise<Array<IScheduleDTO>> {
