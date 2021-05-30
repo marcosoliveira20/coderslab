@@ -20,6 +20,7 @@ import { ReadAllInProgressRoadmapRepositories } from "../controllers/ReadAllInPr
 import { ReadAllDoneRoadmapRepositories } from "../controllers/ReadAllDoneRoadmapRepositories";
 import { UpdateLevelController } from "../controllers/UpdateLevelController";
 import { ReadAllDefaultByUserIdRoadmapRepositories } from "../controllers/ReadAllDefaultByUserIdRoadmapRepositories";
+import { ensureAuthenticated } from "../../../ensureAuthenticated";
 
 const createRoadmapDefaultController = new CreateRoadmapDefaultController();
 const createRoadmapCustomController = new CreateRoadmapCustomController();
@@ -40,6 +41,7 @@ const readAllDoneRoadmapRepositories = new ReadAllDoneRoadmapRepositories();
 const updateLevelController = new UpdateLevelController();
 const readAllDefaultByUserIdRoadmapRepositories = new ReadAllDefaultByUserIdRoadmapRepositories();
 
+RoadmapRoutes.use(ensureAuthenticated)
 RoadmapRoutes.post("/roadmap/create/default", createRoadmapDefaultController.handle);
 RoadmapRoutes.post("/roadmap/create/custom", createRoadmapCustomController.handle);
 RoadmapRoutes.put("/roadmap/update/custom/:_id", turnRoadmapCustomizedController.handle);

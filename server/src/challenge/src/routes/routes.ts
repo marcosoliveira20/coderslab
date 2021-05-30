@@ -13,6 +13,7 @@ import { ReadAllDoneChallengeController } from "../controllers/ReadAllDoneChalle
 import { UpdateChallengeTitleController } from "../controllers/UpdateChallengeTitleController";
 import { UpdateChallengeDescriptionController } from "../controllers/UpdateChallengeDescriptionController"
 import { CreateChallengeByRoadmapController } from "../controllers/CreateChallengeByRoadmapController";
+import { ensureAuthenticated } from "../../../ensureAuthenticated";
 
 const createChallengeController = new CreateChallengeController();
 const turnChallengeDoneController = new TurnChallengeDoneController();
@@ -26,14 +27,13 @@ const updateChallengeTitleController = new UpdateChallengeTitleController();
 const updateChallengeDescriptionController = new UpdateChallengeDescriptionController();
 const createChallengeByRoadmapController = new CreateChallengeByRoadmapController();
 
+ChallengeRoutes.use(ensureAuthenticated)
 ChallengeRoutes.post("/challenge/create", createChallengeController.handle);
 ChallengeRoutes.post("/challenge/create/By/Roadmap", createChallengeByRoadmapController.handle);
-
 ChallengeRoutes.put("/challenge/update/done/:_id", turnChallengeDoneController.handle);
 ChallengeRoutes.put("/challenge/update/inprogress/:_id", turnChallengeNotDoneController.handle);
 ChallengeRoutes.put("/challenge/update/title/:_id", updateChallengeTitleController.handle);
 ChallengeRoutes.put("/challenge/update/description/:_id", updateChallengeDescriptionController.handle);
-
 ChallengeRoutes.get("/challenge/read/all", readAllChallengeController.handle);
 ChallengeRoutes.get("/challenge/read/:_id", readChallengeByIdController.handle);
 ChallengeRoutes.get("/challenge/read/all/inprogress", readAllInProgressChallengeController.handle);

@@ -19,6 +19,7 @@ import { DeleteContentByRoadmapIDController } from "../controllers/DeleteContent
 import { ReadOverdueContents } from "../controllers/ReadOverdueContents";
 import { UpdateContenChallenge } from "../controllers/UpdateContenChallenge"
 import { ReadByRoadmapDeadline } from "../controllers/ReadByRoadmapDeadline";
+import { ensureAuthenticated } from "../../../ensureAuthenticated";
 
 const createContentController = new CreateContentController();
 const turnContentDoneController = new TurnContentDone();
@@ -38,6 +39,7 @@ const deleteContentByRoadmapIDController = new DeleteContentByRoadmapIDControlle
 const readOverdueContents = new ReadOverdueContents();
 const readByRoadmapDeadline = new ReadByRoadmapDeadline();
 
+ContentRoutes.use(ensureAuthenticated)
 ContentRoutes.post("/content/create", createContentController.handle);
 ContentRoutes.put("/content/update/done/:_id", turnContentDoneController.handle);
 ContentRoutes.put("/content/update/inprogress/:_id", TurnContentNotDoneController.handle);

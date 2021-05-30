@@ -7,6 +7,7 @@ import { ReadAllGroupsByUserController } from "./controllers/ReadAllGroupsByUser
 import { ReadAllGroupsByOwnerController } from "./controllers/ReadAllGroupsByOwnerController";
 import { DeleteUnionUserGroupController } from "./controllers/DeleteUnionUserGroupController";
 import { DeleteUnionUserAllGroupController } from "./controllers/DeleteUnionUserAllGroupController";
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 const router = Router();
 
@@ -18,6 +19,7 @@ const readAllGroupsByOwnerController = new ReadAllGroupsByOwnerController();
 const deleteUnionUserGroupController = new DeleteUnionUserGroupController();
 const deleteUnionUserAllGroupController = new DeleteUnionUserAllGroupController();
 
+router.use(ensureAuthenticated)
 router.post("/unionUserGroup/create", createUnionUserGroupController.handle);
 router.post("/unionUserGroup/read/search", readAllGroupsBySearchController.handle);
 router.get("/unionUserGroup/read/allUsersByGroup/:idGroup", readAllUsersByGroupController.handle);
