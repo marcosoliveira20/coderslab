@@ -1,20 +1,41 @@
-<div class="cdl-container">
+<div class="cdl-container-group">
   <header>
-    <h1> {{isNewCustomRoadmap ? "Novo Roadmap" : "Roadmap"}} </h1>
+    <h1>{{ isNewCustomRoadmap ? "Novo Roadmap" : "Roadmap" }}</h1>
+    <nav>
+      <ul class="tabs">
+        <li>
+          <button class="button-nav" type="button" (click)="filter('roadmap')" [class.active]="type == 'roadmap'">
+            Roadmap
+          </button>
+        </li>
+        <li>
+          <button class="button-nav" type="button" (click)="filter('task')" [class.active]="type == 'task'">
+            Task
+          </button>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <main>
     <!-- CONTENT SELECT NEW ROADMAP -->
     <div class="content-select-new-roadmap" *ngIf="!isNewCustomRoadmap">
-      <p>Aqui é onde se inicia sua jornada de aprendizado. Você deve escolher qual roadmap quer seguir. Na opção default
-        você ira ter a opção de escolher um objetivo que teve todo seu caminho pensado pela equipe do Codando, e na
-        opção custom você tera a liberdade de decidir cada etapa da sua jornada. Iai, qual a sua escolha pra hoje?</p>
+      <p>
+        Aqui é onde se inicia sua jornada de aprendizado. Você deve escolher
+        qual roadmap quer seguir. Na opção default você ira ter a opção de
+        escolher um objetivo que teve todo seu caminho pensado pela equipe do
+        Codando, e na opção custom você tera a liberdade de decidir cada etapa
+        da sua jornada. Iai, qual a sua escolha pra hoje?
+      </p>
 
       <div>
         <div class="div-new-roadmap-option">
           <div>
             <h4>Roadmap Default</h4>
-            <p>Comece seu objetivo direto ao ponto. Encontre trilhas com todo o conteúdo planejado pra você.</p>
+            <p>
+              Comece seu objetivo direto ao ponto. Encontre trilhas com todo o
+              conteúdo planejado pra você.
+            </p>
           </div>
           <button routerLink="/roadmap/list">ver mais</button>
         </div>
@@ -22,84 +43,107 @@
         <div class="div-new-roadmap-option">
           <div>
             <h4>Roadmap Custom</h4>
-            <p>Tome as rédias do seu trajeto. Decida cada etapa do seu objetivo de acordo com as suas necessidades.</p>
+            <p>
+              Tome as rédias do seu trajeto. Decida cada etapa do seu objetivo
+              de acordo com as suas necessidades.
+            </p>
           </div>
-          <button routerLink="/roadmap/new/custom" (click)="verifyUrlParam()">ver mais</button>
+          <button routerLink="/roadmap/new/custom" (click)="verifyUrlParam()">
+            ver mais
+          </button>
         </div>
       </div>
     </div>
 
     <!-- CONTENT NEW CUSTOM ROADMAP -->
-    <form class="content-new-custom-roadmap" (ngSubmit)="onSubmitRegister()" *ngIf="isNewCustomRoadmap"
-      [formGroup]="roadmapForm">
-      <section>
-        <div class="row row-switch">
-          <h4>Informações gerais</h4>
-        </div>
-
-        <div class="row">
-          <label>nome</label>
-          <input type="text" placeholder="Nome do roadmap" formControlName="name" />
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <label>objetivo</label>
-            <select name="objective" placeholder="Busque por um assunto" formControlName="objective">
-              <option *ngFor="let objective of interestList">{{objective.name}}</option>
-            </select>
+    <form class="content-new-custom-roadmap" *ngIf="isNewCustomRoadmap" [formGroup]="roadmapForm"
+      (ngSubmit)="onSubmit()">
+      <div *ngIf="type === 'roadmap'">
+        <section>
+          <div class="row row-switch">
+            <h4>Informações gerais</h4>
           </div>
 
-          <div class="col">
-            <label>nível</label>
-            <select name="level" formControlName="level">
-              <option value="0" selected>Iniciante</option>
-              <option value="1">Intermediário</option>
-              <option value="2">Avançado</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
-      <div class="header-task-creation-list">
-        <h4>Crie uma nova tarefa</h4>
-        <button (click)="addNewTaskObject()">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M31.9366 15.3404H18.6596V2.06311C18.6596 1.14719 17.9159 0.403564 16.9997 0.403564C16.0838 0.403564 15.3402 1.14719 15.3402 2.06311V15.3404H2.06287C1.14694 15.3404 0.40332 16.084 0.40332 17C0.40332 17.9162 1.14694 18.6598 2.06287 18.6598H15.3402V31.9368C15.3402 32.853 16.0838 33.5967 16.9997 33.5967C17.9159 33.5967 18.6596 32.853 18.6596 31.9368V18.6598H31.9366C32.8528 18.6598 33.5964 17.9162 33.5964 17C33.5964 16.084 32.8528 15.3404 31.9366 15.3404V15.3404Z"
-              fill="#D13C74" />
-          </svg>
-        </button>
-      </div>
-
-      <div class="task-creation-list">
-        <section *ngFor="let task of taskList; index as i">
           <div class="row">
-            <div class="col">
-              <label>título</label>
-              <input name="title" placeholder="Nome da sua task" (input)="handleTaskChange($event, i)">
-            </div>
-            <div class="col">
-              <label>data de conclusão</label>
-              <input type="date" name="end_date" placeholder="dd/mm/yyy" (input)="handleTaskChange($event, i)">
-            </div>
-            <div class="col">
-              <label>link</label>
-              <input name="link" placeholder="Adicione uma referência" (input)="handleTaskChange($event, i)">
-            </div>
+            <label>nome</label>
+            <input type="text" placeholder="Nome do roadmap" formControlName="name" />
           </div>
 
           <div class="row">
             <div class="col">
-              <label>descrição</label>
-              <input name="description" placeholder="Fale um pouco sobre sua task"
-                (input)="handleTaskChange($event, i)">
+              <label>objetivo</label>
+              <select name="objective" placeholder="Busque por um assunto" formControlName="objective">
+                <option *ngFor="let objective of interestList">
+                  {{ objective.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col">
+              <label>nível</label>
+              <select name="level" formControlName="level">
+                <option value="0" selected>Iniciante</option>
+                <option value="1">Intermediário</option>
+                <option value="2">Avançado</option>
+              </select>
             </div>
           </div>
         </section>
+        <button class="button-default float-right" (click)="filter('task')" type="button">
+          Próximo
+        </button>
       </div>
-      <button type="submit">Cadastrar</button>
-    </form>
 
+      <div *ngIf="type === 'task'">
+        <div class="header-task-creation-list">
+          <h4>Crie uma nova tarefa</h4>
+        </div>
+
+        <div class="task-creation-list">
+          <div *ngFor="let task of taskList; index as i">
+            <section>
+              <div class="row">
+                <div class="col">
+                  <label>título</label>
+                  <input name="title" placeholder="Nome da sua task" (input)="handleTaskChange($event, i)" />
+                </div>
+                <div class="col">
+                  <label>data de conclusão</label>
+                  <input type="date" name="end_date" placeholder="dd/mm/yyy" (input)="handleTaskChange($event, i)" />
+                </div>
+                <div class="col">
+                  <label>link</label>
+                  <input name="link" placeholder="Adicione uma referência" (input)="handleTaskChange($event, i)" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <label>descrição</label>
+                  <input name="description" placeholder="Fale um pouco sobre sua task"
+                    (input)="handleTaskChange($event, i)" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <button type="button" *ngIf="!(i === 0)" (click)="removeTask(i)" class="simple-button float-right">
+                    Excluir
+                  </button>
+                </div>
+              </div>
+            </section>
+            <button type="button" *ngIf="i === 0" (click)="addNewTaskObject()" class="button-pink">
+              Criar task
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="button-default float-right">Concluir</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </main>
 </div>

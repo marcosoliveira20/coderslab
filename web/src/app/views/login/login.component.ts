@@ -1,10 +1,11 @@
-// import { interestListMock } from "../../../app/app.component";
+import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 import { UserService } from "src/app/services/user.service";
 
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+// import { interestListMock } from "../../../app/app.component";
 
-import { subjectMock } from "../../../mock";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -12,13 +13,14 @@ import { subjectMock } from "../../../mock";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  private mode = "login";
-  private interestList: any[] = [];
-  private subjectList: any[] = subjectMock;
-  private selectedSubjectList: any[] = [];
-  private selectedCustomSubjectList: any[] = [];
+  public mode = "register";
 
-  private interestModel = { _id_subject: "", _id_user: "", level: 0 };
+  public interest_list: any[] = [];
+  // TODO Integrar Subject
+  public subjectList: any[] = [];
+
+  public selectedSubjectList: any[] = [];
+  public customInterestList: any[] = [];
 
   loginForm = this.fb.group({
     username: [""],
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
     confirm_password: ["", Validators.required],
     discord_id: [""],
     github_id: [""],
-    objective: [[], Validators.required],
+    interest_list: [[], Validators.required],
     level: ["-1"],
     subjectForm: [""],
   });
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitRegister() {
     this.registerForm.patchValue({
-      objective: this.interestList[0],
+      interest_list: this.interest_list,
     });
 
     if (
@@ -65,59 +67,57 @@ export class LoginComponent implements OnInit {
       // TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
       console.log("senha divergente");
     }
+    this.registerForm.removeControl("level");
+    this.registerForm.removeControl("subjectForm");
+    console.log("onSubmit: ", this.registerForm.value);
   }
 
-  listenInput(interestListEvent) {
-    this.interestList = interestListEvent;
+  handleChangeSelect(event, type, index) {
+    this.interest_list[index][type] = event.target.value;
+  }
+
+  validateFirstSelect(): boolean {
+    return (
+      this.registerForm.value.subjectForm !== "" &&
+      this.registerForm.value.level !== "-1"
+    );
   }
 
   addInterest() {
-    const subjectLabel = this.registerForm.value.subjectForm;
+    if (this.validateFirstSelect()) {
+      const subjectId = this.registerForm.value.subjectForm;
+      const levelName = this.registerForm.value.level.split(" ")[1];
+      const level = this.registerForm.value.level.split(" ")[0];
 
-    const subjectIndex = this.subjectList.findIndex(
-      (i) => i.label == subjectLabel
+      const subjectIndex = this.subjectList.findIndex((i) => i.id == subjectId);
+
+      this.interest_list.push({
+        _id_subject: Number(subjectId),
+        level: Number(level),
+      });
+
+      this.customInterestList.push({
+        _id_subject: subjectId,
+        label: this.subjectList[subjectIndex].label,
+        level: levelName,
+      });
+
+      this.selectedSubjectList.push(this.subjectList[subjectIndex]);
+      this.subjectList.splice(subjectIndex, 1);
+      this.registerForm.controls.level.setValue("-1");
+      this.registerForm.controls.subjectForm.setValue("");
+    }
+  }
+
+  deleteInterest(index) {
+    const subjectIndex = this.selectedSubjectList.findIndex(
+      (item) => item.id == this.interest_list[index]._id_subject
     );
 
-    const subjectId = this.subjectList[subjectIndex].id;
+    this.subjectList.push(this.selectedSubjectList[subjectIndex]);
+    this.selectedSubjectList.splice(subjectIndex, 1);
 
-    this.selectedSubjectList.push(this.subjectList[subjectIndex]);
-
-    this.subjectList.splice(subjectIndex, 1);
-
-    this.interestList.push({
-      _id_subject: subjectId,
-      _id_user: "",
-      level: Number(this.registerForm.value.level),
-    });
-
-    this.selectedCustomSubjectList.push({
-      _id_subject: subjectId,
-      label: subjectLabel,
-      _id_user: "",
-      level: Number(this.registerForm.value.level),
-      levelName: this.levelNameStr(Number(this.registerForm.value.level)),
-    });
-
-    this.registerForm.controls.level.setValue("-1");
-    this.registerForm.controls.subjectForm.setValue("");
-  }
-
-  updateInterest(subject, value, change) {
-    if (change === "label") {
-    } else {
-    }
-  }
-
-  levelNameStr(level: number) {
-    switch (level) {
-      case 0:
-        return "Iniciante";
-      case 1:
-        return "Intermediário";
-      case 2:
-        return "Avançado";
-      default:
-        return "Nivel";
-    }
+    this.interest_list.splice(index, 1);
+    this.customInterestList.splice(index, 1);
   }
 }

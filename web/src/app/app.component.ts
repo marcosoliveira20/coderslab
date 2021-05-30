@@ -9,17 +9,47 @@ const userList = [
 ];
 
 const content = {
+  id: Math.ceil(Math.random() * 1000),
   title: "titulo conteudo",
   description: "descricao conteudo",
   deadline: new Date("2021-06-20"),
   reference: "https://matias.ma/nsfw/",
   is_done: false,
-  status: "late",
   challenge: {
-    id: Math.random() * 1000,
+    id: Math.ceil(Math.random() * 1000),
+    title: "titulo challenge",
+    description: "descricao challenge",
+    is_done: true,
+  },
+};
+
+const contentLate = {
+  id: Math.ceil(Math.random() * 1000),
+  title: "titulo conteudo atrasado",
+  description: "descricao conteudo atrasado",
+  deadline: new Date("2021-04-20"),
+  reference: "https://matias.ma/nsfw/",
+  is_done: false,
+  challenge: {
+    id: Math.ceil(Math.random() * 1000),
     title: "titulo challenge",
     description: "descricao challenge",
     is_done: false,
+  },
+};
+
+const contentComplete = {
+  id: Math.ceil(Math.random() * 1000),
+  title: "titulo conteudo finalizado",
+  description: "descricao conteudo finalizado",
+  deadline: new Date("2021-04-20"),
+  reference: "https://matias.ma/nsfw/",
+  is_done: true,
+  challenge: {
+    id: Math.ceil(Math.random() * 1000),
+    title: "titulo challenge",
+    description: "descricao challenge",
+    is_done: true,
   },
 };
 
@@ -38,9 +68,8 @@ export const roadmapMock = [
     },
     content_list: [
       { ...content },
-      { ...content },
-      { ...content },
-      { ...content },
+      { ...contentLate },
+      { ...contentComplete }
     ],
   },
   {
@@ -57,9 +86,8 @@ export const roadmapMock = [
     },
     content_list: [
       { ...content },
-      { ...content },
-      { ...content },
-      { ...content },
+      { ...contentLate },
+      { ...contentComplete }
     ],
   },
   {
@@ -76,9 +104,8 @@ export const roadmapMock = [
     },
     content_list: [
       { ...content },
-      { ...content },
-      { ...content },
-      { ...content },
+      { ...contentLate },
+      { ...contentComplete }
     ],
   },
   {
@@ -95,9 +122,8 @@ export const roadmapMock = [
     },
     content_list: [
       { ...content },
-      { ...content },
-      { ...content },
-      { ...content },
+      { ...contentLate },
+      { ...contentComplete }
     ],
   },
 ];
@@ -112,6 +138,8 @@ export const userMock = {
   username: "Flynn Rider",
   email: "jose@email.com.br",
   level: "Iniciante",
+  discord_id: "batata#4566",
+  github_id: "socorrokkkk",
   group_list: [
     {
       token: 1,
@@ -119,30 +147,32 @@ export const userMock = {
       user_list: userList,
       subject_label: "Lógica de programação",
       level: 0,
+      next_schedule: "2021-05-28T19:04:49.500Z",
+      number_members: 1,
       schedule_list: [
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
       ],
       owner: 1,
@@ -157,28 +187,28 @@ export const userMock = {
       level: 1,
       schedule_list: [
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
       ],
       owner: 2,
@@ -193,28 +223,28 @@ export const userMock = {
       level: 3,
       schedule_list: [
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
       ],
       owner: 3,
@@ -229,28 +259,28 @@ export const userMock = {
       level: 0,
       schedule_list: [
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
       ],
       owner: 1,
@@ -265,28 +295,28 @@ export const userMock = {
       level: 1,
       schedule_list: [
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
       ],
       owner: 2,
@@ -301,28 +331,28 @@ export const userMock = {
       level: 3,
       schedule_list: [
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-04-20"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-05-30"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
         {
-          id: Math.random() * 1000,
+          id: Math.ceil(Math.random() * 1000),
           datetime: new Date("2021-06-11"),
           link: "https://matias.ma/nsfw/",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan congue aliquet. Nam accumsan vestibulum condimentum. Vivamus vulputate placerat tortor accumsan luctus. Maecenas quis iaculis ipsum. Cras semper consectetur diam, sed hendrerit nunc tincidunt ac. Ut pharetra diam arcu.",
-          owner: Math.random() * 1000,
+          owner: Math.ceil(Math.random() * 1000),
         },
       ],
       owner: 3,

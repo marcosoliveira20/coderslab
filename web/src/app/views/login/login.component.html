@@ -122,38 +122,43 @@
         />
       </div>
 
-      <div class="form-group-base">
+      <div class="form-group-base" id="teste">
         <select formControlName="subjectForm">
           <option value="" selected disabled>Interesse</option>
-          <option *ngFor="let subject of subjectList">
+          <option *ngFor="let subject of subjectList" value="{{ subject.id }}">
             {{ subject.label }}
           </option>
         </select>
 
         <select formControlName="level">
           <option value="-1" selected disabled>Nível</option>
-          <option value="0">Iniciante</option>
-          <option value="1">Intermediário</option>
-          <option value="2">Avançado</option>
+          <option value="0 Iniciante">Iniciante</option>
+          <option value="1 Intermediário">Intermediário</option>
+          <option value="2 Avançado">Avançado</option>
         </select>
-        <button id="add-interest" (click)="addInterest()">
+
+        <button type="button" id="add-interest" (click)="addInterest()">
           <img src="../../../assets/icons/plus-white.svg" alt="" srcset="" />
         </button>
 
-        <div *ngFor="let subject of selectedCustomSubjectList">
-          <select (change)="updateInterest(subject, $event.target.value, 'label')">
-            <option selected>{{subject.label}}</option>
-            <option *ngFor="let subject of subjectList">
-              {{ subject.label }}
+        <div *ngFor="let interest of customInterestList; index as i">
+          <select disabled>
+            <option
+              *ngFor="let subject of selectedSubjectList"
+              value="{{ subject.id }}"
+            >
+              {{ interest.label }}
             </option>
           </select>
 
-          <select (change)="updateInterest(subject, $event.target.value, 'level')">
-            <option selected>{{subject.levelName}}</option>
+          <select disabled>
+            <option value="">{{ interest.level }}</option>
           </select>
-
-          <button (click)="updateInterest(subject)" id="add-interest">
-            <img src="../../../assets/icons/plus-white.svg" alt="" srcset="" />
+          <button type="button" id="add-interest" (click)="deleteInterest(i)">
+            <img
+              [style.transform]="'rotate(45deg)'"
+              src="../../../assets/icons/plus-white.svg"
+            />
           </button>
         </div>
       </div>

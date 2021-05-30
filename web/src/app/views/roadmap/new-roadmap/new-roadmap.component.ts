@@ -1,3 +1,5 @@
+import { interestListMock } from "src/app/app.component";
+
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -11,6 +13,7 @@ import { RoadmapService } from "../../../services/roadmapCustom.service";
 })
 export class NewRoadmapComponent implements OnInit {
   public isNewCustomRoadmap: boolean;
+  public interestList = interestListMock;
 
   private taskModel = {
     title: "",
@@ -18,7 +21,7 @@ export class NewRoadmapComponent implements OnInit {
     link: "",
     description: "",
   };
-  public taskList = [{ ...this.taskModel }];
+  public taskList = [];
 
   public roadmapForm = this.fb.group({
     name: ["", Validators.required],
@@ -35,8 +38,22 @@ export class NewRoadmapComponent implements OnInit {
 
   ngOnInit() {
     this.verifyUrlParam();
+    this.taskList = [[{ ...this.taskModel }]];
   }
 
+  type = "roadmap";
+
+  filter(typeFilter: string) {
+    this.type = typeFilter;
+  }
+  onSubmit() {
+    this.taskList.splice(0, 1);
+    this.roadmapForm.patchValue({
+      content_list: this.taskList,
+    });
+    console.log("formulário ", this.roadmapForm.value);
+    this.ngOnInit();
+  }
   verifyUrlParam() {
     if (this.activatedRoute.snapshot.url[2])
       this.isNewCustomRoadmap =
@@ -44,13 +61,14 @@ export class NewRoadmapComponent implements OnInit {
   }
 
   addNewTaskObject() {
-    this.taskList.push({ ...this.taskModel });
+    this.taskList.unshift({ ...this.taskModel });
+  }
+
+  removeTask(index) {
+    this.taskList.splice(index, 1);
   }
 
   handleTaskChange(event, index) {
-    console.log(this.taskList);
-    console.log(index);
-
     this.taskList[index][event.target.name] = event.target.value;
     console.log(this.taskList);
   }

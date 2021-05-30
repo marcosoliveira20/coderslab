@@ -1,90 +1,207 @@
-<div *ngIf="showLoading">loading</div>
-<div>
-  <form
-    class="mainPage"
-    [formGroup]="profileForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <div class="bodyForm">
-      <div class="header">
-        <h1>{{ profileForm.value.name }} {{profileForm.value.last_name}}</h1>
-        <div>
-          <button>Redefinir Senha</button>
-          <button (click)="handleEditMode()">
-            <img src="assets/icons/edit_icon.svg" id="edit_icon" />
-          </button>
-        </div>
+<div class="cdl-container-group">
+  <header>
+    <div>
+      <h1>{{ user.name + " " + user.lastname }}</h1>
+
+      <div>
+        <button class="button-default" (click)="showResetPasswordModal = true">
+          Redefinir Senha
+        </button>
+        <button class="edit-button" (click)="handleEditMode()">
+          <img src="assets/icons/edit_icon.svg" id="edit_icon" />
+        </button>
       </div>
-  
-      <section>
-        <h4>Informações Pessoais</h4>
+    </div>
+
+    <nav>
+      <ul class="tabs">
+        <li>
+          <button
+            class="button-nav"
+            [class.active]="activeTab === 'user'"
+            (click)="changeTab('user')"
+          >
+            Usuário
+          </button>
+        </li>
+        <li>
+          <button
+            class="button-nav"
+            [class.active]="activeTab === 'interests'"
+            (click)="changeTab('interests')"
+          >
+            Interesses
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- USER TAB AREA -->
+    <form
+      class="user-info-area"
+      [formGroup]="profileForm"
+      (ngSubmit)="onSubmitUserInfo()"
+      *ngIf="activeTab === 'user'"
+    >
+      <div class="info-block">
+        <h4 class="title-info-block">Informações Pessoais</h4>
+
         <div class="row">
           <div class="col">
-            <label>nome</label>
-            <input type="text" id="" placeholder="José" formControlName="name"/>
-          </div>
-          <div class="col">
-            <label>sobrenome</label>
+            <label class="label-info-block">nome</label>
             <input
               type="text"
               id=""
+              placeholder="José"
+              formControlName="name"
+            />
+          </div>
+          <div class="col">
+            <label class="label-info-block">sobrenome</label>
+            <input
+              type="text"
               placeholder="Bezerra"
-              formControlName="last_name"
+              formControlName="lastname"
             />
           </div>
         </div>
+
         <div class="row">
           <div class="col">
-            <label>nome de usuário</label>
+            <label class="label-info-block">nome de usuário</label>
             <input
               type="text"
-              id=""
               placeholder="Flynn Rider"
               formControlName="username"
             />
           </div>
           <div class="col">
-            <label>e-mail</label>
+            <label class="label-info-block">e-mail</label>
             <input
               type="text"
-              id=""
               placeholder="jose@email.com.br"
               formControlName="email"
             />
           </div>
         </div>
-      </section>
-  
-      <section>
-        <h4>Redes Sociais</h4>
+      </div>
+
+      <div class="info-block">
+        <h4 class="title-info-block">Redes Sociais</h4>
+
         <div class="row">
           <div class="col">
-            <label>discord id</label>
+            <label class="label-info-block">discord id</label>
             <input
               type="text"
-              id=""
               placeholder="zébezerra#3503"
               formControlName="discord_id"
             />
           </div>
           <div class="col">
-            <label>github id</label>
+            <label class="label-info-block">github id</label>
             <input
               type="text"
-              id=""
               placeholder="zebezerra"
               formControlName="github_id"
             />
           </div>
         </div>
-      </section>
-    </div>
-  
-    <footer>
-      <button (click)="deleteUser()">Excluir Conta</button>
-      <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit">
-        Salvar
+      </div>
+    </form>
+
+    <!-- INTEREST TAB AREA -->
+    <div class="interest-area" *ngIf="activeTab === 'interests'">
+      <div class="info-block">
+        <div class="row">
+          <div class="col">
+            <select #subjectSelect>
+              <option *ngFor="let interest of interestList">
+                {{ interest.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <select #levelSelect>
+              <option value="0">Iniciante</option>
+              <option value="1">Intermediário</option>
+              <option value="2">Avançado</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="add-new-interest-button"
+        (click)="addNewInterest(subjectSelect, levelSelect)"
+      >
+        Criar interesse
       </button>
-    </footer>
-  </form>
+
+      <div class="info-block" *ngFor="let interest of selectedInterestList">
+        <div class="row">
+          <div class="col">
+            <label class="label-info-block">Interesse</label>
+            <select>
+              <option>{{ interest.label }}</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="label-info-block">Nível</label>
+            <select>
+              <option value="0">Iniciante</option>
+              <option value="1">Intermediário</option>
+              <option value="2">Avançado</option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          class="delete-interest-button"
+          (click)="deleteInterest(interest)"
+        >
+          Excluir
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer *ngIf="activeTab == 'user'">
+    <button (click)="showConfirmDeleteAccountModal = true">
+      Excluir Conta
+    </button>
+    <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit">
+      Salvar
+    </button>
+  </footer>
 </div>
+
+<app-modal
+  *ngIf="showConfirmDeleteAccountModal"
+  [showController]="showConfirmDeleteAccountModal"
+  (close)="showConfirmDeleteAccountModal = false"
+>
+  <div class="modal-body">
+    <p>
+      Você tem certeza que deseja exluir a sua conta? Todos os seus dados serão
+      apagados.
+    </p>
+    <button (click)="deleteAccount()">Sim, o Coderslab não acaba nunca</button>
+  </div>
+</app-modal>
+
+<app-modal
+  *ngIf="showResetPasswordModal"
+  [showController]="showResetPasswordModal"
+  (close)="showResetPasswordModal = false"
+>
+  <div class="modal-body">
+    <p>Para prosseguir, informe primeiro a sua senha atual e seguida a nova</p>
+    <input placeholder="senha atual" #oldPassword />
+    <input placeholder="nova senha" #newPassword />
+
+    <button (click)="resetPassword(oldPassword, newPassword)">Enviar</button>
+  </div>
+</app-modal>

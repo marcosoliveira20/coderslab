@@ -42,7 +42,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/group_read.Response'
+                $ref: '#/components/schemas/group_read_create.Response'
         '400':
           description: Bad Request
         '406':
@@ -694,9 +694,15 @@ paths:
     post:
       tags:
         - Schedule
-      summary: API
-      description: API de criação de schedule
       operationId: schedule_create
+      summary: API de criação de schedule
+      description: API de criação de schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schedule_create.Request'
+        required: true
       responses:
         '201':
           description: Schedule created
@@ -704,15 +710,13 @@ paths:
           description: Bad Request
         '403':
           description: Schedule already exists
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/schedule_create.Request'
-        required: true
   /schedule/read/byId/{id}:
     get:
+      tags:
+        - Schedule
+      operationId: schedule_byId
       summary: Retorna o schedule com base em um ID
+      description: API para retorno de um schedule
       parameters:
         - name: id
           in: path
@@ -722,10 +726,6 @@ paths:
             type : string
             format: uuid
             minimum: 1
-      tags:
-        - Schedule
-      description: API para retorno de um schedule
-      operationId: schedule_byId
       responses:
         '200':
           description: OK
@@ -739,7 +739,11 @@ paths:
           description: Not Found
   /schedule/read/byOwner/{idOwner}:
     get:
+      tags:
+        - Schedule
+      operationId: schedule_byOwner
       summary: Retorna o schedule com base no id do user que o criou.
+      description: API para retorno de um schedule com base no id do user que o criou
       parameters:
         - name: idOwner
           in: path
@@ -748,10 +752,6 @@ paths:
           schema:
             type : string
             minimum: 1
-      tags:
-        - Schedule
-      description: API para retorno de um schedule com base no id do user que o criou
-      operationId: schedule_byOwner
       responses:
         '200':
           description: OK
@@ -763,9 +763,13 @@ paths:
           description: Bad Request
         '404':
           description: Not Found
-  /schedule/read/byGroup/{idGroup}:
+  /schedule/read/byIdGroup/{idGroup}:
     get:
-      summary: Retorna o schedule com base no id do user que o criou.
+      tags:
+        - Schedule
+      operationId: schedule_byGroup
+      summary: Retorna schedules com base no id do seu grupo.
+      description: API para retorno de array de schedules com base no id do grupo associado a eles.
       parameters:
         - name: idGroup
           in: path
@@ -774,10 +778,6 @@ paths:
           schema:
             type : string
             minimum: 1
-      tags:
-        - Schedule
-      description: API para retorno de array de schedules com base no id do grupo associado a eles.
-      operationId: schedule_byGroup
       responses:
         '200':
           description: OK
@@ -793,9 +793,9 @@ paths:
     get:
       tags:
         - Schedule
-      summary: API
-      description: API para retorno do array de schedules
       operationId: schedule_all
+      summary: Retorna array de schedules
+      description: API para retorno do array de schedules
       responses:
         '200':
           description: successful operation
@@ -807,7 +807,11 @@ paths:
           description: Bad Request
   /schedule/update/{id}:
     put:
+      tags:
+        - Schedule
+      operationId: schedule_update
       summary: Atualiza algumas informações de um schedule com base em seu ID.
+      description: API para update de um schedule
       parameters:
           - name: id
             in: path
@@ -817,10 +821,12 @@ paths:
               type : string
               format: uuid
               minimum: 1
-      tags:
-        - Schedule
-      description: API para update de um schedule
-      operationId: schedule_update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schedule_update.Request'
+        required: true
       responses:
         '200':
           description: Schedule update
@@ -832,14 +838,12 @@ paths:
           description: Bad request
         '404':
             description: Not Found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/schedule_update.Request'
-        required: true
   /schedule/delete/{id}:
     delete:
+      tags:
+        - Schedule
+      operationId: schedule_delete
+      description: API para deletar um schedule com base em seu id
       summary: Deleta um schedule com base em seu ID.
       parameters:
           - name: id
@@ -850,10 +854,6 @@ paths:
               type : string
               format: uuid
               minimum: 1
-      tags:
-        - Schedule
-      description: API para deletar um schedule com base em seu id
-      operationId: schedule_delete
       responses:
         '204':
           description: Schedule deleted
@@ -867,9 +867,15 @@ paths:
     post:
       tags:
         - Subject
-      summary: API
-      description: API de criação de subject
       operationId: subject_create
+      summary: API de criação de subject
+      description: API de criação de subject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject_create.Request'
+        required: true
       responses:
         '201':
           description: Subject created
@@ -877,15 +883,13 @@ paths:
           description: Bad Request
         '403':
           description: Subject already exists
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/subject_create.Request'
-        required: true
   /subject/read/byId/{id}:
     get:
+      tags:
+        - Subject
+      operationId: subjects_byId
       summary: Retorna o subject com base em um ID
+      description: Retorna o subject com base em um ID
       parameters:
         - name: id
           in: path
@@ -895,10 +899,6 @@ paths:
             type : string
             format: uuid
             minimum: 1
-      tags:
-        - Subject
-      description: API para retorno de um subject
-      operationId: subjects_byId
       responses:
         '200':
           description: OK
@@ -912,7 +912,11 @@ paths:
           description: Not Found
   /subject/read/byLabel/{label}:
     get:
+      tags:
+        - Subject
+      operationId: subjects_byLabel
       summary: Retorna o subject com base em uma Label.
+      description: Retorna o subject com base em uma Label.
       parameters:
         - name: label
           in: path
@@ -921,10 +925,6 @@ paths:
           schema:
             type : string
             minimum: 1
-      tags:
-        - Subject
-      description: API para retorno do array de subjects
-      operationId: subjects_byLabel
       responses:
         '200':
           description: OK
@@ -940,9 +940,9 @@ paths:
     get:
       tags:
         - Subject
-      summary: API
-      description: API para retorno do array de subjects
       operationId: subjects_all
+      summary: Retorna Array de subjects.
+      description: Retorna Array de subjects.
       responses:
         '200':
           description: successful operation
@@ -954,7 +954,11 @@ paths:
           description: Bad Request
   /subject/update/{id}:
     put:
+      tags:
+        - Subject
+      operationId: subject_update
       summary: Atualiza as categories de um subject com base no ID.
+      description: Atualiza as categories de um subject com base no ID.
       parameters:
           - name: id
             in: path
@@ -964,10 +968,12 @@ paths:
               type : string
               format: uuid
               minimum: 1
-      tags:
-        - Subject
-      description: API para update de um subject
-      operationId: subject_update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subject_update.Request'
+        required: true
       responses:
         '200':
           description: Subject updated
@@ -979,15 +985,13 @@ paths:
           description: Bad request
         '404':
             description: Not Found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/subject_update.Request'
-        required: true
   /subject/delete/{id}:
     delete:
+      tags:
+        - Subject
+      operationId: subject_delete
       summary: Deleta um subject com base em seu ID.
+      description: Deleta um subject com base em seu ID.
       parameters:
           - name: id
             in: path
@@ -997,10 +1001,6 @@ paths:
               type : string
               format: uuid
               minimum: 1
-      tags:
-        - Subject
-      description: API para deletar um subject com base em seu id
-      operationId: subject_delete
       responses:
         '204':
           description: Subject deleted
@@ -1043,7 +1043,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/unionUserGroup_search.Response'
+                $ref: '#/components/schemas/unionUserGroup_read_all.Response'
         '400':
           description: Bad Request
       requestBody:
@@ -1204,7 +1204,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user.Request'
+              $ref: '#/components/schemas/user_create.Request'
         required: true 
   /user/login:
     post:
@@ -1230,6 +1230,33 @@ paths:
             schema:
               $ref: '#/components/schemas/user_login.Request'
         required: true 
+  /user/logout/{id}/{token}:
+    post:
+      tags: 
+        - User
+      summary: Realiza o logout do usuário
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do usuário gerado pelo MongoDB
+          schema:
+            type: string
+            minimum: 1
+        - name: token
+          in: path
+          required: true
+          description: Token da sessão do usuário gerado ao fazer login
+          schema:
+            type: string
+            minimum: 1
+      description: Realiza o logout do usuário para que ele possa ser redirecionado para fora da plataforma.
+      operationId: user_logout
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
   /user/read/byId/{id}:
     get:
       summary: Busca um usuário com base em um ID
@@ -1339,7 +1366,7 @@ paths:
             type: string
             format: ObjectId
             minimum: 1
-      description: Atualiza os dados de perfil de um usuário e sua lista de interesses com base em seu ID gerado pelo MongoDB. Caso haja um interesse novo, ele deve vir com _id = "", caso o campo esteja preenchido, é considerado como um interesse já existente que tem que ser atualizado.
+      description: Atualiza os dados de perfil de um usuário com base em seu ID gerado pelo MongoDB.
       operationId: user_update
       responses:
         '200':
@@ -1359,6 +1386,37 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/user_update.Request'
+        required: true
+  /user/update/password/{id}:
+    put:
+      tags:
+        - User
+      summary: Atualiza um usuário com base em um ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do usuário gerado pelo MongoDB
+          schema:
+            type: string
+            format: ObjectId
+            minimum: 1
+      description: Atualiza a senha de um usuário com base em seu ID gerado pelo MongoDB.
+      operationId: user_update
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_update_password.Request'
         required: true
   /user/delete/{id}:
     delete:
@@ -1383,11 +1441,12 @@ paths:
           description: Bad request
         '404':
             description: Not Found
+
   
 # Added by API Auto Mocking Plugin
 servers:
-  - url: 'https://cluster.prod.com.br/coderslab'
-    description: Link do cluster produtivo - External URL PRD
+  - url: ''
+    description: ''
 components:
   schemas:
     # Group
@@ -1418,8 +1477,45 @@ components:
           description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
         _owner:
           type: string
-          description: 'ID do dono do grupo gerado pelo MongoDB'
+          description: 'ID do dono do grupo gerado pelo MongoDB'  
     group_read.Response:
+      title: group_read.Response
+      description: 'Objeto para grupo'
+      type: object
+      properties:
+        _id:
+          type: string
+          description: 'ID gerado pelo MongoDB'
+        name:
+          type: string
+          description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
+        subject_label:
+          type: string
+          description: 'Assunto do grupo Ex: Node'
+        category:
+          type: array
+          items:
+            type: string
+            description: 'Lista de categorias Ex: [Web, Mobile]'
+        level:
+          type: number
+          description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+        token:
+          type: string
+          description: 'Token de acesso para grupo'
+        is_public:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é público ou particular'
+        is_default:
+          type: boolean
+          description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
+        _owner:
+          type: string
+          description: 'ID do dono do grupo gerado pelo MongoDB'
+        next_schedule:
+            type: string
+            description: 'Data da próxima reunião do grupo'
+    group_read_create.Response:
       title: group_read.Response
       description: 'Objeto para grupo'
       type: object
@@ -1486,6 +1582,9 @@ components:
           _owner:
             type: string
             description: 'ID do dono do grupo gerado pelo MongoDB'
+          next_schedule:
+            type: string
+            description: 'Data da próxima reunião do grupo'
     
     # Interest
     interest.Request:
@@ -1513,9 +1612,21 @@ components:
         _id_user:
           type: string
           description: 'ID do usuário gerado pelo MongoDB'
-        _id_subject:
-          type: string
-          description: 'ID do assunto gerado pelo MongoDB'
+        subject:
+          type: object
+          properties:
+            _id:
+              type: string
+              format: uuid
+              description: 'Id gerado pelo MongoDB'
+            label:
+              type: string
+              description: 'Rotúlo para o assunto Ex: NodeJs'
+            categories:
+              type: array
+              items:
+                type: string
+                description: 'Array de categorias Ex: [Web, Mobile]'
         level:
           type: number
           description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
@@ -1532,9 +1643,21 @@ components:
           _id_user:
             type: string
             description: 'ID do usuário gerado pelo MongoDB'
-          _id_subject:
-            type: string
-            description: 'ID do assunto gerado pelo MongoDB'
+          subject:
+            type: object
+            properties:
+              _id:
+                type: string
+                format: uuid
+                description: 'Id gerado pelo MongoDB'
+              label:
+                type: string
+                description: 'Rotúlo para o assunto Ex: NodeJs'
+              categories:
+                type: array
+                items:
+                  type: string
+                  description: 'Array de categorias Ex: [Web, Mobile]'
           level:
             type: number
             description: 'Número de 0 a 2 que represente o nível de conhecimento em determinado interesse Ex: 1'
@@ -1848,42 +1971,6 @@ components:
         is_alphabetical:
           type: boolean
           description: 'Se a resposta deve ser ordenada de A-Z ou de Z-A. Sendo true para o primeiro caso e false para o segundo' 
-    unionUserGroup_search.Response:
-      title: unionUserGroup_search.Response
-      description: 'Lista para grupos'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          name:
-            type: string
-            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-          category:
-            type: array
-            items:
-              type: string
-              description: 'Lista de assuntos Ex: [Node, Java]'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-          token:
-            type: string
-            description: 'Token de acesso para grupo'
-          is_public:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é público ou particular'
-          is_default:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-          _owner:
-            type: string
-            description: 'ID do dono do grupo gerado pelo MongoDB'
-          number_members:
-            type: number
-            description: 'Quantidade de membros contidos no grupo'
     unionUserGroup_read_all.Response:
       title: unionUserGroup_read_users.Response
       description: 'Lista para a união entre usuário e grupo'
@@ -1920,14 +2007,12 @@ components:
           _owner:
             type: string
             description: 'ID do dono do grupo gerado pelo MongoDB'
-          _schedule_list:
-            type: array
-            items:
-              type: string
-              description: 'Lista de IDs gerado pelo MongoDB referente as reuniões do grupo'
+          next_schedule:
+            type: string
+            description: 'Próxima reunião do grupo'
     
     # User
-    user.Request:
+    user_create.Request:
       title: user.Request
       description: 'Objeto para usuário'
       type: object
@@ -1952,6 +2037,7 @@ components:
           description: 'ID do usuário no GitHub Ex: joaosilva10'
         password:
           type: string
+          format: password
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
         interest_list:
           type: array
@@ -1960,6 +2046,7 @@ components:
             properties:
               _id_subject:
                 type: string
+                format: uuid
                 description: 'ID do interesse gerado pelo MongoDB'
               level:
                 type: number
@@ -1990,23 +2077,17 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-        interest_list:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: 'ID do interesse gerado pelo MongoDB'
-              _id_user:
-                type: string
-                description: 'ID do usuário gerado pelo MongoDB'
-              _id_subject:
-                type: string
-                description: 'ID do interesse gerado pelo MongoDB'
-              level:
-                type: number
-                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
+    user_update_password.Request:
+      title: user.Request
+      description: 'Objeto para usuário'
+      type: object
+      properties:
+        email:
+          type: string
+          description: 'E-mail do usuário Ex: joao@email.com'
+        password:
+          type: string
+          description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
     user_login.Request:
       title: user_login.Request
       description: 'Objeto para usuário'
@@ -2017,6 +2098,7 @@ components:
           description: 'Username do usuário Ex: Joãozinho10'
         password:
           type: string
+          format: password
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
     user_read.Response:
       title: user_read.Response
@@ -2047,23 +2129,6 @@ components:
         password:
           type: string
           description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-        interest_list:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: 'ID do interesse gerado pelo MongoDB'
-              _id_user:
-                type: string
-                description: 'ID do usuário gerado pelo MongoDB'
-              _id_subject:
-                type: string
-                description: 'ID do interesse gerado pelo MongoDB'
-              level:
-                type: number
-                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
     user_read_token.Response:
       title: user_read.Response
       description: 'Objeto para usuário'
@@ -2080,98 +2145,8 @@ components:
           description: 'Nome do usuário Ex: João'
         last_name:
           type: string
-<<<<<<< HEAD
-          description: 'Categoria dos grupos'
-        level:
-          type: number
-          description: 'Nível dos grupos'
-        is_alphabetical:
-          type: boolean
-          description: 'Se a resposta deve ser ordenada de A-Z ou de Z-A. Sendo true para o primeiro caso e false para o segundo' 
-    unionUserGroup_search.Response:
-      title: unionUserGroup_search.Response
-      description: 'Lista para grupos'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          name:
-            type: string
-            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-          category:
-            type: array
-            items:
-              type: string
-              description: 'Lista de assuntos Ex: [Node, Java]'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-          token:
-            type: string
-            description: 'Token de acesso para grupo'
-          is_public:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é público ou particular'
-          is_default:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-          _owner:
-            type: string
-            description: 'ID do dono do grupo gerado pelo MongoDB'
-          number_members:
-            type: number
-            description: 'Quantidade de membros contidos no grupo'
-    unionUserGroup_read_all.Response:
-      title: unionUserGroup_read_users.Response
-      description: 'Lista para a união entre usuário e grupo'
-      type: array
-      items:
-        type: object
-        properties:
-          _id:
-            type: string
-            description: 'ID gerado pelo MongoDB'
-          name:
-            type: string
-            description: 'Nome do grupo Ex: Desenvolvimento Web com PHP'
-          number_members:
-            type: number
-            description: 'Quantidade de usuários que existem no grupo'
-          category:
-            type: array
-            items:
-              type: string
-              description: 'Lista de assuntos Ex: [Node, Java]'
-          level:
-            type: number
-            description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
-          token:
-            type: string
-            description: 'Token de acesso para grupo'
-          is_public:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é público ou particular'
-          is_default:
-            type: boolean
-            description: 'Identificação para dizer se o grupo é do tipo padrão, ou customizado'
-          _owner:
-            type: string
-            description: 'ID do dono do grupo gerado pelo MongoDB'
-            
-    # Interest
-    interest.Request:
-      title: interest.Request
-      description: 'Objeto para interesse'
-      type: object
-      properties:
-        _id_user:
-=======
           description: 'Sobrenome do usuário Ex: Silva'
         email:
->>>>>>> 830109bec4432535693b66683b9c4dd5e033fdaa
           type: string
           description: 'E-mail do usuário Ex: joao@email.com'
         discord_id:
@@ -2186,23 +2161,6 @@ components:
         token:
           type: string
           description: 'Token da sessão'
-        interest_list:
-          type: array
-          items:
-            type: object
-            properties:
-              _id:
-                type: string
-                description: 'ID do interesse gerado pelo MongoDB'
-              _id_user:
-                type: string
-                description: 'ID do usuário gerado pelo MongoDB'
-              _id_subject:
-                type: string
-                description: 'ID do interesse gerado pelo MongoDB'
-              level:
-                type: number
-                description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'               
     user_read_all.Response:
       title: user_read_all.Response
       description: 'Lista para usuários'
@@ -2234,20 +2192,3 @@ components:
           password:
             type: string
             description: 'Senha escolhida pelo usuário para utilizar na plataforma Ex: Jo@10Silv4'
-          interest_list:
-            type: array
-            items:
-              type: object
-              properties:
-                _id:
-                  type: string
-                  description: 'ID do interesse gerado pelo MongoDB'
-                _id_user:
-                  type: string
-                  description: 'ID do usuário gerado pelo MongoDB'
-                _id_subject:
-                  type: string
-                  description: 'ID do interesse gerado pelo MongoDB'
-                level:
-                  type: number
-                  description: 'Número de 0 a 2 que represente o nível de conhecimentodo grupo Ex: 1'
