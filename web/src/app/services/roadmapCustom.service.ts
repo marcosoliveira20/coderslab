@@ -19,4 +19,8 @@ export class RoadmapService {
       .post<any>(`${this.url}/roadmap/create/custom`, body, httpOptions)
       .toPromise();
   }
+
+  public getRoadmapListByUser() {
+    return this.http.get<any>(`${this.url}/roadmap/read/all`).toPromise();
+  }
 }

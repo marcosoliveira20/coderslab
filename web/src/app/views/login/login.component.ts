@@ -1,9 +1,11 @@
-import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
-
 // import { interestListMock } from "../../../app/app.component";
 import { UserService } from "src/app/services/user.service";
 
-import { interestListMock, subjectMock } from "../../../mock";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+
+import { subjectMock } from "../../../mock";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -37,11 +39,7 @@ export class LoginComponent implements OnInit {
     subjectForm: [""],
   });
 
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private userService: UserService
-  ) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   ngOnInit() {}
 

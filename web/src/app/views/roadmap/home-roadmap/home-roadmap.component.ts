@@ -1,5 +1,8 @@
-import { Component, OnInit } from "@angular/core";
 import { roadmapMock } from "src/app/app.component";
+
+import { Component, OnInit } from "@angular/core";
+
+import { RoadmapService } from "../../../services/roadmapCustom.service";
 
 @Component({
   selector: "app-home-roadmap",
@@ -7,9 +10,11 @@ import { roadmapMock } from "src/app/app.component";
   styleUrls: ["./home-roadmap.component.scss"],
 })
 export class HomeRoadmapComponent implements OnInit {
-  public roadmap_list = roadmapMock;
+  // public roadmap_list = roadmapMock;
+  public roadmap_list = [];
   public roadmapList = roadmapMock;
-  public typeFilter: string = "all";
+  public typeFilter = "all";
+  public roadmap_list_bd;
 
   filter(type: string) {
     this.typeFilter = type;
@@ -33,7 +38,12 @@ export class HomeRoadmapComponent implements OnInit {
     }
   }
 
-  constructor() {}
+  constructor(private roadmapService: RoadmapService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.roadmapService.getRoadmapListByUser().then((data) => {
+      this.roadmap_list = data;
+      this.filter("");
+    });
+  }
 }
