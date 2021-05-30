@@ -8,6 +8,7 @@ import { ReadUserByEmailController } from "./controllers/ReadUserByEmailControll
 import { ReadUserByIdController } from "./controllers/ReadUserByIdController";
 import { ReadUserByUsernameController } from "./controllers/ReadUserByUsernameController";
 import { UpdateUserController } from "./controllers/UpdateUserController";
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 const router = Router();
 
@@ -21,6 +22,8 @@ const updateUserController = new UpdateUserController();
 const deleteUserController = new DeleteUserController();
 
 router.post("/user/create", createUserController.handle);
+
+router.use(ensureAuthenticated)
 router.post("/user/login", loginUserController.handle);
 router.get("/user/read/byId/:id", readUserByIdController.handle);
 router.get(
