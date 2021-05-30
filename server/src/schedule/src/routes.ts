@@ -8,6 +8,7 @@ import ReadByGroupNextScheduleController from "./controllers/ReadByGroupNextSche
 import ReadByIdScheduleController from "./controllers/ReadByIdScheduleController";
 import ReadByOwnerScheduleController from "./controllers/ReadByOwnerScheduleController";
 import UpdateScheduleController from "./controllers/UpdateScheduleController";
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 const router = Router();
 
@@ -20,6 +21,7 @@ const readAllScheduleController = new ReadAllScheduleController();
 const updateScheduleController = new UpdateScheduleController();
 const deleteScheduleController = new DeleteScheduleController();
 
+router.use(ensureAuthenticated)
 router.post("/schedule/create", createScheduleController.handle);
 router.get("/schedule/read/byId/:id", readByIdScheduleController.handle);
 router.get(

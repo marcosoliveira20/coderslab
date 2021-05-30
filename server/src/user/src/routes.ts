@@ -10,6 +10,7 @@ import { ReadUserByIdController } from "./controllers/ReadUserByIdController";
 import { ReadUserByUsernameController } from "./controllers/ReadUserByUsernameController";
 import { UpdatePasswordUserController } from "./controllers/UpdatePasswordUserController";
 import { UpdateUserController } from "./controllers/UpdateUserController";
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 const router = Router();
 
@@ -25,6 +26,8 @@ const updatePasswordUserController = new UpdatePasswordUserController();
 const deleteUserController = new DeleteUserController();
 
 router.post("/user/create", createUserController.handle);
+
+router.use(ensureAuthenticated)
 router.post("/user/login", loginUserController.handle);
 router.post("/user/logout/:id/:token", logoutUserController.handle);
 router.get("/user/read/byId/:id", readUserByIdController.handle);

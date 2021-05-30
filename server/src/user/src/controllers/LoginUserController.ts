@@ -1,5 +1,6 @@
 import { hash, compare } from "bcrypt";
 import { Request, Response } from "express";
+import { sign } from "jsonwebtoken"
 
 import { User } from "../model/User";
 
@@ -25,7 +26,12 @@ class LoginUserController {
         return response.status(404).send();
       }
 
-      data.token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkJydW5vIiwiaWF0IjoxNTE2MjM5MDIyfQ.YDN0wJHLzyzmqdwycv4wgh-RMBwQR4C_0uehWmo_77ZrAB46YnPYmzJJ2Lb36GyyDXDwRP9Bt759hcVmUiGWEg";
+      const token = sign({}, "71ce41b9695dca078a73e0382b4b8d88", {
+        subject: String(data._id),
+        expiresIn: "5h"
+      })
+
+      data.token = token
 
       return response.status(200).send(data);
     } catch(err) {

@@ -6,8 +6,10 @@ class ReadAllRoadmapController {
   async handle(request: Request, response: Response) {
     const roadmap = new Roadmap();
 
+    let { user_id } = request.query;
+
     try {
-      const data = await roadmap.readAll();
+      const data = await roadmap.readAll(user_id);
 
       return response.status(200).send(data);
     } catch (err) {

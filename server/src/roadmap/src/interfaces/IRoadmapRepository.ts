@@ -1,8 +1,8 @@
 import { IRoadmapDTO } from "./IRoadmapDTO";
 
 interface IRoadmapRepository {
-  createDefault({ name, objective, is_default, is_done, level, quantity_contents, quantity_of_challenge }: IRoadmapDTO): Promise<IRoadmapDTO>;
-  createCustom({ name, objective, is_default, is_done, level, quantity_contents, quantity_of_challenge }: IRoadmapDTO): Promise<IRoadmapDTO>;
+  createDefault({ name, objective, is_default, is_done, level, quantity_contents, quantity_of_challenge, user_id }: IRoadmapDTO): Promise<IRoadmapDTO>;
+  createCustom({ name, objective, is_default, is_done, level, quantity_contents, quantity_of_challenge, user_id }: IRoadmapDTO): Promise<IRoadmapDTO>;
   turnRoadmapCustomized(_id: String): object
   turnRoadmapDefault(_id: String): object
   turnRoadmapDone(_id: String): object
@@ -16,11 +16,12 @@ interface IRoadmapRepository {
   readById(_id: string): object;
   readByName(name: string): object;
   readAllDefaultRepositories(): object;
-  readAllCustomRepositories(): object;
-  readAllDoneRepositories(): object;
-  readAllInProgressRepositories(): object;
+  readAllDefaultRepositoriesByUserId(user_id: String)
+  readAllCustomRepositories(user_id: String): object;
+  readAllDoneRepositories(user_id: String): object;
+  readAllInProgressRepositories(user_id: String): object;
   readLateContents(_roadmap_id: String, today: String): object;
-  readAll(): object;
+  readAll(user_id: String): object;
   update(id: String): object;
   delete(_id: string): object;
   UpdateContentListByRoadmapId(_roadmap_id: String, content_list: String): object

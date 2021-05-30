@@ -19,6 +19,8 @@ import { ReadAllDefaultRoadmapRepositories } from "../controllers/ReadAllDefault
 import { ReadAllInProgressRoadmapRepositories } from "../controllers/ReadAllInProgressRoadmapRepositories";
 import { ReadAllDoneRoadmapRepositories } from "../controllers/ReadAllDoneRoadmapRepositories";
 import { UpdateLevelController } from "../controllers/UpdateLevelController";
+import { ReadAllDefaultByUserIdRoadmapRepositories } from "../controllers/ReadAllDefaultByUserIdRoadmapRepositories";
+import { ensureAuthenticated } from "../../../ensureAuthenticated";
 
 const createRoadmapDefaultController = new CreateRoadmapDefaultController();
 const createRoadmapCustomController = new CreateRoadmapCustomController();
@@ -37,7 +39,9 @@ const readAllDefaultRoadmapRepositories = new ReadAllDefaultRoadmapRepositories(
 const readAllInProgressRoadmapRepositories = new ReadAllInProgressRoadmapRepositories();
 const readAllDoneRoadmapRepositories = new ReadAllDoneRoadmapRepositories();
 const updateLevelController = new UpdateLevelController();
+const readAllDefaultByUserIdRoadmapRepositories = new ReadAllDefaultByUserIdRoadmapRepositories();
 
+RoadmapRoutes.use(ensureAuthenticated)
 RoadmapRoutes.post("/roadmap/create/default", createRoadmapDefaultController.handle);
 RoadmapRoutes.post("/roadmap/create/custom", createRoadmapCustomController.handle);
 RoadmapRoutes.put("/roadmap/update/custom/:_id", turnRoadmapCustomizedController.handle);
@@ -53,6 +57,7 @@ RoadmapRoutes.get("/roadmap/read/all", readAllRoadmapController.handle);
 RoadmapRoutes.get("/roadmap/read/:_id", readRoadmapByIdController.handle);
 RoadmapRoutes.get("/roadmap/read/all/custom", readAllCustomRoadmapRepositories.handle);
 RoadmapRoutes.get("/roadmap/read/all/default", readAllDefaultRoadmapRepositories.handle);
+RoadmapRoutes.get("/roadmap/read/all/default/by/userid", readAllDefaultByUserIdRoadmapRepositories.handle);
 RoadmapRoutes.get("/roadmap/read/all/inprogress", readAllInProgressRoadmapRepositories.handle);
 RoadmapRoutes.get("/roadmap/read/all/done", readAllDoneRoadmapRepositories.handle);
 RoadmapRoutes.delete("/roadmap/delete/:_id", deleteRoadmapController.handle);
