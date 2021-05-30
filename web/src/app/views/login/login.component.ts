@@ -1,4 +1,5 @@
 import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
+import { SubjectService } from "src/app/services/subject.service";
 import { UserService } from "src/app/services/user.service";
 
 import { Component, OnInit } from "@angular/core";
@@ -16,7 +17,6 @@ export class LoginComponent implements OnInit {
   public mode = "register";
 
   public interest_list: any[] = [];
-  // TODO Integrar Subject
   public subjectList: any[] = [];
 
   public selectedSubjectList: any[] = [];
@@ -41,9 +41,20 @@ export class LoginComponent implements OnInit {
     subjectForm: [""],
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private subjectService: SubjectService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subjectService.getAllSubjects().then((data) => {
+      console.log(data);
+      data.map((subject) => {
+        this.subjectList.push({ id: subject._id, label: subject.label });
+      });
+    });
+  }
 
   handleLoginMode = (mode) => (this.mode = mode);
 

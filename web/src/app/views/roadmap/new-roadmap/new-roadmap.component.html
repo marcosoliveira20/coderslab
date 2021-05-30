@@ -73,6 +73,7 @@
             <div class="col">
               <label>objetivo</label>
               <select name="objective" placeholder="Busque por um assunto" formControlName="objective">
+                <option disabled selected value=""> objetivo </option>
                 <option *ngFor="let objective of interestList">
                   {{ objective.name }}
                 </option>
@@ -82,6 +83,7 @@
             <div class="col">
               <label>nível</label>
               <select name="level" formControlName="level">
+                <option disabled selected value="-1">level</option>
                 <option value="0" selected>Iniciante</option>
                 <option value="1">Intermediário</option>
                 <option value="2">Avançado</option>
