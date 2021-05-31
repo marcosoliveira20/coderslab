@@ -147,6 +147,8 @@ export const userMock = {
       user_list: userList,
       subject_label: "Lógica de programação",
       level: 0,
+      next_schedule: "2021-05-28T19:04:49.500Z",
+      number_members: 1,
       schedule_list: [
         {
           id: Math.ceil(Math.random() * 1000),

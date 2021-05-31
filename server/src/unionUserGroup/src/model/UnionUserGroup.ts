@@ -21,6 +21,10 @@ class UnionUserGroup implements IUnionUserGroupRepository {
         return UnionUserGroupSchema.find({ _id_user });
     }
 
+    readAllGroups(): Promise<Array<IUnionUserGroupDTO>> {
+        return UnionUserGroupSchema.find();
+    }
+
     readAllUsersByGroup(_id_group: string): Promise<Array<IUnionUserGroupDTO>> {
         return UnionUserGroupSchema.find({ _id_group });
     }

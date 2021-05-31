@@ -24,6 +24,8 @@ import { HomeRoadmapComponent } from './views/roadmap/home-roadmap/home-roadmap.
 import { NewRoadmapComponent } from './views/roadmap/new-roadmap/new-roadmap.component';
 import { ListRoadmapComponent } from './views/roadmap/list-roadmap/list-roadmap.component';
 import { DetailRoadmapComponent } from './views/roadmap/detail-roadmap/detail-roadmap.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user.service';
 import { LineChartComponent } from './component/line-chart/line-chart.component';
 import { ChartsModule, ThemeService } from 'ng2-charts';
 import { AccordionComponent } from './component/accordion/accordion.component';
@@ -58,9 +60,10 @@ import { AccordionComponent } from './component/accordion/accordion.component';
     FormsModule,
     AutocompleteLibModule,
     CommonModule,
+    HttpClientModule,
     ChartsModule
   ],
-  providers: [ThemeService],
+  providers: [ThemeService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

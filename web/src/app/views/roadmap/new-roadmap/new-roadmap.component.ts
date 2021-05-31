@@ -10,7 +10,7 @@ import { interestListMock } from "src/app/app.component";
 })
 export class NewRoadmapComponent implements OnInit {
   public isNewCustomRoadmap: boolean;
-  public interestList = interestListMock
+  public interestList = interestListMock;
 
   private taskModel = {
     title: "",
@@ -18,39 +18,53 @@ export class NewRoadmapComponent implements OnInit {
     link: "",
     description: "",
   };
-  public taskList = [{ ...this.taskModel }];
+  public taskList = [];
 
   public roadmapForm = this.fb.group({
     name: ["", Validators.required],
     level: ["", Validators.required],
     objective: ["", Validators.required],
     content_list: ["", Validators.required],
-  })
+  });
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    this.verifyUrlParam()
+    this.verifyUrlParam();
+    this.taskList=[[{ ...this.taskModel }]]
   }
 
+  type: string = "roadmap";
+
+  filter(typeFilter: string) {
+    this.type = typeFilter;
+  }
+  onSubmit() {
+    this.taskList.splice(0,1);
+    this.roadmapForm.patchValue({
+      content_list:  this.taskList
+    })
+    console.log("formulário ", this.roadmapForm.value);
+    this.ngOnInit();
+  }
   verifyUrlParam() {
     if (this.activatedRoute.snapshot.url[2])
-    this.isNewCustomRoadmap =
-      this.activatedRoute.snapshot.url[2].path === "custom";
+      this.isNewCustomRoadmap =
+        this.activatedRoute.snapshot.url[2].path === "custom";
   }
 
   addNewTaskObject() {
-    this.taskList.push({...this.taskModel});
+    this.taskList.unshift({ ...this.taskModel });
+  }
+
+  removeTask(index){
+    this.taskList.splice(index, 1);
   }
 
   handleTaskChange(event, index) {
-    console.log(this.taskList)
-    console.log(index)
-
     this.taskList[index][event.target.name] = event.target.value;
-    console.log(this.taskList)
   }
 }
