@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
 import { userMock } from "src/app/app.component";
 import { subjectMock } from "src/mock";
+
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-profile",
@@ -10,13 +11,13 @@ import { subjectMock } from "src/mock";
 })
 export class ProfileComponent implements OnInit {
   public user = userMock;
-  public isEditMode: boolean = false;
-  public activeTab: string = "user";
+  public isEditMode = false;
+  public activeTab = "user";
   public selectedInterestList: any[] = [];
   public interestList: any;
 
-  public showResetPasswordModal: boolean = false;
-  public showConfirmDeleteAccountModal: boolean = false;
+  public showResetPasswordModal = false;
+  public showConfirmDeleteAccountModal = false;
 
   public handleEditMode = () => (this.isEditMode = !this.isEditMode);
   public changeTab = (tab: string) => (this.activeTab = tab);
@@ -72,9 +73,9 @@ export class ProfileComponent implements OnInit {
    *  Add a new interest to selected interest list
    */
   addNewInterest(subjectSelect: { value: any }, levelSelect: { value: any }) {
-    let label = subjectSelect.value;
-    let level = levelSelect.value;
-    let id = subjectMock.find((subject) => subject.label === label).id;
+    const label = subjectSelect.value;
+    const level = levelSelect.value;
+    const { id } = subjectMock.find((subject) => subject.label === label);
 
     this.selectedInterestList.push({ id, label, level });
   }

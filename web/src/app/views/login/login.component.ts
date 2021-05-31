@@ -1,9 +1,11 @@
+import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
+import { SubjectService } from "src/app/services/subject.service";
+import { UserService } from "src/app/services/user.service";
+
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 // import { interestListMock } from "../../../app/app.component";
-import { interestListMock, subjectMock } from "../../../mock";
-import { UserService } from "src/app/services/user.service";
+
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,10 +14,10 @@ import { Router } from "@angular/router";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  public mode: string = "register";
+  public mode = "register";
 
   public interest_list: any[] = [];
-  public subjectList: any[] = subjectMock;
+  public subjectList: any[] = [];
 
   public selectedSubjectList: any[] = [];
   public customInterestList: any[] = [];
@@ -39,9 +41,20 @@ export class LoginComponent implements OnInit {
     subjectForm: [""],
   });
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private subjectService: SubjectService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subjectService.getAllSubjects().then((data) => {
+      console.log(data);
+      data.map((subject) => {
+        this.subjectList.push({ id: subject._id, label: subject.label });
+      });
+    });
+  }
 
   handleLoginMode = (mode) => (this.mode = mode);
 
@@ -53,12 +66,17 @@ export class LoginComponent implements OnInit {
     this.registerForm.patchValue({
       interest_list: this.interest_list,
     });
-    
-    if ( this.registerForm.value.password == this.registerForm.value.confirm_password ) {
-      this.userService.createUser(this.registerForm.value).then(data => console.log(data))
+
+    if (
+      this.registerForm.value.password ==
+      this.registerForm.value.confirm_password
+    ) {
+      this.userService
+        .createUser(this.registerForm.value)
+        .then((data) => console.log(data));
     } else {
-      //TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
-      console.log("senha divergente")
+      // TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
+      console.log("senha divergente");
     }
     this.registerForm.removeControl("level");
     this.registerForm.removeControl("subjectForm");
@@ -78,9 +96,9 @@ export class LoginComponent implements OnInit {
 
   addInterest() {
     if (this.validateFirstSelect()) {
-      let subjectId = this.registerForm.value.subjectForm;
-      let levelName = this.registerForm.value.level.split(" ")[1];
-      let level = this.registerForm.value.level.split(" ")[0];
+      const subjectId = this.registerForm.value.subjectForm;
+      const levelName = this.registerForm.value.level.split(" ")[1];
+      const level = this.registerForm.value.level.split(" ")[0];
 
       const subjectIndex = this.subjectList.findIndex((i) => i.id == subjectId);
 
@@ -97,8 +115,8 @@ export class LoginComponent implements OnInit {
 
       this.selectedSubjectList.push(this.subjectList[subjectIndex]);
       this.subjectList.splice(subjectIndex, 1);
-      this.registerForm.controls["level"].setValue("-1");
-      this.registerForm.controls["subjectForm"].setValue("");
+      this.registerForm.controls.level.setValue("-1");
+      this.registerForm.controls.subjectForm.setValue("");
     }
   }
 
