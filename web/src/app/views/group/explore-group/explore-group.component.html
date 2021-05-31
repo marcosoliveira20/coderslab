@@ -31,7 +31,11 @@
             />
           </div>
           <div class="col-1">
-            <button type="button" (click)="setShowInput()" class="button-square button-dark">
+            <button
+              type="button"
+              (click)="setShowInput()"
+              class="button-square button-dark"
+            >
               <img src="../../../../assets/icons/filter.svg" />
             </button>
           </div>
@@ -44,7 +48,7 @@
               class="input-dark input"
               formControlName="subject_label"
             >
-            <option  value="" disabled selected> Objetivo</option>
+              <option value="" disabled selected>Objetivo</option>
               <option
                 *ngFor="let objective of objective_list"
                 value="{{ objective.name }}"
@@ -60,7 +64,7 @@
               class="input-dark input select-default"
               formControlName="category"
             >
-            <option  value="" disabled selected> Categoria</option>
+              <option value="" disabled selected>Categoria</option>
               <option
                 *ngFor="let category of category_listMok"
                 value="{{ category.name }}"
@@ -71,22 +75,30 @@
           </div>
 
           <div class="col-3">
-            <select formControlName="level"  class="input-dark input">
+            <select formControlName="level" class="input-dark input">
               <option value="-1" disabled selected>Nível</option>
               <option value="0">Iniciante</option>
               <option value="1">Intermediário</option>
               <option value="2">Avançado</option>
             </select>
-
           </div>
 
           <div class="col-2">
-            <button id="order-alphabetic" class="input-dark input" (click)="changeAlphabetical()" type="button">
+            <button
+              id="order-alphabetic"
+              class="input-dark input"
+              (click)="changeAlphabetical()"
+              type="button"
+            >
               {{ exploreForm.value.is_alphabetical ? "A - Z" : "Z - A" }}
             </button>
           </div>
           <div class="col-1">
-            <button type="button" class="button-square button-dark" (click)="onSubmit()">
+            <button
+              type="button"
+              class="button-square button-dark"
+              (click)="onSubmit()"
+            >
               <img
                 src="../../../../assets/icons/magnifying-glass.svg"
                 srcset=""
@@ -102,7 +114,7 @@
       </ul>
     </div>
     <ul class="button-list">
-      <li>
+      <li (click)="showJoinPrivateGroupModal = true">
         <a routerLink="./"
           ><button>
             <img src="../../../../assets/icons/key.svg" /></button
@@ -117,3 +129,15 @@
     </ul>
   </div>
 </main>
+
+<app-modal
+  *ngIf="showJoinPrivateGroupModal"
+  [showController]="showJoinPrivateGroupModal"
+  (close)="showJoinPrivateGroupModal = false"
+>
+  <div class="modal-body">
+    <p> Insira a chave do grupo </p>
+    <input placeholder="ACME#0123" #privateKey/>
+    <button (click)="joinGroup(privateKey)">Entrar no grupo</button>
+  </div>
+</app-modal>

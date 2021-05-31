@@ -8,7 +8,8 @@ import { GroupService } from "src/app/services/group.service";
   styleUrls: ["./explore-group.component.scss"],
 })
 export class ExploreGroupComponent implements OnInit {
-  showInput: boolean;
+  public showJoinPrivateGroupModal: boolean;
+  public showInput: boolean;
 
   public user = userMock;
 
@@ -54,5 +55,9 @@ export class ExploreGroupComponent implements OnInit {
     this.groupService.getAllGroups().then(data => {
       this.user.group_list = this.groupService.listGroup(data);
     });
+  }
+
+  joinGroup(key: any) {
+    console.log(key.value)
   }
 }
