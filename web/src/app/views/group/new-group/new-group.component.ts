@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { interestListMock, userMock } from "../../../app.component";
+import { GroupService } from "src/app/services/group.service";
+import { SubjectService } from "src/app/services/subject.service";
 
 @Component({
   selector: "app-new-group",
@@ -12,7 +14,8 @@ export class NewGroupComponent implements OnInit {
   public group;
   public user = userMock;
   public isEditMode: boolean;
-  public interestList: any[] = interestListMock;
+  // public interestList: any[] = interestListMock;
+  public interestList = [];
   private categories; // TODO finish
 
   public formGroup = this.fb.group({
@@ -20,22 +23,39 @@ export class NewGroupComponent implements OnInit {
     level: ["", Validators.required],
     objective: ["", Validators.required],
     categories: ["", Validators.required],
+    is_public: [false, Validators.required],
   });
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private groupService: GroupService,
+    private subjectService: SubjectService,
   ) {}
 
   ngOnInit() {
     this.isEditMode = this.activatedRoute.snapshot.url[1].path === "edit";
     this.getGroupData();
+    this.subjectService.getAllSubjects().then(data => this.interestList = data)
   }
 
   onSubmit() {
     this.formGroup.patchValue({
       categories: this.categories
     });
+    
+    // TODO - is_default tem q ser tratado pelo backend
+    const body = {
+      "name": this.formGroup.value.name,
+      "subject_label": "string",
+      "category": this.formGroup.value.categories,
+      "level": this.formGroup.value.level,
+      "is_public": this.formGroup.value.is_public,
+      "is_default": false,
+      "_owner": this.groupService.user_id
+    }
+
+    this.groupService.createGroup(body).then(data => console.log(data));
     console.log("registerForm", this.formGroup.value);
   }
 
