@@ -27,8 +27,8 @@ const deleteUserController = new DeleteUserController();
 
 router.post("/user/create", createUserController.handle);
 
-router.use(ensureAuthenticated)
 router.post("/user/login", loginUserController.handle);
+router.use(ensureAuthenticated)
 router.post("/user/logout/:id/:token", logoutUserController.handle);
 router.get("/user/read/byId/:id", readUserByIdController.handle);
 router.get("/user/read/byUsername/:username", readUserByUsernameController.handle);
