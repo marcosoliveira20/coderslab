@@ -6,8 +6,10 @@ class ReadAllCustomRoadmapRepositories {
   async handle(request: Request, response: Response) {
     const roadmap = new Roadmap();
 
+    const { user_id } = request.query;
+
     try {
-      const data = await roadmap.readAllCustomRepositories();
+      const data = await roadmap.readAllCustomRepositories(user_id);
 
       if(!data) {
         return response.status(404).send();

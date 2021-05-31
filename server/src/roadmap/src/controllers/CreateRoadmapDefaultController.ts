@@ -7,6 +7,8 @@ class CreateRoadmapDefaultController {
   async handle(request: Request, response: Response) {
     const { name, objective, content_list, level } = request.body;
 
+    const { user_id } = request.query;
+
     const roadmap = new Roadmap();
     const api = new Api();
 
@@ -23,6 +25,7 @@ class CreateRoadmapDefaultController {
         level,
         quantity_contents: content_list.length,
         quantity_challenges: quantityChallenge,
+        user_id,
       });
 
       await roadmap.updateQuantityOfContents(data._id, content_list.length);
