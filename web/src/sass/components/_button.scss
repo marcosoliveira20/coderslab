@@ -2,7 +2,7 @@
   border: 1px solid $cdl_pink;
   color: $cdl_pink;
 
-  background-color: rgb(231 233 240);
+  background-color: transparent;
   border-radius: 5px;
 
   font-family: inherit;
@@ -12,6 +12,24 @@
 
   height: 100% ;
   width: 270px ;
+}
+
+.button-pink{
+  border: 1px solid $cdl_pink;
+  color: white;
+
+  background-color: $cdl_pink;
+  border-radius: 5px;
+
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+
+  height: 100% ;
+  width: 100% ;
+
+  margin: 0px 0px 38px 0px;
 }
 
 .button-default:hover{
