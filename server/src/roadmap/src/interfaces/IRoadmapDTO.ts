@@ -10,7 +10,8 @@ interface IRoadmapDTO {
   percent_contents?: Number,
   quantity_challenges?: Number,
   quantity_of_challenge?: Number,
-  percent_challenges?: Number
+  percent_challenges?: Number,
+  user_id: String,
 }
 
 export { IRoadmapDTO };

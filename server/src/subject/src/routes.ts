@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 import CreateSubjectController from "./controllers/CreateSubjectController";
 import DeleteSubjectController from "./controllers/DeleteSubjectController";
@@ -16,6 +17,7 @@ const readAllSubjectController = new ReadAllSubjectController();
 const updateSubjectController = new UpdateSubjectController();
 const deleteSubjectController = new DeleteSubjectController();
 
+router.use(ensureAuthenticated)
 router.post("/subject/create", createSubjectController.handle);
 router.get("/subject/read/byId/:id", readByIdSubjectController.handle);
 router.get("/subject/read/byLabel/:label", readByLabelSubjectController.handle);
