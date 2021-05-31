@@ -33,6 +33,10 @@ export class GroupService {
 
     }
 
+    public getAllUserByGroup(group_id) {
+        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${group_id}`).toPromise()
+    }
+
     public listGroup(data) {
         this.groupList = [];
 
