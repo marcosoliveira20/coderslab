@@ -9,21 +9,19 @@ import { ReadAllUsersController } from "./controllers/ReadAllUsersController";
 import { ReadUserByEmailController } from "./controllers/ReadUserByEmailController";
 import { ReadUserByIdController } from "./controllers/ReadUserByIdController";
 import { ReadUserByUsernameController } from "./controllers/ReadUserByUsernameController";
-import { UpdatePasswordUserController } from "./controllers/UpdatePasswordUserController";
 import { UpdateUserController } from "./controllers/UpdateUserController";
 
 const router = Router();
 
 const createUserController = new CreateUserController();
 const loginUserController = new LoginUserController();
-const logoutUserController = new LogoutUserController();
 const readUserByIdController = new ReadUserByIdController();
 const readUserByUsernameController = new ReadUserByUsernameController();
 const readUserByEmailController = new ReadUserByEmailController();
 const readAllUsersController = new ReadAllUsersController();
 const updateUserController = new UpdateUserController();
-const updatePasswordUserController = new UpdatePasswordUserController();
 const deleteUserController = new DeleteUserController();
+const logoutUserController = new LogoutUserController();
 
 router.post("/user/create", createUserController.handle);
 
@@ -38,7 +36,6 @@ router.get(
 );
 router.get("/user/read/byEmail/:email", readUserByEmailController.handle);
 router.put("/user/update/:id", updateUserController.handle);
-router.put("/user/update/password/:id", updatePasswordUserController.handle);
 router.delete("/user/delete/:id", deleteUserController.handle);
 
 export { router };

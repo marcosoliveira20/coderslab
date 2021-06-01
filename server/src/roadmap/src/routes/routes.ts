@@ -5,31 +5,24 @@ import { CreateRoadmapCustomController } from "../controllers/CreateRoadmapCusto
 import { CreateRoadmapDefaultController } from "../controllers/CreateRoadmapDefaultController";
 import {
   DeleteRoadmapController,
-  DeleteRoadmapController,
 } from "../controllers/DeleteRoadmapController";
 import {
-  ReadAllCustomRoadmapRepositories,
   ReadAllCustomRoadmapRepositories,
 } from "../controllers/ReadAllCustomRoadmapRepositories";
 import { ReadAllDefaultByUserIdRoadmapRepositories } from "../controllers/ReadAllDefaultByUserIdRoadmapRepositories";
 import {
   ReadAllDefaultRoadmapRepositories,
-  ReadAllDefaultRoadmapRepositories,
 } from "../controllers/ReadAllDefaultRoadmapRepositories";
 import {
-  ReadAllDoneRoadmapRepositories,
   ReadAllDoneRoadmapRepositories,
 } from "../controllers/ReadAllDoneRoadmapRepositories";
 import {
   ReadAllInProgressRoadmapRepositories,
-  ReadAllInProgressRoadmapRepositories,
 } from "../controllers/ReadAllInProgressRoadmapRepositories";
 import {
   ReadAllRoadmapController,
-  ReadAllRoadmapController,
 } from "../controllers/ReadAllRoadmapController";
 import {
-  ReadRoadmapByIdController,
   ReadRoadmapByIdController,
 } from "../controllers/ReadRoadmapByIdController";
 import { TurnRoadmapCustomizedController } from "../controllers/TurnRoadmapCustomizedController";
@@ -38,10 +31,8 @@ import { TurnRoadmapDone } from "../controllers/TurnRoadmapDone";
 import { TurnRoadmapNotDone } from "../controllers/TurnRoadmapNotDone";
 import {
   UpdateLevelController,
-  UpdateLevelController,
 } from "../controllers/UpdateLevelController";
 import {
-  UpdateRepositoryContentList,
   UpdateRepositoryContentList,
 } from "../controllers/UpdateRepositoryContentList";
 import { UpdateRepositoryName } from "../controllers/UpdateRepositoryName";
@@ -68,43 +59,16 @@ const readAllDoneRoadmapRepositories = new ReadAllDoneRoadmapRepositories();
 const updateLevelController = new UpdateLevelController();
 const readAllDefaultByUserIdRoadmapRepositories = new ReadAllDefaultByUserIdRoadmapRepositories();
 
-// RoadmapRoutes.use(ensureAuthenticated);
-RoadmapRoutes.post(
-  "/roadmap/create/default",
-  createRoadmapDefaultController.handle
-);
-RoadmapRoutes.post(
-  "/roadmap/create/custom",
-  createRoadmapCustomController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/custom/:_id",
-  turnRoadmapCustomizedController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/default/:_id",
-  turnRoadmapDefaultController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/done/:_id",
-  turnRoadmapDoneController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/inprogress/:_id",
-  turnRoadmapNotDoneController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/name/:_id",
-  updateRepositoryNameController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/objective/:_id",
-  updateRepositoryObjectiveController.handle
-);
-RoadmapRoutes.put(
-  "/roadmap/update/list/:_id",
-  updateRepositoryContentListController.handle
-);
+// RoadmapRoutes.use(ensureAuthenticated)
+RoadmapRoutes.post("/roadmap/create/default", createRoadmapDefaultController.handle);
+RoadmapRoutes.post("/roadmap/create/custom", createRoadmapCustomController.handle);
+RoadmapRoutes.put("/roadmap/update/custom/:_id", turnRoadmapCustomizedController.handle);
+RoadmapRoutes.put("/roadmap/update/default/:_id", turnRoadmapDefaultController.handle);
+RoadmapRoutes.put("/roadmap/update/done/:_id", turnRoadmapDoneController.handle);
+RoadmapRoutes.put("/roadmap/update/inprogress/:_id", turnRoadmapNotDoneController.handle);
+RoadmapRoutes.put("/roadmap/update/name/:_id", updateRepositoryNameController.handle);
+RoadmapRoutes.put("/roadmap/update/objective/:_id", updateRepositoryObjectiveController.handle);
+RoadmapRoutes.put("/roadmap/update/list/:_id", updateRepositoryContentListController.handle);
 RoadmapRoutes.put("/roadmap/update/level/:_id", updateLevelController.handle);
 
 RoadmapRoutes.get("/roadmap/read/all", readAllRoadmapController.handle);
