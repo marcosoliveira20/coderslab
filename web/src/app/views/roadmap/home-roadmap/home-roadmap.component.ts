@@ -12,9 +12,9 @@ import { RoadmapService } from "../../../services/roadmapCustom.service";
 export class HomeRoadmapComponent implements OnInit {
   // public roadmap_list = roadmapMock;
   public roadmap_list = [];
-  public roadmapList = roadmapMock;
+  // public roadmapList = roadmapMock;
+  public roadmapList = [];
   public typeFilter = "all";
-  public roadmap_list_bd;
 
   filter(type: string) {
     this.typeFilter = type;
@@ -41,9 +41,28 @@ export class HomeRoadmapComponent implements OnInit {
   constructor(private roadmapService: RoadmapService) {}
 
   ngOnInit() {
-    this.roadmapService.getRoadmapListByUser().then((data) => {
-      this.roadmap_list = data;
-      this.filter("");
-    });
+    this.roadmapService
+      .getRoadmapListByUser("60b5689c1a0293229c6002ae")
+      .then((data) => {
+        data.map((roadmap) => {
+          this.roadmap_list.push({
+            id: roadmap._id,
+            name: roadmap.name,
+            is_default: roadmap.is_default,
+            is_done: roadmap.is_done,
+            level: roadmap.level,
+            // TODO Lógica
+            progress: "10%",
+            content_status: {
+              total: roadmap.quantity_contents,
+              // TODO CHAMADA
+              complete: 20,
+              late: 3,
+            },
+            content_list: [],
+          });
+        });
+        this.filter("");
+      });
   }
 }

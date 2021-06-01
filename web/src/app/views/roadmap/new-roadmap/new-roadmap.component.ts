@@ -56,13 +56,26 @@ export class NewRoadmapComponent implements OnInit {
 
   // TODO validações
   onSubmit() {
-    if (this.roadmapForm.value) this.taskList.splice(0, 1);
-    this.roadmapForm.patchValue({
-      content_list: this.taskList,
+    this.taskList.splice(0, 1);
+    const content_list = [];
+    this.taskList.map((task) => {
+      content_list.push({
+        title: task.title,
+        deadline: task.end_date,
+        reference: task.link,
+        description: task.description,
+      });
     });
-    console.log("formulário ", this.roadmapForm.value);
+    this.roadmapForm.patchValue({
+      content_list,
+    });
+    // TODO passar o user_id da sessão
+    this.roadmapService
+      .createCustomRoadmap(this.roadmapForm.value, "60b5689c1a0293229c6002ae")
+      .then((data) => console.log(`Registro:${data}`));
     this.ngOnInit();
   }
+
   verifyUrlParam() {
     if (this.activatedRoute.snapshot.url[2])
       this.isNewCustomRoadmap =
@@ -80,12 +93,5 @@ export class NewRoadmapComponent implements OnInit {
   handleTaskChange(event, index) {
     this.taskList[index][event.target.name] = event.target.value;
     console.log(this.taskList);
-  }
-
-  onSubmitRegister() {
-    // TODO validações
-    this.roadmapService
-      .createCustomRoadmap(this.roadmapForm.value)
-      .then((data) => console.log(data));
   }
 }
