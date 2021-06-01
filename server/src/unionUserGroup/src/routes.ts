@@ -19,7 +19,7 @@ const readAllGroupsByOwnerController = new ReadAllGroupsByOwnerController();
 const deleteUnionUserGroupController = new DeleteUnionUserGroupController();
 const deleteUnionUserAllGroupController = new DeleteUnionUserAllGroupController();
 
-router.use(ensureAuthenticated)
+// router.use(ensureAuthenticated)
 router.post("/unionUserGroup/create", createUnionUserGroupController.handle);
 router.post("/unionUserGroup/read/search", readAllGroupsBySearchController.handle);
 router.get("/unionUserGroup/read/allUsersByGroup/:idGroup", readAllUsersByGroupController.handle);
