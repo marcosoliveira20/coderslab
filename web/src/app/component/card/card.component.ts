@@ -21,10 +21,6 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {}
 
-  redirectToGroup(groupToken) {
-    this.router.navigate([`/groups`, groupToken]);
-  }
-
   redirectToRoadmap(roadmapId) {
     this.router.navigate([`/roadmap`, roadmapId]);
   }

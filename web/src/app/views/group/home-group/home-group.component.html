@@ -14,7 +14,7 @@
   <main class="">
     <ul class="card-list">
       <li *ngFor="let group of groupList">
-        <app-card [data]="group"></app-card>
+        <app-card [data]="group" (click)="redirectToGroup(group.token)"></app-card>
       </li>
     </ul>
     <a routerLink="./explore"

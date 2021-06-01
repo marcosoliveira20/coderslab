@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { userMock } from "src/app/app.component";
 import { GroupService } from "src/app/services/group.service";
 
@@ -9,7 +10,7 @@ import { GroupService } from "src/app/services/group.service";
 })
 export class HomeGroupComponent implements OnInit {
 
-  constructor(private groupService: GroupService) {}
+  constructor(private groupService: GroupService, private router: Router) {}
 
   public user = userMock;
   // groupList = userMock.group_list;
@@ -33,5 +34,9 @@ export class HomeGroupComponent implements OnInit {
       this.groupListBd = this.groupService.listGroup(data);
       this.filter("all");
     })
+  }
+
+  redirectToGroup(token) {
+    this.router.navigate([`/groups`, token]);
   }
 }
