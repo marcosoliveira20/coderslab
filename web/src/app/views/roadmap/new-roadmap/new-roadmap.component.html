@@ -4,22 +4,12 @@
     <nav>
       <ul class="tabs">
         <li>
-          <button
-            class="button-nav"
-            type="button"
-            (click)="filter('roadmap')"
-            [class.active]="type == 'roadmap'"
-          >
+          <button class="button-nav" type="button" (click)="filter('roadmap')" [class.active]="type == 'roadmap'">
             Roadmap
           </button>
         </li>
         <li>
-          <button
-            class="button-nav"
-            type="button"
-            (click)="filter('task')"
-            [class.active]="type == 'task'"
-          >
+          <button class="button-nav" type="button" (click)="filter('task')" [class.active]="type == 'task'">
             Task
           </button>
         </li>
@@ -66,12 +56,8 @@
     </div>
 
     <!-- CONTENT NEW CUSTOM ROADMAP -->
-    <form
-      class="content-new-custom-roadmap"
-      *ngIf="isNewCustomRoadmap"
-      [formGroup]="roadmapForm"
-      (ngSubmit)="onSubmit()"
-    >
+    <form class="content-new-custom-roadmap" *ngIf="isNewCustomRoadmap" [formGroup]="roadmapForm"
+      (ngSubmit)="onSubmit()">
       <div *ngIf="type === 'roadmap'">
         <section>
           <div class="row row-switch">
@@ -80,21 +66,14 @@
 
           <div class="row">
             <label>nome</label>
-            <input
-              type="text"
-              placeholder="Nome do roadmap"
-              formControlName="name"
-            />
+            <input type="text" placeholder="Nome do roadmap" formControlName="name" />
           </div>
 
           <div class="row">
             <div class="col">
               <label>objetivo</label>
-              <select
-                name="objective"
-                placeholder="Busque por um assunto"
-                formControlName="objective"
-              >
+              <select name="objective" placeholder="Busque por um assunto" formControlName="objective">
+                <option disabled selected value=""> objetivo </option>
                 <option *ngFor="let objective of interestList">
                   {{ objective.name }}
                 </option>
@@ -104,6 +83,7 @@
             <div class="col">
               <label>nível</label>
               <select name="level" formControlName="level">
+                <option disabled selected value="-1">level</option>
                 <option value="0" selected>Iniciante</option>
                 <option value="1">Intermediário</option>
                 <option value="2">Avançado</option>
@@ -111,11 +91,7 @@
             </div>
           </div>
         </section>
-        <button
-          class="button-default float-right"
-          (click)="filter('task')"
-          type="button"
-        >
+        <button class="button-default float-right" (click)="filter('task')" type="button">
           Próximo
         </button>
       </div>
@@ -131,61 +107,35 @@
               <div class="row">
                 <div class="col">
                   <label>título</label>
-                  <input
-                    name="title"
-                    placeholder="Nome da sua task"
-                    (input)="handleTaskChange($event, i)"
-                  />
+                  <input name="title" placeholder="Nome da sua task" (input)="handleTaskChange($event, i)" />
                 </div>
                 <div class="col">
                   <label>data de conclusão</label>
-                  <input
-                    type="date"
-                    name="end_date"
-                    placeholder="dd/mm/yyy"
-                    (input)="handleTaskChange($event, i)"
-                  />
+                  <input type="date" name="end_date" placeholder="dd/mm/yyy" (input)="handleTaskChange($event, i)" />
                 </div>
                 <div class="col">
                   <label>link</label>
-                  <input
-                    name="link"
-                    placeholder="Adicione uma referência"
-                    (input)="handleTaskChange($event, i)"
-                  />
+                  <input name="link" placeholder="Adicione uma referência" (input)="handleTaskChange($event, i)" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="col">
                   <label>descrição</label>
-                  <input
-                    name="description"
-                    placeholder="Fale um pouco sobre sua task"
-                    (input)="handleTaskChange($event, i)"
-                  />
+                  <input name="description" placeholder="Fale um pouco sobre sua task"
+                    (input)="handleTaskChange($event, i)" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="col">
-                  <button
-                    type="button"
-                    *ngIf="!(i === 0)"
-                    (click)="removeTask(i)"
-                    class="simple-button float-right"
-                  >
+                  <button type="button" *ngIf="!(i === 0)" (click)="removeTask(i)" class="simple-button float-right">
                     Excluir
                   </button>
                 </div>
               </div>
             </section>
-            <button
-              type="button"
-              *ngIf="i === 0"
-              (click)="addNewTaskObject()"
-              class="button-pink"
-            >
+            <button type="button" *ngIf="i === 0" (click)="addNewTaskObject()" class="button-pink">
               Criar task
             </button>
           </div>

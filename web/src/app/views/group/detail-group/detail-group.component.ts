@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { userMock } from "src/app/app.component";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { userMock } from 'src/app/app.component';
 
 import { ScheduleService } from "src/app/services/schedule.service";
 import { GroupService } from "src/app/services/group.service";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
-  selector: "app-detail-group",
-  templateUrl: "./detail-group.component.html",
-  styleUrls: ["./detail-group.component.scss"],
+  selector: 'app-detail-group',
+  templateUrl: './detail-group.component.html',
+  styleUrls: ['./detail-group.component.scss'],
 })
 export class DetailGroupComponent implements OnInit {
   public user = userMock;
@@ -22,10 +22,10 @@ export class DetailGroupComponent implements OnInit {
   public isGroupOwner: boolean;
 
   public scheduleForm = this.fb.group({
-    date: ["", Validators.required],
-    time: ["", Validators.required],
-    link: ["", Validators.required],
-    description: [""],
+    date: ['', Validators.required],
+    time: ['', Validators.required],
+    link: ['', Validators.required],
+    description: [''],
   });
 
   constructor(
@@ -64,8 +64,7 @@ export class DetailGroupComponent implements OnInit {
     })
   }
 
-
-  openScheduleLink = () => window.open(this.modalData.link, "_blank");
+  openScheduleLink = () => window.open(this.modalData.link, '_blank');
 
   handleRedirectToEdit = () =>
     this.router.navigate([`/groups/edit`, this.group.token]);

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { ensureAuthenticated } from "../../ensureAuthenticated";
 
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 import CreateSubjectController from "./controllers/CreateSubjectController";
 import DeleteSubjectController from "./controllers/DeleteSubjectController";
 import ReadAllSubjectController from "./controllers/ReadAllSubjectController";
@@ -22,6 +22,8 @@ router.post("/subject/create", createSubjectController.handle);
 router.get("/subject/read/byId/:id", readByIdSubjectController.handle);
 router.get("/subject/read/byLabel/:label", readByLabelSubjectController.handle);
 router.get("/subject/read/all", readAllSubjectController.handle);
+// router.use(ensureAuthenticated);
+router.post("/subject/create", createSubjectController.handle);
 router.put("/subject/update/:id", updateSubjectController.handle);
 router.delete("/subject/delete/:id", deleteSubjectController.handle);
 

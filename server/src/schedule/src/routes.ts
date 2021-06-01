@@ -1,14 +1,14 @@
 import { Router } from "express";
 
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 import CreateScheduleController from "./controllers/CreateScheduleController";
 import DeleteScheduleController from "./controllers/DeleteScheduleController";
 import ReadAllScheduleController from "./controllers/ReadAllScheduleController";
-import ReadByGroupScheduleController from "./controllers/ReadByGroupScheduleController";
 import ReadByGroupNextScheduleController from "./controllers/ReadByGroupNextScheduleController";
+import ReadByGroupScheduleController from "./controllers/ReadByGroupScheduleController";
 import ReadByIdScheduleController from "./controllers/ReadByIdScheduleController";
 import ReadByOwnerScheduleController from "./controllers/ReadByOwnerScheduleController";
 import UpdateScheduleController from "./controllers/UpdateScheduleController";
-import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 const router = Router();
 

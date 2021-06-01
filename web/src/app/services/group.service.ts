@@ -16,10 +16,6 @@ export class GroupService {
         this.groupUrl = "http://localhost:3000";
     }
 
-    public createGroup() {
-
-    }
-
     public insertUserInGroup(body) {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/create`, body, httpOptions).toPromise()
@@ -44,6 +40,11 @@ export class GroupService {
     
     public getAllUserByGroup(groupId) {
         return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
+    }
+
+    public createGroup(body) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
     }
 
     public listGroup(data) {

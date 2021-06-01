@@ -20,6 +20,7 @@ import { ReadOverdueContents } from "../controllers/ReadOverdueContents";
 import { UpdateContenChallenge } from "../controllers/UpdateContenChallenge"
 import { ReadByRoadmapDeadline } from "../controllers/ReadByRoadmapDeadline";
 import { CreateContentCustomRoadmapController } from "../controllers/CreateContentCustomRoadmapController"
+import { ReadDashboardController } from "../controllers/ReadDashboardController"
 import { ensureAuthenticated } from "../../../ensureAuthenticated";
 
 const createContentController = new CreateContentController();
@@ -40,6 +41,7 @@ const deleteContentByRoadmapIDController = new DeleteContentByRoadmapIDControlle
 const readOverdueContents = new ReadOverdueContents();
 const readByRoadmapDeadline = new ReadByRoadmapDeadline();
 const createContentCustomRoadmapController = new CreateContentCustomRoadmapController();
+const readDashboardController = new ReadDashboardController()
 
 // ContentRoutes.use(ensureAuthenticated)
 ContentRoutes.post("/content/create", createContentController.handle);
@@ -52,6 +54,7 @@ ContentRoutes.put("/content/update/deadline/:_id", updateContenDeadline.handle);
 ContentRoutes.put("/content/update/reference/:_id", updateContenReference.handle);
 ContentRoutes.put("/content/update/challenge/:_id", updateContenChallenge.handle);
 
+ContentRoutes.get("/content/dashboard", readDashboardController.handle);
 ContentRoutes.get("/content/read/all", readAllContentController.handle);
 ContentRoutes.get("/content/read/:_id", readContentByIdController.handle);
 ContentRoutes.get("/content/read/byroadmapid/:_id", readContentByRoadmapIdController.handle);

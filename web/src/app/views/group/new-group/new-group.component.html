@@ -11,7 +11,7 @@
         <div>
           <p>Público</p>
           <label class="switch">
-            <input type="checkbox" checked />
+            <input type="checkbox" checked formControlName="is_public"/>
             <span class="slider round"></span>
           </label>
         </div>
@@ -25,8 +25,8 @@
       <div class="row">
         <div class="col">
           <label>objetivo</label>
-          <select name="objective" formControlName="objective" >
-            <option *ngFor="let objective of interestList">{{objective.name}}</option>
+          <select name="objective" formControlName="objective">
+            <option *ngFor="let objective of subjectList">{{objective.label}}</option>
           </select>
         </div>
 
@@ -56,9 +56,9 @@
         </div>
       </div>
     </section>
-  </form>
 
-  <footer>
-    <button>Criar</button>
-  </footer>
+    <footer>
+      <button type="submit">Criar</button>
+    </footer>
+  </form>
 </div>
