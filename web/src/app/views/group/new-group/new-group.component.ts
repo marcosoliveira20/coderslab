@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { interestListMock, userMock } from "../../../app.component";
 import { GroupService } from "src/app/services/group.service";
 import { SubjectService } from "src/app/services/subject.service";
+import { InterstService } from "src/app/services/interest.service";
 
 @Component({
   selector: "app-new-group",
@@ -16,6 +17,7 @@ export class NewGroupComponent implements OnInit {
   public isEditMode: boolean;
   // public interestList: any[] = interestListMock;
   public interestList = [];
+  public subjectList = [];
   private categories; // TODO finish
 
   public formGroup = this.fb.group({
@@ -31,12 +33,17 @@ export class NewGroupComponent implements OnInit {
     private fb: FormBuilder,
     private groupService: GroupService,
     private subjectService: SubjectService,
+    private interestService: InterstService
   ) {}
 
   ngOnInit() {
     this.isEditMode = this.activatedRoute.snapshot.url[1].path === "edit";
     this.getGroupData();
-    this.subjectService.getAllSubjects().then(data => this.interestList = data)
+    this.subjectService.getAllSubjects().then(data => {
+      this.subjectList = data
+      console.log(data)
+    });
+    // this.interestService.getAllInterestList().then(data => console.log(data))
   }
 
   onSubmit() {
@@ -57,6 +64,20 @@ export class NewGroupComponent implements OnInit {
 
     this.groupService.createGroup(body).then(data => console.log(data));
     console.log("registerForm", this.formGroup.value);
+  }
+
+  getSubject(event) {
+    this.interestList = []
+    
+    this.subjectList.map(x => {
+      if(x.label == event.target.value) {
+
+        x.categories.map( c => {
+          this.interestList.push(c);
+        })    
+        // console.log(this.interestList)
+      }
+    })
   }
 
   handleCategories = (event) => (this.categories = event);
