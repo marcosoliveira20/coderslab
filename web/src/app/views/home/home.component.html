@@ -32,5 +32,39 @@
   </div>
 
   <!-- <div class="roadmap-status"></div> -->
-  <div class="roadmap-details"></div>
+  <div class="roadmap-overview">
+    <div class="roadmap-overview-header">
+      <button (click)="changeRoadmap('prev')">&lt;</button>
+      <p>{{selectedRoadmap.name}}</p>
+      <button (click)="changeRoadmap('next')">&gt;</button>
+    </div>
+
+  <div class="roadmap-overview-progress-area">
+      <img class="roadmap-icon" src="assets/icons/map-travel 2.svg">
+      <p>Seu progresso</p>
+
+      <div class="progressbar">
+        <div [style.width]="data.progress"></div>
+        <p>{{data.progress}}</p>
+      </div>
+
+      <p>Agenda da semana</p>
+      <div class="calendar">
+        <ul class="week-days">
+          <li *ngFor="let initial of weekDaysInitials">{{initial}}</li>
+        </ul>
+        <ul class="number-of-days">
+          <li *ngFor="let day of weekDayList" [class.activeDate]="verifyActiveDate(day)">{{day | date: 'dd'}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="roadmap-overview-accordion-area">
+      suas atividades
+      <app-accordion
+        *ngFor="let content of selectedRoadmap.content_list"
+        [data]="content"
+      ></app-accordion>
+    </div>
+  </div>
 </main>

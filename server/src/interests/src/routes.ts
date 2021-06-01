@@ -6,6 +6,7 @@ import { ReadAllInterestsController } from "./controllers/ReadAllInterestsContro
 import { UpdateInterestController } from "./controllers/UpdateInterestController";
 import { DeleteInterestController } from "./controllers/DeleteInterestController";
 import { DeleteInterestByUserIdController } from "./controllers/DeleteInterestByUserIdController";
+import { ensureAuthenticated } from "../../ensureAuthenticated";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ const updateInterestController = new UpdateInterestController();
 const deleteInterestController = new DeleteInterestController();
 const deleteInterestByUserIdController = new DeleteInterestByUserIdController();
 
+// router.use(ensureAuthenticated)
 router.post("/interest/create", createInterestController.handle);
 router.get("/interest/read/byId/:id", readInterestByIdController.handle);
 router.get("/interest/read/all", readAllInterestsController.handle);

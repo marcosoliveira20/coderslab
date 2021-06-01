@@ -17,7 +17,7 @@ export class ExploreGroupComponent implements OnInit {
   public user = userMock;
   public group: any;
   public objective_list = [];
-  public userId = "60b58deb9a9359ade65bd782";
+  public userId = "60ac594c68ec2ca3d561db6f";
 
   public category_listMok = [
     { id: 1, name: "Backend" },

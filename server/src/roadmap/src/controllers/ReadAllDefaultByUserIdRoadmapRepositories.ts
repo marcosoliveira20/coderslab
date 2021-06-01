@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 
 import { Roadmap } from "../model/Roadmap";
 
-class ReadAllInProgressRoadmapRepositories {
+class ReadAllDefaultByUserIdRoadmapRepositories {
   async handle(request: Request, response: Response) {
     const roadmap = new Roadmap();
 
     const { user_id } = request.query;
 
     try {
-      const data = await roadmap.readAllInProgressRepositories(user_id);
+      const data = await roadmap.readAllDefaultRepositoriesByUserId(user_id);
 
       if(!data) {
         return response.status(404).send();
@@ -23,4 +23,4 @@ class ReadAllInProgressRoadmapRepositories {
   }
 }
 
-export { ReadAllInProgressRoadmapRepositories };
+export { ReadAllDefaultByUserIdRoadmapRepositories };
