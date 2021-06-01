@@ -154,6 +154,22 @@ class Content implements IContentRepository {
 
     return content;
   }
+
+  //Concluidos - Quantidade
+  // Progress - %
+  // Late - 
+
+  readQuantity(_roadmap_id: String): object {
+    const content = ContentSchema.find({_roadmap_id});
+
+    return content;
+  }
+
+  readQuantityDone(_roadmap_id: String): object {
+    const content = ContentSchema.find({is_done: true}, {_roadmap_id});
+
+    return content;
+  }  
 }
 
 export { Content };
