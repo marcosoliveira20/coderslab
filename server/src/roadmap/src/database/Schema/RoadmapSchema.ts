@@ -12,6 +12,7 @@ const RoadmapSchema = new Schema(
     percent_contents: { type: Number, required: false },
     quantity_challenges: { type: Number, required: false },
     percent_challenges: { type: Number, required: false },
+    user_id: { type: String, required: false },
   },
   {
     timestamps: true,

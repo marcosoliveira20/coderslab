@@ -6,8 +6,6 @@ class CreateChallengeByRoadmapController {
   async handle(request: Request, response: Response) {
     const challenge = request.body;
 
-    console.log(challenge)
-
     const challenge_class = new Challenge();
 
     try {

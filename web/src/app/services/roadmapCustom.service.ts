@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
 })
+
+// TODO refatorar tudo para RoadmapCustomService
 export class RoadmapService {
   private url: string;
 
@@ -11,16 +13,22 @@ export class RoadmapService {
     this.url = "http://localhost:7000";
   }
 
-  public createCustomRoadmap(body: object) {
+  public createCustomRoadmap(body: object, user_id: string) {
     const httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
     return this.http
-      .post<any>(`${this.url}/roadmap/create/custom`, body, httpOptions)
+      .post<any>(
+        `${this.url}/roadmap/create/custom?user_id=${user_id}`,
+        body,
+        httpOptions
+      )
       .toPromise();
   }
 
-  public getRoadmapListByUser() {
-    return this.http.get<any>(`${this.url}/roadmap/read/all`).toPromise();
+  public getRoadmapListByUser(user_id: string) {
+    return this.http
+      .get<any>(`${this.url}/roadmap/read/all?user_id=${user_id}`)
+      .toPromise();
   }
 }
