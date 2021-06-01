@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { userMock } from "src/app/app.component";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { userMock } from 'src/app/app.component';
 
 @Component({
-  selector: "app-detail-group",
-  templateUrl: "./detail-group.component.html",
-  styleUrls: ["./detail-group.component.scss"],
+  selector: 'app-detail-group',
+  templateUrl: './detail-group.component.html',
+  styleUrls: ['./detail-group.component.scss'],
 })
 export class DetailGroupComponent implements OnInit {
   public user = userMock;
@@ -18,27 +18,29 @@ export class DetailGroupComponent implements OnInit {
   public isGroupOwner: boolean;
 
   public scheduleForm = this.fb.group({
-    date: ["", Validators.required],
-    time: ["", Validators.required],
-    link: ["", Validators.required],
-    description: [""],
+    date: ['', Validators.required],
+    time: ['', Validators.required],
+    link: ['', Validators.required],
+    description: [''],
   });
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
+    const urlToken = this.activatedRoute.snapshot.paramMap.get('token');
 
-    this.group = this.user.group_list.find((group) => String(group.token) === urlToken)
+    this.group = this.user.group_list.find(
+      (group) => String(group.token) === urlToken,
+    );
 
     this.isGroupOwner = this.group.owner === this.user.id;
   }
 
-  openScheduleLink = () => window.open(this.modalData.link, "_blank");
+  openScheduleLink = () => window.open(this.modalData.link, '_blank');
 
   handleRedirectToEdit = () =>
     this.router.navigate([`/groups/edit`, this.group.token]);
