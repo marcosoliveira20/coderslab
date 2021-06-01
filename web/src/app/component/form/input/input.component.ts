@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
 export class BasicAutoCompleterComponent implements OnInit {
   @Input() theme: string;
   @Input() placeholder: string;
-  @Input() interestLisInput: any[] ;//= [];
+  @Input() interestLisInput: any[];
   @Output() itemEvent = new EventEmitter<any[]>();
 
   private interestList = [];
@@ -21,10 +21,6 @@ export class BasicAutoCompleterComponent implements OnInit {
   }
 
   getInterestListFromParent() {
-    console.log("(getInterestListFromParent) this.interestLisInput: ", this.interestLisInput)
-    console.log("this.interestLisInput: ", this.interestLisInput);
-    console.log("this.interestListIntermediary !==  this.interestLisInput", this.interestListIntermediary !==  this.interestLisInput)
-    
     if( this.interestLisInput[0]
       && !this.interestLisInput[0].name 
       && (this.interestListBD.length === 0 || this.interestListIntermediary !==  this.interestLisInput)) {
@@ -39,10 +35,6 @@ export class BasicAutoCompleterComponent implements OnInit {
       this.interestListIntermediary =  this.interestLisInput;
 
     }
-    // else {
-    //    this.interestListBD = this.interestLisInput
-    // }
-    console.log("(getInterestListFromParent) this.interestListBD: ", this.interestListBD);
   }
   
   selectEvent(item) {
@@ -84,8 +76,6 @@ export class BasicAutoCompleterComponent implements OnInit {
 
   filterList(event) {
     this.getInterestListFromParent();
-    console.log("(filterList) this.interestLisInput: ", this.interestLisInput)
-    console.log("(filterList) this.interestListBD: ", this.interestListBD);
     if (event.target.value.length > 0) {
       this.interestListFilter = this.interestListBD.filter((interest) =>
         interest.name.toLowerCase().includes(event.target.value)

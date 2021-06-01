@@ -63,7 +63,7 @@ export class NewGroupComponent implements OnInit {
     }
 
     this.groupService.createGroup(body).then(data => console.log(data));
-    console.log("registerForm", this.formGroup.value);
+    //TODO - redirecionar para dentro da tela de detalhe do grupo
   }
 
   getSubject(event) {
@@ -74,8 +74,7 @@ export class NewGroupComponent implements OnInit {
 
         x.categories.map( c => {
           this.interestList.push(c);
-        })    
-        // console.log(this.interestList)
+        })
       }
     })
   }
