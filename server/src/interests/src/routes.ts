@@ -17,7 +17,7 @@ const updateInterestController = new UpdateInterestController();
 const deleteInterestController = new DeleteInterestController();
 const deleteInterestByUserIdController = new DeleteInterestByUserIdController();
 
-router.use(ensureAuthenticated)
+// router.use(ensureAuthenticated)
 router.post("/interest/create", createInterestController.handle);
 router.get("/interest/read/byId/:id", readInterestByIdController.handle);
 router.get("/interest/read/all", readAllInterestsController.handle);

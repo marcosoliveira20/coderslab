@@ -21,7 +21,7 @@ const readAllScheduleController = new ReadAllScheduleController();
 const updateScheduleController = new UpdateScheduleController();
 const deleteScheduleController = new DeleteScheduleController();
 
-router.use(ensureAuthenticated)
+// router.use(ensureAuthenticated)
 router.post("/schedule/create", createScheduleController.handle);
 router.get("/schedule/read/byId/:id", readByIdScheduleController.handle);
 router.get(

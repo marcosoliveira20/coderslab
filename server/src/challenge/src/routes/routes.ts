@@ -27,7 +27,7 @@ const updateChallengeTitleController = new UpdateChallengeTitleController();
 const updateChallengeDescriptionController = new UpdateChallengeDescriptionController();
 const createChallengeByRoadmapController = new CreateChallengeByRoadmapController();
 
-ChallengeRoutes.use(ensureAuthenticated)
+// ChallengeRoutes.use(ensureAuthenticated)
 ChallengeRoutes.post("/challenge/create", createChallengeController.handle);
 ChallengeRoutes.post("/challenge/create/By/Roadmap", createChallengeByRoadmapController.handle);
 ChallengeRoutes.put("/challenge/update/done/:_id", turnChallengeDoneController.handle);

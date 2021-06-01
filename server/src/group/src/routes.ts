@@ -21,7 +21,7 @@ const readAllGroupsController = new ReadAllGroupsController();
 const updateGroupController = new UpdateGroupController();
 const deleteGroupController = new DeleteGroupController();
 
-router.use(ensureAuthenticated)
+// router.use(ensureAuthenticated)
 router.post("/group/create", createGroupController.handle);
 router.post("/group/read/search", readGroupBySearchController.handle);
 router.get("/group/read/byId/:id", readGroupByIdController.handle);

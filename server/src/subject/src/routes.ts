@@ -17,7 +17,7 @@ const readAllSubjectController = new ReadAllSubjectController();
 const updateSubjectController = new UpdateSubjectController();
 const deleteSubjectController = new DeleteSubjectController();
 
-router.use(ensureAuthenticated)
+// router.use(ensureAuthenticated)
 router.post("/subject/create", createSubjectController.handle);
 router.get("/subject/read/byId/:id", readByIdSubjectController.handle);
 router.get("/subject/read/byLabel/:label", readByLabelSubjectController.handle);
