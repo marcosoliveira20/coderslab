@@ -15,7 +15,6 @@ export class NewGroupComponent implements OnInit {
   public group;
   public user = userMock;
   public isEditMode: boolean;
-  // public interestList: any[] = interestListMock;
   public interestList = [];
   public subjectList = [];
   private categories; // TODO finish
@@ -41,9 +40,7 @@ export class NewGroupComponent implements OnInit {
     this.getGroupData();
     this.subjectService.getAllSubjects().then(data => {
       this.subjectList = data
-      console.log(data)
     });
-    // this.interestService.getAllInterestList().then(data => console.log(data))
   }
 
   onSubmit() {
@@ -55,7 +52,7 @@ export class NewGroupComponent implements OnInit {
     const body = {
       "name": this.formGroup.value.name,
       "subject_label": "string",
-      "category": this.formGroup.value.categories,
+      "category": this.formGroup.value.categories[0],
       "level": this.formGroup.value.level,
       "is_public": this.formGroup.value.is_public,
       "is_default": false,
@@ -67,6 +64,7 @@ export class NewGroupComponent implements OnInit {
   }
 
   getSubject(event) {
+    //TODO - limpar input depois de selecionar uma opção
     this.interestList = []
     
     this.subjectList.map(x => {

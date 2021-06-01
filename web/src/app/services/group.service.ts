@@ -52,6 +52,8 @@ export class GroupService {
             this.group_list.push(obj);
         });
 
+        console.log(this.group_list)
+
         return this.group_list;
     }
 }
