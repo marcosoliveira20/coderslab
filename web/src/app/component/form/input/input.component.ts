@@ -6,19 +6,37 @@ import { Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
   styleUrls: ["./input.component.scss"],
 })
 export class BasicAutoCompleterComponent implements OnInit {
-  ngOnInit(): void {
-    this.interestListBD = this.interestLisInput
-  }
   @Input() theme: string;
   @Input() placeholder: string;
   @Input() interestLisInput: any[];
   @Output() itemEvent = new EventEmitter<any[]>();
 
-
-  keyword = "name";
   private interestList = [];
   private interestListFilter = [];
-  private interestListBD;
+  private interestListBD = [];
+  private interestListIntermediary =[];
+  
+  ngOnInit(): void {
+    this.getInterestListFromParent();
+  }
+
+  getInterestListFromParent() {
+    if( this.interestLisInput[0]
+      && !this.interestLisInput[0].name 
+      && (this.interestListBD.length === 0 || this.interestListIntermediary !==  this.interestLisInput)) {
+
+        this.interestListBD = [];
+        this.interestLisInput.map( i =>{
+        this.interestListBD.push({
+            id: 0,
+            name: i 
+        })
+      })
+      this.interestListIntermediary =  this.interestLisInput;
+
+    }
+  }
+  
   selectEvent(item) {
     this.interestList.push(item);
     const interestIndex = this.interestListBD.findIndex(
@@ -57,6 +75,7 @@ export class BasicAutoCompleterComponent implements OnInit {
   }
 
   filterList(event) {
+    this.getInterestListFromParent();
     if (event.target.value.length > 0) {
       this.interestListFilter = this.interestListBD.filter((interest) =>
         interest.name.toLowerCase().includes(event.target.value)

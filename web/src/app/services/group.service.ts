@@ -37,14 +37,14 @@ export class GroupService {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/read/search`, body, httpOptions).toPromise()
     }
-    
-    public getAllUserByGroup(groupId) {
-        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
-    }
 
     public createGroup(body) {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
+    }
+    
+    public getAllUserByGroup(groupId) {
+        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
     }
 
     public listGroup(data) {

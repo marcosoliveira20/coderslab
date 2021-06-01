@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col">
           <label>objetivo</label>
-          <select name="objective" formControlName="objective">
+          <select name="objective" formControlName="objective" (change)="getSubject($event)">
             <option *ngFor="let objective of subjectList">{{objective.label}}</option>
           </select>
         </div>
