@@ -20,6 +20,8 @@ interface IContentRepository {
   update(id: String): object;
   delete(_id: string): object;
   deleteByRoadmapId(_roadmap_id: String): object
+  readQuantity(_roadmap_id: String): Object;
+  readQuantityDone(_roadmap_id: String): Object;
 }
 
 export { IContentRepository };

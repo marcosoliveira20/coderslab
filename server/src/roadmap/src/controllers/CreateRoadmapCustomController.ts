@@ -12,11 +12,15 @@ class CreateRoadmapCustomController {
     const roadmap = new Roadmap();
     const api = new Api();
 
+<<<<<<< HEAD
     const quantityChallenge = 0;
     for (let i = 0; i < content_list.length; i++) {
       // const challenge = content_list[i].challenge.length;
       // quantityChallenge += challenge;
     }
+=======
+    let quantityChallenge = 0
+>>>>>>> ff7d99ed93a25de0e0b40391fd8a17f66cb2c0ad
 
     try {
       const data = await roadmap.createCustom({
@@ -37,6 +41,7 @@ class CreateRoadmapCustomController {
 
       if (content_list.length == 0) {
         return response.status(201).send(data);
+<<<<<<< HEAD
       }
       try {
         for (let i = 0; i < content_list.length; i++) {
@@ -46,6 +51,21 @@ class CreateRoadmapCustomController {
             content_list[i]
           );
           content_list[i] = new_content_list.data;
+=======
+      } else {
+        try {
+          for(let i = 0; i < content_list.length; i++) {
+            content_list[i]._roadmap_id = data._id;
+            const new_content_list = await api.content.post("create/By/Roadmap/Custom", content_list[i]);
+            content_list[i] = new_content_list.data
+          }
+        } catch(err) {
+          await roadmap.delete(data._id)
+          await api.content.delete(`/delete/roadmapid/${data._id}`);
+
+          console.log(err.response.message)
+          return response.status(err.response.status).send();
+>>>>>>> ff7d99ed93a25de0e0b40391fd8a17f66cb2c0ad
         }
       } catch (err) {
         await roadmap.delete(data._id);
