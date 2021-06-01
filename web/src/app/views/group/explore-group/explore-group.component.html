@@ -97,12 +97,12 @@
       </form>
       <ul class="card-list">
         <li *ngFor="let group of user.group_list">
-          <app-card [data]="group"></app-card>
+          <app-card [data]="group" (click)="joinPublicGroup(group.token)"></app-card>
         </li>
       </ul>
     </div>
     <ul class="button-list">
-      <li>
+      <li (click)="showJoinPrivateGroupModal = true">
         <a routerLink="./"
           ><button>
             <img src="../../../../assets/icons/key.svg" /></button
@@ -117,3 +117,26 @@
     </ul>
   </div>
 </main>
+
+<app-modal
+  *ngIf="showConfirmJoinGroupModal"
+  [showController]="showConfirmJoinGroupModal"
+  (close)="showConfirmJoinGroupModal = false"
+>
+  <div class="modal-body">
+    <p> Você gostaria de ingressar neste grupo? </p>
+    <button (click)="joinInGroup()">Confirmar</button>
+  </div>
+</app-modal>
+
+<app-modal
+  *ngIf="showJoinPrivateGroupModal"
+  [showController]="showJoinPrivateGroupModal"
+  (close)="showJoinPrivateGroupModal = false"
+>
+  <div class="modal-body">
+    <p> Insira a chave do grupo </p>
+    <input placeholder="ACME#0123" #token/>
+    <button (click)="joinPrivateGroup(token)">Entrar no grupo</button>
+  </div>
+</app-modal>

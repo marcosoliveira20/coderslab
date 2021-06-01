@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class GroupService {
     private unionGroupUrl: string;
     private groupUrl: string;
-    public user_id: string = "60ac594c68ec2ca3d561db6f";
+    public user_id: string = "60b58deb9a9359ade65bd782";
     public groupList = [];
 
     constructor(private http: HttpClient) {
@@ -16,6 +16,19 @@ export class GroupService {
         this.groupUrl = "http://localhost:3000";
     }
 
+    public createGroup() {
+
+    }
+
+    public insertUserInGroup(body) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/create`, body, httpOptions).toPromise()
+    }
+
+    public getGroupByToken(groupToken) {
+        return this.http.get<any>(`${this.groupUrl}/group/read/byToken/${groupToken}`).toPromise()
+    }
+    
     public getAllGroupsByUser() {
         return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allGroupsByUser/${this.user_id}`).toPromise()
     }
@@ -28,13 +41,9 @@ export class GroupService {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/read/search`, body, httpOptions).toPromise()
     }
-
-    public createGroup() {
-
-    }
-
-    public getAllUserByGroup(group_id) {
-        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${group_id}`).toPromise()
+    
+    public getAllUserByGroup(groupId) {
+        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
     }
 
     public listGroup(data) {
@@ -50,6 +59,7 @@ export class GroupService {
             next_schedule: group.next_schedule,
             number_members: group.number_members,
             is_default: group.is_default,
+            is_public: group.is_public,
             owner: group._owner,
             category: group.category,
         }

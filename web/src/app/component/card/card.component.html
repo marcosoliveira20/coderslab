@@ -11,8 +11,8 @@
           <p>horário</p>
         </div>
         <div>
-          <p>{{ data | date: "hh:mm" }}</p>
-          <p>{{ data | json }}</p>
+          <!-- TODO essa merda ta exibindo a hora errada -->
+          <p>{{ data | date: "HH:mm" }}</p>
         </div>
       </div>
     </footer>
@@ -130,7 +130,6 @@
     'cdl-card-dark': data.is_default,
     'cdl-card-light': !data.is_default
   }"
-  (click)="redirectToGroup(data.token)"
   *ngIf="type === 'group'"
 >
   <main>

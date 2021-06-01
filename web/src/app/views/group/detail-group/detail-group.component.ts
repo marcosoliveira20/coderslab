@@ -50,7 +50,7 @@ export class DetailGroupComponent implements OnInit {
     })
     .catch(err => {
       this.group.schedule_list = [];
-      console.log("Erro: ", err);
+      // console.log("Erro: ", err);
     });
 
     // buscando integrantes do grupo
@@ -60,7 +60,7 @@ export class DetailGroupComponent implements OnInit {
     })
     .catch(err => {
       this.group.user_list = [];
-      console.log("Erro: ", err);
+      // console.log("Erro: ", err);
     })
   }
 
