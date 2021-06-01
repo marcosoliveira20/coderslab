@@ -32,7 +32,7 @@ export class UserService {
   }
 
   public updateUser(body: object) {
-    body._id = this.user_id;
+    body["_id"] = this.user_id;
 
     const httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),

@@ -29,8 +29,9 @@ export class GroupService {
         return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/read/search`, body, httpOptions).toPromise()
     }
 
-    public createGroup() {
-
+    public createGroup(body) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
     }
 
     public listGroup(data) {
