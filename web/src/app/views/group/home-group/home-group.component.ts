@@ -32,6 +32,7 @@ export class HomeGroupComponent implements OnInit {
   ngOnInit() {
     this.groupService.getAllGroupsByUser().then(data => {
       this.groupListBd = this.groupService.listGroup(data);
+      console.log("group list bd: ", this.groupListBd)
       this.filter("all");
     })
   }

@@ -40,6 +40,9 @@ export class DetailGroupComponent implements OnInit {
   ngOnInit() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
     this.group = this.user.group_list.find((group) => String(group.token) === urlToken)
+    console.log("group: ", this.group);
+    console.log("group list: ", this.user.group_list);
+    console.log("token: ", urlToken);
     // this.isGroupOwner = this.group.owner === this.user.id;
     this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
 

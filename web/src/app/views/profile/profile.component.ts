@@ -3,6 +3,7 @@ import { subjectMock } from "src/mock";
 
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: "app-profile",
@@ -31,7 +32,7 @@ export class ProfileComponent implements OnInit {
     github_id: [{ value: "", disabled: !this.isEditMode }],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   /**
    * @todo integration
@@ -46,6 +47,18 @@ export class ProfileComponent implements OnInit {
       github_id: this.user.github_id,
     });
     this.getAllInterests();
+
+    this.userService.getUserById().then(data => {
+      console.log(data)
+      this.profileForm.patchValue({
+        name: data.name,
+        last_name: data.last_name,
+        username: data.username,
+        email: data.email,
+        discord_id: data.discord_id,
+        github_id: data.github_id
+      });
+    })
   }
 
   /**
@@ -67,6 +80,8 @@ export class ProfileComponent implements OnInit {
       "isEditMode:",
       this.isEditMode
     );
+
+    this.userService.updateUser(this.profileForm.value).then(data => console.log(data));
   }
 
   /**
@@ -92,6 +107,7 @@ export class ProfileComponent implements OnInit {
    * @todo implement delete code
    */
   deleteAccount() {
+    this.userService.deleteUser().then(data => console.log(data)).catch(err => console.log(err))
     console.log("deleteAccount: ", this.user.id);
   }
 
