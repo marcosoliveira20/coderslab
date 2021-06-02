@@ -29,6 +29,11 @@ header{
 
 
 @media (max-width: 1025px) {
+
+  header {
+    margin-top: 0;
+  }
+
   header h1 {
     font-size: 2rem;
   }

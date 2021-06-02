@@ -26,3 +26,10 @@ main {
     z-index: 20;
   }
 }
+
+@media (max-width: 1025px) {
+  main a button {
+    bottom: 80px;
+    right: 20px;
+  }
+}

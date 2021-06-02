@@ -1,8 +1,8 @@
 .cdl-container {
-  display: grid;
+  // display: grid;
   height: 100%;
   padding: 0 32px;
-  grid-template-rows: 25vh 75vh;
+  grid-template-rows: auto;
   overflow: auto;
 }
 
@@ -17,6 +17,8 @@
     padding: 32px;
   }
 }
+
+/*
 
 @media(min-height: 572px) and(max-height: 657px) {
   .cdl-container-group {
@@ -40,3 +42,4 @@
     grid-template-rows: 50vh 50vh;
   }
 }
+*/

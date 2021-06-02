@@ -23,9 +23,8 @@ main {
 
 @media (max-width: 1025px) {
   main {
-    grid-template-rows: calc(100vh - 100px) 100px;
+    grid-template-rows: calc(100vh - 60px) 60px;
     grid-template-columns: 100vw;
-    grid-template-areas:  "router-outlet"
-                          "navbar";
+    grid-template-areas:  "router-outlet" "navbar";
   }
 }
