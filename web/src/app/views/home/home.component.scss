@@ -118,6 +118,7 @@ ul {
 .roadmap-overview {
   grid-area: roadmap-overview;
   height: 100%;
+  overflow-y: auto;
 
   border-radius: 15px;
 
@@ -273,7 +274,6 @@ ul {
   padding: 15px 24px;
   height: 45%;
   border-radius: 15px;
-  overflow-y: auto;
   display: grid;
 }
 
