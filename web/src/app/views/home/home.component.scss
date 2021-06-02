@@ -21,80 +21,73 @@ ul {
   list-style: none;
 }
 
+/*
+  STATUS AND GROUPS
+*/
 .status-and-groups {
   grid-area: status-and-groups;
 }
 
-.custom_roadmap_icon svg {
-  fill: green;
-}
-
+/*
+  PERSONAL STATUS
+*/
 .personal-status {
   grid-area: personal-status;
   display: block;
   margin-top: 25px;
+}
 
-  div {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+.personal-status div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 
-    h1 {
-      color: $cdl_darkBlue;
-      font-weight: 300;
-      font-size: 2rem;
-    }
-    h3 {
-      color: $cdl_pink;
-      font-weight: 500;
-    }
-  }
-
-  ul {
-    padding: 25px;
-    border-radius: 15px;
-    background-color: #fff;
-    text-align: center;
-    align-items: center;
-    list-style: none;
+  h1 {
     color: $cdl_darkBlue;
     font-weight: 300;
-    display: flex;
-    width: 100%;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
-
-    li {
-      width: 100%;
-    }
-
-    li p:first-child {
-      font-size: 20px;
-    }
-    li p:last-child {
-      font-size: 50px;
-    }
-
-    li:first-child {
-      border: none;
-      border-right: 1px solid $cdl_darkBlue;
-    }
-
-    li:last-child {
-      border: none;
-      border-left: 1px solid $cdl_darkBlue;
-    }
+    font-size: 3rem;
   }
+  h3 {
+    color: $cdl_pink;
+    font-weight: 500;
+  }
+}
+
+.personal-status ul {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+
+  color: $cdl_darkBlue;
+  text-align: center;
+  font-weight: 300;
+
+  li {
+    width: 100%;
+  }
+
+  li p {
+    margin: 0;
+  }
+}
+
+/*
+  STUDY GROUPS
+  */
+.study-groups-title {
+  font-size: 28px;
+  font-weight: 500;
+  color: $cdl_darkBlue;
 }
 
 .study-groups {
   grid-area: study-groups;
   height: 350px;
-
-  h1 {
-    font-size: 28px;
-    font-weight: 500;
-    color: $cdl_darkBlue;
-  }
 
   > ul {
     display: flex;
@@ -107,14 +100,9 @@ ul {
   }
 }
 
-.roadmap-status {
-  grid-area: roadmap-status;
-
-  background: $cdl_darkGrey;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-//
+/*
+  ROADMAP OVERVIEW
+*/
 .roadmap-overview {
   grid-area: roadmap-overview;
   height: 100%;
@@ -168,8 +156,8 @@ ul {
   }
 
   div > button:hover {
-    background: #FFF;
-    transition: .2s;
+    background: #fff;
+    transition: 0.2s;
   }
 
   div > p {
@@ -254,7 +242,7 @@ ul {
   .active-date {
     background: $cdl_pink;
     border-radius: 50%;
-    color: #FFF;
+    color: #fff;
   }
 
   .number-of-days li {
@@ -262,7 +250,6 @@ ul {
     text-align: center;
     padding: 3px 5px;
   }
-
 }
 
 .roadmap-overview-calendar {
@@ -277,12 +264,71 @@ ul {
   display: grid;
 }
 
+/*
+  MOBILE
+*/
+@media (max-width: 768px) {
+  .personal-status {
+    margin: 0;
+  }
+
+  .personal-status > div {
+    display: block;
+  }
+
+  .personal-status h1 {
+    font-size: 2rem;
+  }
+
+  .personal-status ul {
+    display: block;
+
+    li {
+      border: none;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    li p {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .personal-status {
+    margin: 0;
+  }
+
+  .personal-status h1 {
+    font-size: 2rem;
+  }
+
+  .personal-status ul {
+
+    li p:first-child {
+      font-size: 1.5rem;
+    }
+    li p:last-child {
+      font-size: 3rem;
+    }
+
+    li:first-child {
+      border-right: 1px solid $cdl_darkBlue;
+    }
+
+    li:last-child {
+      border-left: 1px solid $cdl_darkBlue;
+    }
+  }
+}
+
 @media (max-width: 1025px) {
   main {
     height: 100%;
 
     grid-template-columns: 100%;
-    grid-template-areas: "status-and-groups""roadmap-overview";
+    grid-template-areas: "status-and-groups" "roadmap-overview";
 
     // padding: 25px 20px;
     column-gap: 48px;
@@ -294,11 +340,48 @@ ul {
 
   .roadmap-overview {
     margin-top: 40px;
+    overflow-y: unset;
   }
 
   .study-groups {
     overflow-x: auto;
-    height: auto;
+    height: 350px;
+    overflow-y: clip;
+  }
+
+  .study-groups ul {
+    width: max-content;
+    overflow-x: clip;
+  }
+}
+
+/*
+  DESKTOP
+*/
+@media (min-width: 1026px) {
+  main {
+    height: 100%;
+
+    grid-template-columns: 100%;
+    grid-template-areas: "status-and-groups" "roadmap-overview";
+
+    // padding: 25px 20px;
+    column-gap: 48px;
+    row-gap: 28px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .roadmap-overview {
+    margin-top: 40px;
+    overflow-y: unset;
+  }
+
+  .study-groups {
+    overflow-x: auto;
+    height: 350px;
+    overflow-y: clip;
   }
 
   .study-groups ul {

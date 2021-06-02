@@ -238,7 +238,6 @@
     p {
       width: calc(100% - 18px);
       font-weight: 400;
-      font-size: 28px;
       line-height: 33px;
     }
 
@@ -281,4 +280,16 @@
 .group-type:hover > button {
   margin-top: -20px;
   margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .group-type header > div p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .group-type header > div p {
+    font-size: 28px;
+  }
 }
