@@ -1,81 +1,95 @@
-import { IContentSchemaDTO } from "../interfaces/IContentSchemaDTO";
-import { IContentRepository } from "../interfaces/IContentRepository";
-
-import ContentSchema from "../database/Schema/ContentSchema"
-
+import ContentSchema from '../database/Schema/ContentSchema';
+import { IContentRepository } from '../interfaces/IContentRepository';
+import { IContentSchemaDTO } from '../interfaces/IContentSchemaDTO';
 
 class Content implements IContentRepository {
-  create({ title, description, reference, challenge, deadline, is_done, _roadmap_id }: IContentSchemaDTO): object {
-    const content = ContentSchema.create({ title, description, reference, challenge, deadline, is_done, _roadmap_id});
+  create({
+    title,
+    description,
+    reference,
+    challenge,
+    deadline,
+    is_done,
+    _roadmap_id,
+  }: IContentSchemaDTO): object {
+    const content = ContentSchema.create({
+      title,
+      description,
+      reference,
+      challenge,
+      deadline,
+      is_done,
+      _roadmap_id,
+    });
 
     return content;
   }
 
-  turnContentDone(_id: String): object {
+  turnContentDone(_id: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {is_done: true},
-      {new: true}
+      { _id },
+      { is_done: true },
+      { new: true },
     );
 
     return content;
   }
 
-  turnContentNotDone(_id: String): object {
+  turnContentNotDone(_id: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {is_done: false},
-      {new: true}
+      { _id },
+      { is_done: false },
+      { new: true },
     );
 
     return content;
   }
 
-  updateTitle(_id: String, title: String): object {
+  updateTitle(_id: string, title: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {title},
-      {new: true}
+      { _id },
+      { title },
+      { new: true },
     );
 
     return content;
   }
 
-  updateDescription(_id: String, description: String): object {
+  updateDescription(_id: string, description: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {description},
-      {new: true}
+      { _id },
+      { description },
+      { new: true },
     );
 
     return content;
   }
 
-  updateDeadline(_id: String, deadline: String): object {
+  updateDeadline(_id: string, deadline: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {deadline},
-      {new: true}
+      { _id },
+      { deadline },
+      { new: true },
     );
 
     return content;
   }
 
-  updateReference(_id: String, reference: String): object {
+  updateReference(_id: string, reference: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {reference},
-      {new: true}
+      { _id },
+      { reference },
+      { new: true },
     );
 
     return content;
   }
 
-  updateChallenge(_id: String, challenge: String): object {
+  updateChallenge(_id: string, challenge: string): object {
     const content = ContentSchema.findByIdAndUpdate(
-      {_id},
-      {challenge},
-      {new: true}
+      { _id },
+      { challenge },
+      { new: true },
     );
 
     return content;
@@ -88,56 +102,57 @@ class Content implements IContentRepository {
   }
 
   readById(_id: string): IContentSchemaDTO {
-    const content = ContentSchema.findById({_id});
+    const content = ContentSchema.findById({ _id });
 
     return content;
   }
 
-  readByRoadmapId(_roadmap_id: String): IContentSchemaDTO {
-    const content = ContentSchema.find({_roadmap_id});
+  readByRoadmapId(_roadmap_id: string): IContentSchemaDTO {
+    const content = ContentSchema.find({ _roadmap_id });
 
     return content;
   }
 
   readByTitle(title: string): IContentSchemaDTO {
-    const content = ContentSchema.find({title});
+    const content = ContentSchema.find({ title });
 
     return content;
   }
 
   readAllDoneRepositories(): object {
-    const content = ContentSchema.find({is_done: true});
+    const content = ContentSchema.find({ is_done: true });
 
     return content;
   }
 
-  readByRoadmapDeadlineContents(_roadmap_id: String, roadmap_deadline: String): object {
-    let content = ContentSchema.find({
-      _roadmap_id,
-      deadline: {$gte: roadmap_deadline}
-    });
-
-    console.log(content)
-
-    return content;
-  }
-
-  readLateContents(_roadmap_id: String, today: String): object {
+  readByRoadmapDeadlineContents(
+    _roadmap_id: string,
+    roadmap_deadline: string,
+  ): object {
     const content = ContentSchema.find({
       _roadmap_id,
-      deadline: {$lte: today}
+      deadline: { $gte: roadmap_deadline },
+    });
+
+    return content;
+  }
+
+  readLateContents(_roadmap_id: string, today: Date): object {
+    const content = ContentSchema.find({
+      _roadmap_id,
+      deadline: { $lt: today.toISOString().substring(0, 10) },
     });
 
     return content;
   }
 
   readAllInProgressRepositories(): object {
-    const content = ContentSchema.find({is_done: false});
+    const content = ContentSchema.find({ is_done: false });
 
     return content;
   }
 
-  update(id: String): object {
+  update(id: string): object {
     const content = ContentSchema.findByIdAndUpdate(id);
 
     return content;
@@ -149,27 +164,27 @@ class Content implements IContentRepository {
     return content;
   }
 
-  deleteByRoadmapId(_roadmap_id: String): object {
-    const content = ContentSchema.deleteMany({_roadmap_id});
+  deleteByRoadmapId(_roadmap_id: string): object {
+    const content = ContentSchema.deleteMany({ _roadmap_id });
 
     return content;
   }
 
-  //Concluidos - Quantidade
+  // Concluidos - Quantidade
   // Progress - %
-  // Late - 
+  // Late -
 
-  readQuantity(_roadmap_id: String): object {
-    const content = ContentSchema.find({_roadmap_id});
+  readQuantity(_roadmap_id: string): object {
+    const content = ContentSchema.find({ _roadmap_id });
 
     return content;
   }
 
-  readQuantityDone(_roadmap_id: String): object {
-    const content = ContentSchema.find({is_done: true}, {_roadmap_id});
+  readQuantityInProgress(_roadmap_id: string): object {
+    const content = ContentSchema.find({ _roadmap_id, is_done: true });
 
     return content;
-  }  
+  }
 }
 
 export { Content };
