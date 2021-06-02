@@ -22,8 +22,22 @@ export class InterstService {
             _id_subject: body._id,
             level: body.level
         }
-        console.log(res)
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.url}/interest/create`, res, httpOptions).toPromise()
+    }
+
+    public updateInterest(body) {
+        const res = {
+            _id_user: this.user_id,
+            _id_subject: body._id,
+            level: body.level
+        }
+
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.put<any>(`${this.url}/interest/create/${body._id}`, res, httpOptions).toPromise()
+    }
+
+    public deleteInterest(id) {
+        return this.http.put<any>(`${this.url}/interest/create/${id}`, httpOptions).toPromise()
     }
 }
