@@ -1,4 +1,5 @@
 import { roadmapMock } from 'src/app/app.component';
+import { ContentService } from 'src/app/services/content.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -38,28 +39,31 @@ export class HomeRoadmapComponent implements OnInit {
     }
   }
 
-  constructor(private roadmapService: RoadmapService) {}
+  constructor(
+    private roadmapService: RoadmapService,
+    private contentService: ContentService,
+  ) {}
 
   ngOnInit() {
     this.roadmapService
       .getRoadmapListByUser('60b5689c1a0293229c6002ae')
       .then((data) => {
         data.map((roadmap) => {
-          this.roadmap_list.push({
-            id: roadmap._id,
-            name: roadmap.name,
-            is_default: roadmap.is_default,
-            is_done: roadmap.is_done,
-            level: roadmap.level,
-            // TODO Lógica
-            progress: '10%',
-            content_status: {
-              total: roadmap.quantity_contents,
-              // TODO CHAMADA
-              complete: 20,
-              late: 3,
-            },
-            content_list: [],
+          this.contentService.getDashboard(roadmap._id).then((dashboard) => {
+            this.roadmap_list.push({
+              id: roadmap._id,
+              name: roadmap.name,
+              is_default: roadmap.is_default,
+              is_done: roadmap.is_done,
+              level: roadmap.level,
+              progress: `${dashboard.percentInProgress}%`,
+              content_status: {
+                total: roadmap.quantity_contents,
+                complete: dashboard.done,
+                late: dashboard.late,
+              },
+              content_list: [],
+            });
           });
         });
         this.filter('');
