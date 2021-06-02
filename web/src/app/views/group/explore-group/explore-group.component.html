@@ -43,13 +43,14 @@
               name="objective"
               class="input-dark input"
               formControlName="subject_label"
+              (change)="handleSelectObjective($event)"
             >
             <option  value="" disabled selected> Objetivo</option>
               <option
                 *ngFor="let objective of subjectList"
                 value="{{ objective.label }}"
               >
-                {{ objective.name }}
+                {{ objective.label }}
               </option>
             </select>
           </div>
@@ -59,13 +60,13 @@
               name="category"
               class="input-dark input select-default"
               formControlName="category"
-            >
+              >
             <option  value="" disabled selected> Categoria</option>
               <option
                 *ngFor="let category of categoryList"
-                value="{{ category.name }}"
+                value="{{ categoryList }}"
               >
-                {{ category.name }}
+                {{ category }}
               </option>
             </select>
           </div>

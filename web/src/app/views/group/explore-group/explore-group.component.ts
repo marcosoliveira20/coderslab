@@ -25,7 +25,7 @@ export class ExploreGroupComponent implements OnInit {
   exploreForm = this.fb.group({
     name: [""],
     subject_label: [""],
-    category: [""],
+    category: [{value: '', disabled: true}],
     level: [-1],
     is_alphabetical: [true]
   });
@@ -58,6 +58,14 @@ export class ExploreGroupComponent implements OnInit {
     this.showInput = !this.showInput;
   }
 
+  handleSelectObjective(event: any) {
+    this.exploreForm.patchValue({ category: '' });
+    
+    let subject = this.subjectList.find(subject => subject.label === event.target.value);
+    this.categoryList = subject.categories;
+    this.exploreForm.controls['category'].enable();
+  }
+
   ngOnInit() {
     this.groupService.getAllGroups()
       .then(data => {
@@ -67,59 +75,58 @@ export class ExploreGroupComponent implements OnInit {
         this.groupList = [];
         // console.log("Erro: ", err);
       });
-      
-      this.subjectService.getAllSubjects().then(data => {
-      // console.log(data);
-      this.subjectList = data
+
+    this.subjectService.getAllSubjects().then(data => {
+      this.subjectList = data;
     });
   }
 
   joinPublicGroup(token: any) {
     this.groupService.getGroupByToken(token)
-    .then(data => {
-      this.group = data;
-      this.group.id = this.group._id;
-      this.group.owner = this.group._owner;
-      
-      delete this.group._id;
-      delete this.group._owner;
+      .then(data => {
+        this.group = data;
+        this.group.id = this.group._id;
+        this.group.owner = this.group._owner;
 
-      this.isInGroup().then(res => {
-        if (res) {
-          this.router.navigate([`/groups`, this.group.token]);
-        } else {
-          this.showConfirmJoinGroupModal = true;
-        }
-      });
-    })
-    .catch(err => {
-      // console.log(err);
-    });
-  }
+        delete this.group._id;
+        delete this.group._owner;
 
-  joinPrivateGroup(token: any) {
-    this.groupService.getGroupByToken(token.value)
-    .then(data => {
-      this.group = data;
-      this.group.id = this.group._id;
-      this.group.owner = this.group._owner;
-      
-      delete this.group._id;
-      delete this.group._owner;
-
-      if (this.group) {
         this.isInGroup().then(res => {
           if (res) {
             this.router.navigate([`/groups`, this.group.token]);
           } else {
-            this.joinInGroup();
+            this.showConfirmJoinGroupModal = true;
           }
         });
-      }
-    })
-    .catch(err => {
+      })
+      .catch(err => {
+        // console.log(err);
+      });
+  }
 
-    });
+  joinPrivateGroup(token: any) {
+    this.groupService.getGroupByToken(token.value)
+      .then(data => {
+        this.group = data;
+        this.group.id = this.group._id;
+        this.group.owner = this.group._owner;
+
+        delete this.group._id;
+        delete this.group._owner;
+
+        if (this.group) {
+          this.isInGroup().then(res => {
+            if (res) {
+              this.router.navigate([`/groups`, this.group.token]);
+            } else {
+              this.joinInGroup();
+            }
+          });
+        }
+      })
+      .catch(err => {
+
+      });
   }
 
   joinInGroup() {
