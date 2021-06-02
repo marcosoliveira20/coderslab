@@ -1,24 +1,28 @@
 @import "../../../sass/abstracts/variables";
+@import "../../../sass/components/container";
+@import "../../../sass/components/scrollbar";
 
 main {
-  height: 100%;
+  height: 100vh;
+  max-height: 100vh;
+
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 2fr;
-  grid-template-areas:
-    "personal-status roadmap-overview"
-    "study-groups roadmap-overview";
+  grid-template-columns: auto 420px;
+  grid-template-areas: "status-and-groups roadmap-overview";
+
+  padding: 25px 32px;
   column-gap: 48px;
   row-gap: 28px;
-  overflow-y: auto;
 
-  div {
-    width: 100%;
-  }
+  overflow-y: hidden;
 }
 
 ul {
   list-style: none;
+}
+
+.status-and-groups {
+  grid-area: status-and-groups;
 }
 
 .custom_roadmap_icon svg {
@@ -28,6 +32,7 @@ ul {
 .personal-status {
   grid-area: personal-status;
   display: block;
+  margin-top: 25px;
 
   div {
     display: flex;
@@ -37,6 +42,7 @@ ul {
     h1 {
       color: $cdl_darkBlue;
       font-weight: 300;
+      font-size: 2rem;
     }
     h3 {
       color: $cdl_pink;
@@ -103,6 +109,7 @@ ul {
 
 .roadmap-status {
   grid-area: roadmap-status;
+
   background: $cdl_darkGrey;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
 }
@@ -110,32 +117,66 @@ ul {
 //
 .roadmap-overview {
   grid-area: roadmap-overview;
+  height: 100%;
+
+  border-radius: 15px;
+
   background: #fff;
   box-shadow: 0px 4px 27px rgba(0, 0, 0, 0.12);
-  border-radius: 15px;
+
+  > h2 {
+    padding-left: 24px;
+  }
+
+  h2 {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    margin: 29px 0 5px;
+  }
 }
 
 .roadmap-overview-header {
-  display: flex;
+  display: block;
   width: 100%;
   height: 140px;
-  padding: 24px 24px 0;
+  padding: 24px 24px 71px;
+  border-radius: 15px 15px 0 0;
+  align-items: flex-start;
 
   background-color: $cdl_yellow;
-  justify-content: space-between;
 
-  > button {
-    background: #fff;
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  div > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: transparent;
+    border: none;
     padding: 3px;
     border-radius: 50%;
     width: 20px;
     height: 20px;
   }
 
-  > p {
+  div > button:hover {
+    background: #FFF;
+    transition: .2s;
+  }
+
+  div > p {
+    flex-wrap: wrap;
+    height: fit-content;
     width: fit-content;
+    margin: 0;
     font-size: 22px;
-    line-height: 26px;
     text-align: center;
     letter-spacing: 0.15em;
     color: $cdl_darkBlue;
@@ -200,12 +241,68 @@ ul {
     justify-content: space-around;
     align-items: center;
   }
+
+  .week-days {
+    font-weight: 500;
+    font-size: 1.3rem;
+    text-align: center;
+    letter-spacing: 0.15em;
+    color: $cdl_darkBlue;
+  }
+
+  .active-date {
+    background: $cdl_pink;
+    border-radius: 50%;
+    color: #FFF;
+  }
+
+  .number-of-days li {
+    font-size: 1rem;
+    text-align: center;
+    padding: 3px 5px;
+  }
+
 }
 
 .roadmap-overview-calendar {
   border: 1px solid $cdl_darkBlue;
 }
 
-.roadmap-overview-accordion-group {
-  background: $cdl_lightGrey;
+.roadmap-overview-accordion-area {
+  background: $cdl_white;
+  padding: 15px 24px;
+  height: 45%;
+  border-radius: 15px;
+  overflow-y: auto;
+  display: grid;
+}
+
+@media (max-width: 1025px) {
+  main {
+    height: 100%;
+
+    grid-template-columns: 100%;
+    grid-template-areas: "status-and-groups""roadmap-overview";
+
+    padding: 25px 20px;
+    column-gap: 48px;
+    row-gap: 28px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .roadmap-overview {
+    margin-top: 40px;
+  }
+
+  .study-groups {
+    overflow-x: auto;
+    height: auto;
+  }
+
+  .study-groups ul {
+    width: max-content;
+    overflow-x: clip;
+  }
 }

@@ -3,20 +3,11 @@
 @import "../../../../sass/components/tabs";
 @import "../../../../sass/components/button";
 @import "../../../../sass/components/container";
+@import "../../../../sass/components/header";
+
 main {
   overflow-y: auto;
   height: 100%;
-}
-
-header {
-  padding: 48px 32px;
-  align-items: center;
-  display: block;
-}
-
-header h1 {
-  font-weight: 100;
-  color: $cdl_darkBlue;
 }
 
 // Bootstrap override
@@ -144,4 +135,45 @@ li {
   bottom: 0px !important;
   width: 100%;
   background-color: #E7E9F0;
+}
+
+@media (max-width: 1150px) {
+  .content-select-new-roadmap {
+    p {
+      margin-bottom: 40px;
+    }
+
+    > div {
+      padding: 0;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  .div-new-roadmap-option {
+    width: 40%;
+
+    button {
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .div-new-roadmap-option {
+    width: 100%;
+
+    button {
+      margin-top: 0;
+    }
+  }
+
+  section .row {
+    display: grid;
+    row-gap: 40px;
+  }
+
+  main {
+    overflow-y: hidden;
+  }
 }

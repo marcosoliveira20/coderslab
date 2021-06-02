@@ -55,9 +55,11 @@
     </nav>
   </header>
 
-  <ul class="card-list-roadmap">
-    <li *ngFor="let roadmap of roadmap_list">
-      <app-card [data]="roadmap" [type]="'roadmap'"></app-card>
-    </li>
-  </ul>
+  <main>
+    <ul class="card-list-roadmap">
+      <li *ngFor="let roadmap of roadmap_list">
+        <app-card [data]="roadmap" [type]="'roadmap'"></app-card>
+      </li>
+    </ul>
+  </main>
 </div>

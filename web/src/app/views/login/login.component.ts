@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  public mode: string = "register";
+  public mode: string = "login";
 
   public interest_list: any[] = [];
   public subjectList: any[] = subjectMock;
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.registerForm.patchValue({
       interest_list: this.interest_list,
     });
-    
+
     if ( this.registerForm.value.password == this.registerForm.value.confirm_password ) {
       this.userService.createUser(this.registerForm.value).then(data => console.log(data))
     } else {
