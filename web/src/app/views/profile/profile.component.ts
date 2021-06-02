@@ -4,6 +4,8 @@ import { subjectMock } from "src/mock";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from 'src/app/services/user.service';
+import { SubjectService } from "src/app/services/subject.service";
+import { InterstService } from "src/app/services/interest.service";
 
 @Component({
   selector: "app-profile",
@@ -32,7 +34,7 @@ export class ProfileComponent implements OnInit {
     github_id: [{ value: "", disabled: !this.isEditMode }],
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private subjectService: SubjectService, private interestService: InterstService) {}
 
   /**
    * @todo integration
@@ -49,7 +51,6 @@ export class ProfileComponent implements OnInit {
     this.getAllInterests();
 
     this.userService.getUserById().then(data => {
-      console.log(data)
       this.profileForm.patchValue({
         name: data.name,
         last_name: data.last_name,
@@ -61,18 +62,14 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  /**
-   * Get interest list from database
-   * @todo integration
-   */
+  
   getAllInterests() {
-    this.interestList = subjectMock;
+    this.subjectService.getAllSubjects().then(data => {
+      console.log(data)
+      this.interestList = data
+    });
   }
 
-  /**
-   * Method triggered by onSubmit event for send user info
-   * @todo integration
-   */
   onSubmitUserInfo() {
     console.log(
       "profileForm: ",
@@ -90,9 +87,10 @@ export class ProfileComponent implements OnInit {
   addNewInterest(subjectSelect: { value: any }, levelSelect: { value: any }) {
     const label = subjectSelect.value;
     const level = levelSelect.value;
-    const { id } = subjectMock.find((subject) => subject.label === label);
+    const { _id } = this.interestList.find((subject) => subject.label === label);
 
-    this.selectedInterestList.push({ id, label, level });
+    this.selectedInterestList.push({ _id, label, level });
+    this.interestService.createInterest({ _id, label, level });
   }
 
   /**
