@@ -13,7 +13,7 @@ import { UserService } from "src/app/services/user.service";
   styleUrls: ['./detail-group.component.scss'],
 })
 export class DetailGroupComponent implements OnInit {
-  public user = userMock;
+  // public user = userMock;
   public group: any;
   public modalData: any;
 
@@ -39,29 +39,45 @@ export class DetailGroupComponent implements OnInit {
 
   ngOnInit() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-    this.group = this.user.group_list.find((group) => String(group.token) === urlToken)
-    // this.isGroupOwner = this.group.owner === this.user.id;
-    this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
-
-    // buscando reuniões do grupo
-    this.scheduleService.getAllSchedulesByGroup(this.group.id)
+    
+    this.groupService.getGroupByToken(urlToken)
     .then(data => {
-      this.group.schedule_list = this.scheduleService.listSchedule(data);
+      this.group = data;
+      this.group.id = this.group._id;
+      this.group.owner = this.group._owner;
+      
+      delete this.group._id;
+      delete this.group._owner;
+      // console.log("group ", this.group.category);
+
+      // this.isGroupOwner = this.group.owner === this.user.id;
+      this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
+  
+      // buscando reuniões do grupo
+      this.scheduleService.getAllSchedulesByGroup(this.group.id)
+      .then(data => {
+        this.group.schedule_list = this.scheduleService.listSchedule(data);
+      })
+      .catch(err => {
+        this.group.schedule_list = [];
+        // console.log("Erro: ", err);
+      });
+  
+      // buscando integrantes do grupo
+      this.groupService.getAllUserByGroup(this.group.id)
+      .then(data => {
+        this.group.user_list = this.userService.listUsers(data);
+      })
+      .catch(err => {
+        this.group.user_list = [];
+        // console.log("Erro: ", err);
+      });
+
     })
     .catch(err => {
-      this.group.schedule_list = [];
-      // console.log("Erro: ", err);
+
     });
 
-    // buscando integrantes do grupo
-    this.groupService.getAllUserByGroup(this.group.id)
-    .then(data => {
-      this.group.user_list = this.userService.listUsers(data);
-    })
-    .catch(err => {
-      this.group.user_list = [];
-      // console.log("Erro: ", err);
-    })
   }
 
   openScheduleLink = () => window.open(this.modalData.link, '_blank');
