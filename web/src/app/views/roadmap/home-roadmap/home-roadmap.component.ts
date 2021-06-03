@@ -1,4 +1,3 @@
-import { roadmapMock } from 'src/app/app.component';
 import { ContentService } from 'src/app/services/content.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -11,9 +10,7 @@ import { RoadmapService } from '../../../services/roadmapCustom.service';
   styleUrls: ['./home-roadmap.component.scss'],
 })
 export class HomeRoadmapComponent implements OnInit {
-  // public roadmap_list = roadmapMock;
   public roadmap_list = [];
-  // public roadmapList = roadmapMock;
   public roadmapList = [];
   public typeFilter = 'all';
 
