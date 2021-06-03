@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { userMock } from "src/app/app.component";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { userMock } from 'src/app/app.component';
 
 import { ScheduleService } from "src/app/services/schedule.service";
 import { GroupService } from "src/app/services/group.service";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
-  selector: "app-detail-group",
-  templateUrl: "./detail-group.component.html",
-  styleUrls: ["./detail-group.component.scss"],
+  selector: 'app-detail-group',
+  templateUrl: './detail-group.component.html',
+  styleUrls: ['./detail-group.component.scss'],
 })
 export class DetailGroupComponent implements OnInit {
-  public user = userMock;
+  // public user = userMock;
   public group: any;
   public modalData: any;
 
@@ -22,10 +22,10 @@ export class DetailGroupComponent implements OnInit {
   public isGroupOwner: boolean;
 
   public scheduleForm = this.fb.group({
-    date: ["", Validators.required],
-    time: ["", Validators.required],
-    link: ["", Validators.required],
-    description: [""],
+    date: ['', Validators.required],
+    time: ['', Validators.required],
+    link: ['', Validators.required],
+    description: [''],
   });
 
   constructor(
@@ -39,36 +39,47 @@ export class DetailGroupComponent implements OnInit {
 
   ngOnInit() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-    this.group = this.user.group_list.find((group) => String(group.token) === urlToken)
-    console.log("group: ", this.group);
-    console.log("group list: ", this.user.group_list);
-    console.log("token: ", urlToken);
-    // this.isGroupOwner = this.group.owner === this.user.id;
-    this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
+    // TODO
+    // Fazer load para dar tempo do category carregar e não dar erro no console
 
-    // buscando reuniões do grupo
-    this.scheduleService.getAllSchedulesByGroup(this.group.id)
+    this.groupService.getGroupByToken(urlToken)
     .then(data => {
-      this.group.schedule_list = this.scheduleService.listSchedule(data);
+      this.group = data;
+      this.group.id = this.group._id;
+      this.group.owner = this.group._owner;
+      
+      delete this.group._id;
+      delete this.group._owner;
+
+      // // this.isGroupOwner = this.group.owner === this.user.id;
+      this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
+  
+      // buscando reuniões do grupo
+      this.scheduleService.getAllSchedulesByGroup(this.group.id)
+      .then(data => {
+        this.group.schedule_list = this.scheduleService.listSchedule(data);
+      })
+      .catch(err => {
+        this.group.schedule_list = [];
+        // console.log("Erro: ", err);
+      });
+  
+      // buscando integrantes do grupo
+      this.groupService.getAllUserByGroup(this.group.id)
+      .then(data => {
+        this.group.user_list = this.userService.listUsers(data);
+      })
+      .catch(err => {
+        this.group.user_list = [];
+        // console.log("Erro: ", err);
+      });
     })
     .catch(err => {
-      this.group.schedule_list = [];
-      // console.log("Erro: ", err);
+
     });
-
-    // buscando integrantes do grupo
-    this.groupService.getAllUserByGroup(this.group.id)
-    .then(data => {
-      this.group.user_list = this.userService.listUsers(data);
-    })
-    .catch(err => {
-      this.group.user_list = [];
-      // console.log("Erro: ", err);
-    })
   }
 
-
-  openScheduleLink = () => window.open(this.modalData.link, "_blank");
+  openScheduleLink = () => window.open(this.modalData.link, '_blank');
 
   handleRedirectToEdit = () =>
     this.router.navigate([`/groups/edit`, this.group.token]);

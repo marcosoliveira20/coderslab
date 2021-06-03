@@ -43,13 +43,14 @@
               name="objective"
               class="input-dark input"
               formControlName="subject_label"
+              (change)="handleSelectObjective($event)"
             >
             <option  value="" disabled selected> Objetivo</option>
               <option
-                *ngFor="let objective of objective_list"
-                value="{{ objective.name }}"
+                *ngFor="let objective of subjectList"
+                value="{{ objective.label }}"
               >
-                {{ objective.name }}
+                {{ objective.label }}
               </option>
             </select>
           </div>
@@ -59,13 +60,13 @@
               name="category"
               class="input-dark input select-default"
               formControlName="category"
-            >
+              >
             <option  value="" disabled selected> Categoria</option>
               <option
-                *ngFor="let category of category_listMok"
-                value="{{ category.name }}"
+                *ngFor="let category of categoryList"
+                value="{{ categoryList }}"
               >
-                {{ category.name }}
+                {{ category }}
               </option>
             </select>
           </div>
@@ -96,7 +97,7 @@
         </div>
       </form>
       <ul class="card-list">
-        <li *ngFor="let group of user.group_list">
+        <li *ngFor="let group of groupList">
           <app-card [data]="group" (click)="joinPublicGroup(group.token)"></app-card>
         </li>
       </ul>

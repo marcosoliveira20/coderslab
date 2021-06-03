@@ -60,14 +60,28 @@ export class ProfileComponent implements OnInit {
         github_id: data.github_id
       });
     })
+
+    this.getUserInterests();
   }
 
   
   getAllInterests() {
     this.subjectService.getAllSubjects().then(data => {
-      console.log(data)
       this.interestList = data
     });
+  }
+
+  getUserInterests() {
+    this.interestService.getInterestListByUser().then(data => {
+      data.map(x => {
+        this.selectedInterestList.push({
+          _id: x._id,
+          label: x.subject.label,
+          level: x.level
+        });
+      })
+      console.log(data)
+    })
   }
 
   onSubmitUserInfo() {
@@ -89,16 +103,20 @@ export class ProfileComponent implements OnInit {
     const level = levelSelect.value;
     const { _id } = this.interestList.find((subject) => subject.label === label);
 
-    this.selectedInterestList.push({ _id, label, level });
-    this.interestService.createInterest({ _id, label, level });
+    this.interestService.createInterest({ _id, label, level }).then(() => {
+      this.selectedInterestList.push({ _id, label, level });
+    });
   }
 
   /**
    * @todo implement delete code
    * @param interest
    */
-  deleteInterest(interest: any) {
-    console.log("interest: ", interest);
+  deleteInterest(interest: any, index) {
+    //TODO - deletar interesse que acabou de ser criado
+    this.interestService.deleteInterest(interest._id).then(() => {
+      this.selectedInterestList.splice(index, 1)
+    })
   }
 
   /**

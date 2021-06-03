@@ -16,6 +16,10 @@ export class InterstService {
         return this.http.get<any>(`${this.url}/interest/read/all`).toPromise()
     }
 
+    public getInterestListByUser() {
+        return this.http.get<any>(`${this.url}/interest/read/byUserId/${this.user_id}`).toPromise();
+    }
+
     public createInterest(body) {
         const res = {
             _id_user: this.user_id,
@@ -38,6 +42,6 @@ export class InterstService {
     }
 
     public deleteInterest(id) {
-        return this.http.put<any>(`${this.url}/interest/create/${id}`, httpOptions).toPromise()
+        return this.http.delete<any>(`${this.url}/interest/delete/${id}`).toPromise()
     }
 }

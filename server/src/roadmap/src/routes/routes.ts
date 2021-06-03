@@ -1,44 +1,26 @@
 import { Router } from "express";
 
-import { ensureAuthenticated } from "../../../ensureAuthenticated";
-import { CreateRoadmapCustomController } from "../controllers/CreateRoadmapCustomController";
+const RoadmapRoutes = Router();
+
 import { CreateRoadmapDefaultController } from "../controllers/CreateRoadmapDefaultController";
-import {
-  DeleteRoadmapController,
-} from "../controllers/DeleteRoadmapController";
-import {
-  ReadAllCustomRoadmapRepositories,
-} from "../controllers/ReadAllCustomRoadmapRepositories";
-import { ReadAllDefaultByUserIdRoadmapRepositories } from "../controllers/ReadAllDefaultByUserIdRoadmapRepositories";
-import {
-  ReadAllDefaultRoadmapRepositories,
-} from "../controllers/ReadAllDefaultRoadmapRepositories";
-import {
-  ReadAllDoneRoadmapRepositories,
-} from "../controllers/ReadAllDoneRoadmapRepositories";
-import {
-  ReadAllInProgressRoadmapRepositories,
-} from "../controllers/ReadAllInProgressRoadmapRepositories";
-import {
-  ReadAllRoadmapController,
-} from "../controllers/ReadAllRoadmapController";
-import {
-  ReadRoadmapByIdController,
-} from "../controllers/ReadRoadmapByIdController";
+import { CreateRoadmapCustomController } from "../controllers/CreateRoadmapCustomController";
 import { TurnRoadmapCustomizedController } from "../controllers/TurnRoadmapCustomizedController";
 import { TurnRoadmapDefaultController } from "../controllers/TurnRoadmapDefaultController";
 import { TurnRoadmapDone } from "../controllers/TurnRoadmapDone";
 import { TurnRoadmapNotDone } from "../controllers/TurnRoadmapNotDone";
-import {
-  UpdateLevelController,
-} from "../controllers/UpdateLevelController";
-import {
-  UpdateRepositoryContentList,
-} from "../controllers/UpdateRepositoryContentList";
 import { UpdateRepositoryName } from "../controllers/UpdateRepositoryName";
 import { UpdateRepositoryObjective } from "../controllers/UpdateRepositoryObjective";
-
-const RoadmapRoutes = Router();
+import { UpdateRepositoryContentList } from "../controllers/UpdateRepositoryContentList";
+import { ReadAllRoadmapController } from "../controllers/ReadAllRoadmapController";
+import { ReadRoadmapByIdController } from "../controllers/ReadRoadmapByIdController";
+import { DeleteRoadmapController } from "../controllers/DeleteRoadmapController";
+import { ReadAllCustomRoadmapRepositories } from "../controllers/ReadAllCustomRoadmapRepositories";
+import { ReadAllDefaultRoadmapRepositories } from "../controllers/ReadAllDefaultRoadmapRepositories";
+import { ReadAllInProgressRoadmapRepositories } from "../controllers/ReadAllInProgressRoadmapRepositories";
+import { ReadAllDoneRoadmapRepositories } from "../controllers/ReadAllDoneRoadmapRepositories";
+import { UpdateLevelController } from "../controllers/UpdateLevelController";
+import { ReadAllDefaultByUserIdRoadmapRepositories } from "../controllers/ReadAllDefaultByUserIdRoadmapRepositories";
+import { ensureAuthenticated } from "../../../ensureAuthenticated";
 
 const createRoadmapDefaultController = new CreateRoadmapDefaultController();
 const createRoadmapCustomController = new CreateRoadmapCustomController();
@@ -73,26 +55,11 @@ RoadmapRoutes.put("/roadmap/update/level/:_id", updateLevelController.handle);
 
 RoadmapRoutes.get("/roadmap/read/all", readAllRoadmapController.handle);
 RoadmapRoutes.get("/roadmap/read/:_id", readRoadmapByIdController.handle);
-RoadmapRoutes.get(
-  "/roadmap/read/all/custom",
-  readAllCustomRoadmapRepositories.handle
-);
-RoadmapRoutes.get(
-  "/roadmap/read/all/default",
-  readAllDefaultRoadmapRepositories.handle
-);
-RoadmapRoutes.get(
-  "/roadmap/read/all/default/by/userid",
-  readAllDefaultByUserIdRoadmapRepositories.handle
-);
-RoadmapRoutes.get(
-  "/roadmap/read/all/inprogress",
-  readAllInProgressRoadmapRepositories.handle
-);
-RoadmapRoutes.get(
-  "/roadmap/read/all/done",
-  readAllDoneRoadmapRepositories.handle
-);
+RoadmapRoutes.get("/roadmap/read/all/custom", readAllCustomRoadmapRepositories.handle);
+RoadmapRoutes.get("/roadmap/read/all/default", readAllDefaultRoadmapRepositories.handle);
+RoadmapRoutes.get("/roadmap/read/all/default/by/userid", readAllDefaultByUserIdRoadmapRepositories.handle);
+RoadmapRoutes.get("/roadmap/read/all/inprogress", readAllInProgressRoadmapRepositories.handle);
+RoadmapRoutes.get("/roadmap/read/all/done", readAllDoneRoadmapRepositories.handle);
 RoadmapRoutes.delete("/roadmap/delete/:_id", deleteRoadmapController.handle);
 
 export { RoadmapRoutes };
