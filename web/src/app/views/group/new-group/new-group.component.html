@@ -12,7 +12,7 @@
             <div>
               <p>Público</p>
               <label class="switch">
-                <input type="checkbox" checked />
+                <input type="checkbox" formControlName="is_public" checked />
                 <span class="slider round"></span>
               </label>
             </div>
@@ -27,6 +27,7 @@
             <div class="col">
               <label>objetivo</label>
               <select name="objective" formControlName="objective" (change)="getSubject($event)">
+                <option value="" selected>{{ formGroup.value.objective }}</option>
                 <option *ngFor="let objective of subjectList">{{objective.label}}</option>
               </select>
             </div>
@@ -55,9 +56,6 @@
         </section>
 
         <footer>
-          <button *ngIf="isEditMode" (click)="deleteGroup()">
-            Excluir Grupo
-          </button>
           <button type="submit">{{ isEditMode ? "Editar" : "Criar" }}</button>
         </footer>
     </form>

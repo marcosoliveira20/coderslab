@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
-import { interestListMock, userMock } from "../../../app.component";
 import { GroupService } from "src/app/services/group.service";
 import { SubjectService } from "src/app/services/subject.service";
 import { InterstService } from "src/app/services/interest.service";
@@ -13,11 +12,12 @@ import { InterstService } from "src/app/services/interest.service";
 })
 export class NewGroupComponent implements OnInit {
   public group;
-  public user = userMock;
   public isEditMode: boolean;
   public interestList = [];
   public subjectList = [];
-  private categories; // TODO finish
+  public categories = []; // TODO finish
+  public isGroupOwner: boolean;
+  public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
 
   public formGroup = this.fb.group({
     name: ["", Validators.required],
@@ -37,10 +37,10 @@ export class NewGroupComponent implements OnInit {
 
   ngOnInit() {
     this.isEditMode = this.activatedRoute.snapshot.url[1].path === "edit";
-    this.getGroupData();
     this.subjectService.getAllSubjects().then(data => {
       this.subjectList = data
     });
+    this.isEditMode && this.getGroupData();
   }
 
   onSubmit() {
@@ -63,18 +63,16 @@ export class NewGroupComponent implements OnInit {
     //TODO - redirecionar para dentro da tela de detalhe do grupo
   }
 
+  // Pegar todas as categorias correlacionadas ao subject escolhido pelo usuário
   getSubject(event) {
     //TODO - limpar input depois de selecionar uma opção
     this.interestList = []
     
-    this.subjectList.map(x => {
-      if(x.label == event.target.value) {
-
-        x.categories.map( c => {
-          this.interestList.push(c);
+    this.subjectList.map(subject => {
+      if(subject.label == event.target.value) {
+        subject.categories.map(category => {
+          this.interestList.push(category);
         })
-
-        console.log("interestList: ", this.interestList)
       }
     })
   }
@@ -86,24 +84,33 @@ export class NewGroupComponent implements OnInit {
    */
   getGroupData() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-    const group_list = this.user.group_list;
-    const isOwner = group_list.find(
-      (group) =>
-        String(group.token) === urlToken && group.owner === this.user.id
-    );
+    this.groupService.getGroupByToken(urlToken)
+    .then(data => {
+      this.group = data;
+      this.group.id = this.group._id;
+      this.group.owner = this.group._owner;
+      
+      delete this.group._id;
+      delete this.group._owner;
 
-    if (urlToken && isOwner) {
-      this.group = group_list.find((group) => String(group.token) === urlToken);
-      this.categories = this.group.categories;
+      this.isGroupOwner = this.group.owner === this.user.id;
+      console.log(this.group);
+      
+      if (urlToken && this.isGroupOwner) {
 
-      this.formGroup.patchValue({
-        name: this.group.name,
-        level: this.group.level,
-        assunto_list: this.group.subject,
-        objective: this.group.subject_label
-      });
-    }
+        this.formGroup.patchValue({
+          name: this.group.name,
+          level: this.group.level,
+          objective: this.group.subject_label,
+          is_public: this.group.is_public
+        });
 
-    console.log(this.group);
+        let index = this.subjectList.findIndex(subject => subject.label == this.group.subject_label);
+        index > -1 && this.subjectList.splice(index, 1);
+      }
+    })
+    .catch(error => {
+
+    });
   }
 }
