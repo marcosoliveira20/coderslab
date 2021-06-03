@@ -14,6 +14,7 @@ class ReadInterestByUserIdController {
             const data = await interests.readByUserId(idUser);
             const api = new Api();
             let interest = null;
+            let insterestList = [];
 
             try {
 
@@ -28,13 +29,15 @@ class ReadInterestByUserIdController {
                         subject: subject.data,
                         level: data[i].level,
                     };
+
+                    insterestList.push(interest);
                 }
 
             } catch (err) {
                 return response.status(err.response.status).send();
             }
 
-            return response.status(200).send(interest);
+            return response.status(200).send(insterestList);
         } catch (err) {
             console.log(err.message);
             return response.status(400).send();

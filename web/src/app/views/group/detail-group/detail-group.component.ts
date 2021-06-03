@@ -39,7 +39,9 @@ export class DetailGroupComponent implements OnInit {
 
   ngOnInit() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-    
+    // TODO
+    // Fazer load para dar tempo do category carregar e não dar erro no console
+
     this.groupService.getGroupByToken(urlToken)
     .then(data => {
       this.group = data;
@@ -48,9 +50,8 @@ export class DetailGroupComponent implements OnInit {
       
       delete this.group._id;
       delete this.group._owner;
-      // console.log("group ", this.group.category);
 
-      // this.isGroupOwner = this.group.owner === this.user.id;
+      // // this.isGroupOwner = this.group.owner === this.user.id;
       this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
   
       // buscando reuniões do grupo
@@ -72,12 +73,10 @@ export class DetailGroupComponent implements OnInit {
         this.group.user_list = [];
         // console.log("Erro: ", err);
       });
-
     })
     .catch(err => {
 
     });
-
   }
 
   openScheduleLink = () => window.open(this.modalData.link, '_blank');
