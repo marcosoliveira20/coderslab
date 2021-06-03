@@ -1,8 +1,8 @@
-<div class="cdl-container-group">
+<div class="cdl-container">
   <header>
     <h1>{{ isNewCustomRoadmap ? "Novo Roadmap" : "Roadmap" }}</h1>
     <nav>
-      <ul class="tabs">
+      <ul class="tabs" *ngIf="isNewCustomRoadmap">
         <li>
           <button class="button-nav" type="button" (click)="filter('roadmap')" [class.active]="type == 'roadmap'">
             Roadmap
@@ -65,8 +65,14 @@
           </div>
 
           <div class="row">
-            <label>nome</label>
-            <input type="text" placeholder="Nome do roadmap" formControlName="name" />
+            <div class="col">
+              <label>nome</label>
+              <input
+                type="text"
+                placeholder="Nome do roadmap"
+                formControlName="name"
+              />
+            </div>
           </div>
 
           <div class="row">

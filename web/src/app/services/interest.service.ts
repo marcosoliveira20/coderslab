@@ -15,4 +15,33 @@ export class InterstService {
     public getAllInterestList() {
         return this.http.get<any>(`${this.url}/interest/read/all`).toPromise()
     }
+
+    public getInterestListByUser() {
+        return this.http.get<any>(`${this.url}/interest/read/byUserId/${this.user_id}`).toPromise();
+    }
+
+    public createInterest(body) {
+        const res = {
+            _id_user: this.user_id,
+            _id_subject: body._id,
+            level: body.level
+        }
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.post<any>(`${this.url}/interest/create`, res, httpOptions).toPromise()
+    }
+
+    public updateInterest(body) {
+        const res = {
+            _id_user: this.user_id,
+            _id_subject: body._id,
+            level: body.level
+        }
+
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.put<any>(`${this.url}/interest/create/${body._id}`, res, httpOptions).toPromise()
+    }
+
+    public deleteInterest(id) {
+        return this.http.delete<any>(`${this.url}/interest/delete/${id}`).toPromise()
+    }
 }

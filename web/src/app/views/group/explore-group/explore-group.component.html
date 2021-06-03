@@ -1,4 +1,4 @@
-<main class="cdl-container">
+<div class="cdl-container">
   <div class="body">
     <a routerLink="./../.."
       ><button id="logo">
@@ -31,7 +31,11 @@
             />
           </div>
           <div class="col-1">
-            <button type="button" (click)="setShowInput()" class="button-square button-dark">
+            <button
+              type="button"
+              (click)="setShowInput()"
+              class="button-square button-dark"
+            >
               <img src="../../../../assets/icons/filter.svg" />
             </button>
           </div>
@@ -45,7 +49,7 @@
               formControlName="subject_label"
               (change)="handleSelectObjective($event)"
             >
-            <option  value="" disabled selected> Objetivo</option>
+              <option value="" disabled selected>Objetivo</option>
               <option
                 *ngFor="let objective of subjectList"
                 value="{{ objective.label }}"
@@ -60,11 +64,11 @@
               name="category"
               class="input-dark input select-default"
               formControlName="category"
-              >
-            <option  value="" disabled selected> Categoria</option>
+            >
+              <option value="" disabled selected>Categoria</option>
               <option
                 *ngFor="let category of categoryList"
-                value="{{ categoryList }}"
+                value="{{ category }}"
               >
                 {{ category }}
               </option>
@@ -72,22 +76,30 @@
           </div>
 
           <div class="col-3">
-            <select formControlName="level"  class="input-dark input">
+            <select formControlName="level" class="input-dark input">
               <option value="-1" disabled selected>Nível</option>
               <option value="0">Iniciante</option>
               <option value="1">Intermediário</option>
               <option value="2">Avançado</option>
             </select>
-
           </div>
 
           <div class="col-2">
-            <button id="order-alphabetic" class="input-dark input" (click)="changeAlphabetical()" type="button">
+            <button
+              id="order-alphabetic"
+              class="input-dark input"
+              (click)="changeAlphabetical()"
+              type="button"
+            >
               {{ exploreForm.value.is_alphabetical ? "A - Z" : "Z - A" }}
             </button>
           </div>
           <div class="col-1">
-            <button type="button" class="button-square button-dark" (click)="onSubmit()">
+            <button
+              type="button"
+              class="button-square button-dark"
+              (click)="onSubmit()"
+            >
               <img
                 src="../../../../assets/icons/magnifying-glass.svg"
                 srcset=""
@@ -117,7 +129,7 @@
       </li>
     </ul>
   </div>
-</main>
+</div>
 
 <app-modal
   *ngIf="showConfirmJoinGroupModal"

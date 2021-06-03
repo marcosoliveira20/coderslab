@@ -1,7 +1,9 @@
 .cdl-container {
   display: grid;
-  height: 100vh;
+  height: 100%;
+  padding: 0 32px;
   grid-template-rows: 25vh 75vh;
+  overflow: auto;
 }
 
 .cdl-container-group {

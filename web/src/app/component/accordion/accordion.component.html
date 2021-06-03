@@ -1,6 +1,6 @@
 <div
   class="accordion"
-  (click)="handleDisplay()"
+  (click)="!disableDetails ? handleDisplay() : redirectToRoadmapDetail()"
   [ngClass]="{
     'status-default': status === 'default',
     'status-done': status === 'done',
@@ -39,15 +39,16 @@
         <p class="text">{{ data.deadline | date:'dd/MM'}}</p>
       </div>
 
-      <div (click)="openReferenceLink()" *ngIf="data && data.reference">
+      <div (click)="openReferenceLink()" *ngIf="!disableDetails && data && data.reference">
         <img src="assets/icons/go_to_icon.svg"/>
         <p class="text">Referência</p>
       </div>
     </div>
 
     <div class="icon" [style.transform]="showBody ? 'rotate(180deg)' : 'rotate(0deg)'">
-      <img src="assets/icons/light/arrow-down.svg" *ngIf="!isChallenge"/>
-      <img src="assets/icons/dark/arrow-down.svg"  *ngIf="isChallenge"/>
+      <img src="assets/icons/light/arrow-down.svg" *ngIf="!disableDetails && !isChallenge"/>
+      <img src="assets/icons/dark/arrow-down.svg"  *ngIf="!disableDetails && isChallenge"/>
+      <button *ngIf="disableDetails"> saiba mais </button>
     </div>
   </div>
 

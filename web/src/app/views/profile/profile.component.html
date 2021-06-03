@@ -1,4 +1,4 @@
-<div class="cdl-container-group">
+<div class="cdl-container">
   <header>
     <div>
       <h1>{{ user.name + " " + user.lastname }}</h1>
@@ -140,7 +140,7 @@
         Criar interesse
       </button>
 
-      <div class="info-block" *ngFor="let interest of selectedInterestList">
+      <div class="info-block" *ngFor="let interest of selectedInterestList; index as i">
         <div class="row">
           <div class="col">
             <label class="label-info-block">Interesse</label>
@@ -150,7 +150,7 @@
           </div>
           <div class="col">
             <label class="label-info-block">Nível</label>
-            <select>
+            <select [value]="interest.level">
               <option value="0">Iniciante</option>
               <option value="1">Intermediário</option>
               <option value="2">Avançado</option>
@@ -160,7 +160,7 @@
 
         <button
           class="delete-interest-button"
-          (click)="deleteInterest(interest)"
+          (click)="deleteInterest(interest, i)"
         >
           Excluir
         </button>

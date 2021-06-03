@@ -73,6 +73,8 @@ export class NewGroupComponent implements OnInit {
         x.categories.map( c => {
           this.interestList.push(c);
         })
+
+        console.log("interestList: ", this.interestList)
       }
     })
   }

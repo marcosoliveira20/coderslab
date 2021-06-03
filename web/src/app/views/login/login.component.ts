@@ -1,12 +1,13 @@
 import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 import { SubjectService } from "src/app/services/subject.service";
-import { UserService } from "src/app/services/user.service";
+
 
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 // import { interestListMock } from "../../../app/app.component";
 
 import { Router } from "@angular/router";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: "app-login",
@@ -14,7 +15,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  public mode = "register";
+  public mode: string = "login";
 
   public interest_list: any[] = [];
   public subjectList: any[] = [];

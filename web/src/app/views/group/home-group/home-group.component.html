@@ -1,4 +1,4 @@
-<div class ="cdl-container-group">
+<div class ="cdl-container">
   <header>
     <div>
       <h1>José Bezerra</h1>
@@ -14,7 +14,7 @@
   <main class="">
     <ul class="card-list">
       <li *ngFor="let group of groupList">
-        <app-card [data]="group"></app-card>
+        <app-card [data]="group" (click)="redirectToGroup(group.token)"></app-card>
       </li>
     </ul>
     <a routerLink="./explore"

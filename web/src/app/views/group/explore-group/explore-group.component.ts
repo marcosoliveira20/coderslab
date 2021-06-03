@@ -39,14 +39,16 @@ export class ExploreGroupComponent implements OnInit {
 
   onSubmit() {
     this.exploreForm.controls["level"].setValue(Number(this.exploreForm.value.level));
+    this.exploreForm.controls['category'].enable();
 
     this.groupService.getAllGroupsBySearch(this.exploreForm.value)
       .then(data => {
         this.groupList = this.groupService.listGroup(data);
+        this.exploreForm.controls['category'].disable();
       })
       .catch(err => {
         this.groupList = [];
-        // console.log("Erro: ", err);
+        console.log("Erro: ", err);
       });
   }
 

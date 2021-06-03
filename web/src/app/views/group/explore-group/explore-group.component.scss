@@ -4,9 +4,7 @@
 @import "../../../../sass/components/button";
 @import "../../../../sass/components/input";
 
-main {
-  height: 100vh;
-  width: 100vw;
+.cdl-container {
   background-color: $cdl_darkBlue;
 }
 
@@ -101,6 +99,7 @@ input::placeholder {
   }
 }
 
+// MODAL
 .modal-body {
   p {
     color: #2d2d2d;

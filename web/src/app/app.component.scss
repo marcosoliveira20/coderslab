@@ -4,7 +4,6 @@
 
 .router-outlet-area {
   grid-area: router-outlet;
-  padding: 0 32px;
 }
 
 .main-without-navbar {
@@ -22,7 +21,7 @@ main {
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
   main {
     grid-template-rows: calc(100vh - 100px) 100px;
     grid-template-columns: 100vw;
