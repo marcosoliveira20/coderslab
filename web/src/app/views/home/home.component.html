@@ -27,7 +27,7 @@
     <div class="study-groups">
       <h1>Grupos de estudo</h1>
       <ul>
-        <li *ngFor="let group of user.group_list.slice(0, 3)">
+        <li *ngFor="let group of groupList.slice(0, 3)">
           <app-card [data]="group"></app-card>
         </li>
       </ul>

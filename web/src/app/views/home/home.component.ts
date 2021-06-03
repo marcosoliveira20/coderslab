@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
 import { roadmapMock, userMock } from "src/app/app.component";
+import { GroupService } from "src/app/services/group.service";
 
 @Component({
   selector: "app-home",
@@ -17,8 +18,9 @@ export class HomeComponent implements OnInit {
   public roadmapList: any = roadmapMock;
   public selectedRoadmap: any;
   public selectedRoadmapIndex: number = 0;
+  public groupList = [];
 
-  constructor() {}
+  constructor(private groupService: GroupService) {}
 
   ngOnInit() {
     this.selectedRoadmap = this.roadmapList[this.selectedRoadmapIndex];
@@ -29,6 +31,8 @@ export class HomeComponent implements OnInit {
     );
 
     this.getWeekDayList();
+
+    this.groupService.getAllGroupsByUser().then(data => { this.groupList = data })
   }
 
   changeRoadmap(action) {
