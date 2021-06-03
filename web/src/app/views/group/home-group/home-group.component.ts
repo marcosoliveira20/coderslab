@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { userMock } from "src/app/app.component";
 import { GroupService } from "src/app/services/group.service";
 
@@ -9,38 +10,34 @@ import { GroupService } from "src/app/services/group.service";
 })
 export class HomeGroupComponent implements OnInit {
 
+  constructor(private groupService: GroupService, private router: Router) {}
+
   public user = userMock;
   // groupList = userMock.group_list;
   groupList = [];
   groupListBd = [];
   typeFilter: string="all";
+  user_id = this.groupService.user_id;
 
   filter(type:string){
     this.typeFilter = type;
     if(type === "all"){
       this.groupList = this.groupListBd;
     }else{
-      this.groupList = this.groupListBd.filter( group => group.owner === this.user.id)
+      this.groupList = this.groupListBd.filter( group => group.owner === this.user_id)
     }
 
   }
 
-  constructor(private groupService: GroupService) {}
-
   ngOnInit() {
     this.groupService.getAllGroupsByUser().then(data => {
-      data.map(x => {
-        let obj = {
-          token: x.token,
-          name: x.name,
-          subject_label: x.subject_label,
-          level: x.level
-        }
-        this.groupListBd.push(obj);
-        console.log(x)
-      })
-
+      this.groupListBd = this.groupService.listGroup(data);
       this.filter("all");
     })
+    .catch(err => console.log(err))
+  }
+
+  redirectToGroup(token) {
+    this.router.navigate([`/groups`, token]);
   }
 }
