@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import { User } from "../model/User";
 import Api from "../../../Api";
+import { User } from "../model/User";
 
 class DeleteUserController {
   async handle(request: Request, response: Response) {
@@ -20,7 +20,7 @@ class DeleteUserController {
 
       try {
         await api.interests.delete(`/delete/byUserId/${id}`);
-      } catch(err) {
+      } catch (err) {
         return response.status(err.response.status).send();
       }
 

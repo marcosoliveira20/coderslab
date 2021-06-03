@@ -41,7 +41,7 @@ const readAllDoneRoadmapRepositories = new ReadAllDoneRoadmapRepositories();
 const updateLevelController = new UpdateLevelController();
 const readAllDefaultByUserIdRoadmapRepositories = new ReadAllDefaultByUserIdRoadmapRepositories();
 
-RoadmapRoutes.use(ensureAuthenticated)
+// RoadmapRoutes.use(ensureAuthenticated)
 RoadmapRoutes.post("/roadmap/create/default", createRoadmapDefaultController.handle);
 RoadmapRoutes.post("/roadmap/create/custom", createRoadmapCustomController.handle);
 RoadmapRoutes.put("/roadmap/update/custom/:_id", turnRoadmapCustomizedController.handle);

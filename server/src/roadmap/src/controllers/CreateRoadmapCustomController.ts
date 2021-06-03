@@ -18,10 +18,6 @@ class CreateRoadmapCustomController {
     const api = new Api();
 
     let quantityChallenge = 0
-    for(let i = 0; i < content_list.length; i++) {
-      const challenge = content_list[i].challenge.length
-      quantityChallenge = quantityChallenge + challenge
-    }
 
     try {
       const data = await roadmap.createCustom({
@@ -44,7 +40,7 @@ class CreateRoadmapCustomController {
         try {
           for(let i = 0; i < content_list.length; i++) {
             content_list[i]._roadmap_id = data._id;
-            const new_content_list = await api.content.post("/create", content_list[i]);
+            const new_content_list = await api.content.post("create/By/Roadmap/Custom", content_list[i]);
             content_list[i] = new_content_list.data
           }
         } catch(err) {
