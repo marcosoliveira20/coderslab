@@ -85,6 +85,33 @@ export class DetailGroupComponent implements OnInit {
     this.router.navigate([`/groups/edit`, this.group.token]);
 
   onSubmitNewSchedule() {
-    console.log(this.scheduleForm.value);
+    let newDate = new Date(`${this.scheduleForm.value.date}T${this.scheduleForm.value.time}:00`);
+
+    const body = {
+      "datetime": newDate,
+      "link": this.scheduleForm.value.link,
+      "description": this.scheduleForm.value.description,
+      "owner": this.group.owner,
+      "id_group": this.group.id
+    }
+
+    this.scheduleService.createSchedule(body)
+    .then(data => {
+      this.scheduleService.getAllSchedulesByGroup(this.group.id)
+      .then(res => {
+        this.group.schedule_list = this.scheduleService.listSchedule(res);
+      })
+      .catch(error => {
+        this.group.schedule_list = [];
+        // console.log("Erro: ", err);
+      });
+      
+      this.showAddScheduleModal = false;
+      this.scheduleForm.patchValue({ date: '', time: '', link: '', description: ''});
+      // console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 }

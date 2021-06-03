@@ -14,6 +14,15 @@ export class ScheduleService {
         this.scheduleUrl = "http://localhost:4000";
     }
 
+    public createSchedule(body) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json" }) };
+        return this.http.post<any>(`${this.scheduleUrl}/schedule/create`, body, httpOptions).toPromise();
+    }
+
+    public getAllSchedulesByGroup(group_id) {
+        return this.http.get<any>(`${this.scheduleUrl}/schedule/read/byIdGroup/${group_id}`).toPromise()
+    }
+
     public listSchedule(data) {
         this.scheduleList = [];
 
@@ -29,9 +38,5 @@ export class ScheduleService {
             this.scheduleList.push(obj);
         });
         return this.scheduleList;
-    }
-
-    public getAllSchedulesByGroup(group_id) {
-        return this.http.get<any>(`${this.scheduleUrl}/schedule/read/byIdGroup/${group_id}`).toPromise()
     }
 }
