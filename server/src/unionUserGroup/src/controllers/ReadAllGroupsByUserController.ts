@@ -27,7 +27,6 @@ class ReadAllGroupsByUserController {
 				}
 
 			} catch(err) {
-				console.log("oi");
 				return response.status(err.response.status).send();
 			}
 

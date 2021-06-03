@@ -6,6 +6,7 @@
       <div>
         <button
           class="button-default add-schedule-button"
+          *ngIf="isGroupOwner"
           (click)="showAddScheduleModal = true"
           >
         <svg fill="none" viewBox="0 0 43 43" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +16,7 @@
 
         <button
           class="button-default"
-          (click)="isGroupOwner && handleRedirectToEdit()"
+          (click)="handleRedirectToEditOrExit()"
         >
           {{ isGroupOwner ? 'Editar grupo' : 'Sair do grupo' }}
         </button>
@@ -54,6 +55,7 @@
             [type]="'member'"
             [data]="user"
             [disableButton]="!isGroupOwner"
+            (click)="exitGroup(user.id)"
           ></app-card>
         </li>
       </ul>

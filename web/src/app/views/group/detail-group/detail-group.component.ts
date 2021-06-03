@@ -21,6 +21,8 @@ export class DetailGroupComponent implements OnInit {
   public showAddScheduleModal: boolean;
   public isGroupOwner: boolean;
 
+  public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
+
   public scheduleForm = this.fb.group({
     date: ['', Validators.required],
     time: ['', Validators.required],
@@ -51,8 +53,7 @@ export class DetailGroupComponent implements OnInit {
       delete this.group._id;
       delete this.group._owner;
 
-      // // this.isGroupOwner = this.group.owner === this.user.id;
-      this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
+      this.isGroupOwner = this.group.owner === this.user.id;
   
       // buscando reuniões do grupo
       this.scheduleService.getAllSchedulesByGroup(this.group.id)
@@ -63,26 +64,47 @@ export class DetailGroupComponent implements OnInit {
         this.group.schedule_list = [];
         // console.log("Erro: ", err);
       });
+
+      this.getAllUsers();
   
-      // buscando integrantes do grupo
-      this.groupService.getAllUserByGroup(this.group.id)
-      .then(data => {
-        this.group.user_list = this.userService.listUsers(data);
-      })
-      .catch(err => {
-        this.group.user_list = [];
-        // console.log("Erro: ", err);
-      });
     })
     .catch(err => {
-
+      
+    });
+  }
+  
+  getAllUsers() {
+    // buscando integrantes do grupo
+    this.groupService.getAllUserByGroup(this.group.id)
+    .then(data => {
+      this.group.user_list = this.userService.listUsers(data);
+    })
+    .catch(err => {
+      this.group.user_list = [];
+      // console.log("Erro: ", err);
     });
   }
 
   openScheduleLink = () => window.open(this.modalData.link, '_blank');
 
-  handleRedirectToEdit = () =>
-    this.router.navigate([`/groups/edit`, this.group.token]);
+  handleRedirectToEditOrExit() {
+    this.isGroupOwner 
+    ? this.router.navigate([`/groups/edit`, this.group.token]) 
+    : this.exitGroup(this.user.id);
+    // TODO chamar um modal para confirmar se quer mesmo sair do grupo
+  }
+
+  exitGroup(idUSer: string) {
+    this.groupService.removeUserFromGroup(idUSer, this.group.id)
+    .then(data => {
+      this.isGroupOwner 
+      ? this.getAllUsers()
+      : this.router.navigate([`/groups`]);
+    })
+    .catch(error => {
+
+    });
+  }
 
   onSubmitNewSchedule() {
     let newDate = new Date(`${this.scheduleForm.value.date}T${this.scheduleForm.value.time}:00`);

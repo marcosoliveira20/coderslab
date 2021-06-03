@@ -55,7 +55,10 @@
         </section>
 
         <footer>
-          <button type="submit">Criar</button>
+          <button *ngIf="isEditMode" (click)="deleteGroup()">
+            Excluir Grupo
+          </button>
+          <button type="submit">{{ isEditMode ? "Editar" : "Criar" }}</button>
         </footer>
     </form>
   </main>
