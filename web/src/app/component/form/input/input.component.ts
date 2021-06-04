@@ -18,8 +18,6 @@ export class BasicAutoCompleterComponent implements OnInit {
   private interestListIntermediary =[];
   
   ngOnInit(): void {
-    console.log("interestLisInput ", this.interestLisInput);
-    console.log("interestListInputEdit ", this.interestListInputEdit);
     // this.getInterestListFromParent();
   }
 
@@ -89,6 +87,5 @@ export class BasicAutoCompleterComponent implements OnInit {
 
   public getInterestList() {
     this.itemEvent.emit([this.interestList]);
-    console.log(this.interestList)
   }
 }

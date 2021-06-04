@@ -204,3 +204,30 @@ app-input-auto-complete {
 .slider.round:before {
   border-radius: 50%;
 }
+
+// MODAL
+.modal-body {
+  p {
+    color: #2d2d2d;
+    font-weight: 300;
+    font-size: 25px;
+    letter-spacing: 15%;
+    margin-bottom: 70px;
+  }
+
+  button {
+    width: 100%;
+    background: transparent;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
+    font-size: 20px;
+    text-align: center;
+    align-self: center;
+    justify-content: center;
+    font-weight: 300;
+    height: 64px;
+    padding: 16px;
+    border-radius: 15px;
+  }
+
+}

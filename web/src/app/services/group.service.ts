@@ -47,6 +47,10 @@ export class GroupService {
         return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
     }
     
+    public deleteteGroup(group: any) {
+        return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${group.owner}`).toPromise()
+    }
+    
     public getAllUserByGroup(groupId: string) {
         return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
     }

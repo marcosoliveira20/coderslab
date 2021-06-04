@@ -5,7 +5,7 @@
   </header>
 
   <main>
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formGroup">
         <section>
           <div class="row row-switch">
             <h4>Informações gerais</h4>
@@ -56,8 +56,25 @@
         </section>
 
         <footer>
-          <button type="submit">{{ isEditMode ? "Editar" : "Criar" }}</button>
+          <button *ngIf="isEditMode" (click)="showConfirmDeleteGroupModal = true">
+            Excluir Grupo
+          </button>
+          <button (click)="onSubmit()">{{ isEditMode ? "Editar" : "Criar" }}</button>
         </footer>
     </form>
   </main>
 </div>
+
+<!-- MODAL DELETE GROUP -->
+<app-modal
+  *ngIf="showConfirmDeleteGroupModal"
+  [showController]="showConfirmDeleteGroupModal"
+  (close)="showConfirmDeleteGroupModal = false"
+>
+  <div class="modal-body">
+    <p>
+      Você tem certeza que deseja exluir esse grupo?
+    </p>
+    <button (click)="deleteGroup()">Sim, tenho certeza</button>
+  </div>
+</app-modal>

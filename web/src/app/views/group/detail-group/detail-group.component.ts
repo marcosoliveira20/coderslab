@@ -14,11 +14,17 @@ import { UserService } from "src/app/services/user.service";
 })
 export class DetailGroupComponent implements OnInit {
   // public user = userMock;
-  public group: any;
+  public group: any = userMock.group_list;
   public modalData: any;
+  public selecteduser: any;
 
-  public showScheduleModal: boolean;
-  public showAddScheduleModal: boolean;
+  public showModal: any = {
+    viewSchedule: false,
+    newSchedule: false,
+    leaveGroup: false,
+    deleteUser: false,
+  }
+
   public isGroupOwner: boolean;
 
   public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
@@ -41,15 +47,14 @@ export class DetailGroupComponent implements OnInit {
 
   ngOnInit() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-    // TODO
-    // Fazer load para dar tempo do category carregar e não dar erro no console
+    // TODO fazer load para dar tempo do category carregar e não dar erro no console
 
     this.groupService.getGroupByToken(urlToken)
     .then(data => {
       this.group = data;
       this.group.id = this.group._id;
       this.group.owner = this.group._owner;
-      
+
       delete this.group._id;
       delete this.group._owner;
 
@@ -97,6 +102,8 @@ export class DetailGroupComponent implements OnInit {
   exitGroup(idUSer: string) {
     this.groupService.removeUserFromGroup(idUSer, this.group.id)
     .then(data => {
+      this.showModal.deleteUser = false;
+      
       this.isGroupOwner 
       ? this.getAllUsers()
       : this.router.navigate([`/groups`]);
@@ -127,8 +134,8 @@ export class DetailGroupComponent implements OnInit {
         this.group.schedule_list = [];
         // console.log("Erro: ", err);
       });
-      
-      this.showAddScheduleModal = false;
+
+      this.showModal.newSchedule = false;
       this.scheduleForm.patchValue({ date: '', time: '', link: '', description: ''});
       // console.log(data);
     })

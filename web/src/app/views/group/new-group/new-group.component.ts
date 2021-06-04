@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { GroupService } from "src/app/services/group.service";
 import { SubjectService } from "src/app/services/subject.service";
@@ -12,12 +13,15 @@ import { InterstService } from "src/app/services/interest.service";
 })
 export class NewGroupComponent implements OnInit {
   public group;
-  public isEditMode: boolean;
   public interestList = [];
   public interestListEdit = [];
   public subjectList = [];
   public categories = []; // TODO finish
+
+  public isEditMode: boolean;
   public isGroupOwner: boolean;
+  public showConfirmDeleteGroupModal: boolean;
+
   public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
 
   public formGroup = this.fb.group({
@@ -27,10 +31,12 @@ export class NewGroupComponent implements OnInit {
     categories: ["", Validators.required],
     is_public: [false, Validators.required],
   });
+  
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private router: Router,
     private groupService: GroupService,
     private subjectService: SubjectService,
     private interestService: InterstService
@@ -60,8 +66,9 @@ export class NewGroupComponent implements OnInit {
       "_owner": this.groupService.user_id
     }
 
-    this.groupService.createGroup(body).then(data => console.log(data));
-    //TODO - redirecionar para dentro da tela de detalhe do grupo
+    this.groupService.createGroup(body)
+    .then(data => this.router.navigate([`/groups`, data.token]))
+    .catch(error => console.log(error));
   }
 
   getSubject(event?) {
@@ -122,5 +129,14 @@ export class NewGroupComponent implements OnInit {
     .catch(error => {
 
     });
+  }
+
+  deleteGroup() {
+    this.groupService.deleteteGroup(this.group)
+    .then(data => {
+      this.showConfirmDeleteGroupModal = false;
+      this.router.navigate([`/groups`])
+    })
+    .catch(error => console.log(error));
   }
 }
