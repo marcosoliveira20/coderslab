@@ -14,11 +14,17 @@ import { UserService } from "src/app/services/user.service";
 })
 export class DetailGroupComponent implements OnInit {
   // public user = userMock;
-  public group: any;
+  public group: any = userMock.group_list;
   public modalData: any;
+  public selecteduser: any;
 
-  public showScheduleModal: boolean;
-  public showAddScheduleModal: boolean;
+  public showModal: any = {
+    viewSchedule: false,
+    newSchedule: false,
+    leaveGroup: false,
+    deleteUser: false,
+  }
+
   public isGroupOwner: boolean;
 
   public scheduleForm = this.fb.group({
@@ -39,21 +45,20 @@ export class DetailGroupComponent implements OnInit {
 
   ngOnInit() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
-    // TODO
-    // Fazer load para dar tempo do category carregar e não dar erro no console
+    // TODO fazer load para dar tempo do category carregar e não dar erro no console
 
     this.groupService.getGroupByToken(urlToken)
     .then(data => {
       this.group = data;
       this.group.id = this.group._id;
       this.group.owner = this.group._owner;
-      
+
       delete this.group._id;
       delete this.group._owner;
 
       // // this.isGroupOwner = this.group.owner === this.user.id;
       this.isGroupOwner = this.group.owner === "60ac594c68ec2ca3d561db6f";
-  
+
       // buscando reuniões do grupo
       this.scheduleService.getAllSchedulesByGroup(this.group.id)
       .then(data => {
@@ -63,7 +68,7 @@ export class DetailGroupComponent implements OnInit {
         this.group.schedule_list = [];
         // console.log("Erro: ", err);
       });
-  
+
       // buscando integrantes do grupo
       this.groupService.getAllUserByGroup(this.group.id)
       .then(data => {
@@ -105,13 +110,28 @@ export class DetailGroupComponent implements OnInit {
         this.group.schedule_list = [];
         // console.log("Erro: ", err);
       });
-      
-      this.showAddScheduleModal = false;
+
+      this.showModal.newSchedule = false;
       this.scheduleForm.patchValue({ date: '', time: '', link: '', description: ''});
       // console.log(data);
     })
     .catch(err => {
       console.log(err);
     });
+  }
+
+
+  /**
+   * Remove user from current group
+   */
+  leaveGroup(): void {
+    // TODO leave group integration
+  }
+
+  /**
+   * Owner can remove an user from current group
+   */
+  removeUser(user: any) {
+
   }
 }
