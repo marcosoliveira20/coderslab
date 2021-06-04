@@ -9,6 +9,7 @@ export class BasicAutoCompleterComponent implements OnInit {
   @Input() theme: string;
   @Input() placeholder: string;
   @Input() interestLisInput: any[];
+  @Input() interestListInputEdit: any[];
   @Output() itemEvent = new EventEmitter<any[]>();
 
   private interestList = [];
@@ -17,11 +18,13 @@ export class BasicAutoCompleterComponent implements OnInit {
   private interestListIntermediary =[];
   
   ngOnInit(): void {
-    this.getInterestListFromParent();
+    console.log("interestLisInput ", this.interestLisInput);
+    console.log("interestListInputEdit ", this.interestListInputEdit);
+    // this.getInterestListFromParent();
   }
 
   getInterestListFromParent() {
-    if( this.interestLisInput[0]
+    if(this.interestLisInput[0]
       && !this.interestLisInput[0].name 
       && (this.interestListBD.length === 0 || this.interestListIntermediary !==  this.interestLisInput)) {
 
@@ -33,7 +36,6 @@ export class BasicAutoCompleterComponent implements OnInit {
         })
       })
       this.interestListIntermediary =  this.interestLisInput;
-
     }
   }
   
@@ -84,7 +86,9 @@ export class BasicAutoCompleterComponent implements OnInit {
       this.interestListFilter.splice(0);
     }
   }
+
   public getInterestList() {
     this.itemEvent.emit([this.interestList]);
+    console.log(this.interestList)
   }
 }

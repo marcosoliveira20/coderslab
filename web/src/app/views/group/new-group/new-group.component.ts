@@ -14,6 +14,7 @@ export class NewGroupComponent implements OnInit {
   public group;
   public isEditMode: boolean;
   public interestList = [];
+  public interestListEdit = [];
   public subjectList = [];
   public categories = []; // TODO finish
   public isGroupOwner: boolean;
@@ -63,18 +64,27 @@ export class NewGroupComponent implements OnInit {
     //TODO - redirecionar para dentro da tela de detalhe do grupo
   }
 
-  // Pegar todas as categorias correlacionadas ao subject escolhido pelo usuário
-  getSubject(event) {
+  getSubject(event?) {
+    let label = this.isEditMode ? this.formGroup.value.objective : event.target.value;
     //TODO - limpar input depois de selecionar uma opção
     this.interestList = []
     
     this.subjectList.map(subject => {
-      if(subject.label == event.target.value) {
+      if(subject.label == label) {
         subject.categories.map(category => {
           this.interestList.push(category);
         })
       }
     })
+
+    if(this.isEditMode) {
+      this.group.category.map(categoryGroup => {
+        let index = this.interestList.findIndex(category => category === categoryGroup);
+        index > -1 && this.interestList.splice(index, 1);
+      });
+      
+      this.interestListEdit = this.group.category;
+    }
   }
 
   handleCategories = (event) => (this.categories = event);
@@ -94,16 +104,16 @@ export class NewGroupComponent implements OnInit {
       delete this.group._owner;
 
       this.isGroupOwner = this.group.owner === this.user.id;
-      console.log(this.group);
       
       if (urlToken && this.isGroupOwner) {
-
         this.formGroup.patchValue({
           name: this.group.name,
           level: this.group.level,
           objective: this.group.subject_label,
           is_public: this.group.is_public
         });
+        
+        this.getSubject(this.formGroup);
 
         let index = this.subjectList.findIndex(subject => subject.label == this.group.subject_label);
         index > -1 && this.subjectList.splice(index, 1);
