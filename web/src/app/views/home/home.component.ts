@@ -32,7 +32,10 @@ export class HomeComponent implements OnInit {
 
     this.getWeekDayList();
 
-    this.groupService.getAllGroupsByUser().then(data => { this.groupList = data })
+    this.groupService.getAllGroupsByUser().then(data => {
+      this.groupList = data
+      console.log("grupo: ", data.length)
+    })
   }
 
   changeRoadmap(action) {
