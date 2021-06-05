@@ -23,7 +23,7 @@ class Api {
     });
 
     public subject = axios.create({
-        baseURL: "http://localhost:6000/subject",
+        baseURL: "http://localhost:11000/subject",
     });
 
     public roadmap = axios.create({

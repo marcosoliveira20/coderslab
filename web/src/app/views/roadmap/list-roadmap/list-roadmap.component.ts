@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { roadmapMock } from 'src/app/app.component';
+import { roadmapMock } from "src/app/app.component";
+
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
-  selector: 'app-list-roadmap',
-  templateUrl: './list-roadmap.component.html',
-  styleUrls: ['./list-roadmap.component.scss']
+  selector: "app-list-roadmap",
+  templateUrl: "./list-roadmap.component.html",
+  styleUrls: ["./list-roadmap.component.scss"],
 })
 export class ListRoadmapComponent implements OnInit {
-
   public roadmap_list = roadmapMock;
   showInput: boolean;
 
@@ -23,9 +23,7 @@ export class ListRoadmapComponent implements OnInit {
   onSubmit() {
     console.log(this.searchForm.value);
   }
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   setShowInput() {
     this.showInput = !this.showInput;

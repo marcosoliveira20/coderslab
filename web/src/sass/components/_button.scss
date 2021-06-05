@@ -66,3 +66,12 @@
   background-color: transparent;
   border: solid 2px $cdl_darkBlue;
 }
+
+
+@media (max-width: 1025px) {
+  .button-default {
+    font-size: 1rem;
+    width: fit-content;
+    padding: 0 10px;
+  }
+}

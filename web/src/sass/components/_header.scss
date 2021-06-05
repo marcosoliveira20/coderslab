@@ -11,7 +11,7 @@ header{
     font-family: Roboto;
     font-style: normal;
     font-weight: 300;
-    font-size: 45px;
+    font-size: 3rem;
     line-height: 53px;
     letter-spacing: 0.15em;
     margin-top: 0;
@@ -24,5 +24,12 @@ header{
 
   ul{
     list-style: none;
+  }
+}
+
+
+@media (max-width: 1025px) {
+  header h1 {
+    font-size: 2rem;
   }
 }

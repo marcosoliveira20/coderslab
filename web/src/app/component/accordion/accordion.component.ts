@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-accordion',
@@ -8,23 +8,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AccordionComponent implements OnInit {
   public showBody:boolean = false;
-  /**
-   * Accepted values: "done", "late", "challenge" and "default"
-   * Will be applied "default" if anyone value is passed,
-   */
   public status:string;
+  @Input() disableDetails: boolean = false;
   @Input() isChallenge:boolean = false;
   @Input() index:number;
   @Input() data;
+  @Input() roadmapToken: string;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.checkTaskStatus()
-    console.log("data: ", this.data)
-    console.log("isChallenge: ", this.isChallenge)
-    console.log("status: ", this.status)
-    console.log("deadline: ", this.data.deadline > new Date())
+    // console.log("data: ", this.data)
+    // console.log("isChallenge: ", this.isChallenge)
+    // console.log("status: ", this.status)
+    // console.log("deadline: ", this.data.deadline > new Date())
   }
 
   checkTaskStatus() {
@@ -54,6 +52,11 @@ export class AccordionComponent implements OnInit {
 
   handleDisplay() {
     this.showBody = !this.showBody;
+  }
+
+  redirectToRoadmapDetail() {
+    console.log(this.roadmapToken)
+    this.router.navigate(["/roadmap", this.roadmapToken]);
   }
 
 }
