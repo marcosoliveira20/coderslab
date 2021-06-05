@@ -1,4 +1,5 @@
 import { ContentService } from 'src/app/services/content.service';
+import { UserService } from 'src/app/services/user.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -13,6 +14,7 @@ export class HomeRoadmapComponent implements OnInit {
   public roadmap_list = [];
   public roadmapList = [];
   public typeFilter = 'all';
+  private user: any;
 
   filter(type: string) {
     this.typeFilter = type;
@@ -39,12 +41,13 @@ export class HomeRoadmapComponent implements OnInit {
   constructor(
     private roadmapService: RoadmapService,
     private contentService: ContentService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
-    this.roadmapService
-      .getRoadmapListByUser('60b5689c1a0293229c6002ae')
-      .then((data) => {
+    this.userService.getUserById().then((resultado) => {
+      this.user = resultado;
+      this.roadmapService.getRoadmapListByUser(this.user._id).then((data) => {
         data.map((roadmap) => {
           this.contentService.getDashboard(roadmap._id).then((dashboard) => {
             this.roadmap_list.push({
@@ -65,5 +68,6 @@ export class HomeRoadmapComponent implements OnInit {
         });
         this.filter('');
       });
+    });
   }
 }
