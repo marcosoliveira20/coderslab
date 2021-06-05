@@ -19,10 +19,10 @@ export class AccordionComponent implements OnInit {
 
   ngOnInit() {
     this.checkTaskStatus()
-    console.log("data: ", this.data)
-    console.log("isChallenge: ", this.isChallenge)
-    console.log("status: ", this.status)
-    console.log("deadline: ", this.data.deadline > new Date())
+    // console.log("data: ", this.data)
+    // console.log("isChallenge: ", this.isChallenge)
+    // console.log("status: ", this.status)
+    // console.log("deadline: ", this.data.deadline > new Date())
   }
 
   checkTaskStatus() {
