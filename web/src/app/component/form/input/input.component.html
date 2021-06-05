@@ -8,16 +8,16 @@
     />
     <div>
       <ul class="interest-list-dropdown">
-        <li *ngFor="let item of interestListFilter">
-          <button type="button" class="{{ item.name }}" (click)="addInterest($event)">
-            {{ item.name }}
+        <li *ngFor="let category of categoryListFilter">
+          <button type="button" (click)="handleCategoryList(category, 'add')">
+            {{ category }}
           </button>
         </li>
       </ul>
       <div id="interest-list">
-        <p class="interest-{{theme}}" *ngFor="let item of interestList">
-          {{ item.name }}
-          <button  type="button" class="{{ item.name }}" (click)="removeInterest($event)">
+        <p class="interest-{{theme}}" *ngFor="let category of categoryListSelected">
+          {{ category }}
+          <button  type="button" (click)="handleCategoryList(category, 'remove')">
             x
           </button>
         </p>

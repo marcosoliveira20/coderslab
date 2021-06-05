@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { GroupService } from "src/app/services/group.service";
 import { SubjectService } from "src/app/services/subject.service";
 import { InterstService } from "src/app/services/interest.service";
+import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 
 @Component({
   selector: "app-new-group",
@@ -12,9 +13,12 @@ import { InterstService } from "src/app/services/interest.service";
   styleUrls: ["./new-group.component.scss"],
 })
 export class NewGroupComponent implements OnInit {
+  @Output() cleanListSelected = new EventEmitter<boolean>();
+  @ViewChild (BasicAutoCompleterComponent, { static: false })
+  autoComplete: BasicAutoCompleterComponent;
+
   public group;
   public interestList = [];
-  public interestListEdit = [];
   public subjectList = [];
   public categories = []; // TODO finish
 
@@ -58,8 +62,8 @@ export class NewGroupComponent implements OnInit {
     // TODO - is_default tem q ser tratado pelo backend
     const body = {
       "name": this.formGroup.value.name,
-      "subject_label": "string",
-      "category": this.formGroup.value.categories[0],
+      "subject_label": this.formGroup.value.objective,
+      "category": this.formGroup.value.categories,
       "level": this.formGroup.value.level,
       "is_public": this.formGroup.value.is_public,
       "is_default": false,
@@ -83,14 +87,15 @@ export class NewGroupComponent implements OnInit {
         })
       }
     })
-
+    
     if(this.isEditMode) {
       this.group.category.map(categoryGroup => {
         let index = this.interestList.findIndex(category => category === categoryGroup);
         index > -1 && this.interestList.splice(index, 1);
       });
-      
-      this.interestListEdit = this.group.category;
+      this.autoComplete.setCategoryListSelected(this.group.category);
+    } else {
+      this.autoComplete.setCategoryListSelected([]);
     }
   }
 
