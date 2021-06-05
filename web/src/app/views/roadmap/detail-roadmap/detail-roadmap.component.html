@@ -1,7 +1,7 @@
 <div class="cdl-container">
   <header>
     <div>
-      <h1>{{ roadmap.name }}</h1>
+      <h1>{{ roadmap && roadmap.name }}</h1>
     </div>
 
     <nav>
@@ -31,7 +31,7 @@
       <li *ngFor="let content of filteredContentList; let i = index">
         <app-accordion [data]="content" [index]="getContentNumber(content)"></app-accordion>
 
-        <div class="challenge" *ngIf="content.challenge !== null">
+        <div class="challenge" *ngIf="content.challenge[0]">
           <app-accordion [data]="content.challenge" [isChallenge]="true"></app-accordion>
         </div>
       </li>
