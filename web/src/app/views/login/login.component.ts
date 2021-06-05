@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    localStorage.clear();
     this.subjectService.getAllSubjects().then((data) => {
       console.log(data);
       data.map((subject) => {
