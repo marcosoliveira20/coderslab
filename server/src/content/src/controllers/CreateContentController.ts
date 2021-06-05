@@ -1,18 +1,12 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import Api from "../../../Api";
-import { Content } from "../model/Content";
+import Api from '../../../Api';
+import { Content } from '../model/Content';
 
 class CreateContentController {
   async handle(request: Request, response: Response) {
-    const {
-      title,
-      description,
-      deadline,
-      reference,
-      challenge,
-      _roadmap_id,
-    } = request.body;
+    const { title, description, deadline, reference, challenge, _roadmap_id } =
+      request.body;
 
     const content = new Content();
     const api = new Api();
@@ -21,7 +15,7 @@ class CreateContentController {
       const data = await content.create({
         title,
         description,
-        deadline,
+        deadline: new Date(deadline),
         reference,
         challenge,
         _roadmap_id,
@@ -39,7 +33,7 @@ class CreateContentController {
       return response.status(201).send(data);
     } catch (err) {
       console.log(err.message);
-      return response.status(400).send("Bad Request");
+      return response.status(400).send('Bad Request');
     }
   }
 }
