@@ -13,11 +13,21 @@ import { InterstService } from "src/app/services/interest.service";
   styleUrls: ["./profile.component.scss"],
 })
 export class ProfileComponent implements OnInit {
-  public user = userMock;
+  public user: {
+    id,
+    name,
+    last_name,
+    username,
+    email,
+    discord_id,
+    github_id
+  };
+
   public isEditMode = false;
   public activeTab = "user";
   public selectedInterestList: any[] = [];
   public interestList: any;
+  public userId = localStorage.getItem('id');
 
   public showResetPasswordModal = false;
   public showConfirmDeleteAccountModal = false;
@@ -27,27 +37,19 @@ export class ProfileComponent implements OnInit {
 
   public profileForm = this.fb.group({
     name: [{ value: "", disabled: !this.isEditMode }, Validators.required],
-    lastname: [{ value: "", disabled: !this.isEditMode }, Validators.required],
+    last_name: [{ value: "", disabled: !this.isEditMode }, Validators.required],
     username: [{ value: "", disabled: !this.isEditMode }, Validators.required],
     email: [{ value: "", disabled: !this.isEditMode }, Validators.required],
     discord_id: [{ value: "", disabled: !this.isEditMode }],
     github_id: [{ value: "", disabled: !this.isEditMode }],
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService, private subjectService: SubjectService, private interestService: InterstService) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private subjectService: SubjectService, private interestService: InterstService) { }
 
   /**
    * @todo integration
    */
   ngOnInit() {
-    this.profileForm.patchValue({
-      name: this.user.name,
-      lastname: this.user.lastname,
-      username: this.user.username,
-      email: this.user.email,
-      discord_id: this.user.discord_id,
-      github_id: this.user.github_id,
-    });
     this.getAllInterests();
 
     this.userService.getUserById().then(data => {
@@ -58,13 +60,21 @@ export class ProfileComponent implements OnInit {
         email: data.email,
         discord_id: data.discord_id,
         github_id: data.github_id
-      });
-    })
+      })
 
+      this.user = {
+        id: this.userId,
+        name: data.name,
+        last_name: data.last_name,
+        username: data.username,
+        email: data.email,
+        discord_id: data.discord_id,
+        github_id: data.github_id,
+      }
+    })
     this.getUserInterests();
   }
 
-  
   getAllInterests() {
     this.subjectService.getAllSubjects().then(data => {
       this.interestList = data

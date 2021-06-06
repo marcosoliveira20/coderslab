@@ -1,7 +1,7 @@
-<div class="cdl-container">
+<div *ngIf="user && user.name &&  user.last_name " class="cdl-container">
   <header>
     <div>
-      <h1>{{ user.name + " " + user.lastname }}</h1>
+      <h1>{{ user.name + " " + user.last_name }}</h1>
 
       <div>
         <button class="button-default" (click)="showResetPasswordModal = true">
@@ -63,7 +63,7 @@
             <input
               type="text"
               placeholder="Bezerra"
-              formControlName="lastname"
+              formControlName="last_name"
             />
           </div>
         </div>
@@ -188,7 +188,7 @@
       Você tem certeza que deseja exluir a sua conta? Todos os seus dados serão
       apagados.
     </p>
-    <button (click)="deleteAccount()">Sim, o Coderslab não acaba nunca</button>
+    <button (click)="deleteAccount()">Sim</button>
   </div>
 </app-modal>
 

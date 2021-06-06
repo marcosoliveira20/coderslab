@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { GroupService } from "src/app/services/group.service";
 import { SubjectService } from "src/app/services/subject.service";
-import { InterstService } from "src/app/services/interest.service";
 import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
 
 @Component({
@@ -43,8 +42,7 @@ export class NewGroupComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private groupService: GroupService,
-    private subjectService: SubjectService,
-    private interestService: InterstService
+    private subjectService: SubjectService
   ) {}
 
   ngOnInit() {
