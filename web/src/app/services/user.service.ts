@@ -33,11 +33,10 @@ export class UserService {
   }
 
   public updateUser(body: any) {
-    body._id = this.user_id;
-
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
+
     return this.http
       .put<any>(`${this.url}/update/${this.user_id}`, body, httpOptions)
       .toPromise();

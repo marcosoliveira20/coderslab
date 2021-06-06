@@ -172,7 +172,7 @@
     <button (click)="showConfirmDeleteAccountModal = true">
       Excluir Conta
     </button>
-    <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit">
+    <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit" (click)="onSubmitUserInfo()">
       Salvar
     </button>
   </footer>
