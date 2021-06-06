@@ -9,6 +9,7 @@ const ContentSchema = new Schema(
     is_done: { type: Boolean, required: false, default: false },
     challenge: { type: [], required: false },
     _roadmap_id: { type: String, required: false },
+    doneDateTime: { type: Date, required: false },
   },
   {
     timestamps: true,

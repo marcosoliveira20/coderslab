@@ -28,7 +28,10 @@ class Content implements IContentRepository {
   turnContentDone(_id: string): object {
     const content = ContentSchema.findByIdAndUpdate(
       { _id },
-      { is_done: true },
+      { 
+        is_done: true, 
+        doneDateTime: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
+      },
       { new: true },
     );
 
@@ -38,7 +41,10 @@ class Content implements IContentRepository {
   turnContentNotDone(_id: string): object {
     const content = ContentSchema.findByIdAndUpdate(
       { _id },
-      { is_done: false },
+      { 
+        is_done: false,
+        doneDateTime: null
+      },
       { new: true },
     );
 
