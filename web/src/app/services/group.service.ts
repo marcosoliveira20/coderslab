@@ -46,9 +46,14 @@ export class GroupService {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
     }
+
+    public editGroup(group: any) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.put<any>(`${this.groupUrl}/group/update/${group.id}/${this.user_id}`, group, httpOptions).toPromise()
+    }
     
     public deleteteGroup(group: any) {
-        return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${group.owner}`).toPromise()
+        return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${this.user_id}`).toPromise()
     }
     
     public getAllUserByGroup(groupId: string) {

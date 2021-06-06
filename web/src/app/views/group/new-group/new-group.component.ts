@@ -25,6 +25,7 @@ export class NewGroupComponent implements OnInit {
   public isEditMode: boolean;
   public isGroupOwner: boolean;
   public showConfirmDeleteGroupModal: boolean;
+  private isFirstTime: boolean = true;
 
   public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
 
@@ -61,6 +62,7 @@ export class NewGroupComponent implements OnInit {
     
     // TODO - is_default tem q ser tratado pelo backend
     const body = {
+      "id": this.group.id,
       "name": this.formGroup.value.name,
       "subject_label": this.formGroup.value.objective,
       "category": this.formGroup.value.categories,
@@ -70,9 +72,15 @@ export class NewGroupComponent implements OnInit {
       "_owner": this.groupService.user_id
     }
 
-    this.groupService.createGroup(body)
-    .then(data => this.router.navigate([`/groups`, data.token]))
-    .catch(error => console.log(error));
+    if(this.isEditMode) {
+      this.groupService.editGroup(body)
+      .then(data => this.router.navigate([`/groups`, data.token]))
+      .catch(error => console.log(error));
+    } else {
+      this.groupService.createGroup(body)
+      .then(data => this.router.navigate([`/groups`, data.token]))
+      .catch(error => console.log(error));
+    }
   }
 
   getSubject(event?) {
@@ -88,11 +96,13 @@ export class NewGroupComponent implements OnInit {
       }
     })
     
-    if(this.isEditMode) {
+    if(this.isEditMode && this.isFirstTime) {
       this.group.category.map(categoryGroup => {
         let index = this.interestList.findIndex(category => category === categoryGroup);
         index > -1 && this.interestList.splice(index, 1);
       });
+
+      this.isFirstTime = false;
       this.autoComplete.setCategoryListSelected(this.group.category);
     } else {
       this.autoComplete.setCategoryListSelected([]);

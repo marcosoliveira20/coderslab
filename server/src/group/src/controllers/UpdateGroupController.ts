@@ -11,7 +11,6 @@ class UpdateGroupController {
 			category,
 			subject_label,
 			level,
-  			token,
 			is_public,
 			is_default,
 			_owner
@@ -39,7 +38,7 @@ class UpdateGroupController {
 				category,
 				subject_label,
 				level,
-  				token,
+  				token: findIndex.token,
 				is_public,
 				is_default,
 				_owner
