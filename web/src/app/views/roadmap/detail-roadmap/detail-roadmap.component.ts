@@ -1,32 +1,36 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { roadmapMock } from "src/app/app.component";
-import { graphDataMock } from "src/mock";
+import { RoadmapService } from 'src/app/services/roadmapCustom.service';
+import { graphDataMock } from 'src/mock';
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: "app-detail-roadmap",
-  templateUrl: "./detail-roadmap.component.html",
-  styleUrls: ["./detail-roadmap.component.scss"],
+  selector: 'app-detail-roadmap',
+  templateUrl: './detail-roadmap.component.html',
+  styleUrls: ['./detail-roadmap.component.scss'],
 })
 export class DetailRoadmapComponent implements OnInit {
-  public graphData = graphDataMock
+  public graphData = graphDataMock;
 
   public contentIndexList: string[] = [];
-  public filteredContentList: any;
+  public filteredContentList: any = [];
   public roadmap: any;
-  public typeFilter: string = "all";
+  public typeFilter = 'all';
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private roadmapService: RoadmapService,
+  ) {}
 
   ngOnInit() {
-    const token = this.activatedRoute.snapshot.paramMap.get("token");
-    this.roadmap = roadmapMock.find((roadmap) => String(roadmap.id) === token); // TODO integration query here
-
-    this.roadmap.content_list.map((content) =>
-      this.contentIndexList.push(content.id)
-    );
-
-    this.filter("all");
+    const token = this.activatedRoute.snapshot.paramMap.get('token');
+    this.roadmapService.getRoadmapById(token).then((data) => {
+      this.roadmap = data;
+      data.content_list.map((content) => {
+        this.contentIndexList.push(content._id);
+      });
+      this.filter('all');
+    });
   }
 
   /**
@@ -37,14 +41,14 @@ export class DetailRoadmapComponent implements OnInit {
     this.typeFilter = type;
 
     switch (type) {
-      case "done":
+      case 'done':
         this.filteredContentList = this.roadmap.content_list.filter(
-          (content) => content.is_done
+          (content) => content.is_done,
         );
         break;
-      case "inProgress":
+      case 'inProgress':
         this.filteredContentList = this.roadmap.content_list.filter(
-          (content) => !content.is_done
+          (content) => !content.is_done,
         );
         break;
       default:
@@ -58,6 +62,6 @@ export class DetailRoadmapComponent implements OnInit {
    * @returns content number
    */
   getContentNumber(content): number {
-    return this.contentIndexList.findIndex((c) => c === content.id) + 1;
+    return this.contentIndexList.findIndex((c) => c === content._id) + 1;
   }
 }

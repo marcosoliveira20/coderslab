@@ -1,4 +1,5 @@
-import { roadmapMock } from 'src/app/app.component';
+import { ContentService } from 'src/app/services/content.service';
+import { UserService } from 'src/app/services/user.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -10,11 +11,10 @@ import { RoadmapService } from '../../../services/roadmapCustom.service';
   styleUrls: ['./home-roadmap.component.scss'],
 })
 export class HomeRoadmapComponent implements OnInit {
-  // public roadmap_list = roadmapMock;
   public roadmap_list = [];
-  // public roadmapList = roadmapMock;
   public roadmapList = [];
   public typeFilter = 'all';
+  private user: any;
 
   filter(type: string) {
     this.typeFilter = type;
@@ -38,31 +38,36 @@ export class HomeRoadmapComponent implements OnInit {
     }
   }
 
-  constructor(private roadmapService: RoadmapService) {}
+  constructor(
+    private roadmapService: RoadmapService,
+    private contentService: ContentService,
+    private userService: UserService,
+  ) {}
 
   ngOnInit() {
-    this.roadmapService
-      .getRoadmapListByUser('60b5689c1a0293229c6002ae')
-      .then((data) => {
+    this.userService.getUserById().then((resultado) => {
+      this.user = resultado;
+      this.roadmapService.getRoadmapListByUser(this.user._id).then((data) => {
         data.map((roadmap) => {
-          this.roadmap_list.push({
-            id: roadmap._id,
-            name: roadmap.name,
-            is_default: roadmap.is_default,
-            is_done: roadmap.is_done,
-            level: roadmap.level,
-            // TODO Lógica
-            progress: '10%',
-            content_status: {
-              total: roadmap.quantity_contents,
-              // TODO CHAMADA
-              complete: 20,
-              late: 3,
-            },
-            content_list: [],
+          this.contentService.getDashboard(roadmap._id).then((dashboard) => {
+            this.roadmap_list.push({
+              id: roadmap._id,
+              name: roadmap.name,
+              is_default: roadmap.is_default,
+              is_done: roadmap.is_done,
+              level: roadmap.level,
+              progress: `${dashboard.percentInProgress}%`,
+              content_status: {
+                total: roadmap.quantity_contents,
+                complete: dashboard.done,
+                late: dashboard.late,
+              },
+              content_list: [],
+            });
           });
         });
         this.filter('');
       });
+    });
   }
 }
