@@ -5,6 +5,7 @@ import { CreateContentController } from '../controllers/CreateContentController'
 import { CreateContentCustomRoadmapController } from '../controllers/CreateContentCustomRoadmapController';
 import { DeleteContentByRoadmapIDController } from '../controllers/DeleteContentByRoadmapIDController';
 import { DeleteContentController } from '../controllers/DeleteContentController';
+import { ReadGraphicContentController } from '../controllers/ReadGraphicContentController';
 import { ReadAllContentController } from '../controllers/ReadAllContentController';
 import { ReadAllDoneContentRepositories } from '../controllers/ReadAllDoneContentRepositories';
 import { ReadAllInProgressContentRepositories } from '../controllers/ReadAllInProgressContentRepositories';
@@ -29,6 +30,7 @@ const TurnContentNotDoneController = new TurnContentNotDone();
 const readAllContentController = new ReadAllContentController();
 const readContentByIdController = new ReadContentByIdController();
 const deleteContentController = new DeleteContentController();
+const readGraphicContentController = new ReadGraphicContentController();
 const readAllInProgressContentRepositories =
   new ReadAllInProgressContentRepositories();
 const readAllDoneContentRepositories = new ReadAllDoneContentRepositories();
@@ -79,6 +81,7 @@ ContentRoutes.put(
 );
 
 ContentRoutes.get('/content/dashboard', readDashboardController.handle);
+ContentRoutes.get('/content/read/graphic/:_roadmap_id', readGraphicContentController.handle);
 ContentRoutes.get('/content/read/all', readAllContentController.handle);
 ContentRoutes.get('/content/read/:_id', readContentByIdController.handle);
 ContentRoutes.get(

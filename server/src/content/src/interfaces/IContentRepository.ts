@@ -17,6 +17,7 @@ interface IContentRepository {
   updateDeadline(_id: string, deadline: string): object;
   updateReference(_id: string, reference: string): object;
   updateChallenge(_id: string, challenge: string): object;
+  readGraphic(_roadmap_id: string): Array<object>;
   readAll(): IContentSchemaDTO;
   readById(_id: string): IContentSchemaDTO;
   readByRoadmapId(_roadmap_id: string): IContentSchemaDTO;

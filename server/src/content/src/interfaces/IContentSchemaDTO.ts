@@ -6,6 +6,7 @@ interface IContentSchemaDTO {
   is_done?: Boolean,
   challenge?: [],
   _roadmap_id?: String,
+  doneDateTime?: Date,
 }
 
 export { IContentSchemaDTO };

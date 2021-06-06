@@ -65,27 +65,22 @@ export const subjectMock = [
 
 export const graphDataMock = [
   {
-    date: "20/04",
+    date: "21/04",
     quantity: 4,
     completedQuantity: 4,
   },
   {
-    date: "20/05",
-    quantity: 3,
-    completedQuantity: 3,
-  },
-  {
-    date: "20/06",
+    date: "23/04",
     quantity: 2,
     completedQuantity: 1,
   },
   {
-    date: "20/06",
-    quantity: 1,
+    date: "24/04",
+    quantity: 2,
     completedQuantity: 2,
   },
   {
-    date: "20/07",
+    date: "25/04",
     quantity: 0,
     completedQuantity: 0,
   },

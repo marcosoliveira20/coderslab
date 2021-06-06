@@ -101,6 +101,13 @@ class Content implements IContentRepository {
     return content;
   }
 
+  readGraphic(_roadmap_id: string): Array<IContentSchemaDTO> {
+    const graphic = ContentSchema.find({ _roadmap_id, is_done: true })
+    .sort({ deadline: 1 });
+
+    return graphic;
+  }
+
   readAll(): IContentSchemaDTO {
     const content = ContentSchema.find();
 
