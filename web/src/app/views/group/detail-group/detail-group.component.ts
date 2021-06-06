@@ -13,8 +13,7 @@ import { UserService } from "src/app/services/user.service";
   styleUrls: ['./detail-group.component.scss'],
 })
 export class DetailGroupComponent implements OnInit {
-  // public user = userMock;
-  public group: any = userMock.group_list;
+  public group: any;
   public modalData: any;
   public selecteduser: any;
 
@@ -26,8 +25,7 @@ export class DetailGroupComponent implements OnInit {
   }
 
   public isGroupOwner: boolean;
-
-  public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
+  public userId = localStorage.getItem('id');
 
   public scheduleForm = this.fb.group({
     date: ['', Validators.required],
@@ -58,7 +56,7 @@ export class DetailGroupComponent implements OnInit {
       delete this.group._id;
       delete this.group._owner;
 
-      this.isGroupOwner = this.group.owner === this.user.id;
+      this.isGroupOwner = this.group.owner === this.userId;
   
       // buscando reuniões do grupo
       this.scheduleService.getAllSchedulesByGroup(this.group.id)
@@ -95,12 +93,11 @@ export class DetailGroupComponent implements OnInit {
   handleRedirectToEditOrExit() {
     this.isGroupOwner 
     ? this.router.navigate([`/groups/edit`, this.group.token]) 
-    : this.exitGroup(this.user.id);
-    // TODO chamar um modal para confirmar se quer mesmo sair do grupo
+    : this.exitGroup(this.userId);
   }
 
-  exitGroup(idUSer: string) {
-    this.groupService.removeUserFromGroup(idUSer, this.group.id)
+  exitGroup(idUser: string) {
+    this.groupService.removeUserFromGroup(idUser, this.group.id)
     .then(data => {
       this.showModal.deleteUser = false;
       

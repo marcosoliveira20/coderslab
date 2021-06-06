@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class GroupService {
     private unionGroupUrl: string;
     private groupUrl: string;
-    public user_id: string = "60ac594c68ec2ca3d561db6f";
+    public user_id = localStorage.getItem('id');
     public groupList = [];
 
     constructor(private http: HttpClient) {

@@ -27,7 +27,7 @@ export class NewGroupComponent implements OnInit {
   public showConfirmDeleteGroupModal: boolean;
   private isFirstTime: boolean = true;
 
-  public user: { id: string } = { id: "60ac594c68ec2ca3d561db6f" };
+  public userId = localStorage.getItem('id');
 
   public formGroup = this.fb.group({
     name: ["", Validators.required],
@@ -61,8 +61,16 @@ export class NewGroupComponent implements OnInit {
     });
     
     // TODO - is_default tem q ser tratado pelo backend
-    const body = {
-      "id": this.group.id,
+    let body: {
+      id?,
+      name,
+      subject_label,
+      category,
+      level,
+      is_public,
+      is_default,
+      _owner
+    } = {
       "name": this.formGroup.value.name,
       "subject_label": this.formGroup.value.objective,
       "category": this.formGroup.value.categories,
@@ -73,6 +81,8 @@ export class NewGroupComponent implements OnInit {
     }
 
     if(this.isEditMode) {
+      body.id = this.group.id;
+
       this.groupService.editGroup(body)
       .then(data => this.router.navigate([`/groups`, data.token]))
       .catch(error => console.log(error));
@@ -125,7 +135,7 @@ export class NewGroupComponent implements OnInit {
       delete this.group._id;
       delete this.group._owner;
 
-      this.isGroupOwner = this.group.owner === this.user.id;
+      this.isGroupOwner = this.group.owner === this.userId;
       
       if (urlToken && this.isGroupOwner) {
         this.formGroup.patchValue({
