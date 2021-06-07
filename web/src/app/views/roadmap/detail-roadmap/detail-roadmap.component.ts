@@ -28,7 +28,6 @@ export class DetailRoadmapComponent implements OnInit {
       this.roadmap = data;
       data.content_list.map((content) => {
         this.contentIndexList.push(content._id);
-        console.log(content);
       });
       this.filter('all');
     });
@@ -43,7 +42,6 @@ export class DetailRoadmapComponent implements OnInit {
 
     switch (type) {
       case 'done':
-        console.log(this.roadmap);
         this.filteredContentList = this.roadmap.content_list.filter(
           (content) => content.is_done,
         );

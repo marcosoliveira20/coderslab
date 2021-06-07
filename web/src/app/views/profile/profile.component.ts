@@ -13,43 +13,44 @@ import { InterstService } from "src/app/services/interest.service";
   styleUrls: ["./profile.component.scss"],
 })
 export class ProfileComponent implements OnInit {
-  public user = userMock;
+  public user: {
+    id,
+    name,
+    last_name,
+    username,
+    email,
+    discord_id,
+    github_id
+  };
+
   public isEditMode = false;
   public activeTab = "user";
   public selectedInterestList: any[] = [];
   public interestList: any;
+  public userId = localStorage.getItem('id');
 
   public showResetPasswordModal = false;
   public showConfirmDeleteAccountModal = false;
 
-  public handleEditMode = () => (this.isEditMode = !this.isEditMode);
   public changeTab = (tab: string) => (this.activeTab = tab);
-
+  
   public profileForm = this.fb.group({
-    name: [{ value: "", disabled: !this.isEditMode }, Validators.required],
-    lastname: [{ value: "", disabled: !this.isEditMode }, Validators.required],
-    username: [{ value: "", disabled: !this.isEditMode }, Validators.required],
-    email: [{ value: "", disabled: !this.isEditMode }, Validators.required],
-    discord_id: [{ value: "", disabled: !this.isEditMode }],
-    github_id: [{ value: "", disabled: !this.isEditMode }],
+    name: [{ value: "", disabled: true }, Validators.required],
+    last_name: [{ value: "", disabled: true }, Validators.required],
+    username: [{ value: "", disabled: true }, Validators.required],
+    email: [{ value: "", disabled: true }, Validators.required],
+    discord_id: [{ value: "", disabled: true }],
+    github_id: [{ value: "", disabled: true }],
   });
-
-  constructor(private fb: FormBuilder, private userService: UserService, private subjectService: SubjectService, private interestService: InterstService) {}
-
+  
+  constructor(private fb: FormBuilder, private userService: UserService, private subjectService: SubjectService, private interestService: InterstService) { }
+  
   /**
    * @todo integration
    */
   ngOnInit() {
-    this.profileForm.patchValue({
-      name: this.user.name,
-      lastname: this.user.lastname,
-      username: this.user.username,
-      email: this.user.email,
-      discord_id: this.user.discord_id,
-      github_id: this.user.github_id,
-    });
     this.getAllInterests();
-
+    
     this.userService.getUserById().then(data => {
       this.profileForm.patchValue({
         name: data.name,
@@ -58,12 +59,40 @@ export class ProfileComponent implements OnInit {
         email: data.email,
         discord_id: data.discord_id,
         github_id: data.github_id
-      });
+      })
+      
+      this.user = {
+        id: this.userId,
+        name: data.name,
+        last_name: data.last_name,
+        username: data.username,
+        email: data.email,
+        discord_id: data.discord_id,
+        github_id: data.github_id,
+      }
     })
-
     this.getUserInterests();
   }
-
+  
+  public handleEditMode() {
+    this.isEditMode = !this.isEditMode;
+    if(this.isEditMode)
+   {
+      this.profileForm.controls['name'].enable();
+      this.profileForm.controls['last_name'].enable();
+      this.profileForm.controls['username'].enable();
+      this.profileForm.controls['email'].enable();
+      this.profileForm.controls['discord_id'].enable();
+      this.profileForm.controls['github_id'].enable();
+    } else {
+      this.profileForm.controls['name'].disable();
+      this.profileForm.controls['last_name'].disable();
+      this.profileForm.controls['username'].disable();
+      this.profileForm.controls['email'].disable();
+      this.profileForm.controls['discord_id'].disable();
+      this.profileForm.controls['github_id'].disable();
+    }
+  }
   
   getAllInterests() {
     this.subjectService.getAllSubjects().then(data => {
@@ -84,13 +113,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmitUserInfo() {
-    console.log(
-      "profileForm: ",
-      this.profileForm,
-      "isEditMode:",
-      this.isEditMode
-    );
-
     this.userService.updateUser(this.profileForm.value).then(data => console.log(data));
   }
 

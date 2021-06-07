@@ -1,24 +1,27 @@
-
 <div class="cdl-container">
   <header>
     <div>
-      <h1>José Bezerra</h1>
+      <h1>{{user.name}} {{user.last_name}}</h1>
       <button routerLink="./new" class="button-default">Novo Roadmap</button>
     </div>
 
     <nav>
       <ul class="tabs">
         <li><button class="button-nav" (click)="filter('all')" [class.active]="typeFilter == 'all'">Todos</button></li>
-        <li><button class="button-nav" (click)="filter('concluded')" [class.active]="typeFilter == 'concluded'">Concluídos</button></li>
-        <li><button class="button-nav" (click)="filter('inProgress')" [class.active]="typeFilter == 'inProgress'">Em progresso</button></li>
-        <li><button class="button-nav" (click)="filter('default')" [class.active]="typeFilter == 'default'">Default</button></li>
-        <li><button class="button-nav" (click)="filter('custom')"[class.active]="typeFilter == 'custom'" >Customizados</button></li>
+        <li><button class="button-nav" (click)="filter('concluded')"
+            [class.active]="typeFilter == 'concluded'">Concluídos</button></li>
+        <li><button class="button-nav" (click)="filter('inProgress')" [class.active]="typeFilter == 'inProgress'">Em
+            progresso</button></li>
+        <li><button class="button-nav" (click)="filter('default')"
+            [class.active]="typeFilter == 'default'">Default</button></li>
+        <li><button class="button-nav" (click)="filter('custom')"
+            [class.active]="typeFilter == 'custom'">Customizados</button></li>
       </ul>
     </nav>
     <input type="text" name="" id="" placeholder="Pesquisar por roadmap" class="searchbar searchbar-light" />
   </header>
 
-  <main >
+  <main>
     <ul class="card-list-roadmap">
       <li *ngFor="let roadmap of roadmapList">
         <app-card [data]="roadmap" [type]="'roadmap-progress'"></app-card>

@@ -15,12 +15,11 @@ export class ExploreGroupComponent implements OnInit {
   public showConfirmJoinGroupModal: boolean;
   public showInput: boolean;
   public selectedToken: string;
-  // public user = userMock;
   public group: any;
   public groupList = [];
   public subjectList = [];
   public categoryList = [];
-  public userId = "60ac594c68ec2ca3d561db6f";
+  public userId = localStorage.getItem('id');
 
   exploreForm = this.fb.group({
     name: [""],

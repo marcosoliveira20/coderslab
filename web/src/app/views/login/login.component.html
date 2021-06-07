@@ -4,55 +4,23 @@
   <img src="assets/icons/poweredby.svg" alt="" id="poweredby-icon" />
 
   <div class="div-bg-login" *ngIf="mode === 'login'">
-    <img
-      class="img-blob-left"
-      src="assets/background/left_blob_stage1.svg"
-      alt=""
-    />
-    <img
-      class="img-blob-right"
-      src="assets/background/right_blob_stage1.svg"
-      alt=""
-    />
+    <img class="img-blob-left" src="assets/background/left_blob_stage1.svg" alt="" />
+    <img class="img-blob-right" src="assets/background/right_blob_stage1.svg" alt="" />
   </div>
 
   <div class="div-bg-register" *ngIf="mode === 'register'">
-    <img
-      class="img-blob-right"
-      src="assets/background/right_blob_stage3.svg"
-      alt=""
-    />
+    <img class="img-blob-right" src="assets/background/right_blob_stage3.svg" alt="" />
   </div>
 </div>
 
 <div class="container h-100 content-frame">
   <!-- LOGIN -->
-  <form
-    [formGroup]="loginForm"
-    (ngSubmit)="onSubmitLogin()"
-    class="section-login"
-    *ngIf="mode === 'login'"
-  >
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="section-login" *ngIf="mode === 'login'">
     <div class="form-group-base">
-      <input
-        type="text"
-        placeholder="Nome de Usuário"
-        formControlName="username"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Senha"
-        formControlName="password"
-        required
-      />
+      <input type="text" placeholder="Nome de Usuário" formControlName="username" required />
+      <input type="text" placeholder="Senha" formControlName="password" required />
 
-      <button
-        type="submit"
-        class="btn-login-primary"
-        (click)="handleLoginMode('login')"
-        routerLink="/"
-      >
+      <button type="submit" class="btn-login-primary">
         Login
       </button>
       <div class="row">
@@ -60,10 +28,7 @@
           <button class="btn-login-secondary">Redefinir senha</button>
         </div>
         <div class="col">
-          <button
-            class="btn-login-secondary"
-            (click)="handleLoginMode('register')"
-          >
+          <button class="btn-login-secondary" (click)="handleLoginMode('register')">
             Fazer cadastro
           </button>
         </div>
@@ -72,12 +37,7 @@
   </form>
 
   <!-- REGISTER -->
-  <form
-    [formGroup]="registerForm"
-    (ngSubmit)="onSubmitRegister()"
-    class="section-register"
-    *ngIf="mode === 'register'"
-  >
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" class="section-register" *ngIf="mode === 'register'">
     <div>
       <div class="form-group-base">
         <div class="row">
@@ -85,41 +45,21 @@
             <input type="text" placeholder="Nome" formControlName="name" />
           </div>
           <div class="col">
-            <input
-              type="text"
-              placeholder="Sobrenome"
-              formControlName="last_name"
-            />
+            <input type="text" placeholder="Sobrenome" formControlName="last_name" />
           </div>
         </div>
-        <input
-          type="text"
-          placeholder="Nome de usuário"
-          formControlName="username"
-        />
+        <input type="text" placeholder="Nome de usuário" formControlName="username" />
         <input type="text" placeholder="E-mail" formControlName="email" />
       </div>
 
       <div class="form-group-base">
         <input type="text" placeholder="Senha" formControlName="password" />
-        <input
-          type="email"
-          placeholder="Confirmar senha"
-          formControlName="confirm_password"
-        />
+        <input type="email" placeholder="Confirmar senha" formControlName="confirm_password" />
       </div>
 
       <div class="form-group-base">
-        <input
-          type="text"
-          placeholder="Discord ID"
-          formControlName="discord_id"
-        />
-        <input
-          type="email"
-          placeholder="GitHub ID"
-          formControlName="github_id"
-        />
+        <input type="text" placeholder="Discord ID" formControlName="discord_id" />
+        <input type="email" placeholder="GitHub ID" formControlName="github_id" />
       </div>
 
       <div class="form-group-base" id="teste">
@@ -143,10 +83,7 @@
 
         <div *ngFor="let interest of customInterestList; index as i">
           <select disabled>
-            <option
-              *ngFor="let subject of selectedSubjectList"
-              value="{{ subject.id }}"
-            >
+            <option *ngFor="let subject of selectedSubjectList" value="{{ subject.id }}">
               {{ interest.label }}
             </option>
           </select>
@@ -155,10 +92,7 @@
             <option value="">{{ interest.level }}</option>
           </select>
           <button type="button" id="add-interest" (click)="deleteInterest(i)">
-            <img
-              [style.transform]="'rotate(45deg)'"
-              src="../../../assets/icons/plus-white.svg"
-            />
+            <img [style.transform]="'rotate(45deg)'" src="../../../assets/icons/plus-white.svg" />
           </button>
         </div>
       </div>

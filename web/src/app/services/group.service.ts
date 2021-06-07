@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class GroupService {
     private unionGroupUrl: string;
     private groupUrl: string;
-    public user_id: string = "60ac594c68ec2ca3d561db6f";
+    public user_id = localStorage.getItem('id');
     public groupList = [];
 
     constructor(private http: HttpClient) {
@@ -16,12 +16,16 @@ export class GroupService {
         this.groupUrl = "http://localhost:3000";
     }
 
-    public insertUserInGroup(body) {
+    public insertUserInGroup(body: object) {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/create`, body, httpOptions).toPromise()
     }
 
-    public getGroupByToken(groupToken) {
+    public removeUserFromGroup(idUser: string, idGroup: string) {
+        return this.http.delete<any>(`${this.unionGroupUrl}/unionUserGroup/delete/one/${idUser}/${idGroup}`).toPromise()
+    }
+
+    public getGroupByToken(groupToken: string) {
         return this.http.get<any>(`${this.groupUrl}/group/read/byToken/${groupToken}`).toPromise()
     }
     
@@ -38,16 +42,25 @@ export class GroupService {
         return this.http.post<any>(`${this.unionGroupUrl}/unionUserGroup/read/search`, body, httpOptions).toPromise()
     }
 
-    public createGroup(body) {
+    public createGroup(body: object) {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
     }
+
+    public editGroup(group: any) {
+        const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
+        return this.http.put<any>(`${this.groupUrl}/group/update/${group.id}/${this.user_id}`, group, httpOptions).toPromise()
+    }
     
-    public getAllUserByGroup(groupId) {
+    public deleteteGroup(group: any) {
+        return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${this.user_id}`).toPromise()
+    }
+    
+    public getAllUserByGroup(groupId: string) {
         return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
     }
 
-    public listGroup(data) {
+    public listGroup(data: any) {
         this.groupList = [];
 
         data.map(group => {

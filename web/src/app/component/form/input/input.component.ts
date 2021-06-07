@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-input-auto-complete",
@@ -6,85 +6,42 @@ import { Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
   styleUrls: ["./input.component.scss"],
 })
 export class BasicAutoCompleterComponent implements OnInit {
+  @Output() itemEvent = new EventEmitter<any[]>();
+  
   @Input() theme: string;
   @Input() placeholder: string;
-  @Input() interestLisInput: any[];
-  @Output() itemEvent = new EventEmitter<any[]>();
+  @Input() categoryListSelect: any[];
 
-  private interestList = [];
-  private interestListFilter = [];
-  private interestListBD = [];
-  private interestListIntermediary =[];
-  
-  ngOnInit(): void {
-    this.getInterestListFromParent();
+  private categoryListFilter = [];
+  private categoryListSelected = [];
+  public inputValue = "";
+
+  ngOnInit(): void {}
+
+  filterList(event) { 
+    this.inputValue = event.target.value;
+    event.target.value.length > 0
+      ? this.categoryListFilter = this.categoryListSelect.filter(category =>
+        category.toLowerCase().includes(event.target.value)
+      )
+      : this.categoryListFilter.splice(0);
   }
 
-  getInterestListFromParent() {
-    if( this.interestLisInput[0]
-      && !this.interestLisInput[0].name 
-      && (this.interestListBD.length === 0 || this.interestListIntermediary !==  this.interestLisInput)) {
-
-        this.interestListBD = [];
-        this.interestLisInput.map( i =>{
-        this.interestListBD.push({
-            id: 0,
-            name: i 
-        })
-      })
-      this.interestListIntermediary =  this.interestLisInput;
-
-    }
-  }
-  
-  selectEvent(item) {
-    this.interestList.push(item);
-    const interestIndex = this.interestListBD.findIndex(
-      (interest) => interest.name == item.name
-    );
-    this.interestListBD.splice(interestIndex, 1);
-    this.getInterestList()
-  }
-
-  removeInterest(interest) {
-    var interestRemove = interest.path[0].className;
-    const interestIndex = this.interestList.findIndex(
-      (interest) => interest.name == interestRemove
-    );
-    this.interestListBD.push(this.interestList[interestIndex]);
-    this.interestListBD = [...this.interestListBD.splice(interestIndex)];
-    this.interestList.splice(interestIndex, 1);
-    this.getInterestList()
-  }
-
-  addInterest(interest) {
-    if (this.interestListFilter.length > 0) {
-      var interestAdd = interest.path[0].className;
-      const interestIndex = this.interestListBD.findIndex(
-        (i) => i.name == interestAdd
-      );
-      this.interestList.push(this.interestListBD[interestIndex]);
-      this.interestListBD.splice(interestIndex, 1);
-
-      this.interestListFilter.splice(
-        this.interestListFilter.findIndex((i) => i.name == interestAdd),
-        1
-      );
-    }
-    this.getInterestList()
-  }
-
-  filterList(event) {
-    this.getInterestListFromParent();
-    if (event.target.value.length > 0) {
-      this.interestListFilter = this.interestListBD.filter((interest) =>
-        interest.name.toLowerCase().includes(event.target.value)
-      );
+  handleCategoryList(category: string, action: string) {
+    if(action === "add") {
+      this.categoryListSelected.push(category);
+      let interestIndex = this.categoryListSelect.findIndex(i => i === category);
+      this.categoryListSelect.splice(interestIndex, 1);
+      this.categoryListFilter.splice(0);
     } else {
-      this.interestListFilter.splice(0);
+      this.categoryListSelect.push(category);
+      let interestIndex = this.categoryListSelected.findIndex(i => i === category);
+      this.categoryListSelected.splice(interestIndex, 1);
     }
+    this.itemEvent.emit(this.categoryListSelected);
   }
-  public getInterestList() {
-    this.itemEvent.emit([this.interestList]);
+
+  setCategoryListSelected(list: any) {
+    this.categoryListSelected = list;
   }
 }

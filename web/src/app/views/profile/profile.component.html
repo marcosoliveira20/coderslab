@@ -1,7 +1,7 @@
-<div class="cdl-container">
+<div *ngIf="user && user.name &&  user.last_name " class="cdl-container">
   <header>
     <div>
-      <h1>{{ user.name + " " + user.lastname }}</h1>
+      <h1>{{ user.name + " " + user.last_name }}</h1>
 
       <div>
         <button class="button-default" (click)="showResetPasswordModal = true">
@@ -63,7 +63,7 @@
             <input
               type="text"
               placeholder="Bezerra"
-              formControlName="lastname"
+              formControlName="last_name"
             />
           </div>
         </div>
@@ -144,13 +144,13 @@
         <div class="row">
           <div class="col">
             <label class="label-info-block">Interesse</label>
-            <select>
+            <select disabled>
               <option>{{ interest.label }}</option>
             </select>
           </div>
           <div class="col">
             <label class="label-info-block">Nível</label>
-            <select [value]="interest.level">
+            <select [value]="interest.level" disabled>
               <option value="0">Iniciante</option>
               <option value="1">Intermediário</option>
               <option value="2">Avançado</option>
@@ -172,7 +172,7 @@
     <button (click)="showConfirmDeleteAccountModal = true">
       Excluir Conta
     </button>
-    <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit">
+    <button *ngIf="isEditMode" [disabled]="!profileForm.valid" type="submit" (click)="onSubmitUserInfo()">
       Salvar
     </button>
   </footer>
@@ -188,7 +188,7 @@
       Você tem certeza que deseja exluir a sua conta? Todos os seus dados serão
       apagados.
     </p>
-    <button (click)="deleteAccount()">Sim, o Coderslab não acaba nunca</button>
+    <button (click)="deleteAccount()">Sim</button>
   </div>
 </app-modal>
 

@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 })
 export class InterstService {
     private url: string;
-    private user_id = "60ac594c68ec2ca3d561db6f";
+    public user_id = localStorage.getItem('id');
 
     constructor(private http: HttpClient) {
         this.url = "http://localhost:5000";

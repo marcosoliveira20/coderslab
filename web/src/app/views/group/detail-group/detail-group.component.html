@@ -6,7 +6,8 @@
       <div>
         <button
           class="button-default add-schedule-button"
-          (click)="showAddScheduleModal = true"
+          *ngIf="isGroupOwner"
+          (click)="showModal.newSchedule = true"
           >
         <svg fill="none" viewBox="0 0 43 43" xmlns="http://www.w3.org/2000/svg">
         <path d="m40.85 19.35h-17.2v-17.2c0-1.1865-0.9633-2.1499-2.1502-2.1499-1.1866 0-2.1499 0.96333-2.1499 2.1499v17.2h-17.2c-1.1865 0-2.1499 0.9633-2.1499 2.1499 0 1.1869 0.96333 2.1502 2.1499 2.1502h17.2v17.2c0 1.1869 0.9633 2.1502 2.1499 2.1502 1.1869 0 2.1502-0.9633 2.1502-2.1502v-17.2h17.2c1.1869 0 2.1502-0.9633 2.1502-2.1502 0-1.1866-0.9633-2.1499-2.1502-2.1499z"/>
@@ -15,8 +16,8 @@
 
         <button
           class="button-default"
-          (click)="isGroupOwner && handleRedirectToEdit()"
-        >
+          (click)="isGroupOwner ? handleRedirectToEditOrExit() : showModal.leaveGroup = true"
+          >
           {{ isGroupOwner ? 'Editar grupo' : 'Sair do grupo' }}
         </button>
       </div>
@@ -38,7 +39,7 @@
       <ul class="cdl_card_group">
         <li *ngFor="let date of group.schedule_list">
           <app-card
-            (click)="showScheduleModal = true; modalData = date"
+            (click)="showModal.viewSchedule = true; modalData = date"
             [type]="'schedule'"
             [data]="date.datetime"
           ></app-card>
@@ -54,7 +55,8 @@
             [type]="'member'"
             [data]="user"
             [disableButton]="!isGroupOwner"
-          ></app-card>
+            (click)="isGroupOwner && showModal.deleteUser = true && selectedUser = user.id"
+            ></app-card>
         </li>
       </ul>
     </section>
@@ -64,9 +66,9 @@
 
 <!-- MODAL: SCHEDULE DETAILS -->
 <app-modal
-  *ngIf="showScheduleModal"
-  [showController]="showScheduleModal"
-  (close)="showScheduleModal = false"
+  *ngIf="showModal.viewSchedule"
+  [showController]="showModal.viewSchedule"
+  (close)="showModal.viewSchedule = false"
 >
   <div class="modal_header">
     <div>
@@ -93,9 +95,9 @@
 
 <!-- MODAL NEW SCHEDULE -->
 <app-modal
-  *ngIf="showAddScheduleModal"
-  [showController]="showAddScheduleModal"
-  (close)="showAddScheduleModal = false"
+  *ngIf="showModal.newSchedule"
+  [showController]="showModal.newSchedule"
+  (close)="showModal.newSchedule = false"
 >
   <div class="modal_header"></div>
 
@@ -136,4 +138,33 @@
       <button>marcar reunião</button>
     </div>
   </form>
+</app-modal>
+
+
+<!-- MODAL LEAVE GROUP -->
+<app-modal
+  *ngIf="showModal.leaveGroup"
+  [showController]="showModal.leaveGroup"
+  (close)="showModal.leaveGroup = false"
+>
+  <div class="modal_header"></div>
+
+  <p>Você tem certeza que deseja sair do grupo {{group.name}}?</p>
+  <div class="modal_footer" (click)="handleRedirectToEditOrExit()">
+    <button>sim, eu quero sair do grupo</button>
+  </div>
+</app-modal>
+
+<!-- MODAL DELETE USER FROM GROUP -->
+<app-modal
+  *ngIf="showModal.deleteUser"
+  [showController]="showModal.deleteUser"
+  (close)="showModal.deleteUser = false"
+>
+  <div class="modal_header"></div>
+
+  <p>Você tem certeza que deseja remover o usuário {{selectedUser.name}}?</p>
+  <div class="modal_footer" (click)="exitGroup(selectedUser)">
+    <button>remover</button>
+  </div>
 </app-modal>
