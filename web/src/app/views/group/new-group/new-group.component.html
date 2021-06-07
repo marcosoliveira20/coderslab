@@ -56,10 +56,10 @@
         </section>
 
         <footer>
-          <button *ngIf="isEditMode" (click)="showConfirmDeleteGroupModal = true">
-            Excluir Grupo
+          <button style="float: left;" *ngIf="isEditMode" (click)="showConfirmDeleteGroupModal = true">
+            Excluir
           </button>
-          <button (click)="onSubmit()">{{ isEditMode ? "Editar" : "Criar" }}</button>
+          <button style="float: right;" (click)="onSubmit()">{{ isEditMode ? "Editar" : "Criar" }}</button>
         </footer>
     </form>
   </main>

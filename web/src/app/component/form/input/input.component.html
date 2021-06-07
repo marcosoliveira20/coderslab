@@ -8,6 +8,11 @@
     />
     <div>
       <ul class="interest-list-dropdown">
+        <li *ngIf="categoryListFilter.length === 0 && inputValue.length !== 0">
+          <button type="button">
+            Nenhum interesse encontrado
+          </button>
+        </li>
         <li *ngFor="let category of categoryListFilter">
           <button type="button" (click)="handleCategoryList(category, 'add')">
             {{ category }}

@@ -69,9 +69,8 @@ section {
 }
 
 footer {
-  display: flex;
-  justify-content: flex-end;
-  height: 53px;
+  height: auto;
+  padding-bottom: 6em;
 
   button {
     width: 277px;
@@ -231,3 +230,15 @@ app-input-auto-complete {
   }
 
 }
+
+@media (max-width: 1025px) {
+
+  footer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+  }
+  
