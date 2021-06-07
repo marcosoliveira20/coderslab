@@ -82,7 +82,7 @@ class Content implements IContentRepository {
   }
 
   readAll(): IContentSchemaDTO {
-    const content = ContentSchema.find();
+    const content = ContentSchema.find().sort({ deadline: 1 });
 
     return content;
   }
@@ -94,7 +94,7 @@ class Content implements IContentRepository {
   }
 
   readByRoadmapId(_roadmap_id: String): IContentSchemaDTO {
-    const content = ContentSchema.find({_roadmap_id});
+    const content = ContentSchema.find({_roadmap_id}).sort({ deadline: 1 });
 
     return content;
   }
@@ -106,7 +106,7 @@ class Content implements IContentRepository {
   }
 
   readAllDoneRepositories(): object {
-    const content = ContentSchema.find({is_done: true});
+    const content = ContentSchema.find({is_done: true}).sort({ deadline: 1 });
 
     return content;
   }
@@ -115,7 +115,7 @@ class Content implements IContentRepository {
     let content = ContentSchema.find({
       _roadmap_id,
       deadline: {$gte: roadmap_deadline}
-    });
+    }).sort({ deadline: 1 });
 
     console.log(content)
 
@@ -126,13 +126,13 @@ class Content implements IContentRepository {
     const content = ContentSchema.find({
       _roadmap_id,
       deadline: {$lte: today}
-    });
+    }).sort({ deadline: 1 });
 
     return content;
   }
 
   readAllInProgressRepositories(): object {
-    const content = ContentSchema.find({is_done: false});
+    const content = ContentSchema.find({is_done: false}).sort({ deadline: 1 });
 
     return content;
   }
@@ -154,10 +154,6 @@ class Content implements IContentRepository {
 
     return content;
   }
-
-  //Concluidos - Quantidade
-  // Progress - %
-  // Late - 
 
   readQuantity(_roadmap_id: String): object {
     const content = ContentSchema.find({_roadmap_id});
