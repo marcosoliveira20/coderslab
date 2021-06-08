@@ -27,7 +27,7 @@ export class RoadmapService {
   }
 
   public getRoadmapListByUser(user_id: string) {
-    console.log("User id: ", user_id)
+    // console.log("User id: ", user_id)
     return this.http
       .get<any>(`${this.url}/read/all?user_id=${user_id}`)
       .toPromise();
