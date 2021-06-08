@@ -1,12 +1,18 @@
-<main *ngIf="user && groupList && selectedRoadmap">
-
+<!-- <main *ngIf="user && groupList && selectedRoadmap"> -->
+<main *ngIf="1===1">
   <div class="status-and-groups">
     <!-- PERSONAL STATUS -->
     <div class="personal-status">
       <div>
-        <h1>{{user.name}} {{user.last_name}}</h1>
+        <h1 *ngIf="false">{{user.name}} {{user.last_name}}</h1>
+        <app-loader
+          *ngIf="undefined === undefined"
+          [minHeight]="'30px'"
+          [background]="'#fff'"
+          [borderRadius]="'15px'"
+        ></app-loader>
       </div>
-      <ul>
+      <ul *ngIf="groupList === 1">
         <li>
           <p>Grupos</p>
           <p>{{groupList.length}}</p>
@@ -17,57 +23,76 @@
         </li>
         <li>
           <p>Conclusões</p>
-          <!-- TODO ver isso com a alexia-->
           <p>35</p>
         </li>
       </ul>
+
+      <app-loader
+        *ngIf="undefined === undefined"
+        [minHeight]="'200px'"
+        [background]="'#fff'"
+        [borderRadius]="'15px'"
+      ></app-loader>
     </div>
 
     <!-- STUDY GROUPS -->
     <div class="study-groups">
       <h1>Grupos de estudo</h1>
-      <ul>
-        <li *ngFor="let group of groupList.slice(0, 3)">
-          <app-card [data]="group"></app-card>
-        </li>
+      <ul
+        [style.display]="undefined === undefined && 'block'"
+      >
+        <ng-container *ngIf="groupList">
+          <li *ngFor="let group of groupList.slice(0, 3)">
+            <app-card [data]="group"></app-card>
+          </li>
+        </ng-container>
+
+        <app-loader
+          *ngIf="undefined === undefined"
+          [background]="'#fff'"
+          [borderRadius]="'15px'"
+        ></app-loader>
       </ul>
     </div>
   </div>
 
   <!-- <div class="roadmap-status"></div> -->
   <div class="roadmap-overview">
-    <div class="roadmap-overview-header">
-      <div>
-        <button (click)="changeRoadmap('prev')">&lt;</button>
-        <p>{{selectedRoadmap.name}}</p>
-        <button (click)="changeRoadmap('next')">&gt;</button>
-      </div>
-    </div>
-
-    <div class="roadmap-overview-progress-area">
-      <img class="roadmap-icon" src="assets/icons/map-travel 2.svg">
-      <h2>Seu progresso</h2>
-
-      <div class="progressbar">
-        <div [style.width]="selectedRoadmap.progress"></div>
-        <!-- <p>{{data.progress}}</p> -->
+    <ng-container *ngIf="selectedRoadmap === 1">
+      <div class="roadmap-overview-header">
+        <div>
+          <button (click)="changeRoadmap('prev')">&lt;</button>
+          <p>{{selectedRoadmap.name}}</p>
+          <button (click)="changeRoadmap('next')">&gt;</button>
+        </div>
       </div>
 
-      <h2>Agenda da semana</h2>
-      <div class="calendar">
-        <ul class="week-days">
-          <li *ngFor="let initial of weekDaysInitials">{{initial}}</li>
-        </ul>
-        <ul class="number-of-days">
-          <li *ngFor="let day of weekDayList" [class.active-date]="verifyActiveDate(day)">{{day | date: 'dd'}}</li>
-        </ul>
-      </div>
-    </div>
+      <div class="roadmap-overview-progress-area">
+        <img class="roadmap-icon" src="assets/icons/map-travel 2.svg">
+        <h2>Seu progresso</h2>
 
-    <h2>Suas atividades</h2>
-    <div class="roadmap-overview-accordion-area">
-      <app-accordion *ngFor="let content of selectedRoadmap.content_list" [data]="content" [disableDetails]="true"
-        [roadmapToken]="selectedRoadmap.id" [index]="getContentNumber(content)"></app-accordion>
-    </div>
+        <div class="progressbar">
+          <div [style.width]="selectedRoadmap.progress"></div>
+          <!-- <p>{{data.progress}}</p> -->
+        </div>
+
+        <h2>Agenda da semana</h2>
+        <div class="calendar">
+          <ul class="week-days">
+            <li *ngFor="let initial of weekDaysInitials">{{initial}}</li>
+          </ul>
+          <ul class="number-of-days">
+            <li *ngFor="let day of weekDayList" [class.active-date]="verifyActiveDate(day)">{{day | date: 'dd'}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Suas atividades</h2>
+      <div class="roadmap-overview-accordion-area">
+        <app-accordion *ngFor="let content of selectedRoadmap.content_list" [data]="content" [disableDetails]="true"
+          [roadmapToken]="selectedRoadmap.id" [index]="getContentNumber(content)"></app-accordion>
+      </div>
+    </ng-container>
+    <app-loader *ngIf="undefined === undefined"></app-loader>
   </div>
 </main>

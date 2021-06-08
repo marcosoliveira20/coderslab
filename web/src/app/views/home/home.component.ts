@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   public user: any;
   public selectedRoadmap: any;
   public selectedRoadmapIndex = 0;
-  public groupList = [];
+  public groupList: any;
   public roadmap = [];
   public totalTask = 0;
   public user_id: string = localStorage.getItem('id');
@@ -34,19 +34,20 @@ export class HomeComponent implements OnInit {
     this.getWeekDayList();
     this.userService.getUserById().then((data) => {
       this.user = data;
-      console.log(data);
     });
     this.groupService.getAllGroupsByUser().then((data) => {
       this.groupList = data;
-      // console.log("grupo: ", data.length)
     });
 
     this.roadmapService.getRoadmapListByUser(this.user_id).then((data) => {
       this.roadmap = data;
+
       for (const item of data) {
         this.totalTask += item.content_list.length;
       }
-      this.selectedRoadmap = this.roadmap[this.selectedRoadmapIndex];
+
+      this.selectedRoadmap = this.roadmap[this.selectedRoadmapIndex] ? this.roadmap[this.selectedRoadmapIndex] : [];
+
       this.selectedRoadmap.content_list.map((content) =>
         this.contentIndexList.push(content.id),
       );
@@ -59,7 +60,8 @@ export class HomeComponent implements OnInit {
         this.selectedRoadmapIndex - 1 < 0
           ? this.roadmap.length - 1
           : this.selectedRoadmapIndex - 1;
-    } else {
+
+    } else if (action === 'next') {
       this.selectedRoadmapIndex =
         this.selectedRoadmapIndex + 1 >= this.roadmap.length
           ? 0
