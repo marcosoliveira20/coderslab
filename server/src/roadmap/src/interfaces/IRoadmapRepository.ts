@@ -1,8 +1,8 @@
 import { IRoadmapDTO } from "./IRoadmapDTO";
 
 interface IRoadmapRepository {
-  createDefault({ name, objective, is_default, is_done, level, quantity_contents, quantity_of_challenge, user_id }: IRoadmapDTO): Promise<IRoadmapDTO>;
-  createCustom({ name, objective, is_default, is_done, level, quantity_contents, quantity_of_challenge, user_id }: IRoadmapDTO): Promise<IRoadmapDTO>;
+  createDefault({ name, objective, is_default, is_done, level, quantity_contents, quantity_challenges, user_id }: IRoadmapDTO): Promise<IRoadmapDTO>;
+  createCustom({ name, objective, is_default, is_done, level, quantity_contents, quantity_challenges, user_id }: IRoadmapDTO): Promise<IRoadmapDTO>;
   turnRoadmapCustomized(_id: String): object
   turnRoadmapDefault(_id: String): object
   turnRoadmapDone(_id: String): object

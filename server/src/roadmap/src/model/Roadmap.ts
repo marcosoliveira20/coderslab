@@ -10,7 +10,7 @@
       objective,
       level,
       quantity_contents,
-      quantity_of_challenge, 
+      quantity_challenges, 
       user_id
     }: IRoadmapDTO): Promise<IRoadmapDTO> {
       const roadmap = RoadmapSchema.create({
@@ -18,7 +18,7 @@
         objective,
         level,
         quantity_contents,
-        quantity_of_challenge,
+        quantity_challenges,
         user_id
       });
 
