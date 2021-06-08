@@ -199,9 +199,10 @@
 >
   <div class="modal-body">
     <p>Para prosseguir, informe primeiro a sua senha atual e seguida a nova</p>
-    <input placeholder="senha atual" #oldPassword />
-    <input placeholder="nova senha" #newPassword />
-
+    <div>
+      <input type="password" class="input-default-dark" placeholder="senha atual" #oldPassword />
+      <input type="password" class="input-default-dark" placeholder="nova senha" #newPassword />
+    </div>
     <button (click)="resetPassword(oldPassword, newPassword)">Enviar</button>
   </div>
 </app-modal>
