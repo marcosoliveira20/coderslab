@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
       }
 
       this.selectedRoadmap = this.roadmap[this.selectedRoadmapIndex] ? this.roadmap[this.selectedRoadmapIndex] : [];
+      console.log("sr: ", this.selectedRoadmap)
 
       this.selectedRoadmap.content_list.map((content) =>
         this.contentIndexList.push(content.id),

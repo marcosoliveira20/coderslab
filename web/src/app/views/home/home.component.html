@@ -4,31 +4,33 @@
     <!-- PERSONAL STATUS -->
     <div class="personal-status">
       <div>
-        <h1 *ngIf="false">{{user.name}} {{user.last_name}}</h1>
+        <h1 *ngIf="user">{{user.name}} {{user.last_name}}</h1>
+
         <app-loader
-          *ngIf="undefined === undefined"
+          *ngIf="user === undefined"
           [minHeight]="'30px'"
           [background]="'#fff'"
           [borderRadius]="'15px'"
         ></app-loader>
       </div>
-      <ul *ngIf="groupList === 1">
+
+      <ul *ngIf="groupList">
         <li>
           <p>Grupos</p>
-          <p>{{groupList.length}}</p>
+          <p>{{( groupList && !groupList[0]) ? groupList.length : 'todo'}}</p>
         </li>
         <li>
           <p>Objetivos</p>
-          <p>{{totalTask}}</p>
+          <p>{{( groupList && !groupList[0]) ? totalTask : 'todo'}}</p>
         </li>
         <li>
           <p>Conclusões</p>
-          <p>35</p>
+          <p>{{( groupList && !groupList[0]) ? 0 : 'todo'}}</p>
         </li>
       </ul>
 
       <app-loader
-        *ngIf="undefined === undefined"
+        *ngIf="groupList === undefined"
         [minHeight]="'200px'"
         [background]="'#fff'"
         [borderRadius]="'15px'"
@@ -39,7 +41,7 @@
     <div class="study-groups">
       <h1>Grupos de estudo</h1>
       <ul
-        [style.display]="undefined === undefined && 'block'"
+        [style.display]="groupList === undefined && 'block'"
       >
         <ng-container *ngIf="groupList">
           <li *ngFor="let group of groupList.slice(0, 3)">
@@ -48,17 +50,23 @@
         </ng-container>
 
         <app-loader
-          *ngIf="undefined === undefined"
+          *ngIf="groupList === undefined"
           [background]="'#fff'"
           [borderRadius]="'15px'"
         ></app-loader>
+
+        <li *ngIf="groupList && !groupList[0]"> Você ainda não entrou em nenhum grupo </li>
       </ul>
     </div>
   </div>
 
-  <!-- <div class="roadmap-status"></div> -->
-  <div class="roadmap-overview">
-    <ng-container *ngIf="selectedRoadmap === 1">
+  <div
+    class="roadmap-overview"
+    [style.display]="selectedRoadmap && !selectedRoadmap[0] && 'flex'"
+    [style.align-items]="selectedRoadmap && !selectedRoadmap[0] && 'center'"
+    [style.justify-content]="selectedRoadmap && !selectedRoadmap[0] && 'center'"
+  >
+    <ng-container *ngIf="selectedRoadmap.name">
       <div class="roadmap-overview-header">
         <div>
           <button (click)="changeRoadmap('prev')">&lt;</button>
@@ -73,7 +81,6 @@
 
         <div class="progressbar">
           <div [style.width]="selectedRoadmap.progress"></div>
-          <!-- <p>{{data.progress}}</p> -->
         </div>
 
         <h2>Agenda da semana</h2>
@@ -82,17 +89,34 @@
             <li *ngFor="let initial of weekDaysInitials">{{initial}}</li>
           </ul>
           <ul class="number-of-days">
-            <li *ngFor="let day of weekDayList" [class.active-date]="verifyActiveDate(day)">{{day | date: 'dd'}}</li>
+            <li
+              *ngFor="let day of weekDayList"
+              [class.active-date]="verifyActiveDate(day)"
+            >
+              {{day | date: 'dd'}}
+            </li>
           </ul>
         </div>
       </div>
 
       <h2>Suas atividades</h2>
       <div class="roadmap-overview-accordion-area">
-        <app-accordion *ngFor="let content of selectedRoadmap.content_list" [data]="content" [disableDetails]="true"
-          [roadmapToken]="selectedRoadmap.id" [index]="getContentNumber(content)"></app-accordion>
+        <app-accordion
+          *ngFor="let content of selectedRoadmap.content_list"
+          [data]="content"
+          [disableDetails]="true"
+          [roadmapToken]="selectedRoadmap.id"
+          [index]="getContentNumber(content)"
+        ></app-accordion>
       </div>
     </ng-container>
-    <app-loader *ngIf="undefined === undefined"></app-loader>
+
+    <app-loader *ngIf="selectedRoadmap === undefined"></app-loader>
+
+    <p
+      *ngIf="selectedRoadmap && !selectedRoadmap[0]"
+    >
+      Você ainda não começou nenhum roadmap
+    </p>
   </div>
 </main>
