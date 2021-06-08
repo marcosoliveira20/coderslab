@@ -1,7 +1,7 @@
 import { userMock } from "src/app/app.component";
 import { subjectMock } from "src/mock";
 
-import { Component, OnInit } from "@angular/core";
+import { Compiler, Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from 'src/app/services/user.service';
 import { SubjectService } from "src/app/services/subject.service";
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
   public showConfirmDeleteAccountModal = false;
 
   public changeTab = (tab: string) => (this.activeTab = tab);
-  
+
   public profileForm = this.fb.group({
     name: [{ value: "", disabled: true }, Validators.required],
     last_name: [{ value: "", disabled: true }, Validators.required],
@@ -42,15 +42,22 @@ export class ProfileComponent implements OnInit {
     discord_id: [{ value: "", disabled: true }],
     github_id: [{ value: "", disabled: true }],
   });
-  
-  constructor(private fb: FormBuilder, private userService: UserService, private subjectService: SubjectService, private interestService: InterstService) { }
-  
+
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private subjectService: SubjectService,
+    private interestService: InterstService,
+    private _compiler: Compiler
+  ) { }
+
   /**
    * @todo integration
    */
   ngOnInit() {
+    this._compiler.clearCache();
     this.getAllInterests();
-    
+
     this.userService.getUserById().then(data => {
       this.profileForm.patchValue({
         name: data.name,
@@ -60,7 +67,7 @@ export class ProfileComponent implements OnInit {
         discord_id: data.discord_id,
         github_id: data.github_id
       })
-      
+
       this.user = {
         id: this.userId,
         name: data.name,
@@ -73,7 +80,7 @@ export class ProfileComponent implements OnInit {
     })
     this.getUserInterests();
   }
-  
+
   public handleEditMode() {
     this.isEditMode = !this.isEditMode;
     if(this.isEditMode)
@@ -93,7 +100,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls['github_id'].disable();
     }
   }
-  
+
   getAllInterests() {
     this.subjectService.getAllSubjects().then(data => {
       this.interestList = data

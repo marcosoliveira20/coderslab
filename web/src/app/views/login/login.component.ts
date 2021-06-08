@@ -1,10 +1,8 @@
-import { BasicAutoCompleterComponent } from 'src/app/component/form/input/input.component';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UserService } from 'src/app/services/user.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Compiler, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-// import { interestListMock } from "../../../app/app.component";
 
 import { Router } from '@angular/router';
 
@@ -46,12 +44,12 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private subjectService: SubjectService,
     private router: Router,
+    private _compiler: Compiler
   ) {}
 
   ngOnInit() {
     localStorage.clear();
     this.subjectService.getAllSubjects().then((data) => {
-      console.log(data);
       data.map((subject) => {
         this.subjectList.push({ id: subject._id, label: subject.label });
       });
@@ -61,7 +59,6 @@ export class LoginComponent implements OnInit {
   handleLoginMode = (mode) => (this.mode = mode);
 
   onSubmitLogin() {
-    console.log('loginForm', this.loginForm.value);
     this.userService.login(this.loginForm.value).then((data) => {
       localStorage.setItem('id', data._id);
       localStorage.setItem('token', data.token);
@@ -80,14 +77,13 @@ export class LoginComponent implements OnInit {
     ) {
       this.userService
         .createUser(this.registerForm.value)
-        .then((data) => console.log(data));
+        .then(() => this.handleLoginMode("login"));
     } else {
       // TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
-      console.log('senha divergente');
+      console.warn('senha divergente');
     }
     this.registerForm.removeControl('level');
     this.registerForm.removeControl('subjectForm');
-    console.log('onSubmit: ', this.registerForm.value);
   }
 
   handleChangeSelect(event, type, index) {
