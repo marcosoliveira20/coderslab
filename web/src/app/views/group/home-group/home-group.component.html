@@ -1,25 +1,27 @@
 <div class ="cdl-container">
-  <header>
-    <div>
-      <h1>José Bezerra</h1>
-      <button routerLink="./new" class="button-default">Novo Grupo</button>
-    </div>
-    <nav>
-      <ul class="tabs">
-        <li><button class="button-nav" (click)="filter('all')" [class.active]="typeFilter == 'all'">Todos</button></li>
-        <li><button class="button-nav" (click)="filter('myGroup')" [class.active]="typeFilter == 'myGroup'">Meus Grupos</button></li>
+  <div>
+    <header>
+      <div>
+        <h1>José Bezerra</h1>
+        <button routerLink="./new" class="button-default">Novo Grupo</button>
+      </div>
+      <nav>
+        <ul class="tabs">
+          <li><button class="button-nav" (click)="filter('all')" [class.active]="typeFilter == 'all'">Todos</button></li>
+          <li><button class="button-nav" (click)="filter('myGroup')" [class.active]="typeFilter == 'myGroup'">Meus Grupos</button></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="">
+      <ul class="card-list">
+        <li *ngFor="let group of groupList">
+          <app-card [data]="group" (click)="redirectToGroup(group.token)"></app-card>
+        </li>
       </ul>
-    </nav>
-  </header>
-  <main class="">
-    <ul class="card-list">
-      <li *ngFor="let group of groupList">
-        <app-card [data]="group" (click)="redirectToGroup(group.token)"></app-card>
-      </li>
-    </ul>
-    <a routerLink="./explore"
-      ><button>
-        <img src="../../../../assets/icons/planet.svg" alt="" srcset="" /></button
-    ></a>
-  </main>
+      <a routerLink="./explore"
+        ><button>
+          <img src="../../../../assets/icons/planet.svg" alt="" srcset="" /></button
+      ></a>
+    </main>
+  </div>
 </div>

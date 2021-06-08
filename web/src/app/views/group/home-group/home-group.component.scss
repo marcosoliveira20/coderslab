@@ -26,3 +26,27 @@ main {
     z-index: 20;
   }
 }
+
+.card-list{
+  justify-content: flex-start;
+  gap: 30px;
+}
+@media (max-width: 1025px){
+  main a button{
+    bottom: 120px;
+  }
+}
+
+@media (max-width: 680px) {
+  .card-list{
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 680px) {
+  .card-list{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

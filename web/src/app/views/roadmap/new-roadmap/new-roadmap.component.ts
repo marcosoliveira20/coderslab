@@ -74,7 +74,8 @@ export class NewRoadmapComponent implements OnInit {
       .createCustomRoadmap(this.roadmapForm.value, "60b5689c1a0293229c6002ae")
       .then((data) => console.log(`Registro:${data}`));
     this.ngOnInit();
-  }
+    this.roadmapForm.controls["roadmapForm"].setValue("");
+    }
 
   verifyUrlParam() {
     if (this.activatedRoute.snapshot.url[2])

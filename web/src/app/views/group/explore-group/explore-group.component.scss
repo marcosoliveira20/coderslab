@@ -106,7 +106,16 @@ input::placeholder {
     font-weight: 300;
     font-size: 25px;
     letter-spacing: 15%;
-    margin-bottom: 70px;
+  }
+
+  input{
+    width: 100%;
+    margin-bottom: 40px;
+    color: $cdl_darkBlue;
+  }
+
+  input::placeholder{
+    color: $cdl_darkBlue;
   }
 
   button {
@@ -123,5 +132,4 @@ input::placeholder {
     padding: 16px;
     border-radius: 15px;
   }
-
 }

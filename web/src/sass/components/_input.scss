@@ -53,3 +53,12 @@
   border: solid 2px $cdl_darkBlue;
 }
 
+
+.input-default-dark {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $cdl_darkBlue;
+  display: block;
+  font-weight: 300;
+  font-size: 25px;
+}

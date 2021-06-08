@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
       const subjectIndex = this.subjectList.findIndex((i) => i.id == subjectId);
 
       this.interest_list.push({
-        _id_subject: Number(subjectId),
+        _id_subject: subjectId,
         level: Number(level),
       });
 
