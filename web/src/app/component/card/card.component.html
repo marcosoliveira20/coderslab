@@ -30,7 +30,7 @@
     'cdl-card-light': !data.is_default
   }"
   *ngIf="type === 'roadmap'"
-  (click)="redirectToRoadmap(data.id)"
+  (click)="redirectToRoadmap(data._id)"
 >
   <main>
     <header>
@@ -48,15 +48,15 @@
     <footer>
       <div>
         <img src="assets/icons/{{ themeName() }}/post-it.svg" alt="post-it" />
-        <p>40</p>
+        <p>{{data.quantity_contents}}</p>
       </div>
       <div>
         <img src="assets/icons/{{ themeName() }}/mountain.svg" alt="desafios" />
-        <p>40</p>
+        <p>{{data.quantity_challenges}}</p>
       </div>
     </footer>
   </main>
-  <button>
+  <button (click)="createRoadmapDefault(data)">
     <p>começar</p>
   </button>
 </div>

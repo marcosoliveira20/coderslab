@@ -32,11 +32,11 @@
         <app-accordion [data]="content" [index]="getContentNumber(content)"></app-accordion>
 
         <div class="challenge" *ngIf="content.challenge[0]">
-          <app-accordion [data]="content.challenge" [isChallenge]="true"></app-accordion>
+          <app-accordion *ngFor="let challenge of content.challenge" [data]="challenge" [isChallenge]="true"></app-accordion>
         </div>
       </li>
     </ul>
-    <div class="chart-area">
+    <!-- <div class="chart-area">
       <h4>Gráfico de Burn Down</h4>
       <p>
         Acompanhe o seu progresso visualizando o status das atividades e prazos
@@ -46,6 +46,6 @@
       <div>
         <app-line-chart [graphList]="graphData"></app-line-chart>
       </div>
-    </div>
+    </div> -->
   </main>
 </div>
