@@ -14,6 +14,7 @@ import { RoadmapService } from "../../../services/roadmapCustom.service";
 export class NewRoadmapComponent implements OnInit {
   public isNewCustomRoadmap: boolean;
   public interestList = [];
+  private user: any;
 
   private taskModel = {
     title: "",
@@ -69,9 +70,9 @@ export class NewRoadmapComponent implements OnInit {
     this.roadmapForm.patchValue({
       content_list,
     });
-    // TODO passar o user_id da sessão
+    this.user._id = localStorage.getItem('id');
     this.roadmapService
-      .createCustomRoadmap(this.roadmapForm.value, "60b5689c1a0293229c6002ae")
+      .createCustomRoadmap(this.roadmapForm.value, this.user._id)
       .then((data) => console.log(`Registro:${data}`));
     this.ngOnInit();
   }
