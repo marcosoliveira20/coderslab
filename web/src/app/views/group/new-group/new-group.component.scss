@@ -1,5 +1,7 @@
 @import "../../../../sass/abstracts/variables";
 @import "../../../../sass/components/scrollbar";
+@import "../../../../sass/components/container";
+@import "../../../../sass/components/header";
 
 // Bootstrap override
 .row {
@@ -40,34 +42,6 @@ input:disabled {
   color: #888;
 }
 
-header {
-  padding: 48px 32px;
-  align-items: center;
-  display: block;
-
-  h1 {
-    color: $cdl_darkBlue;
-  }
-
-  div:first-child {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    button {
-      padding: 10px 0;
-      width: 280px;
-      background: none;
-      border: 1px solid $cdl_pink;
-      color: $cdl_pink;
-      border-radius: 5px;
-      font-weight: 300;
-      font-size: 20px;
-      letter-spacing: 4px;
-      margin-right: 30px;
-    }
-  }
-}
 
 section {
   display: inline-block;
@@ -95,9 +69,8 @@ section {
 }
 
 footer {
-  display: flex;
-  justify-content: flex-end;
-  height: 53px;
+  height: auto;
+  padding-bottom: 6em;
 
   button {
     width: 277px;
@@ -230,3 +203,42 @@ app-input-auto-complete {
 .slider.round:before {
   border-radius: 50%;
 }
+
+// MODAL
+.modal-body {
+  p {
+    color: #2d2d2d;
+    font-weight: 300;
+    font-size: 25px;
+    letter-spacing: 15%;
+    margin-bottom: 70px;
+  }
+
+  button {
+    width: 100%;
+    background: transparent;
+    border: 1px solid $cdl_pink;
+    color: $cdl_pink;
+    font-size: 20px;
+    text-align: center;
+    align-self: center;
+    justify-content: center;
+    font-weight: 300;
+    height: 64px;
+    padding: 16px;
+    border-radius: 15px;
+  }
+
+}
+
+@media (max-width: 1025px) {
+
+  footer{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+  }
+  

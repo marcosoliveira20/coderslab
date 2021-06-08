@@ -13,8 +13,7 @@ class UpdateUserController {
       last_name,
       email,
       discord_id,
-      github_id,
-      password
+      github_id
     } = request.body;
 
     const user = new User();
@@ -26,8 +25,6 @@ class UpdateUserController {
         return response.status(404).send();
       }
 
-      const passwordHash = await hash(password, 8);
-
       const data = await user.update(id, {
         username,
         name,
@@ -35,7 +32,7 @@ class UpdateUserController {
         email,
         discord_id,
         github_id,
-        password: passwordHash,
+        password: findIndex.password,
       });
       
       return response.status(200).send(data);

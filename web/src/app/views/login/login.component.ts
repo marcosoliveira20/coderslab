@@ -1,68 +1,93 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { BasicAutoCompleterComponent } from "src/app/component/form/input/input.component";
+import { BasicAutoCompleterComponent } from 'src/app/component/form/input/input.component';
+import { SubjectService } from 'src/app/services/subject.service';
+import { UserService } from 'src/app/services/user.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 // import { interestListMock } from "../../../app/app.component";
-import { interestListMock, subjectMock } from "../../../mock";
-import { UserService } from "src/app/services/user.service";
-import { Router } from "@angular/router";
+
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public mode: string = "register";
+  public mode = 'login';
 
   public interest_list: any[] = [];
-  public subjectList: any[] = subjectMock;
+  public subjectList: any[] = [];
 
   public selectedSubjectList: any[] = [];
   public customInterestList: any[] = [];
 
   loginForm = this.fb.group({
-    username: [""],
-    password: [""],
+    username: [''],
+    password: [''],
   });
 
   registerForm = this.fb.group({
-    name: ["", Validators.required],
-    last_name: ["", Validators.required],
-    username: ["", Validators.required],
-    email: ["", Validators.required],
-    password: ["", Validators.required],
-    confirm_password: ["", Validators.required],
-    discord_id: [""],
-    github_id: [""],
+    name: ['', Validators.required],
+    last_name: ['', Validators.required],
+    username: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+    confirm_password: ['', Validators.required],
+    discord_id: [''],
+    github_id: [''],
     interest_list: [[], Validators.required],
-    level: ["-1"],
-    subjectForm: [""],
+    level: ['-1'],
+    subjectForm: [''],
   });
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private subjectService: SubjectService,
+    private router: Router,
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    localStorage.clear();
+    this.subjectService.getAllSubjects().then((data) => {
+      console.log(data);
+      data.map((subject) => {
+        this.subjectList.push({ id: subject._id, label: subject.label });
+      });
+    });
+  }
 
   handleLoginMode = (mode) => (this.mode = mode);
 
   onSubmitLogin() {
-    console.log("loginForm", this.loginForm.value);
+    console.log('loginForm', this.loginForm.value);
+    this.userService.login(this.loginForm.value).then((data) => {
+      localStorage.setItem('id', data._id);
+      localStorage.setItem('token', data.token);
+      this.router.navigate([`/`]);
+    });
   }
 
   onSubmitRegister() {
     this.registerForm.patchValue({
       interest_list: this.interest_list,
     });
-    
-    if ( this.registerForm.value.password == this.registerForm.value.confirm_password ) {
-      this.userService.createUser(this.registerForm.value).then(data => console.log(data))
+
+    if (
+      this.registerForm.value.password ==
+      this.registerForm.value.confirm_password
+    ) {
+      this.userService
+        .createUser(this.registerForm.value)
+        .then((data) => console.log(data));
     } else {
-      //TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
-      console.log("senha divergente")
+      // TODO - por boas práticas para mostrar pro usuário que as senhas estão divergentes
+      console.log('senha divergente');
     }
-    this.registerForm.removeControl("level");
-    this.registerForm.removeControl("subjectForm");
-    console.log("onSubmit: ", this.registerForm.value);
+    this.registerForm.removeControl('level');
+    this.registerForm.removeControl('subjectForm');
+    console.log('onSubmit: ', this.registerForm.value);
   }
 
   handleChangeSelect(event, type, index) {
@@ -71,21 +96,21 @@ export class LoginComponent implements OnInit {
 
   validateFirstSelect(): boolean {
     return (
-      this.registerForm.value.subjectForm !== "" &&
-      this.registerForm.value.level !== "-1"
+      this.registerForm.value.subjectForm !== '' &&
+      this.registerForm.value.level !== '-1'
     );
   }
 
   addInterest() {
     if (this.validateFirstSelect()) {
-      let subjectId = this.registerForm.value.subjectForm;
-      let levelName = this.registerForm.value.level.split(" ")[1];
-      let level = this.registerForm.value.level.split(" ")[0];
+      const subjectId = this.registerForm.value.subjectForm;
+      const levelName = this.registerForm.value.level.split(' ')[1];
+      const level = this.registerForm.value.level.split(' ')[0];
 
       const subjectIndex = this.subjectList.findIndex((i) => i.id == subjectId);
 
       this.interest_list.push({
-        _id_subject: Number(subjectId),
+        _id_subject: subjectId,
         level: Number(level),
       });
 
@@ -97,14 +122,14 @@ export class LoginComponent implements OnInit {
 
       this.selectedSubjectList.push(this.subjectList[subjectIndex]);
       this.subjectList.splice(subjectIndex, 1);
-      this.registerForm.controls["level"].setValue("-1");
-      this.registerForm.controls["subjectForm"].setValue("");
+      this.registerForm.controls.level.setValue('-1');
+      this.registerForm.controls.subjectForm.setValue('');
     }
   }
 
   deleteInterest(index) {
     const subjectIndex = this.selectedSubjectList.findIndex(
-      (item) => item.id == this.interest_list[index]._id_subject
+      (item) => item.id == this.interest_list[index]._id_subject,
     );
 
     this.subjectList.push(this.selectedSubjectList[subjectIndex]);

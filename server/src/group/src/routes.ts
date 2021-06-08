@@ -1,14 +1,14 @@
 import { Router } from "express";
 
-import { CreateGroupController } from "./controllers/CreateGroupController";
-import { ReadGroupBySearchController } from "./controllers/ReadGroupBySearchController";
-import { ReadGroupByIdController } from "./controllers/ReadGroupByIdController";
-import { ReadGroupByTokenController } from "./controllers/ReadGroupByTokenController";
-import { ReadGroupByOwnerController } from "./controllers/ReadGroupByOwnerController";
-import { ReadAllGroupsController } from "./controllers/ReadAllGroupsController";
-import { UpdateGroupController } from "./controllers/UpdateGroupController";
-import { DeleteGroupController } from "./controllers/DeleteGroupController";
 import { ensureAuthenticated } from "../../ensureAuthenticated";
+import { CreateGroupController } from "./controllers/CreateGroupController";
+import { DeleteGroupController } from "./controllers/DeleteGroupController";
+import { ReadAllGroupsController } from "./controllers/ReadAllGroupsController";
+import { ReadGroupByIdController } from "./controllers/ReadGroupByIdController";
+import { ReadGroupByOwnerController } from "./controllers/ReadGroupByOwnerController";
+import { ReadGroupBySearchController } from "./controllers/ReadGroupBySearchController";
+import { ReadGroupByTokenController } from "./controllers/ReadGroupByTokenController";
+import { UpdateGroupController } from "./controllers/UpdateGroupController";
 
 const router = Router();
 

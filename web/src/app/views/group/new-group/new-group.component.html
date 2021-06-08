@@ -1,64 +1,80 @@
-<header class="header">
-  <h1>{{ isEditMode ? "Editar" : "Novo" }} grupo</h1>
-</header>
+<div *ngIf="userId" class="cdl-container">
 
-<div class="main-content">
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <header>
+    <h1>{{ isEditMode ? "Editar" : "Novo" }} grupo</h1>
+  </header>
 
-    <section>
-      <div class="row row-switch">
-        <h4>Informações gerais</h4>
-        <div>
-          <p>Público</p>
-          <label class="switch">
-            <input type="checkbox" checked />
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
+  <main>
+    <form [formGroup]="formGroup">
+        <section>
+          <div class="row row-switch">
+            <h4>Informações gerais</h4>
+            <div>
+              <p>Público</p>
+              <label class="switch">
+                <input type="checkbox" formControlName="is_public" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
 
-      <div class="row">
-        <label>nome</label>
-        <input type="text" placeholder="Nome do grupo" formControlName="name" />
-      </div>
+          <div class="row">
+            <label>nome</label>
+            <input type="text" placeholder="Nome do grupo" formControlName="name" />
+          </div>
 
-      <div class="row">
-        <div class="col">
-          <label>objetivo</label>
-          <select name="objective" formControlName="objective">
-            <option *ngFor="let objective of interestList">{{objective.name}}</option>
-          </select>
-        </div>
+          <div class="row">
+            <div class="col">
+              <label>objetivo</label>
+              <select name="objective" formControlName="objective" (change)="getSubject($event)">
+                <option value="" selected>{{ formGroup.value.objective }}</option>
+                <option *ngFor="let objective of subjectList">{{objective.label}}</option>
+              </select>
+            </div>
 
-        <div class="col">
-          <label>nível</label>
-          <select name="level" formControlName="level">
-            <option value="0">Iniciante</option>
-            <option value="1">Intermediário</option>
-            <option value="2">Avançado</option>
-          </select>
-        </div>
-      </div>
-    </section>
+              <div class="col">
+                <label>nível</label>
+                <select name="level" formControlName="level">
+                  <option value="0">Iniciante</option>
+                  <option value="1">Intermediário</option>
+                  <option value="2">Avançado</option>
+                </select>
+            </div>
+          </div>
+        </section>
 
-    <section>
-      <h4>Informações gerais</h4>
-      <label>tags</label>
+        <section>
+          <h4>Informações gerais</h4>
+          <label>tags</label>
 
-      <div class="row">
-        <div class="col">
-          <app-input-auto-complete
-            theme="custom"
-            (itemEvent)="handleCategories($event)"
-            placeholder="Assuntos relacionados"
-            [interestLisInput]="interestList"
-          ></app-input-auto-complete>
-        </div>
-      </div>
-    </section>
-  </form>
+          <div class="row">
+            <div class="col">
+              <app-input-auto-complete theme="custom" (itemEvent)="handleCategories($event)"
+                placeholder="Assuntos relacionados" [categoryListSelect]="interestList"></app-input-auto-complete>
+            </div>
+          </div>
+        </section>
 
-  <footer>
-    <button>Criar</button>
-  </footer>
+        <footer>
+          <button style="float: left;" *ngIf="isEditMode" (click)="showConfirmDeleteGroupModal = true">
+            Excluir
+          </button>
+          <button style="float: right;" (click)="onSubmit()">{{ isEditMode ? "Editar" : "Criar" }}</button>
+        </footer>
+    </form>
+  </main>
 </div>
+
+<!-- MODAL DELETE GROUP -->
+<app-modal
+  *ngIf="showConfirmDeleteGroupModal"
+  [showController]="showConfirmDeleteGroupModal"
+  (close)="showConfirmDeleteGroupModal = false"
+>
+  <div class="modal-body">
+    <p>
+      Você tem certeza que deseja exluir esse grupo?
+    </p>
+    <button (click)="deleteGroup()">Sim, tenho certeza</button>
+  </div>
+</app-modal>

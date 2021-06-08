@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild, Input } from "@angular/core";
-import { ChartDataSets, ChartOptions } from "chart.js";
-import { Color, Label } from "ng2-charts";
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 
 @Component({
-  selector: "app-line-chart",
-  templateUrl: "./line-chart.component.html",
-  styleUrls: ["./line-chart.component.scss"],
+  selector: 'app-line-chart',
+  templateUrl: './line-chart.component.html',
+  styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit {
   @Input() graphList: any[];
@@ -14,8 +15,8 @@ export class LineChartComponent implements OnInit {
   private label: any[] = [];
 
   public lineChartData: ChartDataSets[] = [
-    { data: this.expectedGoal, label: "Meta esperada" },
-    { data: this.achievedGoal, label: "Atividades feitas" },
+    { data: this.expectedGoal, label: 'Meta esperada' },
+    { data: this.achievedGoal, label: 'Atividades feitas' },
   ];
   public lineChartLabels: Label[] = this.label;
 
@@ -46,23 +47,22 @@ export class LineChartComponent implements OnInit {
 
   public lineChartColors: Color[] = [
     {
-      borderColor: "#FFC42E",
-      backgroundColor: "transparent",
+      borderColor: '#FFC42E',
+      backgroundColor: 'transparent',
     },
     {
-      borderColor: "#48DBDB",
-      backgroundColor: "transparent",
+      borderColor: '#48DBDB',
+      backgroundColor: 'transparent',
     },
   ];
   public lineChartLegend = false;
-  public lineChartType = "line";
+  public lineChartType = 'line';
   public lineChartPlugins = [];
 
   constructor() {}
 
   ngOnInit() {
-
-    console.log(this.graphList)
+    // console.log(this.graphList)
     this.graphList.map((o) => {
       this.expectedGoal.push(o.quantity);
       this.achievedGoal.push(o.completedQuantity);
