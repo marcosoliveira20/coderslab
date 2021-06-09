@@ -10,7 +10,7 @@
       objective,
       level,
       quantity_contents,
-      quantity_challenges, 
+      quantity_of_challenge, 
       user_id
     }: IRoadmapDTO): Promise<IRoadmapDTO> {
       const roadmap = RoadmapSchema.create({
@@ -18,7 +18,7 @@
         objective,
         level,
         quantity_contents,
-        quantity_challenges,
+        quantity_of_challenge,
         user_id
       });
 
@@ -155,7 +155,7 @@
     readLateContents(_roadmap_id: String, today: String): object {
       const content = RoadmapSchema.find({
         deadline: {$lte: today}
-      }).collation({ locale: "en" }).sort({ name: 1 });  
+      });
 
       return content;
     }
@@ -167,7 +167,7 @@
     }
 
     readAll(user_id: String): object {
-      const roadmaps = RoadmapSchema.find({user_id}).collation({ locale: "en" }).sort({ name: 1 });  
+      const roadmaps = RoadmapSchema.find({user_id});
 
       return roadmaps;
     }
@@ -187,7 +187,7 @@
     readAllDefaultRepositories(): object {
       const roadmap = RoadmapSchema.find({
         is_default: true
-      }).collation({ locale: "en" }).sort({ name: 1 });  
+      })      
 
       return roadmap;
     }
@@ -196,7 +196,7 @@
       const roadmap = RoadmapSchema.find({
         user_id,
         is_default: true
-      }).collation({ locale: "en" }).sort({ name: 1 });        
+      })      
 
       return roadmap;
     }
@@ -206,7 +206,7 @@
       const roadmap = RoadmapSchema.find({
         user_id,
         is_default: false
-      }).collation({ locale: "en" }).sort({ name: 1 });        
+      })      
 
       return roadmap;
     }
@@ -215,7 +215,7 @@
       const roadmap = RoadmapSchema.find({
         user_id,
         is_done: true
-      }).collation({ locale: "en" }).sort({ name: 1 });        
+      })      
 
       return roadmap;
     }
@@ -224,7 +224,7 @@
       const roadmap = RoadmapSchema.find({
         user_id,
         is_done: false
-      }).collation({ locale: "en" }).sort({ name: 1 });     
+      })   
 
       return roadmap
     }

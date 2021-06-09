@@ -1,14 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
+import { fadeIn } from "src/app/animation/fade.animation";
 
-// import { userMock } from "../../../app.component";
 import { GroupService } from "src/app/services/group.service";
 import { SubjectService } from "src/app/services/subject.service";
+
 @Component({
   selector: "app-explore-group",
   templateUrl: "./explore-group.component.html",
   styleUrls: ["./explore-group.component.scss"],
+  animations: [fadeIn]
 })
 export class ExploreGroupComponent implements OnInit {
   public showJoinPrivateGroupModal: boolean;
@@ -61,7 +63,7 @@ export class ExploreGroupComponent implements OnInit {
 
   handleSelectObjective(event: any) {
     this.exploreForm.patchValue({ category: '' });
-    
+
     let subject = this.subjectList.find(subject => subject.label === event.target.value);
     this.categoryList = subject.categories;
     this.exploreForm.controls['category'].enable();

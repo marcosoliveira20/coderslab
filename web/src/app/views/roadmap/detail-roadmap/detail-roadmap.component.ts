@@ -1,16 +1,16 @@
 import { RoadmapService } from 'src/app/services/roadmapCustom.service';
-import { graphDataMock } from 'src/mock';
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { fadeIn } from 'src/app/animation/fade.animation';
 
 @Component({
   selector: 'app-detail-roadmap',
   templateUrl: './detail-roadmap.component.html',
   styleUrls: ['./detail-roadmap.component.scss'],
+  animations: [fadeIn]
 })
 export class DetailRoadmapComponent implements OnInit {
-  public graphData = graphDataMock;
 
   public contentIndexList: string[] = [];
   public filteredContentList: any = [];

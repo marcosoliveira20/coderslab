@@ -4,11 +4,13 @@ import { RoadmapService } from 'src/app/services/roadmapCustom.service';
 import { UserService } from 'src/app/services/user.service';
 
 import { Component, OnInit } from '@angular/core';
+import { fadeIn } from 'src/app/animation/fade.animation';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [ fadeIn ]
 })
 export class HomeComponent implements OnInit {
   public weekDaysInitials = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -19,7 +21,7 @@ export class HomeComponent implements OnInit {
   public user: any;
   public selectedRoadmap: any;
   public selectedRoadmapIndex = 0;
-  public groupList = [];
+  public groupList: any;
   public roadmap = [];
   public totalTask = 0;
   public user_id: string = localStorage.getItem('id');
@@ -32,21 +34,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getWeekDayList();
-    this.userService.getUserById().then((data) => {
+
+    this.userService.getUserById(this.user_id).then((data) => {
       this.user = data;
-      console.log(data);
+      console.log("home: user: ", this.user)
     });
-    this.groupService.getAllGroupsByUser().then((data) => {
+
+    this.groupService.getAllGroupsByUser(this.user_id).then((data) => {
       this.groupList = data;
-      // console.log("grupo: ", data.length)
+      console.log("home: groupList: ", this.groupList)
     });
 
     this.roadmapService.getRoadmapListByUser(this.user_id).then((data) => {
       this.roadmap = data;
+
       for (const item of data) {
         this.totalTask += item.content_list.length;
       }
-      this.selectedRoadmap = this.roadmap[this.selectedRoadmapIndex];
+
+      this.selectedRoadmap = this.roadmap[this.selectedRoadmapIndex] ? this.roadmap[this.selectedRoadmapIndex] : [];
+      console.log("sr: ", this.selectedRoadmap)
+
       this.selectedRoadmap.content_list.map((content) =>
         this.contentIndexList.push(content.id),
       );
@@ -59,7 +67,8 @@ export class HomeComponent implements OnInit {
         this.selectedRoadmapIndex - 1 < 0
           ? this.roadmap.length - 1
           : this.selectedRoadmapIndex - 1;
-    } else {
+
+    } else if (action === 'next') {
       this.selectedRoadmapIndex =
         this.selectedRoadmapIndex + 1 >= this.roadmap.length
           ? 0

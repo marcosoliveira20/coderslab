@@ -1,16 +1,15 @@
-import { roadmapMock } from "src/app/app.component";
-
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { fadeIn } from "src/app/animation/fade.animation";
 import { RoadmapGeneralService } from "src/app/services/roadmapGeneral.service";
 
 @Component({
   selector: "app-list-roadmap",
   templateUrl: "./list-roadmap.component.html",
   styleUrls: ["./list-roadmap.component.scss"],
+  animations: [fadeIn]
 })
 export class ListRoadmapComponent implements OnInit {
-  // public roadmap_list = roadmapMock;
   public roadmap_list;
   showInput: boolean;
 

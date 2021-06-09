@@ -4,16 +4,19 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 import { RoadmapService } from '../../../services/roadmapCustom.service';
+import { fadeIn } from 'src/app/animation/fade.animation';
 
 @Component({
   selector: 'app-home-roadmap',
   templateUrl: './home-roadmap.component.html',
   styleUrls: ['./home-roadmap.component.scss'],
+  animations: [fadeIn]
 })
 export class HomeRoadmapComponent implements OnInit {
   public roadmap_list = [];
   public roadmapList = [];
   public typeFilter = 'all';
+  private user_id: string = localStorage.getItem("id");
   private user: any;
 
   filter(type: string) {
@@ -45,7 +48,7 @@ export class HomeRoadmapComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.getUserById().then((resultado) => {
+    this.userService.getUserById(this.user_id).then((resultado) => {
       this.user = resultado;
       this.roadmapService.getRoadmapListByUser(this.user._id).then((data) => {
         console.log(this.user._id)

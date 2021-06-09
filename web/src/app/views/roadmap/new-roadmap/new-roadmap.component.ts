@@ -5,16 +5,20 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 
 import { RoadmapService } from "../../../services/roadmapCustom.service";
+import { fadeIn } from "src/app/animation/fade.animation";
 
 @Component({
   selector: "app-new-roadmap",
   templateUrl: "./new-roadmap.component.html",
   styleUrls: ["./new-roadmap.component.scss"],
+  animations: [fadeIn]
 })
 export class NewRoadmapComponent implements OnInit {
-  public isNewCustomRoadmap: boolean;
-  public interestList = [];
-  private user: any;
+  public isNewCustomRoadmap: boolean = false;
+  public type: string = "roadmap";
+  private user_id: string = localStorage.getItem('id');
+  public interestList: any = [];
+  public taskList: any = [];
 
   private taskModel = {
     title: "",
@@ -22,7 +26,6 @@ export class NewRoadmapComponent implements OnInit {
     link: "",
     description: "",
   };
-  public taskList = [];
 
   public roadmapForm = this.fb.group({
     name: ["", Validators.required],
@@ -40,16 +43,16 @@ export class NewRoadmapComponent implements OnInit {
 
   ngOnInit() {
     this.verifyUrlParam();
+
     this.subjectService.getAllSubjects().then((data) => {
-      console.log(data);
       data.map((subject) => {
         this.interestList.push({ token: subject._id, name: subject.label });
       });
     });
+
     this.taskList = [[{ ...this.taskModel }]];
   }
 
-  type = "roadmap";
 
   filter(typeFilter: string) {
     this.type = typeFilter;
@@ -57,8 +60,10 @@ export class NewRoadmapComponent implements OnInit {
 
   // TODO validações
   onSubmit() {
-    this.taskList.splice(0, 1);
     const content_list = [];
+
+    this.taskList.splice(0, 1);
+
     this.taskList.map((task) => {
       content_list.push({
         title: task.title,
@@ -67,16 +72,19 @@ export class NewRoadmapComponent implements OnInit {
         description: task.description,
       });
     });
+
     this.roadmapForm.patchValue({
       content_list,
     });
-    this.user._id = localStorage.getItem('id');
+
     this.roadmapService
-      .createCustomRoadmap(this.roadmapForm.value, this.user._id)
+      .createCustomRoadmap(this.roadmapForm.value, this.user_id)
       .then((data) => console.log(`Registro:${data}`));
+
     this.ngOnInit();
+
     this.roadmapForm.controls["roadmapForm"].setValue("");
-    }
+  }
 
   verifyUrlParam() {
     if (this.activatedRoute.snapshot.url[2])

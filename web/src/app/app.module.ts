@@ -29,6 +29,7 @@ import { UserService } from './services/user.service';
 import { LineChartComponent } from './component/line-chart/line-chart.component';
 import { ChartsModule, ThemeService } from 'ng2-charts';
 import { AccordionComponent } from './component/accordion/accordion.component';
+import { LoaderComponent } from './component/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AccordionComponent } from './component/accordion/accordion.component';
     ListRoadmapComponent,
     DetailRoadmapComponent,
     LineChartComponent,
-    AccordionComponent
+    AccordionComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

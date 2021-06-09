@@ -28,9 +28,9 @@ export class GroupService {
     public getGroupByToken(groupToken: string) {
         return this.http.get<any>(`${this.groupUrl}/group/read/byToken/${groupToken}`).toPromise()
     }
-    
-    public getAllGroupsByUser() {
-        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allGroupsByUser/${this.user_id}`).toPromise()
+
+    public getAllGroupsByUser(user_id) {
+        return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allGroupsByUser/${user_id}`).toPromise()
     }
 
     public getAllGroups() {
@@ -51,11 +51,11 @@ export class GroupService {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
         return this.http.put<any>(`${this.groupUrl}/group/update/${group.id}/${this.user_id}`, group, httpOptions).toPromise()
     }
-    
+
     public deleteteGroup(group: any) {
         return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${this.user_id}`).toPromise()
     }
-    
+
     public getAllUserByGroup(groupId: string) {
         return this.http.get<any>(`${this.unionGroupUrl}/unionUserGroup/read/allUsersByGroup/${groupId}`).toPromise()
     }
