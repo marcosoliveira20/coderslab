@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
   private url: string;
-  private user_id = localStorage.getItem('id');
   public userList;
 
   constructor(private http: HttpClient) {
@@ -22,9 +21,10 @@ export class UserService {
       .toPromise();
   }
 
-  public getUserById() {
+  public getUserById(id) {
+    console.log("getUserById: ", id)
     return this.http
-      .get<any>(`${this.url}/read/byId/${this.user_id}`)
+      .get<any>(`${this.url}/read/byId/${id}`)
       .toPromise();
   }
 
@@ -32,19 +32,19 @@ export class UserService {
     return this.http.get<any>(`${this.url}/read/all`).toPromise();
   }
 
-  public updateUser(body: any) {
+  public updateUser(body: any, user_id) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
     return this.http
-      .put<any>(`${this.url}/update/${this.user_id}`, body, httpOptions)
+      .put<any>(`${this.url}/update/${user_id}`, body, httpOptions)
       .toPromise();
   }
 
-  public deleteUser() {
+  public deleteUser(user_id) {
     return this.http
-      .delete<any>(`${this.url}/delete/${this.user_id}`)
+      .delete<any>(`${this.url}/delete/${user_id}`)
       .toPromise();
   }
 

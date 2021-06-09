@@ -1,4 +1,4 @@
-<div class="mainPage cdl-container">
+<div [@fadeIn] class="mainPage cdl-container">
   <header>
     <div>
       <h1>{{ group.name }}</h1>
@@ -55,7 +55,7 @@
             [type]="'member'"
             [data]="user"
             [disableButton]="!isGroupOwner"
-            (click)="isGroupOwner && showModal.deleteUser = true && selectedUser = user.id"
+            (click)="isGroupOwner && showModal.deleteUser = true && selectedUser = user"
             ></app-card>
         </li>
       </ul>
@@ -163,7 +163,7 @@
 >
   <div class="modal_header"></div>
 
-  <p>Você tem certeza que deseja remover o usuário {{selectedUser.name}}?</p>
+  <p>Você tem certeza que deseja remover <b>{{selectedUser.name}}</b>?</p>
   <div class="modal_footer" (click)="exitGroup(selectedUser)">
     <button>remover</button>
   </div>

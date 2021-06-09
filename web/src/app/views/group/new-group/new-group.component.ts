@@ -35,7 +35,7 @@ export class NewGroupComponent implements OnInit {
     categories: ["", Validators.required],
     is_public: [false, Validators.required],
   });
-  
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -57,7 +57,7 @@ export class NewGroupComponent implements OnInit {
     this.formGroup.patchValue({
       categories: this.categories
     });
-    
+
     // TODO - is_default tem q ser tratado pelo backend
     let body: {
       id?,
@@ -95,7 +95,7 @@ export class NewGroupComponent implements OnInit {
     let label = this.isEditMode ? this.formGroup.value.objective : event.target.value;
     //TODO - limpar input depois de selecionar uma opção
     this.interestList = []
-    
+
     this.subjectList.map(subject => {
       if(subject.label == label) {
         subject.categories.map(category => {
@@ -103,7 +103,7 @@ export class NewGroupComponent implements OnInit {
         })
       }
     })
-    
+
     if(this.isEditMode && this.isFirstTime) {
       this.group.category.map(categoryGroup => {
         let index = this.interestList.findIndex(category => category === categoryGroup);
@@ -119,9 +119,6 @@ export class NewGroupComponent implements OnInit {
 
   handleCategories = (event) => (this.categories = event);
 
-  /**
-   * Mock of select query
-   */
   getGroupData() {
     const urlToken = this.activatedRoute.snapshot.paramMap.get("token");
     this.groupService.getGroupByToken(urlToken)
@@ -129,12 +126,12 @@ export class NewGroupComponent implements OnInit {
       this.group = data;
       this.group.id = this.group._id;
       this.group.owner = this.group._owner;
-      
+
       delete this.group._id;
       delete this.group._owner;
 
       this.isGroupOwner = this.group.owner === this.userId;
-      
+
       if (urlToken && this.isGroupOwner) {
         this.formGroup.patchValue({
           name: this.group.name,
@@ -142,7 +139,7 @@ export class NewGroupComponent implements OnInit {
           objective: this.group.subject_label,
           is_public: this.group.is_public
         });
-        
+
         this.getSubject(this.formGroup);
 
         let index = this.subjectList.findIndex(subject => subject.label == this.group.subject_label);

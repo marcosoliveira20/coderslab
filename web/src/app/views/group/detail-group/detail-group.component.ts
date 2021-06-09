@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { userMock } from 'src/app/app.component';
 
 import { ScheduleService } from "src/app/services/schedule.service";
 import { GroupService } from "src/app/services/group.service";
 import { UserService } from "src/app/services/user.service";
+import { fadeIn } from 'src/app/animation/fade.animation';
 
 @Component({
   selector: 'app-detail-group',
   templateUrl: './detail-group.component.html',
   styleUrls: ['./detail-group.component.scss'],
+  animations: [fadeIn]
 })
 export class DetailGroupComponent implements OnInit {
   public group: any;
   public modalData: any;
-  public selecteduser: any;
+  public selectedUser: any;
 
   public showModal: any = {
     viewSchedule: false,
@@ -57,7 +58,7 @@ export class DetailGroupComponent implements OnInit {
       delete this.group._owner;
 
       this.isGroupOwner = this.group.owner === this.userId;
-  
+
       // buscando reuniões do grupo
       this.scheduleService.getAllSchedulesByGroup(this.group.id)
       .then(data => {
@@ -69,13 +70,13 @@ export class DetailGroupComponent implements OnInit {
       });
 
       this.getAllUsers();
-  
+
     })
     .catch(err => {
-      
+
     });
   }
-  
+
   getAllUsers() {
     // buscando integrantes do grupo
     this.groupService.getAllUserByGroup(this.group.id)
@@ -91,8 +92,8 @@ export class DetailGroupComponent implements OnInit {
   openScheduleLink = () => window.open(this.modalData.link, '_blank');
 
   handleRedirectToEditOrExit() {
-    this.isGroupOwner 
-    ? this.router.navigate([`/groups/edit`, this.group.token]) 
+    this.isGroupOwner
+    ? this.router.navigate([`/groups/edit`, this.group.token])
     : this.exitGroup(this.userId);
   }
 
@@ -100,8 +101,8 @@ export class DetailGroupComponent implements OnInit {
     this.groupService.removeUserFromGroup(idUser, this.group.id)
     .then(data => {
       this.showModal.deleteUser = false;
-      
-      this.isGroupOwner 
+
+      this.isGroupOwner
       ? this.getAllUsers()
       : this.router.navigate([`/groups`]);
     })

@@ -6,7 +6,6 @@ import { Injectable } from "@angular/core";
 })
 export class InterstService {
     private url: string;
-    public user_id = localStorage.getItem('id');
 
     constructor(private http: HttpClient) {
         this.url = "http://localhost:5000";
@@ -16,13 +15,13 @@ export class InterstService {
         return this.http.get<any>(`${this.url}/interest/read/all`).toPromise()
     }
 
-    public getInterestListByUser() {
-        return this.http.get<any>(`${this.url}/interest/read/byUserId/${this.user_id}`).toPromise();
+    public getInterestListByUser(user_id) {
+        return this.http.get<any>(`${this.url}/interest/read/byUserId/${user_id}`).toPromise();
     }
 
-    public createInterest(body) {
+    public createInterest(body, user_id) {
         const res = {
-            _id_user: this.user_id,
+            _id_user: user_id,
             _id_subject: body._id,
             level: body.level
         }
@@ -30,9 +29,9 @@ export class InterstService {
         return this.http.post<any>(`${this.url}/interest/create`, res, httpOptions).toPromise()
     }
 
-    public updateInterest(body) {
+    public updateInterest(body, user_id) {
         const res = {
-            _id_user: this.user_id,
+            _id_user: user_id,
             _id_subject: body._id,
             level: body.level
         }

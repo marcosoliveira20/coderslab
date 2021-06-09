@@ -4,11 +4,13 @@ import { RoadmapService } from 'src/app/services/roadmapCustom.service';
 import { UserService } from 'src/app/services/user.service';
 
 import { Component, OnInit } from '@angular/core';
+import { fadeIn } from 'src/app/animation/fade.animation';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [ fadeIn ]
 })
 export class HomeComponent implements OnInit {
   public weekDaysInitials = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -32,11 +34,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getWeekDayList();
-    this.userService.getUserById().then((data) => {
+
+    this.userService.getUserById(this.user_id).then((data) => {
       this.user = data;
+      console.log("home: user: ", this.user)
     });
-    this.groupService.getAllGroupsByUser().then((data) => {
+
+    this.groupService.getAllGroupsByUser(this.user_id).then((data) => {
       this.groupList = data;
+      console.log("home: groupList: ", this.groupList)
     });
 
     this.roadmapService.getRoadmapListByUser(this.user_id).then((data) => {

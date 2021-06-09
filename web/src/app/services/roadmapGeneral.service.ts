@@ -6,7 +6,6 @@ import { Injectable } from "@angular/core";
 })
 export class RoadmapGeneralService {
   private url: string;
-  private user_id = localStorage.getItem('id');
 
   constructor(private http: HttpClient) {
     this.url = "http://localhost:7000";
@@ -24,12 +23,12 @@ export class RoadmapGeneralService {
       .toPromise();
   }
 
-  public createRoadmapDefault(body) {
-    body["user_id"] = this.user_id;
+  public createRoadmapDefault(body, user_id) {
+    body["user_id"] = user_id;
 
     const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
     return this.http
-      .post<any>(`${this.url}/roadmap/create/default?user_id=${this.user_id}`, body, httpOptions)
+      .post<any>(`${this.url}/roadmap/create/default?user_id=${user_id}`, body, httpOptions)
       .toPromise();
   }
 }

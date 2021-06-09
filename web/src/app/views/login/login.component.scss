@@ -155,9 +155,20 @@
 }
 
 // BACKGROUND
+.bgActive {
+  opacity: 1;
+  transition: .3s;
+}
+
+.bgHidden {
+  opacity: 0;
+  transition: .3s;
+}
+
 .bg img {
   position: fixed;
-  max-width: 50%;
+  max-width: 100%;
+  transition: .3s;
 }
 
 .img-blob-left,
@@ -169,7 +180,7 @@
   left: 0;
 }
 .img-blob-right {
-  top: 0;
+  bottom: 0;
   right: 0;
 }
 
@@ -215,7 +226,7 @@
 
   .img-blob-left,
   .img-blob-right {
-    display: none;
+    opacity: 0;
   }
   #coderslab-icon,
   #poweredby-icon {

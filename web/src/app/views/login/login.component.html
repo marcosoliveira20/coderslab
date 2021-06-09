@@ -1,21 +1,40 @@
 <!-- BACKGROUND -->
-<div class="bg">
-  <img src="assets/icons/text_logo.svg" alt="" id="coderslab-icon" />
-  <img src="assets/icons/poweredby.svg" alt="" id="poweredby-icon" />
+<div class="bg" [@fadeIn]>
+  <img
+    src="assets/icons/text_logo.svg"
+    alt="Ícone coderslab"
+    id="coderslab-icon"
+  />
+  <img
+    src="assets/icons/poweredby.svg"
+    alt="Powered by Codando Community"
+    id="poweredby-icon"
+  />
 
-  <div class="div-bg-login" *ngIf="mode === 'login'">
-    <img class="img-blob-left" src="assets/background/left_blob_stage1.svg" alt="" />
-    <img class="img-blob-right" src="assets/background/right_blob_stage1.svg" alt="" />
+  <div
+    class="div-bg-login"
+    [ngClass]="mode === 'login' ? 'bgActive' : 'bgHidden'"
+  >
+    <img class="img-blob-right" src="assets/background/right_blob_stage1_v2.png" alt="" />
   </div>
 
-  <div class="div-bg-register" *ngIf="mode === 'register'">
+  <div
+    class="div-bg-register"
+    [ngClass]="mode === 'register' ? 'bgActive' : 'bgHidden'"
+  >
     <img class="img-blob-right" src="assets/background/right_blob_stage3.svg" alt="" />
   </div>
 </div>
 
 <div class="container h-100 content-frame">
   <!-- LOGIN -->
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="section-login" *ngIf="mode === 'login'">
+  <form
+    [@fadeIn]
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmitLogin()"
+    class="section-login"
+    *ngIf="mode === 'login'"
+  >
     <div class="form-group-base">
       <input type="text" placeholder="Nome de Usuário" formControlName="username" required />
       <input type="password" placeholder="Senha" formControlName="password" required />
@@ -37,7 +56,13 @@
   </form>
 
   <!-- REGISTER -->
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" class="section-register" *ngIf="mode === 'register'">
+  <form
+    [@fadeIn]
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmitRegister()"
+    class="section-register"
+    *ngIf="mode === 'register'"
+  >
     <div>
       <div class="form-group-base">
         <div class="row">

@@ -1,5 +1,4 @@
-<!-- <main *ngIf="user && groupList && selectedRoadmap"> -->
-<main *ngIf="1===1">
+<main [@fadeIn]>
   <div class="status-and-groups">
     <!-- PERSONAL STATUS -->
     <div class="personal-status">
@@ -7,25 +6,25 @@
         <h1 *ngIf="user">{{user.name}} {{user.last_name}}</h1>
 
         <app-loader
-          *ngIf="user === undefined"
+          *ngIf="!user"
           [minHeight]="'30px'"
           [background]="'#fff'"
           [borderRadius]="'15px'"
         ></app-loader>
       </div>
 
-      <ul *ngIf="groupList">
+      <ul>
         <li>
           <p>Grupos</p>
-          <p>{{( groupList && !groupList[0]) ? groupList.length : '0'}}</p>
+          <p>{{groupList ? groupList.length : '0'}}</p>
         </li>
         <li>
           <p>Objetivos</p>
-          <p>{{( groupList && !groupList[0]) ? totalTask : '0'}}</p>
+          <p>{{groupList ? totalTask : '0'}}</p>
         </li>
         <li>
           <p>Conclusões</p>
-          <p>{{( groupList && !groupList[0]) ? 0 : '0'}}</p>
+          <p>{{groupList ? 0 : 0}}</p>
         </li>
       </ul>
 
@@ -43,7 +42,7 @@
       <ul>
         <ng-container *ngIf="groupList">
           <li *ngFor="let group of groupList.slice(0, 3)">
-            <app-card [data]="group"></app-card>
+            <app-card [data]="group" [type]="'group'"></app-card>
           </li>
         </ng-container>
 
@@ -64,7 +63,7 @@
     [style.align-items]="selectedRoadmap && !selectedRoadmap.name && 'center'"
     [style.justify-content]="selectedRoadmap && !selectedRoadmap.name && 'center'"
   >
-    <ng-container *ngIf="selectedRoadmap.name">
+    <ng-container *ngIf="selectedRoadmap && selectedRoadmap.name">
       <div class="roadmap-overview-header">
         <div>
           <button (click)="changeRoadmap('prev')">&lt;</button>
@@ -112,7 +111,7 @@
     <app-loader *ngIf="selectedRoadmap === undefined"></app-loader>
 
     <p
-      *ngIf="selectedRoadmap && !selectedRoadmap[0]"
+      *ngIf="selectedRoadmap && !selectedRoadmap.name"
     >
       Você ainda não começou nenhum roadmap
     </p>

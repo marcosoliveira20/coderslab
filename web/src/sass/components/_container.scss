@@ -1,16 +1,15 @@
 .cdl-container {
-  display: grid;
   height: 100%;
   padding: 0 32px;
   grid-template-rows: auto;
   overflow: auto;
 }
 
-.cdl-container-group {
-  display: grid;
-  height: 100vh;
-  grid-template-rows: 20vh 80vh ;
-}
+// .cdl-container-group {
+//   display: grid;
+//   height: 100vh;
+//   grid-template-rows: 20vh 80vh ;
+// }
 
 /* @media (max-width: 1062px) {
    .cdl-container {

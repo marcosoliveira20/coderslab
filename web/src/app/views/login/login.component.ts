@@ -1,15 +1,19 @@
 import { SubjectService } from 'src/app/services/subject.service';
 import { UserService } from 'src/app/services/user.service';
 
-import { Compiler, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { fadeIn } from 'src/app/animation/fade.animation';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  animations: [
+    fadeIn
+  ],
 })
 export class LoginComponent implements OnInit {
   public mode = 'login';
@@ -43,8 +47,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private subjectService: SubjectService,
-    private router: Router,
-    private _compiler: Compiler
+    private router: Router
   ) {}
 
   ngOnInit() {

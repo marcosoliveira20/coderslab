@@ -1,16 +1,16 @@
-import { userMock } from "src/app/app.component";
-import { subjectMock } from "src/mock";
-
 import { Compiler, Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserService } from 'src/app/services/user.service';
 import { SubjectService } from "src/app/services/subject.service";
 import { InterstService } from "src/app/services/interest.service";
+import { fadeIn } from "src/app/animation/fade.animation";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
+  animations: [fadeIn]
 })
 export class ProfileComponent implements OnInit {
   public user: {
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   public activeTab = "user";
   public selectedInterestList: any[] = [];
   public interestList: any;
-  public userId = localStorage.getItem('id');
+  public user_id = localStorage.getItem('id');
 
   public showResetPasswordModal = false;
   public showConfirmDeleteAccountModal = false;
@@ -48,17 +48,13 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private subjectService: SubjectService,
     private interestService: InterstService,
-    private _compiler: Compiler
+    private router: Router
   ) { }
 
-  /**
-   * @todo integration
-   */
   ngOnInit() {
-    this._compiler.clearCache();
     this.getAllInterests();
 
-    this.userService.getUserById().then(data => {
+    this.userService.getUserById(this.user_id).then(data => {
       this.profileForm.patchValue({
         name: data.name,
         last_name: data.last_name,
@@ -69,7 +65,7 @@ export class ProfileComponent implements OnInit {
       })
 
       this.user = {
-        id: this.userId,
+        id: this.user_id,
         name: data.name,
         last_name: data.last_name,
         username: data.username,
@@ -108,7 +104,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserInterests() {
-    this.interestService.getInterestListByUser().then(data => {
+    this.interestService.getInterestListByUser(this.user_id).then(data => {
       data.map(x => {
         this.selectedInterestList.push({
           _id: x._id,
@@ -120,7 +116,11 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmitUserInfo() {
-    this.userService.updateUser(this.profileForm.value).then(data => console.log(data));
+    this.userService.updateUser(this.profileForm.value, this.user_id)
+    .then(data => {
+      console.log(data);
+      this.router.navigate(['/']);
+    });
   }
 
   /**
@@ -131,7 +131,7 @@ export class ProfileComponent implements OnInit {
     const level = levelSelect.value;
     const { _id } = this.interestList.find((subject) => subject.label === label);
 
-    this.interestService.createInterest({ _id, label, level }).then(() => {
+    this.interestService.createInterest({ _id, label, level }, this.user_id).then(() => {
       this.selectedInterestList.push({ _id, label, level });
     });
   }
@@ -151,7 +151,7 @@ export class ProfileComponent implements OnInit {
    * @todo implement delete code
    */
   deleteAccount() {
-    this.userService.deleteUser().then(data => console.log(data)).catch(err => console.log(err))
+    this.userService.deleteUser(this.user_id).then(data => console.log(data)).catch(err => console.log(err))
     console.log("deleteAccount: ", this.user.id);
   }
 

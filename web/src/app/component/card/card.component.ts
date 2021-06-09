@@ -14,13 +14,17 @@ export class CardComponent implements OnInit {
   @Input() type: string;
   @Input() buttonLabel: string = "ver mais";
   @Input() disableButton: boolean;
+  private user_id: string = localStorage.getItem("id");
 
-  constructor(private router: Router, private roadmapGeneralService: RoadmapGeneralService) {
+  constructor(
+    private router: Router,
+    private roadmapGeneralService: RoadmapGeneralService
+  ) {
     if (!this.acceptedTypes.find((type) => type === this.type))
       this.type = "group";
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     console.log("roadmap: ", this.data)
   }
 
@@ -38,6 +42,10 @@ export class CardComponent implements OnInit {
   }
 
   createRoadmapDefault(data) {
-    this.roadmapGeneralService.createRoadmapDefault(data).then()
+    this.roadmapGeneralService.createRoadmapDefault(data, this.user_id).then()
+  }
+
+  redirectToGroup() {
+    this.router.navigate([`/groups`, this.data.token]);
   }
 }

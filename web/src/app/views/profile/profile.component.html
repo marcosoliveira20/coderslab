@@ -1,4 +1,8 @@
-<div *ngIf="user && user.name &&  user.last_name " class="cdl-container">
+<div
+  [@fadeIn]
+  *ngIf="user && user.name"
+  class="cdl-container"
+>
   <header>
     <div>
       <h1>{{ user.name + " " + user.last_name }}</h1>
@@ -54,7 +58,7 @@
             <input
               type="text"
               id=""
-              placeholder="José"
+              placeholder="Ex: José"
               formControlName="name"
             />
           </div>
@@ -62,7 +66,7 @@
             <label class="label-info-block">sobrenome</label>
             <input
               type="text"
-              placeholder="Bezerra"
+              placeholder="Ex: Bezerra"
               formControlName="last_name"
             />
           </div>
@@ -73,7 +77,7 @@
             <label class="label-info-block">nome de usuário</label>
             <input
               type="text"
-              placeholder="Flynn Rider"
+              placeholder="Ex: Flynn Rider"
               formControlName="username"
             />
           </div>
@@ -81,7 +85,7 @@
             <label class="label-info-block">e-mail</label>
             <input
               type="text"
-              placeholder="jose@email.com.br"
+              placeholder="Ex: jose@email.com.br"
               formControlName="email"
             />
           </div>
@@ -96,7 +100,7 @@
             <label class="label-info-block">discord id</label>
             <input
               type="text"
-              placeholder="zébezerra#3503"
+              placeholder="Ex: zébezerra#3503"
               formControlName="discord_id"
             />
           </div>
@@ -104,7 +108,7 @@
             <label class="label-info-block">github id</label>
             <input
               type="text"
-              placeholder="zebezerra"
+              placeholder="Ex: zebezerra"
               formControlName="github_id"
             />
           </div>
