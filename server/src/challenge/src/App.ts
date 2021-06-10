@@ -32,7 +32,7 @@ class App {
       useCreateIndex: true
     }
 
-    mongoose.connect(process.env.URL_MONGO_DEV, options),
+    mongoose.connect(process.env.URL_MONGO_PROD, options),
 
     mongoose.connection.on('error', () => {
       console.log("Erro na conexão com o banco de dados")
