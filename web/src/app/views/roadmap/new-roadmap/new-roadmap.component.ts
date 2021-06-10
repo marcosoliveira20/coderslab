@@ -2,7 +2,7 @@ import { SubjectService } from "src/app/services/subject.service";
 
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { RoadmapService } from "../../../services/roadmapCustom.service";
 import { fadeIn } from "src/app/animation/fade.animation";
@@ -38,7 +38,8 @@ export class NewRoadmapComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private roadmapService: RoadmapService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -79,7 +80,10 @@ export class NewRoadmapComponent implements OnInit {
 
     this.roadmapService
       .createCustomRoadmap(this.roadmapForm.value, this.user_id)
-      .then((data) => console.log(`Registro:${data}`));
+      .then((data) =>{
+         console.log(`Registro:${data}`)
+         this.router.navigate([`/roadmap`])
+      });
 
     this.ngOnInit();
 
