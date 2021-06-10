@@ -22,7 +22,6 @@ export class UserService {
   }
 
   public getUserById(id) {
-    console.log("getUserById: ", id)
     return this.http
       .get<any>(`${this.url}/read/byId/${id}`)
       .toPromise();

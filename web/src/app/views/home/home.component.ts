@@ -37,12 +37,10 @@ export class HomeComponent implements OnInit {
 
     this.userService.getUserById(this.user_id).then((data) => {
       this.user = data;
-      console.log("home: user: ", this.user)
     });
 
     this.groupService.getAllGroupsByUser(this.user_id).then((data) => {
       this.groupList = data;
-      console.log("home: groupList: ", this.groupList)
     });
 
     this.roadmapService.getRoadmapListByUser(this.user_id).then((data) => {
@@ -53,7 +51,6 @@ export class HomeComponent implements OnInit {
       }
 
       this.selectedRoadmap = this.roadmap[this.selectedRoadmapIndex] ? this.roadmap[this.selectedRoadmapIndex] : [];
-      console.log("sr: ", this.selectedRoadmap)
 
       this.selectedRoadmap.content_list.map((content) =>
         this.contentIndexList.push(content.id),

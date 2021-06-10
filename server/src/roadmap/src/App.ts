@@ -32,7 +32,7 @@ class App {
       useCreateIndex: true,
     };
 
-    mongoose.connect(process.env.URL_MONGO_PROD, options);
+    mongoose.connect(process.env.URL_MONGO_DEV, options);
     mongoose.set("useCreateIndex", true);
     mongoose.set("useFindAndModify", false);
 
