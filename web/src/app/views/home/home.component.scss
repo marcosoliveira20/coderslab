@@ -91,6 +91,7 @@ ul {
   height: 350px;
 
   h1 {
+    margin-top: 50px;
     font-size: 28px;
     font-weight: 500;
     color: $cdl_darkBlue;
@@ -102,7 +103,10 @@ ul {
     height: calc(100% - 38px);
 
     > li {
-      width: 100%;
+      width: 33%;
+      @media screen and (max-width: 1025px) {
+        width: 100%;
+      }
     }
   }
 }
@@ -267,7 +271,10 @@ ul {
   height: 45%;
   border-radius: 15px;
   overflow-y: auto;
-  display: grid;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  row-gap: 20px;
 }
 
 @media (max-width: 1025px) {

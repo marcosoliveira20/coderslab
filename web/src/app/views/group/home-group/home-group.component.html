@@ -1,4 +1,4 @@
-<div [@fadeIn] class ="cdl-container">
+<div [@fadeIn] class ="cdl-container" *ngIf="user">
   <div>
     <header>
       <div>
@@ -13,10 +13,14 @@
       </nav>
     </header>
     <main class="">
-      <ul class="card-list">
-        <li *ngFor="let group of groupList">
-          <app-card [data]="group" (click)="redirectToGroup(group.token)"></app-card>
-        </li>
+      <ul class="card-list" *ngIf="groupList">
+        <ng-container *ngIf="groupList">
+          <li *ngFor="let group of groupList">
+            <app-card [data]="group" (click)="redirectToGroup(group.token)"></app-card>
+          </li>
+        </ng-container>
+
+        <li *ngIf="groupList && !groupList[0]"> Você ainda não entrou em nenhum grupo </li>
       </ul>
       <a routerLink="./explore"
         ><button>

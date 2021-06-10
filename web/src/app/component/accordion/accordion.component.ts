@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accordion',
@@ -15,7 +15,7 @@ export class AccordionComponent implements OnInit {
   @Input() data;
   @Input() roadmapToken: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.checkTaskStatus();
@@ -33,11 +33,6 @@ export class AccordionComponent implements OnInit {
     }
   }
 
-  verifyUrlParam() {
-    // if (this.activatedRoute.snapshot.url[2])
-    // console.log(this.activatedRoute.snapshot.url[2]);
-  }
-
   openReferenceLink() {
     window.open(this.data.reference, '_blank');
   }
@@ -46,8 +41,11 @@ export class AccordionComponent implements OnInit {
     this.showBody = !this.showBody;
   }
 
+  /**
+   * @todo bug fix
+   */
   redirectToRoadmapDetail() {
-    // console.log(this.roadmapToken);
-    this.router.navigate(['/roadmap', this.roadmapToken]);
+    // TODO fix: The requested path contains undefined segment at index 1
+    // this.router.navigate(['/roadmap', this.roadmapToken]);
   }
 }

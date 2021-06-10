@@ -51,7 +51,6 @@ export class HomeRoadmapComponent implements OnInit {
     this.userService.getUserById(this.user_id).then((resultado) => {
       this.user = resultado;
       this.roadmapService.getRoadmapListByUser(this.user._id).then((data) => {
-        console.log(this.user._id)
         data.map((roadmap) => {
           this.contentService.getDashboard(roadmap._id).then((dashboard) => {
             this.roadmap_list.push({

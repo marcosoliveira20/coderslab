@@ -13,7 +13,7 @@ import { fadeIn } from 'src/app/animation/fade.animation';
   animations: [ fadeIn ]
 })
 export class HomeComponent implements OnInit {
-  public weekDaysInitials = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  public weekDaysInitials = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
   public currentDay: Date = new Date();
   public weekDayList: any = [];
 

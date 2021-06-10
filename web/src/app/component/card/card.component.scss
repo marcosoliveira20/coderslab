@@ -104,6 +104,7 @@
   box-shadow: 0px 4px 4px #00000040;
   row-gap: 40px;
   letter-spacing: 1px;
+  margin-top: 20px;
 }
 
 .roadmap-progress-type header {
@@ -245,6 +246,7 @@
     img {
       position: absolute;
       right: 18px;
+
     }
   }
 
@@ -259,6 +261,10 @@
 .group-type footer p {
   font-size: 24px;
   font-weight: 300;
+}
+
+.group-type footer img {
+  margin-right: 10px;
 }
 
 .group-level {
