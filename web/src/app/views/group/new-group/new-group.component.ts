@@ -75,13 +75,13 @@ export class NewGroupComponent implements OnInit {
       "level": this.formGroup.value.level,
       "is_public": this.formGroup.value.is_public,
       "is_default": false,
-      "_owner": this.groupService.user_id
+      "_owner": this.userId
     }
 
     if(this.isEditMode) {
       body.id = this.group.id;
 
-      this.groupService.editGroup(body)
+      this.groupService.editGroup(body, this.userId)
       .then(data => this.router.navigate([`/groups`, data.token]))
       .catch(error => console.log(error));
     } else {
@@ -152,7 +152,7 @@ export class NewGroupComponent implements OnInit {
   }
 
   deleteGroup() {
-    this.groupService.deleteteGroup(this.group)
+    this.groupService.deleteteGroup(this.group, this.userId)
     .then(data => {
       this.showConfirmDeleteGroupModal = false;
       this.router.navigate([`/groups`])

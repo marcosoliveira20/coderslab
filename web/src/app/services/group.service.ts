@@ -8,7 +8,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class GroupService {
     private unionGroupUrl: string;
     private groupUrl: string;
-    public user_id = localStorage.getItem('id');
     public groupList = [];
 
     constructor(private http: HttpClient) {
@@ -47,13 +46,13 @@ export class GroupService {
         return this.http.post<any>(`${this.groupUrl}/group/create`, body, httpOptions).toPromise()
     }
 
-    public editGroup(group: any) {
+    public editGroup(group: any, user_id: string) {
         const httpOptions = { headers: new HttpHeaders({ "Content-Type": "application/json"}) };
-        return this.http.put<any>(`${this.groupUrl}/group/update/${group.id}/${this.user_id}`, group, httpOptions).toPromise()
+        return this.http.put<any>(`${this.groupUrl}/group/update/${group.id}/${user_id}`, group, httpOptions).toPromise()
     }
 
-    public deleteteGroup(group: any) {
-        return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${this.user_id}`).toPromise()
+    public deleteteGroup(group: any, user_id: string) {
+        return this.http.delete<any>(`${this.groupUrl}/group/delete/${group.id}/${user_id}`).toPromise()
     }
 
     public getAllUserByGroup(groupId: string) {

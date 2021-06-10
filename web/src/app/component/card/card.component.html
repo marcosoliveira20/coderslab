@@ -14,7 +14,7 @@
           <!-- TODO essa merda ta exibindo a hora errada -->
           <p>{{ data | date: "HH:mm" }}</p>
         </div>
-      </div>
+      </div> l
     </footer>
   </main>
   <button>
@@ -131,7 +131,7 @@
     'cdl-card-light': !data.is_default
   }"
   *ngIf="type === 'group'"
-  (click)="redirectToGroup()"
+  (click)="!disableDefaultRedirect && redirectToGroup()"
 >
   <main>
     <header>

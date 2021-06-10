@@ -110,7 +110,7 @@
       </form>
       <ul class="card-list">
         <li *ngFor="let group of groupList">
-          <app-card [data]="group" (click)="joinPublicGroup(group.token)"></app-card>
+          <app-card [data]="group" (click)="joinPublicGroup(group.token)" [disableDefaultRedirect]="true"></app-card>
         </li>
       </ul>
     </div>

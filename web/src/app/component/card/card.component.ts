@@ -14,6 +14,8 @@ export class CardComponent implements OnInit {
   @Input() type: string;
   @Input() buttonLabel: string = "ver mais";
   @Input() disableButton: boolean;
+  @Input() disableDefaultRedirect: boolean = false;
+  
   private user_id: string = localStorage.getItem("id");
 
   constructor(
@@ -25,7 +27,7 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("roadmap: ", this.data)
+    // console.log("roadmap: ", this.data)
   }
 
   redirectToRoadmap(roadmapId) {
