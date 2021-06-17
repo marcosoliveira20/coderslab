@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 
-export class RoadmapDeafaultService {
+export class RoadmapDefaultService {
   private url: string;
 
   constructor(private http: HttpClient) {
@@ -26,7 +26,6 @@ export class RoadmapDeafaultService {
   }
 
   public getRoadmapListByUser(user_id: string) {
-    console.log("User id: ", user_id)
     return this.http
       .get<any>(`${this.url}/read/all?user_id=${user_id}`)
       .toPromise();
@@ -35,6 +34,4 @@ export class RoadmapDeafaultService {
   public getRoadmapById(_id: string) {
     return this.http.get<any>(`${this.url}/read/${_id}`).toPromise();
   }
-
-  
 }
