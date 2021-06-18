@@ -14,7 +14,6 @@
 
 <p align="center">Coderslab - Desenvolvido durante o 5º Semestre de Ciencia da Computação - by @codando.community</p>
 
-![Design sem nome (1)](https://user-images.githubusercontent.com/50588380/90249807-7cedf000-de11-11ea-8a5f-24e235b42057.jpg)
 
 ## :gear: Tecnologias utilizadas:
 
